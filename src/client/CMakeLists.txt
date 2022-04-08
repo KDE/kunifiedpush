@@ -1,0 +1,51 @@
+# SPDX-FileCopyrightText: 2022 Volker Krause <vkrause@kde.org>
+# SPDX-License-Identifier: BSD-2-Clause
+
+add_library(KUnifiedPush)
+
+qt_add_dbus_adaptor(dbus_srcs  ../interfaces/org.unifiedpush.Connector1.xml connector_p.h KUnifiedPush::ConnectorPrivate)
+qt_add_dbus_interface(dbus_srcs ../interfaces/org.unifiedpush.Distributor1.xml distributor1iface)
+target_sources(KUnifiedPush PRIVATE
+    connector.cpp
+    ${dbus_srcs}
+)
+
+set_target_properties(KUnifiedPush PROPERTIES
+    VERSION ${KUNIFIEDPUSH_VERSION}
+    SOVERSION ${KUNIFIEDPUSH_SOVERSION}
+    EXPORT_NAME KUnifiedPush
+)
+
+generate_export_header(KUnifiedPush BASE_NAME KUnifiedPush)
+ecm_qt_declare_logging_category(KUnifiedPush
+    HEADER logging.h
+    IDENTIFIER Log
+    CATEGORY_NAME org.kde.kunifiedpush.client
+    DESCRIPTION "KUnifiedPush Client"
+    EXPORT KUnifiedPushLogging
+)
+
+target_link_libraries(KUnifiedPush
+    PUBLIC
+        Qt${QT_MAJOR_VERSION}::Core
+    PRIVATE
+        Qt${QT_MAJOR_VERSION}::DBus
+)
+
+ecm_generate_headers(KUnifiedPush_FORWARDING_HEADERS
+    HEADER_NAMES
+        Connector
+    PREFIX KUnifiedPush
+    REQUIRED_HEADERS KUnifiedPush_HEADERS
+)
+
+install(TARGETS KUnifiedPush EXPORT KUnifiedPushTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(FILES
+    ${KUnifiedPush_FORWARDING_HEADERS}
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KUnifiedPush
+)
+install(FILES
+    ${KUnifiedPush_HEADERS}
+    ${CMAKE_CURRENT_BINARY_DIR}/kunifiedpush_export.h
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/kunifiedpush
+)

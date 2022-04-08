@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileCopyrightText: none
+
+*.kdev4
+*~
+*.rej
+*.orig
+*.out
+CMakeLists.txt.user
+callgrind.*
+heaptrack.*
+*.qmlc
+*.fail
+/build*
+/.clang-format
+/compile_commands.json
+.clangd
+.cache
+.idea
+/cmake-build*
+*.zip
+*.pyc

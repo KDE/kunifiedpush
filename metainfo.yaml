@@ -1,0 +1,15 @@
+maintainer: vkrause
+description: UnifiedPush client components
+tier: 1
+type: functional
+platforms:
+    - name: Linux
+    - name: FreeBSD
+portingAid: false
+deprecated: false
+release: false
+libraries:
+ - cmake: KUnifiedPush
+cmakename: KUnifiedPush
+
+public_lib: true
