@@ -24,13 +24,31 @@ class ConnectorPrivate;
 class KUNIFIEDPUSH_EXPORT Connector : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString endpoint READ endpoint NOTIFY endpointChanged)
 public:
-    explicit Connector(QObject *parent = nullptr);
+    /** Create a new connector instance.
+     *  @param serviceName The application identifer, same as used for registration
+     *  on D-Bus and for D-Bus activation.
+     */
+    explicit Connector(const QString &serviceName, QObject *parent = nullptr);
     ~Connector();
 
+    /** HTTP endpoint to trigger the push notification.
+     *  This needs to be communicated to the corresponding server-side application.
+     *  @see endpointChanged
+     */
+    QString endpoint() const;
+
+    // TODO unregister method
+    // TODO status/error API
+
 Q_SIGNALS:
+    /** Emitted for each newly received push message. */
     // TODO this is supposed to be a byte array, but gotify deviates from the spec...
     void messageReceived(const QString &msg);
+
+    /** Emitted when a new endpoint URL has been received. */
+    void endpointChanged(const QString &endpoint);
 
 private:
     ConnectorPrivate *d;

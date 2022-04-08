@@ -20,12 +20,17 @@ public:
 
     void Message(const QString &token, const QString &message, const QString &messageIdentifier);
     void NewEndpoint(const QString &token, const QString &endpoint);
-    void Unregister(const QString &token);
+    void Unregistered(const QString &token);
 
+    QString stateFile() const;
+    void loadState();
+    void storeState() const;
     void selectDistributor();
 
     Connector *q = nullptr;
+    QString m_serviceName;
     QString m_token;
+    QString m_endpoint;
     OrgUnifiedpushDistributor1Interface *m_distributor = nullptr;
 };
 }

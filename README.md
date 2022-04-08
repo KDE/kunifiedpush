@@ -10,6 +10,7 @@ How to register for push notifications:
 - Register on D-Bus with a service name
 - Make your application D-Bus activatable
 - Create an instance of KUnifiedPush::Connector.
+- Communicate the endpoint URL provided by this to the corresponding server-side application.
 - Connect to its `messageReceived` signal.
 
 ### Supported Distributors

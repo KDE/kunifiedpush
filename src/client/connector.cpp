@@ -10,6 +10,7 @@
 #include "logging.h"
 
 #include <QDBusConnection>
+#include <QSettings>
 
 using namespace KUnifiedPush;
 
@@ -24,20 +25,56 @@ ConnectorPrivate::ConnectorPrivate(Connector *qq)
 void ConnectorPrivate::Message(const QString &token, const QString &message, const QString &messageIdentifier)
 {
     qCDebug(Log) << token << message << messageIdentifier;
+    // TODO
     Q_EMIT q->messageReceived(message);
 }
 
 void ConnectorPrivate::NewEndpoint(const QString &token, const QString &endpoint)
 {
-    // ### sigh...
+    qCDebug(Log) << token << endpoint;
+    if (token != m_token) {
+        qCWarning(Log) << "Got new endpoint for a different token??";
+        return;
+    }
+
+    // ### Gotify workaround...
     QString actuallyWorkingEndpoint(endpoint);
     actuallyWorkingEndpoint.replace(QLatin1String("/UP?"), QLatin1String("/message?"));
-    qCDebug(Log) << token << actuallyWorkingEndpoint;
+
+    if (m_endpoint == actuallyWorkingEndpoint) {
+        return;
+    }
+    m_endpoint = actuallyWorkingEndpoint;
+    storeState();
+    Q_EMIT q->endpointChanged(m_endpoint);
 }
 
-void ConnectorPrivate::Unregister(const QString &token)
+void ConnectorPrivate::Unregistered(const QString &token)
 {
+    // TODO token == m_token - we got unregistered by the distributor
+    // TODO token.isEmpty() - confirmation of our unregistration request
     qCDebug(Log) << token;
+}
+
+QString ConnectorPrivate::stateFile() const
+{
+    return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1String("/kunifiedpush-") + m_serviceName;
+}
+
+void ConnectorPrivate::loadState()
+{
+    QSettings settings(stateFile(), QSettings::IniFormat);
+    settings.beginGroup(QStringLiteral("Client"));
+    m_token = settings.value(QStringLiteral("Token"), QString()).toString();
+    m_endpoint = settings.value(QStringLiteral("Endpoint"), QString()).toString();
+}
+
+void ConnectorPrivate::storeState() const
+{
+    QSettings settings(stateFile(), QSettings::IniFormat);
+    settings.beginGroup(QStringLiteral("Client"));
+    settings.setValue(QStringLiteral("Token"), m_token);
+    settings.setValue(QStringLiteral("Endpoint"), m_endpoint);
 }
 
 void ConnectorPrivate::selectDistributor()
@@ -58,20 +95,33 @@ void ConnectorPrivate::selectDistributor()
 }
 
 
-Connector::Connector(QObject *parent)
+Connector::Connector(const QString &serviceName, QObject *parent)
     : QObject(parent)
     , d(new ConnectorPrivate(this))
 {
-    d->m_token = QStringLiteral("191059e1-10b9-4cfb-a878-a031de0fcd38"); // TODO
+    d->m_serviceName = serviceName;
+    if (d->m_serviceName.isEmpty()) {
+        qCWarning(Log) << "empty D-Bus service name!";
+        return;
+    }
+
+    d->loadState();
     d->selectDistributor();
 
     if (d->m_distributor && d->m_distributor->isValid()) {
-        // TODO get service name default from QCoreApp
+        if (d->m_token.isEmpty()) {
+            d->m_token = QUuid::createUuid().toString();
+        }
         qCDebug(Log) << "Registering";
-        const auto reply = d->m_distributor->Register(QStringLiteral("org.kde.kunifiedpush.demo-notifier"), d->m_token/*, QStringLiteral("TODO")*/);
+        const auto reply = d->m_distributor->Register(d->m_serviceName, d->m_token/*, QStringLiteral("TODO")*/);
         qCDebug(Log) << reply;
     }
 
 }
 
 Connector::~Connector() = default;
+
+QString Connector::endpoint() const
+{
+    return d->m_endpoint;
+}

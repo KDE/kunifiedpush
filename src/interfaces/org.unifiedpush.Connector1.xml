@@ -19,7 +19,7 @@
       <arg name="endpoint" type="s" direction="in"/>
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
     </method>
-    <method name="Unregister">
+    <method name="Unregistered">
       <arg name="token" type="s" direction="in"/>
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
     </method>
