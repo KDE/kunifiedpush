@@ -17,6 +17,7 @@ public:
     QString serviceName;
     QString token;
     QString remoteId;
+    QString endpoint;
 };
 
 }

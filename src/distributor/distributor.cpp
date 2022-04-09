@@ -43,6 +43,7 @@ Distributor::Distributor(QObject *parent)
         client.token = token;
         client.remoteId = settings.value(QStringLiteral("RemoteId"), QString()).toString();
         client.serviceName = settings.value(QStringLiteral("ServiceName"), QString()).toString();
+        client.endpoint = settings.value(QStringLiteral("Endpoint"), QString()).toString();
         settings.endGroup();
 
         // TODO discard invalid
@@ -66,9 +67,22 @@ Distributor::~Distributor() = default;
 
 QString Distributor::Register(const QString& serviceName, const QString& token, QString& registrationResultReason)
 {
-    qCDebug(Log) << serviceName << token;
-    registrationResultReason = QStringLiteral("not implemented yet");
-    return QStringLiteral("REGISTRATION_FAILED");
+    qCDebug(Log) << serviceName << token << "XXXXX";
+    const auto it = std::find_if(m_clients.begin(), m_clients.end(), [&token](const auto &client) {
+        return client.token == token;
+    });
+    if (it == m_clients.end()) {
+        qCDebug(Log) << "Registering new client";
+        registrationResultReason = QStringLiteral("not implemented yet");
+        return QStringLiteral("REGISTRATION_FAILED");
+    }
+
+    qCDebug(Log) << "Registering known client";
+    QDBusConnection::sessionBus().interface()->startService((*it).serviceName);
+    OrgUnifiedpushConnector1Interface iface((*it).serviceName, QStringLiteral("/org/unifiedpush/Connector"), QDBusConnection::sessionBus());
+    qCDebug(Log) << (*it).serviceName << iface.isValid();
+    iface.NewEndpoint((*it).token, (*it).endpoint);
+    return QStringLiteral("REGISTRATION_SUCCEEDED");
 }
 
 void Distributor::Unregister(const QString& token)
