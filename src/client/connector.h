@@ -40,7 +40,10 @@ public:
      */
     QString endpoint() const;
 
-    // TODO unregister method
+    /** Unregister this client.
+     *  This is for permanently unsubscribing, do not use on regular application shutdown.
+     */
+    void unregister();
 
     /** Connector state. */
     enum State {

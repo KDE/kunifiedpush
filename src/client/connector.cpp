@@ -52,9 +52,22 @@ void ConnectorPrivate::NewEndpoint(const QString &token, const QString &endpoint
 
 void ConnectorPrivate::Unregistered(const QString &token)
 {
-    // TODO token == m_token - we got unregistered by the distributor
-    // TODO token.isEmpty() - confirmation of our unregistration request
     qCDebug(Log) << token;
+
+    // confirmation of our unregistration request
+    if (token.isEmpty()) {
+        setState(Connector::Unregistered);
+        m_token.clear();
+        m_endpoint.clear();
+        Q_EMIT q->endpointChanged(m_endpoint);
+        QFile::remove(stateFile());
+    }
+
+    // we got unregistered by the distributor
+    else if (token == d->m_token) {
+        setState(Connector::Unregistered);
+        // TODO reregister?
+    }
 }
 
 QString ConnectorPrivate::stateFile() const
@@ -160,6 +173,13 @@ Connector::~Connector() = default;
 QString Connector::endpoint() const
 {
     return d->m_endpoint;
+}
+
+void Connector::unregister()
+{
+    if (d->m_distributor && d->m_state == Registered) {
+        d->m_distributor->Unregister(d->m_token);
+    }
 }
 
 Connector::State Connector::state() const
