@@ -10,6 +10,8 @@
 
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 #include <QSettings>
 #include <QUrlQuery>
 #include <QWebSocket>
@@ -73,6 +75,44 @@ void GotifyPushProvider::wsMessageReceived(const QString &msg)
 void GotifyPushProvider::registerClient(const Client &client)
 {
     qCDebug(Log) << client.serviceName << client.token;
+
+    QUrl url = m_url;
+    auto path = url.path();
+    path += QLatin1String("/application");
+    url.setPath(path);
+
+    QNetworkRequest req(url);
+    req.setHeader(QNetworkRequest::ContentTypeHeader, QStringLiteral("application/json"));
+    req.setRawHeader("X-Gotify-Key", m_clientToken.toUtf8());
+
+    QJsonObject content;
+    content.insert(QLatin1String("name"), client.serviceName);
+    content.insert(QLatin1String("token"), client.token);
+
+    auto reply = nam()->post(req, QJsonDocument(content).toJson(QJsonDocument::Compact));
+    connect(reply, &QNetworkReply::finished, this, [reply, this, client]() {
+        if (reply->error() != QNetworkReply::NoError) {
+            qCDebug(Log) << reply->errorString();
+            return;
+        }
+
+        const auto replyObj = QJsonDocument::fromJson(reply->readAll()).object();
+        qCDebug(Log) << QJsonDocument(replyObj).toJson(QJsonDocument::Compact);
+
+        auto newClient = client;
+        newClient.remoteId = QString::number(replyObj.value(QLatin1String("id")).toInt());
+
+        QUrl endpointUrl = m_url;
+        auto path = endpointUrl.path();
+        path += QLatin1String("/message");
+        endpointUrl.setPath(path);
+        QUrlQuery query(endpointUrl);
+        query.addQueryItem(QStringLiteral("token"), replyObj.value(QLatin1String("token")).toString());
+        endpointUrl.setQuery(query);
+        newClient.endpoint = endpointUrl.toString();
+
+        Q_EMIT clientRegistered(newClient);
+    });
 }
 
 void GotifyPushProvider::unregisterClient(const Client &client)
