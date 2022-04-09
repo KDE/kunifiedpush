@@ -33,6 +33,7 @@ Distributor::Distributor(QObject *parent)
     m_pushProvider->loadSettings(settings);
     settings.endGroup();
     connect(m_pushProvider, &AbstractPushProvider::messageReceived, this, &Distributor::messageReceived);
+    connect(m_pushProvider, &AbstractPushProvider::clientRegistered, this, &Distributor::clientRegistered);
 
     // load previous clients
     const auto clientTokens = settings.value(QStringLiteral("Clients/Tokens"), QStringList()).toStringList();
@@ -73,6 +74,11 @@ QString Distributor::Register(const QString& serviceName, const QString& token, 
     });
     if (it == m_clients.end()) {
         qCDebug(Log) << "Registering new client";
+        Client client;
+        client.token = token;
+        client.serviceName = serviceName;
+        m_pushProvider->registerClient(client);
+        // TODO deferred D-Bus reply
         registrationResultReason = QStringLiteral("not implemented yet");
         return QStringLiteral("REGISTRATION_FAILED");
     }
@@ -88,6 +94,20 @@ QString Distributor::Register(const QString& serviceName, const QString& token, 
 void Distributor::Unregister(const QString& token)
 {
     qCDebug(Log) << token;
+    const auto it = std::find_if(m_clients.begin(), m_clients.end(), [&token](const auto &client) {
+        return client.token == token;
+    });
+    if (it == m_clients.end()) {
+        qCWarning(Log) << "Unregistration request for unknown client.";
+        return;
+    }
+
+    m_pushProvider->unregisterClient((*it));
+    OrgUnifiedpushConnector1Interface iface((*it).serviceName, QStringLiteral("/org/unifiedpush/Connector"), QDBusConnection::sessionBus());
+    iface.Unregistered((*it).token);
+    m_clients.erase(it);
+
+    // TODO persist client data
 }
 
 void Distributor::messageReceived(const Message &msg) const
@@ -105,4 +125,13 @@ void Distributor::messageReceived(const Message &msg) const
     OrgUnifiedpushConnector1Interface iface((*it).serviceName, QStringLiteral("/org/unifiedpush/Connector"), QDBusConnection::sessionBus());
     qCDebug(Log) << (*it).serviceName << iface.isValid();
     iface.Message((*it).token, msg.content, {});
+}
+
+void Distributor::clientRegistered(const Client &client)
+{
+    // TODO check whether we got an endpoint, otherwise report an error
+    m_clients.push_back(client);
+    // TODO persist client data
+    OrgUnifiedpushConnector1Interface iface(client.serviceName, QStringLiteral("/org/unifiedpush/Connector"), QDBusConnection::sessionBus());
+    iface.NewEndpoint(client.token, client.endpoint);
 }

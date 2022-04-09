@@ -4,6 +4,7 @@
 */
 
 #include "gotifypushprovider.h"
+#include "client.h"
 #include "logging.h"
 #include "message.h"
 
@@ -67,4 +68,14 @@ void GotifyPushProvider::wsMessageReceived(const QString &msg)
     m.clientRemoteId = QString::number(msgObj.value(QLatin1String("appid")).toInt());
     m.content = msgObj.value(QLatin1String("message")).toString();
     Q_EMIT messageReceived(m);
+}
+
+void GotifyPushProvider::registerClient(const Client &client)
+{
+    qCDebug(Log) << client.serviceName << client.token;
+}
+
+void GotifyPushProvider::unregisterClient(const Client &client)
+{
+    qCDebug(Log) << client.serviceName << client.token << client.remoteId;
 }

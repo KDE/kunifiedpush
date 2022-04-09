@@ -8,10 +8,12 @@
 
 #include <QObject>
 
+class QNetworkAccessManager;
 class QSettings;
 
 namespace KUnifiedPush {
 
+class Client;
 class Message;
 
 /** Base class for push provider protocol implementations.
@@ -32,9 +34,24 @@ public:
     /** Attempt to establish a connection to the push provider. */
     virtual void connectToProvider() = 0;
 
+    /** Register a new client with the provider. */
+    virtual void registerClient(const Client &client) = 0;
+
+    /** Unregister a client from the provider. */
+    virtual void unregisterClient(const Client &client) = 0;
+
 Q_SIGNALS:
     /** Inform about a received push notification. */
     void messageReceived(const KUnifiedPush::Message &msg);
+
+    /** Emitted after successful client registration. */
+    void clientRegistered(const KUnifiedPush::Client &client);
+
+protected:
+    QNetworkAccessManager *nam();
+
+private:
+    QNetworkAccessManager *m_nam = nullptr;
 };
 
 }

@@ -29,6 +29,7 @@ public:
 
 private:
     void messageReceived(const Message &msg) const;
+    void clientRegistered(const Client &client);
 
     AbstractPushProvider *m_pushProvider = nullptr;
     std::vector<Client> m_clients;

@@ -23,6 +23,8 @@ public:
 
     void loadSettings(const QSettings &settings) override;
     void connectToProvider() override;
+    void registerClient(const Client &client) override;
+    void unregisterClient(const Client &client) override;
 
 private:
     void wsMessageReceived(const QString &msg);
