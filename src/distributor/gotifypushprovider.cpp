@@ -91,6 +91,7 @@ void GotifyPushProvider::registerClient(const Client &client)
 
     auto reply = nam()->post(req, QJsonDocument(content).toJson(QJsonDocument::Compact));
     connect(reply, &QNetworkReply::finished, this, [reply, this, client]() {
+        reply->deleteLater();
         if (reply->error() != QNetworkReply::NoError) {
             qCDebug(Log) << reply->errorString();
             return;
@@ -118,4 +119,18 @@ void GotifyPushProvider::registerClient(const Client &client)
 void GotifyPushProvider::unregisterClient(const Client &client)
 {
     qCDebug(Log) << client.serviceName << client.token << client.remoteId;
+
+    QUrl url = m_url;
+    auto path = url.path();
+    path += QLatin1String("/application/") + client.remoteId;
+    url.setPath(path);
+
+    QNetworkRequest req(url);
+    req.setRawHeader("X-Gotify-Key", m_clientToken.toUtf8());
+
+    auto reply = nam()->deleteResource(req);
+    connect(reply, &QNetworkReply::finished, this, [reply]() {
+        reply->deleteLater();
+        qCDebug(Log) << reply->errorString() << reply->readAll(); // TODO
+    });
 }

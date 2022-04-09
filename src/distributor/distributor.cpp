@@ -73,7 +73,7 @@ QString Distributor::Register(const QString& serviceName, const QString& token, 
         m_pushProvider->registerClient(client);
         // TODO deferred D-Bus reply
         registrationResultReason = QStringLiteral("not implemented yet");
-        return QStringLiteral("REGISTRATION_FAILED");
+        return QStringLiteral("REGISTRATION_SUCCEEDED");
     }
 
     qCDebug(Log) << "Registering known client";
@@ -97,7 +97,8 @@ void Distributor::Unregister(const QString& token)
 
     m_pushProvider->unregisterClient((*it));
     OrgUnifiedpushConnector1Interface iface((*it).serviceName, QStringLiteral("/org/unifiedpush/Connector"), QDBusConnection::sessionBus());
-    iface.Unregistered((*it).token);
+    qCDebug(Log) << "Confirming unregistration" << iface.isValid() << (*it).token;
+    iface.Unregistered(QString());
 
     QSettings settings;
     settings.remove((*it).token);
@@ -118,12 +119,12 @@ void Distributor::messageReceived(const Message &msg) const
 
     QDBusConnection::sessionBus().interface()->startService((*it).serviceName);
     OrgUnifiedpushConnector1Interface iface((*it).serviceName, QStringLiteral("/org/unifiedpush/Connector"), QDBusConnection::sessionBus());
-    qCDebug(Log) << (*it).serviceName << iface.isValid();
     iface.Message((*it).token, msg.content, {});
 }
 
 void Distributor::clientRegistered(const Client &client)
 {
+    qCDebug(Log) << client.token << client.remoteId << client.serviceName;
     // TODO check whether we got an endpoint, otherwise report an error
     m_clients.push_back(client);
 

@@ -5,6 +5,7 @@
 
 #include <KUnifiedPush/Connector>
 
+#include <QCommandLineParser>
 #include <QCoreApplication>
 #include <QDebug>
 #include <QDBusConnection>
@@ -12,13 +13,32 @@
 
 int main(int argc, char **argv)
 {
+    QCommandLineParser parser;
+    parser.addHelpOption();
+    parser.addVersionOption();
+    QCommandLineOption unregisterOpt(QStringLiteral("unregister"));
+    parser.addOption(unregisterOpt);
+
     QCoreApplication app(argc, argv);
+    parser.process(app);
+
+    const auto unregisterRequested = parser.isSet(unregisterOpt);
 
     const auto serviceName = QStringLiteral("org.kde.kunifiedpush.demo-notifier");
-    QDBusConnection::sessionBus().registerService(serviceName);
+    if (!QDBusConnection::sessionBus().registerService(serviceName)) {
+        qCritical("Service name already in use.");
+        return 1;
+    }
+
     KUnifiedPush::Connector connector(serviceName);
-    QObject::connect(&connector, &KUnifiedPush::Connector::stateChanged, [](auto state) {
+    QObject::connect(&connector, &KUnifiedPush::Connector::stateChanged, [unregisterRequested, &connector](auto state) {
         qDebug() << "Connector state changed:" << state;
+        if (unregisterRequested && state == KUnifiedPush::Connector::Registered) {
+            connector.unregisterClient();
+        }
+        if (unregisterRequested && state == KUnifiedPush::Connector::Unregistered) {
+            QCoreApplication::quit();
+        }
     });
     QObject::connect(&connector, &KUnifiedPush::Connector::messageReceived, [](const auto &msg) {
         QProcess::startDetached(QStringLiteral("kdialog"), { QStringLiteral("--msgbox"), msg});
@@ -30,6 +50,15 @@ int main(int argc, char **argv)
     QObject::connect(&connector, &KUnifiedPush::Connector::endpointChanged, [](const auto &endpoint) {
         qDebug() << "New notification endpoint:" << endpoint;
     });
+
+    qDebug() << unregisterRequested << connector.state();
+    if (unregisterRequested && connector.state() == KUnifiedPush::Connector::Registered) {
+        connector.unregisterClient();
+    } else if (unregisterRequested) {
+        return 0;
+    } else if (connector.state() == KUnifiedPush::Connector::Unregistered) {
+        connector.registerClient();
+    }
 
     return app.exec();
 }

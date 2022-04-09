@@ -41,12 +41,11 @@ void ConnectorPrivate::NewEndpoint(const QString &token, const QString &endpoint
     QString actuallyWorkingEndpoint(endpoint);
     actuallyWorkingEndpoint.replace(QLatin1String("/UP?"), QLatin1String("/message?"));
 
-    if (m_endpoint == actuallyWorkingEndpoint) {
-        return;
+    if (m_endpoint != actuallyWorkingEndpoint) {
+        m_endpoint = actuallyWorkingEndpoint;
+        Q_EMIT q->endpointChanged(m_endpoint);
     }
-    m_endpoint = actuallyWorkingEndpoint;
     storeState();
-    Q_EMIT q->endpointChanged(m_endpoint);
     setState(Connector::Registered);
 }
 
@@ -56,11 +55,12 @@ void ConnectorPrivate::Unregistered(const QString &token)
 
     // confirmation of our unregistration request
     if (token.isEmpty()) {
-        setState(Connector::Unregistered);
         m_token.clear();
         m_endpoint.clear();
         Q_EMIT q->endpointChanged(m_endpoint);
-        QFile::remove(stateFile());
+        const auto res = QFile::remove(stateFile());
+        qCDebug(Log) << "Removing" << stateFile() << res;
+        setState(Connector::Unregistered);
     }
 
     // we got unregistered by the distributor
@@ -151,20 +151,8 @@ Connector::Connector(const QString &serviceName, QObject *parent)
     d->loadState();
     d->selectDistributor();
 
-    if (d->m_distributor && d->m_distributor->isValid()) {
-        if (d->m_token.isEmpty()) {
-            d->m_token = QUuid::createUuid().toString();
-        }
-        qCDebug(Log) << "Registering";
-        const auto reply = d->m_distributor->Register(d->m_serviceName, d->m_token/*, QStringLiteral("TODO")*/);
-        const auto result = reply.argumentAt(0).toString();
-        const auto errorMsg = reply.argumentAt(1).toString();
-        qCDebug(Log) << result << errorMsg;
-        if (result == QLatin1String("REGISTRATION_SUCCEEDED")) {
-            d->setState(Registered);
-        } else {
-            d->setState(Error);
-        }
+    if (!d->m_token.isEmpty()) {
+        registerClient();
     }
 }
 
@@ -175,9 +163,31 @@ QString Connector::endpoint() const
     return d->m_endpoint;
 }
 
-void Connector::unregister()
+void Connector::registerClient()
 {
-    if (d->m_distributor && d->m_state == Registered) {
+    qCDebug(Log) << d->m_state;
+    if (d->m_distributor && d->m_distributor->isValid() && d->m_state == Unregistered) {
+        d->setState(Registering);
+        if (d->m_token.isEmpty()) {
+            d->m_token = QUuid::createUuid().toString();
+        }
+        qCDebug(Log) << "Registering";
+        const auto reply = d->m_distributor->Register(d->m_serviceName, d->m_token/*, QStringLiteral("TODO")*/);
+        const auto result = reply.argumentAt(0).toString();
+        const auto errorMsg = reply.argumentAt(1).toString();
+        qCDebug(Log) << result << errorMsg;
+        if (result == QLatin1String("REGISTRATION_SUCCEEDED")) {
+            d->setState(d->m_endpoint.isEmpty() ? Registering : Registered);
+        } else {
+            d->setState(Error);
+        }
+    }
+}
+
+void Connector::unregisterClient()
+{
+    qCDebug(Log) << d->m_state;
+    if (d->m_distributor && d->m_distributor->isValid() && d->m_state == Registered) {
         d->m_distributor->Unregister(d->m_token);
     }
 }

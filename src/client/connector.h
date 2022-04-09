@@ -40,14 +40,22 @@ public:
      */
     QString endpoint() const;
 
+    /** Register this client.
+     *  This is for subscribing to push notifications and is only needed the first
+     *  time an application uses this, or after explicitly unregistering. The registration
+     *  is persisted until explicitly changed.
+     */
+    void registerClient();
+
     /** Unregister this client.
      *  This is for permanently unsubscribing, do not use on regular application shutdown.
      */
-    void unregister();
+    void unregisterClient();
 
     /** Connector state. */
     enum State {
         Unregistered, ///< Connector is not yet registered, or explicitly unregistered.
+        Registering, ///< Connector is registering with the push provider.
         Registered, ///< Connector is registered and thus operational.
         NoDistributor, ///< Connector cannot find a UnifiedPush distributor to register at.
         Error, ///< Any other error condition.
