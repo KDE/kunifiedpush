@@ -18,10 +18,11 @@ private Q_SLOTS:
         qputenv("UNIFIEDPUSH_DISTRIBUTOR", "dummy");
     }
 
-    void testUnknownServiceFailure()
+    void testNoDistributor()
     {
         KUnifiedPush::Connector con(QStringLiteral("org.kde.kunifiedpush.connectortest"));
         QCOMPARE(con.endpoint(), QString());
+        QCOMPARE(con.state(), KUnifiedPush::Connector::NoDistributor);
     }
 
     // not much testable beyond this without a mock distributor...

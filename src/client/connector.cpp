@@ -47,6 +47,7 @@ void ConnectorPrivate::NewEndpoint(const QString &token, const QString &endpoint
     m_endpoint = actuallyWorkingEndpoint;
     storeState();
     Q_EMIT q->endpointChanged(m_endpoint);
+    setState(Connector::Registered);
 }
 
 void ConnectorPrivate::Unregistered(const QString &token)
@@ -85,13 +86,42 @@ void ConnectorPrivate::selectDistributor()
 
     if (services.isEmpty()) {
         qCWarning(Log) << "No UnifiedPush distributor found.";
+        setState(Connector::NoDistributor);
         return;
     }
 
-    // TODO customizable selection if there is more than one
+    // check if one specific distributor was requested
+    const auto requestedDist = QString::fromUtf8(qgetenv("UNIFIEDPUSH_DISTRIBUTOR"));
+    if (!requestedDist.isEmpty()) {
+        const QString distServiceName = QLatin1String("org.unifiedpush.Distributor.") + requestedDist;
+        if (!services.contains(distServiceName)) {
+            qCWarning(Log) << "Requested UnifiedPush distributor is not available.";
+            setState(Connector::NoDistributor);
+        } else {
+            setDistributor(distServiceName);
+        }
+        return;
+    }
 
-    m_distributor = new OrgUnifiedpushDistributor1Interface(services.at(0), QStringLiteral("/org/unifiedpush/Distributor"), QDBusConnection::sessionBus(), this);
-    qCDebug(Log) << "Selected distributor" << services.at(0) << m_distributor->isValid();
+    // ... otherwise take a random one
+    setDistributor(services.at(0));
+}
+
+void ConnectorPrivate::setDistributor(const QString &distServiceName)
+{
+    m_distributor = new OrgUnifiedpushDistributor1Interface(distServiceName, QStringLiteral("/org/unifiedpush/Distributor"), QDBusConnection::sessionBus(), this);
+    qCDebug(Log) << "Selected distributor" << distServiceName << m_distributor->isValid();
+}
+
+void ConnectorPrivate::setState(Connector::State state)
+{
+    qCDebug(Log) << state;
+    if (m_state == state) {
+        return;
+    }
+
+    m_state = state;
+    Q_EMIT q->stateChanged(m_state);
 }
 
 
@@ -114,9 +144,15 @@ Connector::Connector(const QString &serviceName, QObject *parent)
         }
         qCDebug(Log) << "Registering";
         const auto reply = d->m_distributor->Register(d->m_serviceName, d->m_token/*, QStringLiteral("TODO")*/);
-        qCDebug(Log) << reply;
+        const auto result = reply.argumentAt(0).toString();
+        const auto errorMsg = reply.argumentAt(1).toString();
+        qCDebug(Log) << result << errorMsg;
+        if (result == QLatin1String("REGISTRATION_SUCCEEDED")) {
+            d->setState(Registered);
+        } else {
+            d->setState(Error);
+        }
     }
-
 }
 
 Connector::~Connector() = default;
@@ -124,4 +160,9 @@ Connector::~Connector() = default;
 QString Connector::endpoint() const
 {
     return d->m_endpoint;
+}
+
+Connector::State Connector::state() const
+{
+    return d->m_state;
 }

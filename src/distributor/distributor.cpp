@@ -67,7 +67,7 @@ Distributor::~Distributor() = default;
 
 QString Distributor::Register(const QString& serviceName, const QString& token, QString& registrationResultReason)
 {
-    qCDebug(Log) << serviceName << token << "XXXXX";
+    qCDebug(Log) << serviceName << token;
     const auto it = std::find_if(m_clients.begin(), m_clients.end(), [&token](const auto &client) {
         return client.token == token;
     });

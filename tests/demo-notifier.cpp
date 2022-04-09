@@ -17,6 +17,9 @@ int main(int argc, char **argv)
     const auto serviceName = QStringLiteral("org.kde.kunifiedpush.demo-notifier");
     QDBusConnection::sessionBus().registerService(serviceName);
     KUnifiedPush::Connector connector(serviceName);
+    QObject::connect(&connector, &KUnifiedPush::Connector::stateChanged, [](auto state) {
+        qDebug() << "Connector state changed:" << state;
+    });
     QObject::connect(&connector, &KUnifiedPush::Connector::messageReceived, [](const auto &msg) {
         QProcess::startDetached(QStringLiteral("kdialog"), { QStringLiteral("--msgbox"), msg});
     });

@@ -6,12 +6,13 @@
 #ifndef KUNIFIEDPUSH_CONNECTOR_P_H
 #define KUNIFIEDPUSH_CONNECTOR_P_H
 
+#include "connector.h"
+
 #include <QObject>
 
 class OrgUnifiedpushDistributor1Interface;
 
 namespace KUnifiedPush {
-class Connector;
 class ConnectorPrivate : public QObject
 {
     Q_OBJECT
@@ -26,12 +27,16 @@ public:
     void loadState();
     void storeState() const;
     void selectDistributor();
+    void setDistributor(const QString &distServiceName);
+
+    void setState(Connector::State state);
 
     Connector *q = nullptr;
     QString m_serviceName;
     QString m_token;
     QString m_endpoint;
     OrgUnifiedpushDistributor1Interface *m_distributor = nullptr;
+    Connector::State m_state = Connector::Unregistered;
 };
 }
 

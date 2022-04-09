@@ -25,6 +25,7 @@ class KUNIFIEDPUSH_EXPORT Connector : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString endpoint READ endpoint NOTIFY endpointChanged)
+    Q_PROPERTY(State state READ state NOTIFY stateChanged)
 public:
     /** Create a new connector instance.
      *  @param serviceName The application identifer, same as used for registration
@@ -40,7 +41,18 @@ public:
     QString endpoint() const;
 
     // TODO unregister method
-    // TODO status/error API
+
+    /** Connector state. */
+    enum State {
+        Unregistered, ///< Connector is not yet registered, or explicitly unregistered.
+        Registered, ///< Connector is registered and thus operational.
+        NoDistributor, ///< Connector cannot find a UnifiedPush distributor to register at.
+        Error, ///< Any other error condition.
+    };
+    Q_ENUM(State)
+    /** State of the connector. */
+    State state() const;
+    // TODO error message
 
 Q_SIGNALS:
     /** Emitted for each newly received push message. */
@@ -49,6 +61,9 @@ Q_SIGNALS:
 
     /** Emitted when a new endpoint URL has been received. */
     void endpointChanged(const QString &endpoint);
+
+    /** Emitted when the connector state changes. */
+    void stateChanged(State state);
 
 private:
     ConnectorPrivate *d;
