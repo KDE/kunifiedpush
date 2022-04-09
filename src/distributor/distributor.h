@@ -31,6 +31,8 @@ private:
     void messageReceived(const Message &msg) const;
     void clientRegistered(const Client &client);
 
+    QStringList clientTokens() const;
+
     AbstractPushProvider *m_pushProvider = nullptr;
     std::vector<Client> m_clients;
 };

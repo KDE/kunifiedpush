@@ -39,14 +39,7 @@ Distributor::Distributor(QObject *parent)
     const auto clientTokens = settings.value(QStringLiteral("Clients/Tokens"), QStringList()).toStringList();
     m_clients.reserve(clientTokens.size());
     for (const auto &token : clientTokens) {
-        settings.beginGroup(token);
-        Client client;
-        client.token = token;
-        client.remoteId = settings.value(QStringLiteral("RemoteId"), QString()).toString();
-        client.serviceName = settings.value(QStringLiteral("ServiceName"), QString()).toString();
-        client.endpoint = settings.value(QStringLiteral("Endpoint"), QString()).toString();
-        settings.endGroup();
-
+        auto client = Client::load(token, settings);
         // TODO discard invalid
         m_clients.push_back(std::move(client));
     }
@@ -105,9 +98,11 @@ void Distributor::Unregister(const QString& token)
     m_pushProvider->unregisterClient((*it));
     OrgUnifiedpushConnector1Interface iface((*it).serviceName, QStringLiteral("/org/unifiedpush/Connector"), QDBusConnection::sessionBus());
     iface.Unregistered((*it).token);
-    m_clients.erase(it);
 
-    // TODO persist client data
+    QSettings settings;
+    settings.remove((*it).token);
+    m_clients.erase(it);
+    settings.setValue(QStringLiteral("Clients/Tokens"), clientTokens());
 }
 
 void Distributor::messageReceived(const Message &msg) const
@@ -131,7 +126,19 @@ void Distributor::clientRegistered(const Client &client)
 {
     // TODO check whether we got an endpoint, otherwise report an error
     m_clients.push_back(client);
-    // TODO persist client data
+
+    QSettings settings;
+    client.store(settings);
+    settings.setValue(QStringLiteral("Clients/Tokens"), clientTokens());
+
     OrgUnifiedpushConnector1Interface iface(client.serviceName, QStringLiteral("/org/unifiedpush/Connector"), QDBusConnection::sessionBus());
     iface.NewEndpoint(client.token, client.endpoint);
+}
+
+QStringList Distributor::clientTokens() const
+{
+    QStringList l;
+    l.reserve(m_clients.size());
+    std::transform(m_clients.begin(), m_clients.end(), std::back_inserter(l), [](const auto &client) { return client.token; });
+    return l;
 }

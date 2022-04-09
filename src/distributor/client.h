@@ -8,12 +8,17 @@
 
 #include <QString>
 
+class QSettings;
+
 namespace KUnifiedPush {
 
 /** Information about a registered client */
 class Client
 {
 public:
+    void store(QSettings &settings) const;
+    static Client load(const QString &token, QSettings &settings);
+
     QString serviceName;
     QString token;
     QString remoteId;
