@@ -64,7 +64,7 @@ void ConnectorPrivate::Unregistered(const QString &token)
     }
 
     // we got unregistered by the distributor
-    else if (token == d->m_token) {
+    else if (token == m_token) {
         setState(Connector::Unregistered);
         // TODO reregister?
     }
