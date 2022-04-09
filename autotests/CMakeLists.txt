@@ -1,5 +1,4 @@
 # SPDX-FileCopyrightText: 2022 Volker Krause <vkrause@kde.org>
 # SPDX-License-Identifier: BSD-2-Clause
 
-add_subdirectory(client)
-add_subdirectory(distributor)
+ecm_add_test(connectortest.cpp LINK_LIBRARIES Qt::Test KUnifiedPush)

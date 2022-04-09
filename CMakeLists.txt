@@ -33,13 +33,13 @@ ecm_setup_version(PROJECT
 )
 
 set(QT_MIN_VERSION 5.15)
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus)
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Test WebSockets)
 
 ecm_set_disabled_deprecation_versions(QT 5.15.2)
 
 add_subdirectory(src)
 if (BUILD_TESTING)
-    #add_subdirectory(autotests)
+    add_subdirectory(autotests)
     add_subdirectory(tests)
 endif()
 
