@@ -27,6 +27,8 @@ public:
     void unregisterClient(const Client &client) override;
 
 private:
+    void waitForMessage();
+
     QUrl m_url;
     QString m_userName;
     QString m_appPassword;

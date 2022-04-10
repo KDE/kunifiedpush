@@ -6,6 +6,7 @@
 #include "nextpushprovider.h"
 #include "client.h"
 #include "logging.h"
+#include "message.h"
 
 #include <QHostInfo>
 #include <QJsonDocument>
@@ -63,7 +64,10 @@ void NextPushProvider::connectToProvider()
 
             QSettings settings;
             settings.setValue(QStringLiteral("NextPush/DeviceId"), m_deviceId);
+            waitForMessage();
         });
+    } else {
+        waitForMessage();
     }
 }
 
@@ -119,6 +123,43 @@ void NextPushProvider::unregisterClient(const Client &client)
             qCWarning(Log) << reply->errorString();
         } else {
             qCDebug(Log) << "application deleted";
+        }
+    });
+}
+
+void NextPushProvider::waitForMessage()
+{
+    qCDebug(Log);
+
+    QUrl url = m_url;
+    url.setPath(QLatin1String("/index.php/apps/uppush/device/") + m_deviceId);
+
+    QNetworkRequest req(url);
+    req.setRawHeader("Authorization", "Basic " + QByteArray(m_userName.toUtf8() + ':' + m_appPassword.toUtf8()).toBase64());
+
+    auto reply = nam()->get(req);
+    connect(reply, &QNetworkReply::finished, this, [reply, this]() {
+        reply->deleteLater();
+        if (reply->error() != QNetworkReply::NoError) {
+            qCWarning(Log) << reply->errorString();
+        } else {
+            qCDebug(Log) << "GET finished";
+            // TODO restart?
+        }
+    });
+    connect(reply, &QNetworkReply::readyRead, this, [reply, this]() {
+        // TODO proper SSE stream parser, this is just barely enough for demonstration
+        QByteArray data = reply->read(reply->bytesAvailable());
+        qCDebug(Log) << data;
+
+        if (data.startsWith("event: message")) {
+            const auto idx = data.indexOf("data: ");
+            QJsonObject msgObj = QJsonDocument::fromJson(data.mid(idx + 6)).object();
+
+            Message msg;
+            msg.clientRemoteId = msgObj.value(QLatin1String("token")).toString();
+            msg.content = QString::fromUtf8(QByteArray::fromBase64(msgObj.value(QLatin1String("message")).toString().toUtf8()));
+            Q_EMIT messageReceived(msg);
         }
     });
 }
