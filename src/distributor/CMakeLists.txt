@@ -12,6 +12,7 @@ target_sources(kunifiedpush-distributor PRIVATE
     gotifypushprovider.cpp
     main.cpp
     message.cpp
+    nextpushprovider.cpp
     ${dbus_srcs}
 )
 

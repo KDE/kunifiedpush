@@ -11,6 +11,7 @@
 #include "gotifypushprovider.h"
 #include "logging.h"
 #include "message.h"
+#include "nextpushprovider.h"
 
 #include <QDBusConnection>
 #include <QSettings>
@@ -25,6 +26,8 @@ Distributor::Distributor(QObject *parent)
     const auto pushProviderName = settings.value(QStringLiteral("PushProvider/Type"), QStringLiteral("Gotify")).toString();
     if (pushProviderName == QLatin1String("Gotify")) {
         m_pushProvider = new GotifyPushProvider(this);
+    } else if (pushProviderName == QLatin1String("NextPush")) {
+        m_pushProvider = new NextPushProvider(this);
     } else {
         qCWarning(Log) << "Unknown push provider:" << pushProviderName;
         return;
