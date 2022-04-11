@@ -21,6 +21,16 @@ using namespace KUnifiedPush;
 NextPushProvider::NextPushProvider(QObject *parent)
     : AbstractPushProvider(parent)
 {
+    connect(&m_sseStream, &ServerSentEventsStream::messageReceived, this, [this](const SSEMessage &sse) {
+        qCDebug(Log) << sse.event << sse.data;
+        if (sse.event == "message") {
+            QJsonObject msgObj = QJsonDocument::fromJson(sse.data).object();
+            Message msg;
+            msg.clientRemoteId = msgObj.value(QLatin1String("token")).toString();
+            msg.content = QString::fromUtf8(QByteArray::fromBase64(msgObj.value(QLatin1String("message")).toString().toUtf8()));
+            Q_EMIT messageReceived(msg);
+        }
+    });
 }
 
 NextPushProvider::~NextPushProvider() = default;
@@ -147,19 +157,5 @@ void NextPushProvider::waitForMessage()
             // TODO restart?
         }
     });
-    connect(reply, &QNetworkReply::readyRead, this, [reply, this]() {
-        // TODO proper SSE stream parser, this is just barely enough for demonstration
-        QByteArray data = reply->read(reply->bytesAvailable());
-        qCDebug(Log) << data;
-
-        if (data.startsWith("event: message")) {
-            const auto idx = data.indexOf("data: ");
-            QJsonObject msgObj = QJsonDocument::fromJson(data.mid(idx + 6)).object();
-
-            Message msg;
-            msg.clientRemoteId = msgObj.value(QLatin1String("token")).toString();
-            msg.content = QString::fromUtf8(QByteArray::fromBase64(msgObj.value(QLatin1String("message")).toString().toUtf8()));
-            Q_EMIT messageReceived(msg);
-        }
-    });
+    m_sseStream.read(reply);
 }

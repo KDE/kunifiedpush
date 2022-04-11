@@ -13,6 +13,7 @@ target_sources(kunifiedpush-distributor PRIVATE
     main.cpp
     message.cpp
     nextpushprovider.cpp
+    serversenteventsstream.cpp
     ${dbus_srcs}
 )
 

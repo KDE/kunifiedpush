@@ -7,6 +7,7 @@
 #define KUNIFIEDPUSH_NEXTPUSHPROVIDER_H
 
 #include "abstractpushprovider.h"
+#include "serversenteventsstream.h"
 
 #include <QUrl>
 
@@ -33,6 +34,7 @@ private:
     QString m_userName;
     QString m_appPassword;
     QString m_deviceId;
+    ServerSentEventsStream m_sseStream;
 };
 
 }
