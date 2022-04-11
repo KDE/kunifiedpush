@@ -9,6 +9,8 @@
 #include "distributor1iface.h"
 #include "logging.h"
 
+#include "../shared/unifiedpush-constants.h"
+
 #include <QDBusConnection>
 #include <QSettings>
 
@@ -19,7 +21,7 @@ ConnectorPrivate::ConnectorPrivate(Connector *qq)
     , q(qq)
 {
     new Connector1Adaptor(this);
-    QDBusConnection::sessionBus().registerObject(QStringLiteral("/org/unifiedpush/Connector"), this);
+    QDBusConnection::sessionBus().registerObject(QLatin1String(UP_CONNECTOR_PATH), this);
 }
 
 void ConnectorPrivate::Message(const QString &token, const QString &message, const QString &messageIdentifier)
@@ -94,7 +96,7 @@ void ConnectorPrivate::storeState() const
 void ConnectorPrivate::selectDistributor()
 {
     QStringList services = QDBusConnection::sessionBus().interface()->registeredServiceNames();
-    services.erase(std::remove_if(services.begin(), services.end(), [](const auto &s) { return !s.startsWith(QLatin1String("org.unifiedpush.Distributor.")); }), services.end());
+    services.erase(std::remove_if(services.begin(), services.end(), [](const auto &s) { return !s.startsWith(QLatin1String(UP_DISTRIBUTOR_SERVICE_NAME_PREFIX)); }), services.end());
     qCDebug(Log) << services;
 
     if (services.isEmpty()) {
@@ -106,7 +108,7 @@ void ConnectorPrivate::selectDistributor()
     // check if one specific distributor was requested
     const auto requestedDist = QString::fromUtf8(qgetenv("UNIFIEDPUSH_DISTRIBUTOR"));
     if (!requestedDist.isEmpty()) {
-        const QString distServiceName = QLatin1String("org.unifiedpush.Distributor.") + requestedDist;
+        const QString distServiceName = QLatin1String(UP_DISTRIBUTOR_SERVICE_NAME_PREFIX) + requestedDist;
         if (!services.contains(distServiceName)) {
             qCWarning(Log) << "Requested UnifiedPush distributor is not available.";
             setState(Connector::NoDistributor);
@@ -122,7 +124,7 @@ void ConnectorPrivate::selectDistributor()
 
 void ConnectorPrivate::setDistributor(const QString &distServiceName)
 {
-    m_distributor = new OrgUnifiedpushDistributor1Interface(distServiceName, QStringLiteral("/org/unifiedpush/Distributor"), QDBusConnection::sessionBus(), this);
+    m_distributor = new OrgUnifiedpushDistributor1Interface(distServiceName, QLatin1String(UP_DISTRIBUTOR_PATH), QDBusConnection::sessionBus(), this);
     qCDebug(Log) << "Selected distributor" << distServiceName << m_distributor->isValid();
 }
 

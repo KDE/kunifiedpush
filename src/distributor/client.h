@@ -9,6 +9,7 @@
 #include <QString>
 
 class QSettings;
+class OrgUnifiedpushConnector1Interface;
 
 namespace KUnifiedPush {
 
@@ -18,6 +19,9 @@ class Client
 public:
     void store(QSettings &settings) const;
     static Client load(const QString &token, QSettings &settings);
+
+    void activate() const;
+    OrgUnifiedpushConnector1Interface connector() const;
 
     QString serviceName;
     QString token;

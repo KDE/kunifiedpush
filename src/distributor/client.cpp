@@ -4,7 +4,13 @@
 */
 
 #include "client.h"
+#include "connector1iface.h"
+#include "logging.h"
 
+#include "../shared/unifiedpush-constants.h"
+
+#include <QDBusConnection>
+#include <QDBusConnectionInterface>
 #include <QSettings>
 
 using namespace KUnifiedPush;
@@ -28,4 +34,15 @@ void Client::store(QSettings& settings) const
     settings.setValue(QStringLiteral("ServiceName"), serviceName);
     settings.setValue(QStringLiteral("Endpoint"), endpoint);
     settings.endGroup();
+}
+
+void Client::activate() const
+{
+    qCDebug(Log) << "activating" << serviceName;
+    QDBusConnection::sessionBus().interface()->startService(serviceName);
+}
+
+OrgUnifiedpushConnector1Interface Client::connector() const
+{
+    return OrgUnifiedpushConnector1Interface(serviceName, QLatin1String(UP_CONNECTOR_PATH), QDBusConnection::sessionBus());
 }

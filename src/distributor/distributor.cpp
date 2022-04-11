@@ -13,6 +13,8 @@
 #include "message.h"
 #include "nextpushprovider.h"
 
+#include "../shared/unifiedpush-constants.h"
+
 #include <QDBusConnection>
 #include <QSettings>
 
@@ -57,7 +59,7 @@ Distributor::Distributor(QObject *parent)
 
     // register at D-Bus
     new Distributor1Adaptor(this);
-    QDBusConnection::sessionBus().registerObject(QStringLiteral("/org/unifiedpush/Distributor"), this);
+    QDBusConnection::sessionBus().registerObject(QLatin1String(UP_DISTRIBUTOR_PATH), this);
 }
 
 Distributor::~Distributor() = default;
@@ -80,10 +82,8 @@ QString Distributor::Register(const QString& serviceName, const QString& token, 
     }
 
     qCDebug(Log) << "Registering known client";
-    QDBusConnection::sessionBus().interface()->startService((*it).serviceName);
-    OrgUnifiedpushConnector1Interface iface((*it).serviceName, QStringLiteral("/org/unifiedpush/Connector"), QDBusConnection::sessionBus());
-    qCDebug(Log) << (*it).serviceName << iface.isValid();
-    iface.NewEndpoint((*it).token, (*it).endpoint);
+    (*it).activate();
+    (*it).connector().NewEndpoint((*it).token, (*it).endpoint);
     return QStringLiteral("REGISTRATION_SUCCEEDED");
 }
 
@@ -99,9 +99,7 @@ void Distributor::Unregister(const QString& token)
     }
 
     m_pushProvider->unregisterClient((*it));
-    OrgUnifiedpushConnector1Interface iface((*it).serviceName, QStringLiteral("/org/unifiedpush/Connector"), QDBusConnection::sessionBus());
-    qCDebug(Log) << "Confirming unregistration" << iface.isValid() << (*it).token;
-    iface.Unregistered(QString());
+    (*it).connector().Unregistered(QString());
 
     QSettings settings;
     settings.remove((*it).token);
@@ -120,9 +118,8 @@ void Distributor::messageReceived(const Message &msg) const
         return;
     }
 
-    QDBusConnection::sessionBus().interface()->startService((*it).serviceName);
-    OrgUnifiedpushConnector1Interface iface((*it).serviceName, QStringLiteral("/org/unifiedpush/Connector"), QDBusConnection::sessionBus());
-    iface.Message((*it).token, msg.content, {});
+    (*it).activate();
+    (*it).connector().Message((*it).token, msg.content, {});
 }
 
 void Distributor::clientRegistered(const Client &client)
@@ -135,8 +132,7 @@ void Distributor::clientRegistered(const Client &client)
     client.store(settings);
     settings.setValue(QStringLiteral("Clients/Tokens"), clientTokens());
 
-    OrgUnifiedpushConnector1Interface iface(client.serviceName, QStringLiteral("/org/unifiedpush/Connector"), QDBusConnection::sessionBus());
-    iface.NewEndpoint(client.token, client.endpoint);
+    client.connector().NewEndpoint(client.token, client.endpoint);
 }
 
 QStringList Distributor::clientTokens() const
