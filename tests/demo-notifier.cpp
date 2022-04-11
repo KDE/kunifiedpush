@@ -54,9 +54,7 @@ int main(int argc, char **argv)
     qDebug() << unregisterRequested << connector.state();
     if (unregisterRequested && connector.state() == KUnifiedPush::Connector::Registered) {
         connector.unregisterClient();
-    } else if (unregisterRequested) {
-        return 0;
-    } else if (connector.state() == KUnifiedPush::Connector::Unregistered) {
+    } else if (!unregisterRequested && connector.state() == KUnifiedPush::Connector::Unregistered) {
         connector.registerClient();
     }
 

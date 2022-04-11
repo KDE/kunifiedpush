@@ -12,6 +12,7 @@
 #include "../shared/unifiedpush-constants.h"
 
 #include <QDBusConnection>
+#include <QDBusPendingCallWatcher>
 #include <QSettings>
 
 using namespace KUnifiedPush;
@@ -175,14 +176,22 @@ void Connector::registerClient()
         }
         qCDebug(Log) << "Registering";
         const auto reply = d->m_distributor->Register(d->m_serviceName, d->m_token/*, QStringLiteral("TODO")*/);
-        const auto result = reply.argumentAt(0).toString();
-        const auto errorMsg = reply.argumentAt(1).toString();
-        qCDebug(Log) << result << errorMsg;
-        if (result == QLatin1String("REGISTRATION_SUCCEEDED")) {
-            d->setState(d->m_endpoint.isEmpty() ? Registering : Registered);
-        } else {
-            d->setState(Error);
-        }
+        auto watcher = new QDBusPendingCallWatcher(reply, this);
+        connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher]() {
+            if (watcher->isError()) {
+                qCWarning(Log) << watcher->error();
+                d->setState(Error);
+            } else {
+                const auto result = watcher->reply().arguments().at(0).toString();
+                const auto errorMsg = watcher->reply().arguments().at(1).toString();
+                qCDebug(Log) << result << errorMsg;
+                if (result == QLatin1String("REGISTRATION_SUCCEEDED")) {
+                    d->setState(d->m_endpoint.isEmpty() ? Registering : Registered);
+                } else {
+                    d->setState(Error);
+                }
+            }
+        });
     }
 }
 
