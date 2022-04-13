@@ -79,13 +79,14 @@ QString Distributor::Register(const QString& serviceName, const QString& token, 
         m_pushProvider->registerClient(client);
         // TODO deferred D-Bus reply
         registrationResultReason = QStringLiteral("not implemented yet");
-        return QStringLiteral("REGISTRATION_SUCCEEDED");
+        return QLatin1String(UP_REGISTER_RESULT_SUCCESS);
     }
 
     qCDebug(Log) << "Registering known client";
     (*it).activate();
     (*it).connector().NewEndpoint((*it).token, (*it).endpoint);
-    return QStringLiteral("REGISTRATION_SUCCEEDED");
+    registrationResultReason.clear();
+    return QLatin1String(UP_REGISTER_RESULT_SUCCESS);
 }
 
 void Distributor::Unregister(const QString& token)

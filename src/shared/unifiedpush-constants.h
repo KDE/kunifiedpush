@@ -14,6 +14,9 @@ constexpr const char UP_CONNECTOR_PATH[] = "/org/unifiedpush/Connector";
 constexpr const char UP_DISTRIBUTOR_SERVICE_NAME_PREFIX[] = "org.unifiedpush.Distributor.";
 constexpr const char UP_DISTRIBUTOR_PATH[] = "/org/unifiedpush/Distributor";
 
+constexpr const char UP_REGISTER_RESULT_SUCCESS[] = "REGISTRATION_SUCCEEDED";
+constexpr const char UP_REGISTER_RESULT_FAILURE[] = "REGISTRATION_FAILED";
+
 }
 
 #endif

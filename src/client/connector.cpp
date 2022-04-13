@@ -185,7 +185,7 @@ void Connector::registerClient()
                 const auto result = watcher->reply().arguments().at(0).toString();
                 const auto errorMsg = watcher->reply().arguments().at(1).toString();
                 qCDebug(Log) << result << errorMsg;
-                if (result == QLatin1String("REGISTRATION_SUCCEEDED")) {
+                if (result == QLatin1String(UP_REGISTER_RESULT_SUCCESS)) {
                     d->setState(d->m_endpoint.isEmpty() ? Registering : Registered);
                 } else {
                     d->setState(Error);
