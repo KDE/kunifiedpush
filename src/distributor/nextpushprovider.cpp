@@ -49,12 +49,8 @@ void NextPushProvider::connectToProvider()
     qCDebug(Log) << m_deviceId;
 
     if (m_deviceId.isEmpty()) {
-        QUrl url = m_url;
-        url.setPath(QStringLiteral("/index.php/apps/uppush/device/"));
-
-        QNetworkRequest req(url);
+        auto req = prepareRequest("device");
         req.setHeader(QNetworkRequest::ContentTypeHeader, QStringLiteral("application/json"));
-        req.setRawHeader("Authorization", "Basic " + QByteArray(m_userName.toUtf8() + ':' + m_appPassword.toUtf8()).toBase64());
 
         QJsonObject content;
         content.insert(QLatin1String("deviceName"), QHostInfo::localHostName());
@@ -84,12 +80,8 @@ void NextPushProvider::connectToProvider()
 void NextPushProvider::registerClient(const Client &client)
 {
     qCDebug(Log) << client.serviceName;
-    QUrl url = m_url;
-    url.setPath(QStringLiteral("/index.php/apps/uppush/app/"));
-
-    QNetworkRequest req(url);
+    auto req = prepareRequest("app");
     req.setHeader(QNetworkRequest::ContentTypeHeader, QStringLiteral("application/json"));
-    req.setRawHeader("Authorization", "Basic " + QByteArray(m_userName.toUtf8() + ':' + m_appPassword.toUtf8()).toBase64());
 
     QJsonObject content;
     content.insert(QLatin1String("deviceId"), m_deviceId);
@@ -120,12 +112,7 @@ void NextPushProvider::registerClient(const Client &client)
 void NextPushProvider::unregisterClient(const Client &client)
 {
     qCDebug(Log) << client.serviceName << client.remoteId;
-    QUrl url = m_url;
-    url.setPath(QLatin1String("/index.php/apps/uppush/app/") + client.remoteId);
-
-    QNetworkRequest req(url);
-    req.setRawHeader("Authorization", "Basic " + QByteArray(m_userName.toUtf8() + ':' + m_appPassword.toUtf8()).toBase64());
-
+    auto req = prepareRequest("app", client.remoteId);
     auto reply = nam()->deleteResource(req);
     connect(reply, &QNetworkReply::finished, this, [reply, this, client]() {
         reply->deleteLater();
@@ -140,13 +127,7 @@ void NextPushProvider::unregisterClient(const Client &client)
 void NextPushProvider::waitForMessage()
 {
     qCDebug(Log);
-
-    QUrl url = m_url;
-    url.setPath(QLatin1String("/index.php/apps/uppush/device/") + m_deviceId);
-
-    QNetworkRequest req(url);
-    req.setRawHeader("Authorization", "Basic " + QByteArray(m_userName.toUtf8() + ':' + m_appPassword.toUtf8()).toBase64());
-
+    auto req = prepareRequest("device", m_deviceId);
     auto reply = nam()->get(req);
     connect(reply, &QNetworkReply::finished, this, [reply, this]() {
         reply->deleteLater();
@@ -158,4 +139,16 @@ void NextPushProvider::waitForMessage()
         }
     });
     m_sseStream.read(reply);
+}
+
+QNetworkRequest NextPushProvider::prepareRequest(const char *restCmd, const QString &restArg) const
+{
+    QUrl url = m_url;
+    auto path = url.path();
+    path += QLatin1String("/index.php/apps/uppush/") + QLatin1String(restCmd) + QLatin1Char('/') + restArg;
+    url.setPath(path);
+
+    QNetworkRequest req(url);
+    req.setRawHeader("Authorization", "Basic " + QByteArray(m_userName.toUtf8() + ':' + m_appPassword.toUtf8()).toBase64());
+    return req;
 }

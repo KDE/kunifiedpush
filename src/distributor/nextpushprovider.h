@@ -11,6 +11,8 @@
 
 #include <QUrl>
 
+class QNetworkRequest;
+
 namespace KUnifiedPush {
 
 /** NextPush push provider implementation.
@@ -29,6 +31,7 @@ public:
 
 private:
     void waitForMessage();
+    QNetworkRequest prepareRequest(const char *restCmd, const QString &restArg = {}) const;
 
     QUrl m_url;
     QString m_userName;
