@@ -4,6 +4,7 @@
 */
 
 #include "distributor.h"
+#include "logging.h"
 
 #include <QCoreApplication>
 #include <QDBusConnection>
@@ -15,7 +16,10 @@ int main(int argc, char **argv)
 
     QCoreApplication app(argc, argv);
     KUnifiedPush::Distributor distributor;
-    QDBusConnection::sessionBus().registerService(QStringLiteral("org.unifiedpush.Distributor.kde"));
+    if (!QDBusConnection::sessionBus().registerService(QStringLiteral("org.unifiedpush.Distributor.kde"))) {
+        qCCritical(Log) << "Distributor service name already in use - aborting!";
+        return 1;
+    }
 
     return app.exec();
 }
