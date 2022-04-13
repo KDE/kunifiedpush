@@ -25,7 +25,7 @@ Distributor::Distributor(QObject *parent)
 {
     // determine push provider
     QSettings settings;
-    const auto pushProviderName = settings.value(QStringLiteral("PushProvider/Type"), QStringLiteral("Gotify")).toString();
+    const auto pushProviderName = settings.value(QStringLiteral("PushProvider/Type"), QString()).toString();
     if (pushProviderName == QLatin1String("Gotify")) {
         m_pushProvider = new GotifyPushProvider(this);
     } else if (pushProviderName == QLatin1String("NextPush")) {
@@ -45,8 +45,9 @@ Distributor::Distributor(QObject *parent)
     m_clients.reserve(clientTokens.size());
     for (const auto &token : clientTokens) {
         auto client = Client::load(token, settings);
-        // TODO discard invalid
-        m_clients.push_back(std::move(client));
+        if (client.isValid()) {
+            m_clients.push_back(std::move(client));
+        }
     }
     qCDebug(Log) << m_clients.size() << "registered clients loaded";
 
@@ -55,7 +56,7 @@ Distributor::Distributor(QObject *parent)
     m_pushProvider->connectToProvider();
 
     // purge uninstalled apps
-    // TODO
+    purgeUnavailableClients();
 
     // register at D-Bus
     new Distributor1Adaptor(this);
@@ -141,4 +142,22 @@ QStringList Distributor::clientTokens() const
     l.reserve(m_clients.size());
     std::transform(m_clients.begin(), m_clients.end(), std::back_inserter(l), [](const auto &client) { return client.token; });
     return l;
+}
+
+void Distributor::purgeUnavailableClients()
+{
+    QStringList activatableServiceNames = QDBusConnection::sessionBus().interface()->activatableServiceNames();
+    std::sort(activatableServiceNames.begin(), activatableServiceNames.end());
+
+    // collect clients to unregister first, so m_clients doesn't change underneath us
+    QStringList tokensToUnregister;
+    for (const auto &client : m_clients) {
+        if (!std::binary_search(activatableServiceNames.begin(), activatableServiceNames.end(), client.serviceName)) {
+            tokensToUnregister.push_back(client.token);
+        }
+    }
+
+    for (const auto &token : tokensToUnregister) {
+        Unregister(token);
+    }
 }

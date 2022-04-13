@@ -20,7 +20,12 @@ public:
     void store(QSettings &settings) const;
     static Client load(const QString &token, QSettings &settings);
 
+    /** Contains all required information for a client. */
+    bool isValid() const;
+
+    /** Activate client on D-Bus. */
     void activate() const;
+    /** D-Bus UnifiedPush connector interface. */
     OrgUnifiedpushConnector1Interface connector() const;
 
     QString serviceName;

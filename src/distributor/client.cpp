@@ -36,6 +36,11 @@ void Client::store(QSettings& settings) const
     settings.endGroup();
 }
 
+bool Client::isValid() const
+{
+    return !token.isEmpty() && !serviceName.isEmpty();
+}
+
 void Client::activate() const
 {
     qCDebug(Log) << "activating" << serviceName;

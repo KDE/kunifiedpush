@@ -33,6 +33,8 @@ private:
 
     QStringList clientTokens() const;
 
+    void purgeUnavailableClients();
+
     AbstractPushProvider *m_pushProvider = nullptr;
     std::vector<Client> m_clients;
 };
