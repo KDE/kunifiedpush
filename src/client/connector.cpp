@@ -71,6 +71,11 @@ void ConnectorPrivate::Unregistered(const QString &token)
         setState(Connector::Unregistered);
         // TODO reregister?
     }
+
+    if (m_currentCommand == Command::Unregister) {
+        m_currentCommand = Command::None;
+    }
+    processNextCommand();
 }
 
 QString ConnectorPrivate::stateFile() const
@@ -92,6 +97,11 @@ void ConnectorPrivate::storeState() const
     settings.beginGroup(QStringLiteral("Client"));
     settings.setValue(QStringLiteral("Token"), m_token);
     settings.setValue(QStringLiteral("Endpoint"), m_endpoint);
+}
+
+bool ConnectorPrivate::hasDistributor() const
+{
+    return m_distributor && m_distributor->isValid();
 }
 
 void ConnectorPrivate::selectDistributor()
@@ -140,6 +150,82 @@ void ConnectorPrivate::setState(Connector::State state)
     Q_EMIT q->stateChanged(m_state);
 }
 
+void ConnectorPrivate::addCommand(ConnectorPrivate::Command cmd)
+{
+    // ignore new commands that are already in the queue or cancel each other out
+    if (!m_commandQueue.empty()) {
+        if (m_commandQueue.back() == cmd) {
+            return;
+        }
+        if ((m_commandQueue.back() == Command::Register && cmd == Command::Unregister) || (m_commandQueue.back() == Command::Unregister && cmd == Command::Register)) {
+            m_commandQueue.pop_back();
+            return;
+        }
+    } else if (m_currentCommand == cmd) {
+        return;
+    }
+
+    m_commandQueue.push_back(cmd);
+    processNextCommand();
+}
+
+void ConnectorPrivate::processNextCommand()
+{
+    if (m_currentCommand != Command::None || !hasDistributor() || m_commandQueue.empty()) {
+        return;
+    }
+
+    m_currentCommand = m_commandQueue.front();
+    m_commandQueue.pop_front();
+
+    switch (m_currentCommand) {
+        case Command::None:
+            break;
+        case Command::Register:
+        {
+            if (m_state == Connector::Registered) {
+                m_currentCommand = Command::None;
+                break;
+            }
+            setState(Connector::Registering);
+            if (m_token.isEmpty()) {
+                m_token = QUuid::createUuid().toString();
+            }
+            qCDebug(Log) << "Registering";
+            const auto reply = m_distributor->Register(m_serviceName, m_token/*, QStringLiteral("TODO")*/);
+            auto watcher = new QDBusPendingCallWatcher(reply, this);
+            connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher]() {
+                if (watcher->isError()) {
+                    qCWarning(Log) << watcher->error();
+                    setState(Connector::Error);
+                } else {
+                    const auto result = watcher->reply().arguments().at(0).toString();
+                    const auto errorMsg = watcher->reply().arguments().at(1).toString();
+                    qCDebug(Log) << result << errorMsg;
+                    if (result == QLatin1String(UP_REGISTER_RESULT_SUCCESS)) {
+                        setState(m_endpoint.isEmpty() ? Connector::Registering : Connector::Registered);
+                    } else {
+                        setState(Connector::Error);
+                    }
+                }
+                m_currentCommand = Command::None;
+                processNextCommand();
+            });
+            break;
+        }
+        case Command::Unregister:
+            if (m_state == Connector::Unregistered) {
+                m_currentCommand = Command::None;
+                break;
+            }
+            qCDebug(Log) << "Unregistering";
+            m_distributor->Unregister(m_token);
+            break;
+    }
+
+    processNextCommand();
+}
+
 
 Connector::Connector(const QString &serviceName, QObject *parent)
     : QObject(parent)
@@ -169,38 +255,13 @@ QString Connector::endpoint() const
 void Connector::registerClient()
 {
     qCDebug(Log) << d->m_state;
-    if (d->m_distributor && d->m_distributor->isValid() && d->m_state == Unregistered) {
-        d->setState(Registering);
-        if (d->m_token.isEmpty()) {
-            d->m_token = QUuid::createUuid().toString();
-        }
-        qCDebug(Log) << "Registering";
-        const auto reply = d->m_distributor->Register(d->m_serviceName, d->m_token/*, QStringLiteral("TODO")*/);
-        auto watcher = new QDBusPendingCallWatcher(reply, this);
-        connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher]() {
-            if (watcher->isError()) {
-                qCWarning(Log) << watcher->error();
-                d->setState(Error);
-            } else {
-                const auto result = watcher->reply().arguments().at(0).toString();
-                const auto errorMsg = watcher->reply().arguments().at(1).toString();
-                qCDebug(Log) << result << errorMsg;
-                if (result == QLatin1String(UP_REGISTER_RESULT_SUCCESS)) {
-                    d->setState(d->m_endpoint.isEmpty() ? Registering : Registered);
-                } else {
-                    d->setState(Error);
-                }
-            }
-        });
-    }
+    d->addCommand(ConnectorPrivate::Command::Register);
 }
 
 void Connector::unregisterClient()
 {
     qCDebug(Log) << d->m_state;
-    if (d->m_distributor && d->m_distributor->isValid() && d->m_state == Registered) {
-        d->m_distributor->Unregister(d->m_token);
-    }
+    d->addCommand(ConnectorPrivate::Command::Unregister);
 }
 
 Connector::State Connector::state() const

@@ -31,11 +31,8 @@ int main(int argc, char **argv)
     }
 
     KUnifiedPush::Connector connector(serviceName);
-    QObject::connect(&connector, &KUnifiedPush::Connector::stateChanged, [unregisterRequested, &connector](auto state) {
+    QObject::connect(&connector, &KUnifiedPush::Connector::stateChanged, [unregisterRequested](auto state) {
         qDebug() << "Connector state changed:" << state;
-        if (unregisterRequested && state == KUnifiedPush::Connector::Registered) {
-            connector.unregisterClient();
-        }
         if (unregisterRequested && state == KUnifiedPush::Connector::Unregistered) {
             QCoreApplication::quit();
         }
@@ -51,10 +48,12 @@ int main(int argc, char **argv)
         qDebug() << "New notification endpoint:" << endpoint;
     });
 
-    qDebug() << unregisterRequested << connector.state();
-    if (unregisterRequested && connector.state() == KUnifiedPush::Connector::Registered) {
+    if (unregisterRequested) {
+        if (connector.state() == KUnifiedPush::Connector::Unregistered) {
+            return 0;
+        }
         connector.unregisterClient();
-    } else if (!unregisterRequested && connector.state() == KUnifiedPush::Connector::Unregistered) {
+    } else {
         connector.registerClient();
     }
 

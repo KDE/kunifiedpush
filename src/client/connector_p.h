@@ -10,6 +10,8 @@
 
 #include <QObject>
 
+#include <deque>
+
 class OrgUnifiedpushDistributor1Interface;
 
 namespace KUnifiedPush {
@@ -26,10 +28,15 @@ public:
     QString stateFile() const;
     void loadState();
     void storeState() const;
+    bool hasDistributor() const;
     void selectDistributor();
     void setDistributor(const QString &distServiceName);
 
     void setState(Connector::State state);
+
+    enum class Command { None, Register, Unregister };
+    void addCommand(Command cmd);
+    void processNextCommand();
 
     Connector *q = nullptr;
     QString m_serviceName;
@@ -37,6 +44,9 @@ public:
     QString m_endpoint;
     OrgUnifiedpushDistributor1Interface *m_distributor = nullptr;
     Connector::State m_state = Connector::Unregistered;
+
+    Command m_currentCommand;
+    std::deque<Command> m_commandQueue;
 };
 }
 
