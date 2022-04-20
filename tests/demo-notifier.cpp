@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <QDBusConnection>
 #include <QProcess>
+#include <QTimer>
 
 int main(int argc, char **argv)
 {
@@ -18,6 +19,9 @@ int main(int argc, char **argv)
     parser.addVersionOption();
     QCommandLineOption unregisterOpt(QStringLiteral("unregister"));
     parser.addOption(unregisterOpt);
+    QCommandLineOption dbusActivatedOpt(QStringLiteral("dbus-activated"));
+    parser.addOption(dbusActivatedOpt);
+
 
     QCoreApplication app(argc, argv);
     parser.process(app);
@@ -55,6 +59,10 @@ int main(int argc, char **argv)
         connector.unregisterClient();
     } else {
         connector.registerClient();
+    }
+
+    if (parser.isSet(dbusActivatedOpt)) {
+        QTimer::singleShot(std::chrono::seconds(5), &app, &QCoreApplication::quit);
     }
 
     return app.exec();

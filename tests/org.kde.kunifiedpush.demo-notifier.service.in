@@ -2,4 +2,4 @@
 # SPDX-License-Identifier: CC0-1.0
 [D-BUS Service]
 Name=org.kde.kunifiedpush.demo-notifier
-Exec=${CMAKE_BINARY_DIR}/bin/demo-notifier
+Exec=${CMAKE_BINARY_DIR}/bin/demo-notifier --dbus-activated
