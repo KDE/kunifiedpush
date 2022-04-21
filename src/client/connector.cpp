@@ -23,6 +23,27 @@ ConnectorPrivate::ConnectorPrivate(Connector *qq)
 {
     new Connector1Adaptor(this);
     QDBusConnection::sessionBus().registerObject(QLatin1String(UP_CONNECTOR_PATH), this);
+
+    connect(&m_serviceWatcher, &QDBusServiceWatcher::serviceRegistered, this, [this](const QString &serviceName) {
+        qCDebug(Log) << "Distributor" << serviceName << "became available";
+        if (!hasDistributor()) {
+            selectDistributor();
+            processNextCommand();
+        }
+    });
+    connect(&m_serviceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, [this](const QString &serviceName) {
+        qCDebug(Log) << "Distributor" << serviceName << "is gone";
+        if (m_distributor->service() == serviceName) {
+            delete m_distributor;
+            m_distributor = nullptr;
+            m_currentCommand = Command::None;
+            setState(Connector::NoDistributor);
+        }
+    });
+
+    m_serviceWatcher.setConnection(QDBusConnection::sessionBus());
+    m_serviceWatcher.setWatchMode(QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration);
+    m_serviceWatcher.addWatchedService(QLatin1String("org.unifiedpush.Distributor*"));
 }
 
 void ConnectorPrivate::Message(const QString &token, const QString &message, const QString &messageIdentifier)
@@ -137,6 +158,11 @@ void ConnectorPrivate::setDistributor(const QString &distServiceName)
 {
     m_distributor = new OrgUnifiedpushDistributor1Interface(distServiceName, QLatin1String(UP_DISTRIBUTOR_PATH), QDBusConnection::sessionBus(), this);
     qCDebug(Log) << "Selected distributor" << distServiceName << m_distributor->isValid();
+    setState(Connector::Unregistered);
+
+    if (!m_token.isEmpty()) { // re-register if we have been registered before
+        q->registerClient();
+    }
 }
 
 void ConnectorPrivate::setState(Connector::State state)
@@ -239,10 +265,6 @@ Connector::Connector(const QString &serviceName, QObject *parent)
 
     d->loadState();
     d->selectDistributor();
-
-    if (!d->m_token.isEmpty()) {
-        registerClient();
-    }
 }
 
 Connector::~Connector() = default;

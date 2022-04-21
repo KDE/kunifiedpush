@@ -8,6 +8,7 @@
 
 #include "connector.h"
 
+#include <QDBusServiceWatcher>
 #include <QObject>
 
 #include <deque>
@@ -47,6 +48,8 @@ public:
 
     Command m_currentCommand;
     std::deque<Command> m_commandQueue;
+
+    QDBusServiceWatcher m_serviceWatcher;
 };
 }
 
