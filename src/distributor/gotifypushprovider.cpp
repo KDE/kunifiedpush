@@ -129,8 +129,9 @@ void GotifyPushProvider::unregisterClient(const Client &client)
     req.setRawHeader("X-Gotify-Key", m_clientToken.toUtf8());
 
     auto reply = nam()->deleteResource(req);
-    connect(reply, &QNetworkReply::finished, this, [reply]() {
+    connect(reply, &QNetworkReply::finished, this, [reply, client, this]() {
         reply->deleteLater();
         qCDebug(Log) << reply->errorString() << reply->readAll(); // TODO
+        Q_EMIT clientUnregistered(client);
     });
 }

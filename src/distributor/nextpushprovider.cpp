@@ -120,6 +120,7 @@ void NextPushProvider::unregisterClient(const Client &client)
             qCWarning(Log) << reply->errorString();
         } else {
             qCDebug(Log) << "application deleted";
+            Q_EMIT clientUnregistered(client);
         }
     });
 }

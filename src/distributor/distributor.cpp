@@ -39,6 +39,7 @@ Distributor::Distributor(QObject *parent)
     settings.endGroup();
     connect(m_pushProvider, &AbstractPushProvider::messageReceived, this, &Distributor::messageReceived);
     connect(m_pushProvider, &AbstractPushProvider::clientRegistered, this, &Distributor::clientRegistered);
+    connect(m_pushProvider, &AbstractPushProvider::clientUnregistered, this, &Distributor::clientUnregistered);
 
     // load previous clients
     const auto clientTokens = settings.value(QStringLiteral("Clients/Tokens"), QStringList()).toStringList();
@@ -73,13 +74,15 @@ QString Distributor::Register(const QString& serviceName, const QString& token, 
     });
     if (it == m_clients.end()) {
         qCDebug(Log) << "Registering new client";
-        Client client;
-        client.token = token;
-        client.serviceName = serviceName;
-        m_pushProvider->registerClient(client);
-        // TODO deferred D-Bus reply
-        registrationResultReason = QStringLiteral("not implemented yet");
-        return QLatin1String(UP_REGISTER_RESULT_SUCCESS);
+        Command cmd;
+        cmd.type = Command::Register;
+        cmd.client.token = token;
+        cmd.client.serviceName = serviceName;
+        setDelayedReply(true);
+        cmd.reply = message().createReply();
+        m_commandQueue.push_back(std::move(cmd));
+        processNextCommand();
+        return {};
     }
 
     qCDebug(Log) << "Registering known client";
@@ -100,13 +103,11 @@ void Distributor::Unregister(const QString& token)
         return;
     }
 
-    m_pushProvider->unregisterClient((*it));
-    (*it).connector().Unregistered(QString());
-
-    QSettings settings;
-    settings.remove((*it).token);
-    m_clients.erase(it);
-    settings.setValue(QStringLiteral("Clients/Tokens"), clientTokens());
+    Command cmd;
+    cmd.type = Command::Unregister;
+    cmd.client = (*it);
+    m_commandQueue.push_back(std::move(cmd));
+    processNextCommand();
 }
 
 void Distributor::messageReceived(const Message &msg) const
@@ -135,6 +136,30 @@ void Distributor::clientRegistered(const Client &client)
     settings.setValue(QStringLiteral("Clients/Tokens"), clientTokens());
 
     client.connector().NewEndpoint(client.token, client.endpoint);
+
+    m_currentCommand.reply << QString::fromLatin1(UP_REGISTER_RESULT_SUCCESS) << QString();
+    QDBusConnection::sessionBus().send(m_currentCommand.reply);
+    m_currentCommand = {};
+    processNextCommand();
+}
+
+void Distributor::clientUnregistered(const Client &client)
+{
+    qCDebug(Log) << client.token << client.remoteId << client.serviceName;
+    client.connector().Unregistered(QString());
+
+    QSettings settings;
+    settings.remove(client.token);
+    const auto it = std::find_if(m_clients.begin(), m_clients.end(), [&client](const auto &c) {
+        return c.token == client.token;
+    });
+    if (it != m_clients.end()) {
+        m_clients.erase(it);
+    }
+    settings.setValue(QStringLiteral("Clients/Tokens"), clientTokens());
+
+    m_currentCommand = {};
+    processNextCommand();
 }
 
 QStringList Distributor::clientTokens() const
@@ -160,5 +185,32 @@ void Distributor::purgeUnavailableClients()
 
     for (const auto &token : tokensToUnregister) {
         Unregister(token);
+    }
+}
+
+bool Distributor::hasCurrentCommand() const
+{
+    return m_currentCommand.type != Command::NoCommand;
+}
+
+void Distributor::processNextCommand()
+{
+    if (hasCurrentCommand() || m_commandQueue.empty()) {
+        return;
+    }
+
+    m_currentCommand = m_commandQueue.front();
+    m_commandQueue.pop_front();
+    switch (m_currentCommand.type) {
+        case Command::NoCommand:
+            Q_ASSERT(false);
+            processNextCommand();
+            break;
+        case Command::Register:
+            m_pushProvider->registerClient(m_currentCommand.client);
+            break;
+        case Command::Unregister:
+            m_pushProvider->unregisterClient(m_currentCommand.client);
+            break;
     }
 }

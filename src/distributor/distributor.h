@@ -6,8 +6,12 @@
 #ifndef KUNIFIEDPUSH_DISTRIBUTOR_H
 #define KUNIFIEDPUSH_DISTRIBUTOR_H
 
+#include "command.h"
+
+#include <QDBusContext>
 #include <QObject>
 
+#include <deque>
 #include <vector>
 
 namespace KUnifiedPush {
@@ -17,7 +21,7 @@ class Client;
 class Message;
 
 /** UnifiedPush distributor service. */
-class Distributor : public QObject
+class Distributor : public QObject, public QDBusContext
 {
     Q_OBJECT
 public:
@@ -30,13 +34,19 @@ public:
 private:
     void messageReceived(const Message &msg) const;
     void clientRegistered(const Client &client);
+    void clientUnregistered(const Client &client);
 
     QStringList clientTokens() const;
 
     void purgeUnavailableClients();
 
+    bool hasCurrentCommand() const;
+    void processNextCommand();
+
     AbstractPushProvider *m_pushProvider = nullptr;
     std::vector<Client> m_clients;
+    Command m_currentCommand;
+    std::deque<Command> m_commandQueue;
 };
 
 }

@@ -8,6 +8,7 @@ qt_add_dbus_interface(dbus_srcs ../interfaces/org.unifiedpush.Connector1.xml con
 target_sources(kunifiedpush-distributor PRIVATE
     abstractpushprovider.cpp
     client.cpp
+    command.cpp
     distributor.cpp
     gotifypushprovider.cpp
     main.cpp

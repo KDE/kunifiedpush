@@ -47,6 +47,9 @@ Q_SIGNALS:
     /** Emitted after successful client registration. */
     void clientRegistered(const KUnifiedPush::Client &client);
 
+    /** Emitted after successful client unregistration. */
+    void clientUnregistered(const KUnifiedPush::Client &client);
+
 protected:
     QNetworkAccessManager *nam();
 
