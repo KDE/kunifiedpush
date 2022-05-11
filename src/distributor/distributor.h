@@ -6,6 +6,7 @@
 #ifndef KUNIFIEDPUSH_DISTRIBUTOR_H
 #define KUNIFIEDPUSH_DISTRIBUTOR_H
 
+#include "abstractpushprovider.h"
 #include "command.h"
 
 #include <QDBusContext>
@@ -16,7 +17,6 @@
 
 namespace KUnifiedPush {
 
-class AbstractPushProvider;
 class Client;
 class Message;
 
@@ -33,8 +33,8 @@ public:
 
 private:
     void messageReceived(const Message &msg) const;
-    void clientRegistered(const Client &client);
-    void clientUnregistered(const Client &client);
+    void clientRegistered(const Client &client, AbstractPushProvider::Error error, const QString &errorMsg);
+    void clientUnregistered(const Client &client, AbstractPushProvider::Error error);
 
     QStringList clientTokens() const;
 

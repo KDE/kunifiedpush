@@ -93,7 +93,7 @@ void GotifyPushProvider::registerClient(const Client &client)
     connect(reply, &QNetworkReply::finished, this, [reply, this, client]() {
         reply->deleteLater();
         if (reply->error() != QNetworkReply::NoError) {
-            qCDebug(Log) << reply->errorString();
+            Q_EMIT clientRegistered(client, TransientNetworkError, reply->errorString());
             return;
         }
 
@@ -132,6 +132,10 @@ void GotifyPushProvider::unregisterClient(const Client &client)
     connect(reply, &QNetworkReply::finished, this, [reply, client, this]() {
         reply->deleteLater();
         qCDebug(Log) << reply->errorString() << reply->readAll(); // TODO
-        Q_EMIT clientUnregistered(client);
+        if (reply->error() != QNetworkReply::NoError) {
+            Q_EMIT clientUnregistered(client, TransientNetworkError);
+        } else {
+            Q_EMIT clientUnregistered(client);
+        }
     });
 }

@@ -90,22 +90,26 @@ void NextPushProvider::registerClient(const Client &client)
     connect(reply, &QNetworkReply::finished, this, [reply, this, client]() {
         reply->deleteLater();
         if (reply->error() != QNetworkReply::NoError) {
-            qCWarning(Log) << reply->errorString();
-        } else {
-            const auto content = QJsonDocument::fromJson(reply->readAll()).object();
-            qCDebug(Log) << QJsonDocument(content).toJson(QJsonDocument::Compact);
-            // TODO check "success" field
-            auto newClient = client;
-            newClient.remoteId = content.value(QLatin1String("token")).toString();
-
-            QUrl endpointUrl = m_url;
-            auto path = endpointUrl.path();
-            path += QLatin1String("/index.php/apps/uppush/push/") + newClient.remoteId;
-            endpointUrl.setPath(path);
-            newClient.endpoint = endpointUrl.toString();
-
-            Q_EMIT clientRegistered(newClient);
+            Q_EMIT clientRegistered(client, TransientNetworkError, reply->errorString());
+            return;
         }
+
+        const auto content = QJsonDocument::fromJson(reply->readAll()).object();
+        qCDebug(Log) << QJsonDocument(content).toJson(QJsonDocument::Compact);
+        if (!content.value(QLatin1String("success")).toBool()) {
+            Q_EMIT clientRegistered(client, ProviderRejected, QString()); // TODO do we get an error message in this case?
+            return;
+        }
+        auto newClient = client;
+        newClient.remoteId = content.value(QLatin1String("token")).toString();
+
+        QUrl endpointUrl = m_url;
+        auto path = endpointUrl.path();
+        path += QLatin1String("/index.php/apps/uppush/push/") + newClient.remoteId;
+        endpointUrl.setPath(path);
+        newClient.endpoint = endpointUrl.toString();
+
+        Q_EMIT clientRegistered(newClient);
     });
 }
 
@@ -118,6 +122,7 @@ void NextPushProvider::unregisterClient(const Client &client)
         reply->deleteLater();
         if (reply->error() != QNetworkReply::NoError) {
             qCWarning(Log) << reply->errorString();
+            Q_EMIT clientUnregistered(client, TransientNetworkError);
         } else {
             qCDebug(Log) << "application deleted";
             Q_EMIT clientUnregistered(client);

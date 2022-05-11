@@ -26,6 +26,12 @@ class AbstractPushProvider : public QObject
 public:
     explicit AbstractPushProvider(QObject *parent);
 
+    enum Error {
+        NoError, ///< operation succeeded
+        ProviderRejected, ///< communication worked, but the provider refused to complete the operation
+        TransientNetworkError, ///< temporary network error, try again
+    };
+
     /** Load connection settings.
      *  @param settings can be read on the top level, the correct group is already selected.
      */
@@ -45,10 +51,10 @@ Q_SIGNALS:
     void messageReceived(const KUnifiedPush::Message &msg);
 
     /** Emitted after successful client registration. */
-    void clientRegistered(const KUnifiedPush::Client &client);
+    void clientRegistered(const KUnifiedPush::Client &client, Error error = NoError, const QString &errorMsg = {});
 
     /** Emitted after successful client unregistration. */
-    void clientUnregistered(const KUnifiedPush::Client &client);
+    void clientUnregistered(const KUnifiedPush::Client &client, Error error = NoError);
 
 protected:
     QNetworkAccessManager *nam();

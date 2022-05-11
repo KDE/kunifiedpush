@@ -125,38 +125,64 @@ void Distributor::messageReceived(const Message &msg) const
     (*it).connector().Message((*it).token, msg.content, {});
 }
 
-void Distributor::clientRegistered(const Client &client)
+void Distributor::clientRegistered(const Client &client, AbstractPushProvider::Error error, const QString &errorMsg)
 {
-    qCDebug(Log) << client.token << client.remoteId << client.serviceName;
-    // TODO check whether we got an endpoint, otherwise report an error
-    m_clients.push_back(client);
+    qCDebug(Log) << client.token << client.remoteId << client.serviceName << error << errorMsg;
+    switch (error) {
+    case AbstractPushProvider::NoError:
+    {
+        // TODO check whether we got an endpoint, otherwise report an error
+        m_clients.push_back(client);
 
-    QSettings settings;
-    client.store(settings);
-    settings.setValue(QStringLiteral("Clients/Tokens"), clientTokens());
+        QSettings settings;
+        client.store(settings);
+        settings.setValue(QStringLiteral("Clients/Tokens"), clientTokens());
 
-    client.connector().NewEndpoint(client.token, client.endpoint);
+        client.connector().NewEndpoint(client.token, client.endpoint);
 
-    m_currentCommand.reply << QString::fromLatin1(UP_REGISTER_RESULT_SUCCESS) << QString();
-    QDBusConnection::sessionBus().send(m_currentCommand.reply);
+        m_currentCommand.reply << QString::fromLatin1(UP_REGISTER_RESULT_SUCCESS) << QString();
+        QDBusConnection::sessionBus().send(m_currentCommand.reply);
+        break;
+    }
+    case AbstractPushProvider::TransientNetworkError:
+        // retry - TODO this still needs network and connection state tracking
+        m_commandQueue.push_front(std::move(m_currentCommand));
+        break;
+    case AbstractPushProvider::ProviderRejected:
+        m_currentCommand.reply << QString::fromLatin1(UP_REGISTER_RESULT_FAILURE) << errorMsg;
+        QDBusConnection::sessionBus().send(m_currentCommand.reply);
+        break;
+    }
+
     m_currentCommand = {};
     processNextCommand();
 }
 
-void Distributor::clientUnregistered(const Client &client)
+void Distributor::clientUnregistered(const Client &client, AbstractPushProvider::Error error)
 {
-    qCDebug(Log) << client.token << client.remoteId << client.serviceName;
-    client.connector().Unregistered(QString());
-
-    QSettings settings;
-    settings.remove(client.token);
-    const auto it = std::find_if(m_clients.begin(), m_clients.end(), [&client](const auto &c) {
-        return c.token == client.token;
-    });
-    if (it != m_clients.end()) {
-        m_clients.erase(it);
+    qCDebug(Log) << client.token << client.remoteId << client.serviceName << error;
+    switch (error) {
+    case AbstractPushProvider::NoError:
+        client.connector().Unregistered(QString());
+        [[fallthrough]];
+    case AbstractPushProvider::ProviderRejected:
+    {
+        QSettings settings;
+        settings.remove(client.token);
+        const auto it = std::find_if(m_clients.begin(), m_clients.end(), [&client](const auto &c) {
+            return c.token == client.token;
+        });
+        if (it != m_clients.end()) {
+            m_clients.erase(it);
+        }
+        settings.setValue(QStringLiteral("Clients/Tokens"), clientTokens());
+        break;
     }
-    settings.setValue(QStringLiteral("Clients/Tokens"), clientTokens());
+    case AbstractPushProvider::TransientNetworkError:
+        // retry - TODO this still needs network and connection state tracking
+        m_commandQueue.push_front(std::move(m_currentCommand));
+        break;
+    }
 
     m_currentCommand = {};
     processNextCommand();
