@@ -28,7 +28,7 @@ class KUNIFIEDPUSH_EXPORT Connector : public QObject
     Q_PROPERTY(State state READ state NOTIFY stateChanged)
 public:
     /** Create a new connector instance.
-     *  @param serviceName The application identifer, same as used for registration
+     *  @param serviceName The application identifier, same as used for registration
      *  on D-Bus and for D-Bus activation.
      */
     explicit Connector(const QString &serviceName, QObject *parent = nullptr);
