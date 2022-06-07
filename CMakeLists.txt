@@ -35,6 +35,7 @@ ecm_setup_version(PROJECT
 set(QT_MIN_VERSION 5.15)
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Test WebSockets)
 
+set(KUNIFIEDPUSH_INCLUDE_INSTALLDIR ${KDE_INSTALL_INCLUDEDIR}/KUnifiedPush)
 ecm_set_disabled_deprecation_versions(QT 5.15.2)
 
 add_subdirectory(src)
@@ -43,21 +44,21 @@ if (BUILD_TESTING)
     add_subdirectory(tests)
 endif()
 
-set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KUnifiedPush")
+set(KUNIFIEDPUSH_INSTALL_CMAKECONFIGDIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KUnifiedPush")
 configure_package_config_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/KUnifiedPushConfig.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/KUnifiedPushConfig.cmake"
-    INSTALL_DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+    INSTALL_DESTINATION "${KUNIFIEDPUSH_INSTALL_CMAKECONFIGDIR}"
 )
 
 install(FILES
         "${CMAKE_CURRENT_BINARY_DIR}/KUnifiedPushConfig.cmake"
         "${CMAKE_CURRENT_BINARY_DIR}/KUnifiedPushConfigVersion.cmake"
-    DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+    DESTINATION "${KUNIFIEDPUSH_INSTALL_CMAKECONFIGDIR}"
     COMPONENT Devel
 )
-install(EXPORT KUnifiedPushTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KUnifiedPushTargets.cmake)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kunifiedpush_version.h DESTINATION ${KDE_INSTALL_INCLUDEDIR}/kunifiedpush COMPONENT Devel)
+install(EXPORT KUnifiedPushTargets DESTINATION "${KUNIFIEDPUSH_INSTALL_CMAKECONFIGDIR}" FILE KUnifiedPushTargets.cmake)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kunifiedpush_version.h DESTINATION ${KUNIFIEDPUSH_INCLUDE_INSTALLDIR} COMPONENT Devel)
 ecm_qt_install_logging_categories(
     EXPORT KUnifiedPushLogging
     FILE org_kde_kunifiedpush.categories

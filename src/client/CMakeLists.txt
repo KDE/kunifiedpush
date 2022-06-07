@@ -25,6 +25,7 @@ ecm_qt_declare_logging_category(KUnifiedPush
     EXPORT KUnifiedPushLogging
 )
 
+target_include_directories(KUnifiedPush INTERFACE "$<INSTALL_INTERFACE:${KUNIFIEDPUSH_INCLUDE_INSTALLDIR}>")
 target_link_libraries(KUnifiedPush
     PUBLIC
         Qt${QT_MAJOR_VERSION}::Core
@@ -42,10 +43,10 @@ ecm_generate_headers(KUnifiedPush_FORWARDING_HEADERS
 install(TARGETS KUnifiedPush EXPORT KUnifiedPushTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES
     ${KUnifiedPush_FORWARDING_HEADERS}
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KUnifiedPush
+    DESTINATION ${KUNIFIEDPUSH_INCLUDE_INSTALLDIR}/KUnifiedPush
 )
 install(FILES
     ${KUnifiedPush_HEADERS}
     ${CMAKE_CURRENT_BINARY_DIR}/kunifiedpush_export.h
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/kunifiedpush
+    DESTINATION ${KUNIFIEDPUSH_INCLUDE_INSTALLDIR}/kunifiedpush
 )
