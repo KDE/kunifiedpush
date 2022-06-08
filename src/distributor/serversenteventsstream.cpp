@@ -6,7 +6,7 @@
 #include "serversenteventsstream.h"
 #include "logging.h"
 
-#include <QNetworkReply>
+#include <QIODevice>
 
 #include <algorithm>
 #include <cstring>
@@ -20,10 +20,10 @@ ServerSentEventsStream::ServerSentEventsStream(QObject *parent)
 
 ServerSentEventsStream::~ServerSentEventsStream() = default;
 
-void ServerSentEventsStream::read(QNetworkReply *reply)
+void ServerSentEventsStream::read(QIODevice *device)
 {
-    connect(reply, &QNetworkReply::readyRead, this, [reply, this]() {
-        m_buffer.append(reply->read(reply->bytesAvailable()));
+    connect(device, &QIODevice::readyRead, this, [device, this]() {
+        m_buffer.append(device->read(device->bytesAvailable()));
         processBuffer();
     });
 }

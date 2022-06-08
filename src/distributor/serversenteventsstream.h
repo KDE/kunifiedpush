@@ -8,7 +8,7 @@
 
 #include <QObject>
 
-class QNetworkReply;
+class QIODevice;
 
 namespace KUnifiedPush {
 
@@ -29,7 +29,7 @@ public:
     explicit ServerSentEventsStream(QObject *parent = nullptr);
     ~ServerSentEventsStream();
 
-    void read(QNetworkReply *reply);
+    void read(QIODevice *device);
 
 Q_SIGNALS:
     void messageReceived(const SSEMessage &msg);
