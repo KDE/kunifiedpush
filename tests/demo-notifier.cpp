@@ -42,7 +42,7 @@ int main(int argc, char **argv)
         }
     });
     QObject::connect(&connector, &KUnifiedPush::Connector::messageReceived, [](const auto &msg) {
-        QProcess::startDetached(QStringLiteral("kdialog"), { QStringLiteral("--msgbox"), msg});
+        QProcess::startDetached(QStringLiteral("kdialog"), { QStringLiteral("--msgbox"), QString::fromUtf8(msg)});
     });
 
     if (!connector.endpoint().isEmpty()) {

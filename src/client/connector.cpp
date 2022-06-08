@@ -49,8 +49,11 @@ ConnectorPrivate::ConnectorPrivate(Connector *qq)
 void ConnectorPrivate::Message(const QString &token, const QString &message, const QString &messageIdentifier)
 {
     qCDebug(Log) << token << message << messageIdentifier;
-    // TODO
-    Q_EMIT q->messageReceived(message);
+    if (token != m_token) {
+        qCWarning(Log) << "Got message for a different token??";
+        return;
+    }
+    Q_EMIT q->messageReceived(message.toUtf8());
 }
 
 void ConnectorPrivate::NewEndpoint(const QString &token, const QString &endpoint)

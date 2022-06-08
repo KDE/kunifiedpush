@@ -67,8 +67,7 @@ public:
 
 Q_SIGNALS:
     /** Emitted for each newly received push message. */
-    // TODO this is supposed to be a byte array, but gotify deviates from the spec...
-    void messageReceived(const QString &msg);
+    void messageReceived(const QByteArray &msg);
 
     /** Emitted when a new endpoint URL has been received. */
     void endpointChanged(const QString &endpoint);
