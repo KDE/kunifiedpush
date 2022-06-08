@@ -32,7 +32,7 @@ public:
     void read(QIODevice *device);
 
 Q_SIGNALS:
-    void messageReceived(const SSEMessage &msg);
+    void messageReceived(const KUnifiedPush::SSEMessage &msg);
 
 private:
     void processBuffer();
@@ -41,5 +41,7 @@ private:
 };
 
 }
+
+Q_DECLARE_METATYPE(KUnifiedPush::SSEMessage)
 
 #endif // KUNIFIEDPUSH_SERVERSENTEVENTSSTREAM_H
