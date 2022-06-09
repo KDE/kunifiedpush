@@ -46,7 +46,7 @@ public:
     OrgUnifiedpushDistributor1Interface *m_distributor = nullptr;
     Connector::State m_state = Connector::Unregistered;
 
-    Command m_currentCommand;
+    Command m_currentCommand = Command::None;
     std::deque<Command> m_commandQueue;
 
     QDBusServiceWatcher m_serviceWatcher;
