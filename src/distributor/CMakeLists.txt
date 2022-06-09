@@ -12,6 +12,7 @@ target_sources(KUnifiedPushDistributor PRIVATE
     distributor.cpp
     gotifypushprovider.cpp
     message.cpp
+    mockpushprovider.cpp
     nextpushprovider.cpp
     serversenteventsstream.cpp
     ${dbus_srcs}

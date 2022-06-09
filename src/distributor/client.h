@@ -6,6 +6,7 @@
 #ifndef KUNIFIEDPUSH_CLIENT_H
 #define KUNIFIEDPUSH_CLIENT_H
 
+#include <QMetaType>
 #include <QString>
 
 class QSettings;
@@ -35,5 +36,7 @@ public:
 };
 
 }
+
+Q_DECLARE_METATYPE(KUnifiedPush::Client)
 
 #endif // KUNIFIEDPUSH_CLIENT_H

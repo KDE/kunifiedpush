@@ -11,6 +11,7 @@
 #include "gotifypushprovider.h"
 #include "logging.h"
 #include "message.h"
+#include "mockpushprovider.h"
 #include "nextpushprovider.h"
 
 #include "../shared/unifiedpush-constants.h"
@@ -30,6 +31,8 @@ Distributor::Distributor(QObject *parent)
         m_pushProvider = new GotifyPushProvider(this);
     } else if (pushProviderName == QLatin1String("NextPush")) {
         m_pushProvider = new NextPushProvider(this);
+    } else if (pushProviderName == QLatin1String("Mock")) {
+        m_pushProvider = new MockPushProvider(this);
     } else {
         qCWarning(Log) << "Unknown push provider:" << pushProviderName;
         return;

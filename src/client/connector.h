@@ -73,7 +73,7 @@ Q_SIGNALS:
     void endpointChanged(const QString &endpoint);
 
     /** Emitted when the connector state changes. */
-    void stateChanged(State state);
+    void stateChanged(KUnifiedPush::Connector::State state);
 
 private:
     ConnectorPrivate *d;
