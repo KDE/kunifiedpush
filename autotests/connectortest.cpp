@@ -6,6 +6,8 @@
 #include <KUnifiedPush/Connector>
 
 #include "../src/distributor/distributor.h"
+#include "../src/distributor/message.h"
+#include "../src/distributor/mockpushprovider.h"
 
 #include <QDBusConnection>
 #include <QLoggingCategory>
@@ -50,29 +52,69 @@ private Q_SLOTS:
     void testWithDistributor()
     {
         using namespace KUnifiedPush;
+        std::unique_ptr<Connector> con;
+        std::unique_ptr<QSignalSpy> stateSpy;
+        std::unique_ptr<QSignalSpy> endpointSpy;
 
         QVERIFY(QDBusConnection::sessionBus().registerService(QStringLiteral("org.kde.kunifiedpush.connectortest")));
-        Connector con(QStringLiteral("org.kde.kunifiedpush.connectortest"));
-        QCOMPARE(con.state(), KUnifiedPush::Connector::NoDistributor);
-        QSignalSpy stateSpy(&con, &Connector::stateChanged);
-        QSignalSpy endpointSpy(&con, &Connector::endpointChanged);
+        con.reset(new Connector(QStringLiteral("org.kde.kunifiedpush.connectortest")));
+        QCOMPARE(con->state(), KUnifiedPush::Connector::NoDistributor);
+        stateSpy.reset(new QSignalSpy(con.get(), &Connector::stateChanged));
+        endpointSpy.reset(new QSignalSpy(con.get(), &Connector::endpointChanged));
 
         QVERIFY(QDBusConnection::sessionBus().registerService(QStringLiteral("org.unifiedpush.Distributor.mock")));
         Distributor dist;
-        QVERIFY(stateSpy.wait());
-        QCOMPARE(con.state(), KUnifiedPush::Connector::Unregistered);
+        QVERIFY(MockPushProvider::s_instance);
+        QVERIFY(stateSpy->wait());
+        QCOMPARE(con->state(), KUnifiedPush::Connector::Unregistered);
 
-        con.registerClient();
-        QCOMPARE(con.state(), KUnifiedPush::Connector::Registering);
-        QVERIFY(stateSpy.wait());
+        con->registerClient();
+        QCOMPARE(con->state(), KUnifiedPush::Connector::Registering);
+        QVERIFY(stateSpy->wait());
         // FIXME: delayed D-Bus replies inside the same process seem not to be actually delayed, so state get messed up after this...
         // QCOMPARE(con.state(), KUnifiedPush::Connector::Registered);
-        QCOMPARE(endpointSpy.size(), 1);
-        QVERIFY(!con.endpoint().isEmpty());
+        QCOMPARE(endpointSpy->size(), 1);
+        QCOMPARE(con->endpoint(), QLatin1String("https://localhost/push-endpoint"));
 
+        // connector restart does not register at the provider but uses existing state
+        {
+            con.reset();
+            QTest::qWait(10); // propagate connector D-Bus tear-down
+            con.reset(new Connector(QStringLiteral("org.kde.kunifiedpush.connectortest")));
+            QCOMPARE(con->endpoint(), QLatin1String("https://localhost/push-endpoint"));
+            QCOMPARE(con->state(), KUnifiedPush::Connector::Registering);
+            stateSpy.reset(new QSignalSpy(con.get(), &Connector::stateChanged));
+            endpointSpy.reset(new QSignalSpy(con.get(), &Connector::endpointChanged));
+            QVERIFY(stateSpy->wait());
+            QCOMPARE(con->state(), KUnifiedPush::Connector::Registered);
+        }
+
+        // distributor goes away and comes back
         QVERIFY(QDBusConnection::sessionBus().unregisterService(QStringLiteral("org.unifiedpush.Distributor.mock")));
-        QVERIFY(stateSpy.wait());
-        QCOMPARE(con.state(), KUnifiedPush::Connector::NoDistributor);
+        QVERIFY(stateSpy->wait());
+        QCOMPARE(con->state(), KUnifiedPush::Connector::NoDistributor);
+        QVERIFY(QDBusConnection::sessionBus().registerService(QStringLiteral("org.unifiedpush.Distributor.mock")));
+        QVERIFY(stateSpy->wait());
+        QCOMPARE(con->state(), KUnifiedPush::Connector::Registering);
+        QVERIFY(stateSpy->wait());
+        QCOMPARE(con->state(), KUnifiedPush::Connector::Registered);
+
+        // receiving a message
+        QSignalSpy msgSpy(con.get(), &Connector::messageReceived);
+        KUnifiedPush::Message msg;
+        msg.clientRemoteId = QStringLiteral("<client-remote-id>");
+        msg.content = QStringLiteral("hello world");
+        Q_EMIT MockPushProvider::s_instance->messageReceived(msg);
+        QVERIFY(msgSpy.wait());
+        QCOMPARE(msgSpy.at(0).at(0).toByteArray(), "hello world");
+
+        // connector unregisters
+        QCOMPARE(endpointSpy->size(), 0);
+        con->unregisterClient();
+        QVERIFY(stateSpy->wait());
+        QCOMPARE(con->state(), KUnifiedPush::Connector::Unregistered);
+        QCOMPARE(endpointSpy->size(), 1);
+        QCOMPARE(con->endpoint(), QString());
     }
 };
 

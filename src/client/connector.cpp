@@ -22,7 +22,11 @@ ConnectorPrivate::ConnectorPrivate(Connector *qq)
     , q(qq)
 {
     new Connector1Adaptor(this);
-    QDBusConnection::sessionBus().registerObject(QLatin1String(UP_CONNECTOR_PATH), this);
+    const auto res = QDBusConnection::sessionBus().registerObject(QLatin1String(UP_CONNECTOR_PATH), this);
+    if (!res) {
+        qCWarning(Log) << "Failed to register D-Bus object!" << UP_CONNECTOR_PATH;
+        // TODO switch to error state?
+    }
 
     connect(&m_serviceWatcher, &QDBusServiceWatcher::serviceRegistered, this, [this](const QString &serviceName) {
         qCDebug(Log) << "Distributor" << serviceName << "became available";
@@ -44,6 +48,11 @@ ConnectorPrivate::ConnectorPrivate(Connector *qq)
     m_serviceWatcher.setConnection(QDBusConnection::sessionBus());
     m_serviceWatcher.setWatchMode(QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration);
     m_serviceWatcher.addWatchedService(QLatin1String("org.unifiedpush.Distributor*"));
+}
+
+ConnectorPrivate::~ConnectorPrivate()
+{
+    QDBusConnection::sessionBus().unregisterObject(QLatin1String(UP_CONNECTOR_PATH));
 }
 
 void ConnectorPrivate::Message(const QString &token, const QString &message, const QString &messageIdentifier)

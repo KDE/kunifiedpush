@@ -9,13 +9,22 @@
 
 using namespace KUnifiedPush;
 
+MockPushProvider* MockPushProvider::s_instance = nullptr;
+
 MockPushProvider::MockPushProvider(QObject *parent)
     : AbstractPushProvider(parent)
 {
+    Q_ASSERT(!s_instance);
+    s_instance = this;
+
     qRegisterMetaType<KUnifiedPush::Client>();
 }
 
-MockPushProvider::~MockPushProvider() = default;
+MockPushProvider::~MockPushProvider()
+{
+    Q_ASSERT(s_instance);
+    s_instance = nullptr;
+}
 
 void MockPushProvider::loadSettings(const QSettings &settings)
 {
@@ -40,4 +49,5 @@ void MockPushProvider::registerClient(const Client &client)
 void MockPushProvider::unregisterClient(const Client &client)
 {
     qCDebug(Log) << client.serviceName << client.token;
+    QMetaObject::invokeMethod(this, "clientUnregistered", Qt::QueuedConnection, Q_ARG(KUnifiedPush::Client, client));
 }

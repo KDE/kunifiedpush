@@ -21,6 +21,8 @@ public:
     void connectToProvider() override;
     void registerClient(const Client &client) override;
     void unregisterClient(const Client &client) override;
+
+    static MockPushProvider *s_instance;
 };
 
 }

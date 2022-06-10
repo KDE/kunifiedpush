@@ -21,6 +21,7 @@ class ConnectorPrivate : public QObject
     Q_OBJECT
 public:
     explicit ConnectorPrivate(Connector *qq);
+    ~ConnectorPrivate();
 
     void Message(const QString &token, const QString &message, const QString &messageIdentifier);
     void NewEndpoint(const QString &token, const QString &endpoint);
