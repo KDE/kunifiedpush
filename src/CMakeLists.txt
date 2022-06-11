@@ -3,3 +3,4 @@
 
 add_subdirectory(client)
 add_subdirectory(distributor)
+add_subdirectory(kcm)

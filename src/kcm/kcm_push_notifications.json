@@ -1,0 +1,15 @@
+{
+    "KPlugin": {
+        "Description": "Push Notifications",
+        "FormFactors": [
+            "tablet",
+            "handset",
+            "desktop"
+        ],
+        "Icon": "network-connect",
+        "Name": "Push Notifications"
+    },
+    "X-KDE-System-Settings-Parent-Category": "network",
+    "X-KDE-Weight": 40,
+    "X-KDE_Keywords": "Push notifications"
+}
