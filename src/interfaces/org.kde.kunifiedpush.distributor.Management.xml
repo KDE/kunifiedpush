@@ -1,0 +1,40 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<!--
+    SPDX-FileCopyrightText: 2022 Volker Krause <vkrause@kde.org>
+    SPDX-License-Identifier: LGPL-2.0-or-later
+-->
+<node>
+  <interface name="org.kde.kunifiedpush.Management">
+    <!-- status enum -->
+    <method name="status">
+      <arg name="status" type="i" direction="out"/>
+    </method>
+    <signal name="statusChanged"/>
+    <!-- push provider configuration -->
+    <method name="pushProviderId">
+      <arg name="status" type="s" direction="out"/>
+    </method>
+    <method name="pushProviderConfiguration">
+      <arg name="pushProviderId" type="s" direction="in"/>
+      <arg name="config" type="a{sv}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QVariantMap"/>
+    </method>
+    <method name="setPushProvider">
+      <arg name="pushProvider" type="s" direction="in"/>
+      <arg name="config" type="a{sv}" direction="in"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="QVariantMap"/>
+      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
+    </method>
+    <signal name="pushProviderChanged"/>
+    <!-- registered clients -->
+    <method name="registeredClients">
+      <arg name="clients" type="a(sss)" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;KUnifiedPush::ClientInfo&gt;"/>
+    </method>
+    <method name="forceUnregisterClient">
+      <arg name="clientToken" type="s" direction="in"/>
+      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
+    </method>
+    <signal name="registeredClientsChanged"/>
+  </interface>
+</node>

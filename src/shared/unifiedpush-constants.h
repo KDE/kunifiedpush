@@ -18,6 +18,7 @@ constexpr const char UP_REGISTER_RESULT_SUCCESS[] = "REGISTRATION_SUCCEEDED";
 constexpr const char UP_REGISTER_RESULT_FAILURE[] = "REGISTRATION_FAILED";
 
 constexpr const char KDE_DISTRIBUTOR_SERVICE_NAME[] = "org.unifiedpush.Distributor.kde";
+constexpr const char KDE_DISTRIBUTOR_MANAGEMENT_PATH[] = "/Management";
 
 }
 

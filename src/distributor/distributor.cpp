@@ -5,6 +5,7 @@
 
 #include "distributor.h"
 #include "distributor1adaptor.h"
+#include "managementadaptor.h"
 
 #include "client.h"
 #include "connector1iface.h"
@@ -24,9 +25,12 @@ using namespace KUnifiedPush;
 Distributor::Distributor(QObject *parent)
     : QObject(parent)
 {
+    qDBusRegisterMetaType<KUnifiedPush::ClientInfo>();
+    qDBusRegisterMetaType<QList<KUnifiedPush::ClientInfo>>();
+
     // determine push provider
     QSettings settings;
-    const auto pushProviderName = settings.value(QStringLiteral("PushProvider/Type"), QString()).toString();
+    const auto pushProviderName = pushProviderId();
     if (pushProviderName == QLatin1String("Gotify")) {
         m_pushProvider = new GotifyPushProvider(this);
     } else if (pushProviderName == QLatin1String("NextPush")) {
@@ -65,6 +69,9 @@ Distributor::Distributor(QObject *parent)
     // register at D-Bus
     new Distributor1Adaptor(this);
     QDBusConnection::sessionBus().registerObject(QLatin1String(UP_DISTRIBUTOR_PATH), this);
+
+    new ManagementAdaptor(this);
+    QDBusConnection::sessionBus().registerObject(QLatin1String(KDE_DISTRIBUTOR_MANAGEMENT_PATH), this);
 }
 
 Distributor::~Distributor() = default;
@@ -140,6 +147,7 @@ void Distributor::clientRegistered(const Client &client, AbstractPushProvider::E
         QSettings settings;
         client.store(settings);
         settings.setValue(QStringLiteral("Clients/Tokens"), clientTokens());
+        Q_EMIT registeredClientsChanged();
 
         client.connector().NewEndpoint(client.token, client.endpoint);
 
@@ -179,6 +187,7 @@ void Distributor::clientUnregistered(const Client &client, AbstractPushProvider:
             m_clients.erase(it);
         }
         settings.setValue(QStringLiteral("Clients/Tokens"), clientTokens());
+        Q_EMIT registeredClientsChanged();
         break;
     }
     case AbstractPushProvider::TransientNetworkError:
@@ -242,4 +251,81 @@ void Distributor::processNextCommand()
             m_pushProvider->unregisterClient(m_currentCommand.client);
             break;
     }
+}
+
+int Distributor::status() const
+{
+    return m_status;
+}
+
+void Distributor::setStatus(DistributorStatus::Status status)
+{
+    if (m_status == status) {
+        return;
+    }
+
+    m_status = status;
+    Q_EMIT statusChanged();
+}
+
+QString Distributor::pushProviderId() const
+{
+    QSettings settings;
+    return settings.value(QStringLiteral("PushProvider/Type"), QString()).toString();
+}
+
+QVariantMap Distributor::pushProviderConfiguration(const QString &pushProviderId) const
+{
+    QSettings settings;
+    settings.beginGroup(pushProviderId);
+    const auto keys = settings.allKeys();
+
+    QVariantMap config;
+    for (const auto &key : keys) {
+        config.insert(key, settings.value(key));
+    }
+
+    return config;
+}
+
+void Distributor::setPushProvider(const QString &pushProviderId, const QVariantMap &config)
+{
+    // store push provider config and check for changes
+    bool configChanged = false;
+    QSettings settings;
+    settings.beginGroup(pushProviderId);
+    for (auto it = config.begin(); it != config.end(); ++it) {
+        const auto oldValue = settings.value(it.key());
+        configChanged |= oldValue != it.value();
+        settings.setValue(it.key(), it.value());
+    }
+    settings.endGroup();
+    if (!configChanged && pushProviderId == this->pushProviderId()) {
+        return; // nothing changed
+    }
+
+    // TODO if push provider or config changed: unregister all clients, create new push provider backend, re-register all clients
+    qDebug() << pushProviderId << config << configChanged;
+}
+
+QList<KUnifiedPush::ClientInfo> Distributor::registeredClients() const
+{
+    QList<KUnifiedPush::ClientInfo> result;
+    result.reserve(m_clients.size());
+
+    for (const auto &client : m_clients) {
+        ClientInfo info;
+        info.token = client.token;
+        info.serviceName = client.serviceName;
+        info.description = client.description;
+        result.push_back(std::move(info));
+    }
+
+    return result;
+}
+
+void Distributor::forceUnregisterClient(const QString &token)
+{
+    // ### do we want to do this without telling the client?
+    Unregister(token);
 }
