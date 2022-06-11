@@ -6,8 +6,12 @@
 #include "distributor.h"
 #include "logging.h"
 
+#include "../shared/unifiedpush-constants.h"
+
 #include <QCoreApplication>
 #include <QDBusConnection>
+
+using namespace KUnifiedPush;
 
 int main(int argc, char **argv)
 {
@@ -16,7 +20,7 @@ int main(int argc, char **argv)
 
     QCoreApplication app(argc, argv);
     KUnifiedPush::Distributor distributor;
-    if (!QDBusConnection::sessionBus().registerService(QStringLiteral("org.unifiedpush.Distributor.kde"))) {
+    if (!QDBusConnection::sessionBus().registerService(QLatin1String(KDE_DISTRIBUTOR_SERVICE_NAME))) {
         qCCritical(Log) << "Distributor service name already in use - aborting!";
         return 1;
     }
