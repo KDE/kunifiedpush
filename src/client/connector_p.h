@@ -44,6 +44,7 @@ public:
     QString m_serviceName;
     QString m_token;
     QString m_endpoint;
+    QString m_description;
     OrgUnifiedpushDistributor1Interface *m_distributor = nullptr;
     Connector::State m_state = Connector::Unregistered;
 

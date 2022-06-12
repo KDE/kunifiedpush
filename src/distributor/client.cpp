@@ -23,6 +23,7 @@ Client Client::load(const QString &token, QSettings &settings)
     client.remoteId = settings.value(QStringLiteral("RemoteId"), QString()).toString();
     client.serviceName = settings.value(QStringLiteral("ServiceName"), QString()).toString();
     client.endpoint = settings.value(QStringLiteral("Endpoint"), QString()).toString();
+    client.description = settings.value(QStringLiteral("Description"), QString()).toString();
     settings.endGroup();
     return client;
 }
@@ -33,6 +34,7 @@ void Client::store(QSettings& settings) const
     settings.setValue(QStringLiteral("RemoteId"), remoteId);
     settings.setValue(QStringLiteral("ServiceName"), serviceName);
     settings.setValue(QStringLiteral("Endpoint"), endpoint);
+    settings.setValue(QStringLiteral("Description"), description);
     settings.endGroup();
 }
 

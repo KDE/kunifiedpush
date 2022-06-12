@@ -68,7 +68,7 @@ private Q_SLOTS:
         QVERIFY(stateSpy->wait());
         QCOMPARE(con->state(), KUnifiedPush::Connector::Unregistered);
 
-        con->registerClient();
+        con->registerClient(QStringLiteral("Push notification unit test."));
         QCOMPARE(con->state(), KUnifiedPush::Connector::Registering);
         QVERIFY(stateSpy->wait());
         // FIXME: delayed D-Bus replies inside the same process seem not to be actually delayed, so state get messed up after this...

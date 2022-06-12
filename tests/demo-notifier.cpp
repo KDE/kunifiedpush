@@ -58,7 +58,7 @@ int main(int argc, char **argv)
         }
         connector.unregisterClient();
     } else {
-        connector.registerClient();
+        connector.registerClient(QStringLiteral("Demonstrating push notifications."));
     }
 
     if (parser.isSet(dbusActivatedOpt)) {

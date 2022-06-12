@@ -33,6 +33,7 @@ public:
     QString token;
     QString remoteId;
     QString endpoint;
+    QString description;
 };
 
 }

@@ -44,8 +44,10 @@ public:
      *  This is for subscribing to push notifications and is only needed the first
      *  time an application uses this, or after explicitly unregistering. The registration
      *  is persisted until explicitly changed.
+     *  @param description A human-readable explanation what push notifications are used
+     *  for by this application.
      */
-    void registerClient();
+    void registerClient(const QString &description);
 
     /** Unregister this client.
      *  This is for permanently unsubscribing, do not use on regular application shutdown.

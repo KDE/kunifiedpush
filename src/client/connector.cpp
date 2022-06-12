@@ -123,6 +123,7 @@ void ConnectorPrivate::loadState()
     settings.beginGroup(QStringLiteral("Client"));
     m_token = settings.value(QStringLiteral("Token"), QString()).toString();
     m_endpoint = settings.value(QStringLiteral("Endpoint"), QString()).toString();
+    m_description = settings.value(QStringLiteral("Description"), QString()).toString();
 }
 
 void ConnectorPrivate::storeState() const
@@ -131,6 +132,7 @@ void ConnectorPrivate::storeState() const
     settings.beginGroup(QStringLiteral("Client"));
     settings.setValue(QStringLiteral("Token"), m_token);
     settings.setValue(QStringLiteral("Endpoint"), m_endpoint);
+    settings.setValue(QStringLiteral("Description"), m_description);
 }
 
 bool ConnectorPrivate::hasDistributor() const
@@ -151,7 +153,7 @@ void ConnectorPrivate::setDistributor(const QString &distServiceName)
     setState(Connector::Unregistered);
 
     if (!m_token.isEmpty()) { // re-register if we have been registered before
-        q->registerClient();
+        q->registerClient(m_description);
     }
 }
 
@@ -264,9 +266,10 @@ QString Connector::endpoint() const
     return d->m_endpoint;
 }
 
-void Connector::registerClient()
+void Connector::registerClient(const QString &description)
 {
     qCDebug(Log) << d->m_state;
+    d->m_description = description;
     d->addCommand(ConnectorPrivate::Command::Register);
 }
 
