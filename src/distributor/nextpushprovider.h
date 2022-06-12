@@ -26,6 +26,7 @@ public:
 
     void loadSettings(const QSettings &settings) override;
     void connectToProvider() override;
+    void disconnectFromProvider() override;
     void registerClient(const Client &client) override;
     void unregisterClient(const Client &client) override;
 

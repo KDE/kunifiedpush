@@ -59,7 +59,7 @@ void NextPushProvider::connectToProvider()
             reply->deleteLater();
             if (reply->error() != QNetworkReply::NoError) {
                 qCWarning(Log) << reply->errorString();
-                // TODO error state? retry?
+                Q_EMIT disconnected(ProviderRejected, reply->errorString());
                 return;
             }
 
@@ -75,6 +75,10 @@ void NextPushProvider::connectToProvider()
     } else {
         waitForMessage();
     }
+}
+
+void NextPushProvider::disconnectFromProvider()
+{
 }
 
 void NextPushProvider::registerClient(const Client &client)
@@ -139,12 +143,14 @@ void NextPushProvider::waitForMessage()
         reply->deleteLater();
         if (reply->error() != QNetworkReply::NoError) {
             qCWarning(Log) << reply->errorString();
+            Q_EMIT disconnected(TransientNetworkError, reply->errorString());
         } else {
             qCDebug(Log) << "GET finished";
-            // TODO restart?
+            Q_EMIT disconnected(NoError);
         }
     });
     m_sseStream.read(reply);
+    Q_EMIT connected();
 }
 
 QNetworkRequest NextPushProvider::prepareRequest(const char *restCmd, const QString &restArg) const

@@ -36,8 +36,14 @@ void GotifyPushProvider::connectToProvider()
     qCDebug(Log);
     m_socket = new QWebSocket();
     m_socket->setParent(this);
-    connect(m_socket, &QWebSocket::stateChanged, this, [this]() {
+    connect(m_socket, &QWebSocket::stateChanged, this, [this](auto state) {
         qCDebug(Log) << m_socket->state();
+        if (state == QAbstractSocket::ConnectedState) {
+            Q_EMIT connected();
+        } else if (state == QAbstractSocket::UnconnectedState) {
+            Q_EMIT disconnected(TransientNetworkError, m_socket->errorString());
+            m_socket->deleteLater();
+        }
     });
     connect(m_socket, &QWebSocket::textMessageReceived, this, &GotifyPushProvider::wsMessageReceived);
 
@@ -48,6 +54,7 @@ void GotifyPushProvider::connectToProvider()
         wsUrl.setScheme(QStringLiteral("ws"));
     } else {
         qCWarning(Log) << "Unknown URL scheme:" << m_url;
+        Q_EMIT disconnected(ProviderRejected);
         return;
     }
 
@@ -60,6 +67,12 @@ void GotifyPushProvider::connectToProvider()
     wsUrl.setQuery(query);
 
     m_socket->open(wsUrl);
+}
+
+void GotifyPushProvider::disconnectFromProvider()
+{
+    m_socket->close();
+    m_socket = nullptr;
 }
 
 void GotifyPushProvider::wsMessageReceived(const QString &msg)

@@ -18,6 +18,7 @@ MockPushProvider::MockPushProvider(QObject *parent)
     s_instance = this;
 
     qRegisterMetaType<KUnifiedPush::Client>();
+    qRegisterMetaType<KUnifiedPush::AbstractPushProvider::Error>();
 }
 
 MockPushProvider::~MockPushProvider()
@@ -34,6 +35,13 @@ void MockPushProvider::loadSettings(const QSettings &settings)
 void MockPushProvider::connectToProvider()
 {
     qCDebug(Log);
+    QMetaObject::invokeMethod(this, "connected", Qt::QueuedConnection);
+}
+
+void MockPushProvider::disconnectFromProvider()
+{
+    qCDebug(Log);
+    QMetaObject::invokeMethod(this, "disconnected", Qt::QueuedConnection, Q_ARG(KUnifiedPush::AbstractPushProvider::Error, NoError));
 }
 
 void MockPushProvider::registerClient(const Client &client)

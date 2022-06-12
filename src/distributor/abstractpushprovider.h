@@ -31,6 +31,7 @@ public:
         ProviderRejected, ///< communication worked, but the provider refused to complete the operation
         TransientNetworkError, ///< temporary network error, try again
     };
+    Q_ENUM(Error)
 
     /** Load connection settings.
      *  @param settings can be read on the top level, the correct group is already selected.
@@ -39,6 +40,9 @@ public:
 
     /** Attempt to establish a connection to the push provider. */
     virtual void connectToProvider() = 0;
+
+    /** Disconnect and existing connection to the push provider. */
+    virtual void disconnectFromProvider() = 0;
 
     /** Register a new client with the provider. */
     virtual void registerClient(const Client &client) = 0;
@@ -51,10 +55,16 @@ Q_SIGNALS:
     void messageReceived(const KUnifiedPush::Message &msg);
 
     /** Emitted after successful client registration. */
-    void clientRegistered(const KUnifiedPush::Client &client, Error error = NoError, const QString &errorMsg = {});
+    void clientRegistered(const KUnifiedPush::Client &client, KUnifiedPush::AbstractPushProvider::Error error = NoError, const QString &errorMsg = {});
 
     /** Emitted after successful client unregistration. */
-    void clientUnregistered(const KUnifiedPush::Client &client, Error error = NoError);
+    void clientUnregistered(const KUnifiedPush::Client &client, KUnifiedPush::AbstractPushProvider::Error error = NoError);
+
+    /** Emitted after the connection to the push provider has been established successfully. */
+    void connected();
+
+    /** Emitted after the connection to the push provider disconnected or failed to be established. */
+    void disconnected(KUnifiedPush::AbstractPushProvider::Error error, const QString &errorMsg = {});
 
 protected:
     QNetworkAccessManager *nam();
