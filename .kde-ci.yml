@@ -7,6 +7,7 @@ Dependencies:
     'frameworks/extra-cmake-modules': '@stable'
     'frameworks/kcoreaddons': '@stable'
     'frameworks/kdeclarative': '@stable'
+    'frameworks/kservice': '@stable'
 
 Options:
   require-passing-tests-on: [ 'Linux', 'FreeBSD' ]

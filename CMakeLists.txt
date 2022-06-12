@@ -35,7 +35,7 @@ ecm_setup_version(PROJECT
 set(QT_MIN_VERSION 5.15)
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Test WebSockets)
 # for the KCM
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Declarative)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Declarative Service)
 
 set(KUNIFIEDPUSH_INCLUDE_INSTALLDIR ${KDE_INSTALL_INCLUDEDIR}/KUnifiedPush)
 ecm_set_disabled_deprecation_versions(QT 5.15.2)
