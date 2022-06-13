@@ -39,6 +39,7 @@ Distributor::Distributor(QObject *parent)
         m_pushProvider = new MockPushProvider(this);
     } else {
         qCWarning(Log) << "Unknown push provider:" << pushProviderName;
+        setStatus(DistributorStatus::NoSetup);
         return;
     }
     settings.beginGroup(pushProviderName);
@@ -47,6 +48,8 @@ Distributor::Distributor(QObject *parent)
     connect(m_pushProvider, &AbstractPushProvider::messageReceived, this, &Distributor::messageReceived);
     connect(m_pushProvider, &AbstractPushProvider::clientRegistered, this, &Distributor::clientRegistered);
     connect(m_pushProvider, &AbstractPushProvider::clientUnregistered, this, &Distributor::clientUnregistered);
+    connect(m_pushProvider, &AbstractPushProvider::connected, this, &Distributor::providerConnected);
+    connect(m_pushProvider, &AbstractPushProvider::disconnected, this, &Distributor::providerDisconnected);
 
     // load previous clients
     const auto clientTokens = settings.value(QStringLiteral("Clients/Tokens"), QStringList()).toStringList();
@@ -59,12 +62,16 @@ Distributor::Distributor(QObject *parent)
     }
     qCDebug(Log) << m_clients.size() << "registered clients loaded";
 
-    // connect to push provider if necessary
-    // TODO
-    m_pushProvider->connectToProvider();
-
     // purge uninstalled apps
     purgeUnavailableClients();
+
+    // connect to push provider if necessary
+    // TODO
+    {
+        Command cmd;
+        cmd.type = Command::Connect;
+        m_commandQueue.push_back(std::move(cmd));
+    }
 
     // register at D-Bus
     new Distributor1Adaptor(this);
@@ -72,6 +79,8 @@ Distributor::Distributor(QObject *parent)
 
     new ManagementAdaptor(this);
     QDBusConnection::sessionBus().registerObject(QLatin1String(KDE_DISTRIBUTOR_MANAGEMENT_PATH), this);
+
+    processNextCommand();
 }
 
 Distributor::~Distributor() = default;
@@ -200,6 +209,24 @@ void Distributor::clientUnregistered(const Client &client, AbstractPushProvider:
     processNextCommand();
 }
 
+void Distributor::providerConnected()
+{
+    qCDebug(Log);
+    setStatus(DistributorStatus::Connected);
+    m_currentCommand = {};
+    processNextCommand();
+}
+
+void Distributor::providerDisconnected(AbstractPushProvider::Error error, const QString &errorMsg)
+{
+    qCDebug(Log) << error << errorMsg;
+    setStatus(DistributorStatus::NoNetwork);
+    if (m_currentCommand.type == Command::Disconnect) {
+        m_currentCommand = {};
+    }
+    processNextCommand();
+}
+
 QStringList Distributor::clientTokens() const
 {
     QStringList l;
@@ -249,6 +276,12 @@ void Distributor::processNextCommand()
             break;
         case Command::Unregister:
             m_pushProvider->unregisterClient(m_currentCommand.client);
+            break;
+        case Command::Connect:
+            m_pushProvider->connectToProvider();
+            break;
+        case Command::Disconnect:
+            m_pushProvider->disconnectFromProvider();
             break;
     }
 }

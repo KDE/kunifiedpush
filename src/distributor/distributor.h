@@ -52,6 +52,8 @@ private:
     void messageReceived(const Message &msg) const;
     void clientRegistered(const Client &client, AbstractPushProvider::Error error, const QString &errorMsg);
     void clientUnregistered(const Client &client, AbstractPushProvider::Error error);
+    void providerConnected();
+    void providerDisconnected(AbstractPushProvider::Error error, const QString &errorMsg);
 
     QStringList clientTokens() const;
 
