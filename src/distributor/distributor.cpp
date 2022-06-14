@@ -66,11 +66,14 @@ Distributor::Distributor(QObject *parent)
     purgeUnavailableClients();
 
     // connect to push provider if necessary
-    // TODO
+    if (!m_clients.empty())
     {
+        setStatus(DistributorStatus::NoNetwork);
         Command cmd;
         cmd.type = Command::Connect;
         m_commandQueue.push_back(std::move(cmd));
+    } else {
+        setStatus(DistributorStatus::Idle);
     }
 
     // register at D-Bus
@@ -100,6 +103,14 @@ QString Distributor::Register(const QString& serviceName, const QString& token, 
         setDelayedReply(true);
         cmd.reply = message().createReply();
         m_commandQueue.push_back(std::move(cmd));
+
+        // if this is the first client, also connect to the push provider
+        if (m_clients.empty()) {
+            Command cmd;
+            cmd.type = Command::Connect;
+            m_commandQueue.push_back(std::move(cmd));
+        }
+
         processNextCommand();
         return {};
     }
@@ -194,6 +205,13 @@ void Distributor::clientUnregistered(const Client &client, AbstractPushProvider:
         });
         if (it != m_clients.end()) {
             m_clients.erase(it);
+
+            // if this was the last client, also disconnect from the push provider
+            if (m_clients.empty()) {
+                Command cmd;
+                cmd.type = Command::Disconnect;
+                m_commandQueue.push_back(std::move(cmd));
+            }
         }
         settings.setValue(QStringLiteral("Clients/Tokens"), clientTokens());
         Q_EMIT registeredClientsChanged();
@@ -220,9 +238,11 @@ void Distributor::providerConnected()
 void Distributor::providerDisconnected(AbstractPushProvider::Error error, const QString &errorMsg)
 {
     qCDebug(Log) << error << errorMsg;
-    setStatus(DistributorStatus::NoNetwork);
     if (m_currentCommand.type == Command::Disconnect) {
         m_currentCommand = {};
+        setStatus(m_clients.empty() ? DistributorStatus::Idle : DistributorStatus::NoNetwork);
+    } else {
+        setStatus(DistributorStatus::NoNetwork);
     }
     processNextCommand();
 }

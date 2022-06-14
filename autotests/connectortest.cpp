@@ -62,8 +62,10 @@ private Q_SLOTS:
         stateSpy.reset(new QSignalSpy(con.get(), &Connector::stateChanged));
         endpointSpy.reset(new QSignalSpy(con.get(), &Connector::endpointChanged));
 
-        QVERIFY(QDBusConnection::sessionBus().registerService(QStringLiteral("org.unifiedpush.Distributor.mock")));
         Distributor dist;
+        QCOMPARE(dist.status(), KUnifiedPush::DistributorStatus::Idle);
+        QVERIFY(QDBusConnection::sessionBus().registerService(QStringLiteral("org.unifiedpush.Distributor.mock")));
+
         QVERIFY(MockPushProvider::s_instance);
         QVERIFY(stateSpy->wait());
         QCOMPARE(con->state(), KUnifiedPush::Connector::Unregistered);
@@ -75,6 +77,7 @@ private Q_SLOTS:
         // QCOMPARE(con.state(), KUnifiedPush::Connector::Registered);
         QCOMPARE(endpointSpy->size(), 1);
         QCOMPARE(con->endpoint(), QLatin1String("https://localhost/push-endpoint"));
+        QCOMPARE(dist.status(), KUnifiedPush::DistributorStatus::Connected);
 
         // connector restart does not register at the provider but uses existing state
         {
@@ -98,6 +101,7 @@ private Q_SLOTS:
         QCOMPARE(con->state(), KUnifiedPush::Connector::Registering);
         QVERIFY(stateSpy->wait());
         QCOMPARE(con->state(), KUnifiedPush::Connector::Registered);
+        QCOMPARE(dist.status(), KUnifiedPush::DistributorStatus::Connected);
 
         // receiving a message
         QSignalSpy msgSpy(con.get(), &Connector::messageReceived);
@@ -115,9 +119,11 @@ private Q_SLOTS:
         QCOMPARE(con->state(), KUnifiedPush::Connector::Unregistered);
         QCOMPARE(endpointSpy->size(), 1);
         QCOMPARE(con->endpoint(), QString());
+        QCOMPARE(dist.status(), KUnifiedPush::DistributorStatus::Idle);
     }
 };
 
 QTEST_GUILESS_MAIN(ConnectorTest)
 
 #include "connectortest.moc"
+#include "../src/shared/moc_distributorstatus_p.cpp"
