@@ -17,7 +17,7 @@ public:
     explicit MockPushProvider(QObject *parent = nullptr);
     ~MockPushProvider();
 
-    void loadSettings(const QSettings &settings) override;
+    bool loadSettings(const QSettings &settings) override;
     void connectToProvider() override;
     void disconnectFromProvider() override;
     void registerClient(const Client &client) override;

@@ -35,13 +35,14 @@ NextPushProvider::NextPushProvider(QObject *parent)
 
 NextPushProvider::~NextPushProvider() = default;
 
-void NextPushProvider::loadSettings(const QSettings &settings)
+bool NextPushProvider::loadSettings(const QSettings &settings)
 {
     m_appPassword = settings.value(QStringLiteral("AppPassword"), QString()).toString();
     m_url = QUrl(settings.value(QStringLiteral("Url"), QString()).toString());
     m_userName = settings.value(QStringLiteral("Username"), QString()).toString();
     m_deviceId = settings.value(QStringLiteral("DeviceId"), QString()).toString();
     qCDebug(Log) << m_url << m_userName << m_deviceId;
+    return m_url.isValid() && !m_appPassword.isEmpty() && !m_userName.isEmpty();
 }
 
 void NextPushProvider::connectToProvider()

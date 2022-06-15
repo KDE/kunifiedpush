@@ -24,7 +24,7 @@ public:
     explicit NextPushProvider(QObject *parent = nullptr);
     ~NextPushProvider();
 
-    void loadSettings(const QSettings &settings) override;
+    bool loadSettings(const QSettings &settings) override;
     void connectToProvider() override;
     void disconnectFromProvider() override;
     void registerClient(const Client &client) override;

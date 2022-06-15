@@ -24,11 +24,12 @@ GotifyPushProvider::GotifyPushProvider(QObject *parent)
     qCDebug(Log);
 }
 
-void GotifyPushProvider::loadSettings(const QSettings &settings)
+bool GotifyPushProvider::loadSettings(const QSettings &settings)
 {
     m_clientToken = settings.value(QStringLiteral("ClientToken"), QString()).toString();
     m_url = QUrl(settings.value(QStringLiteral("Url"), QString()).toString());
     qCDebug(Log) << m_clientToken << m_url;
+    return m_url.isValid() && !m_clientToken.isEmpty();
 }
 
 void GotifyPushProvider::connectToProvider()

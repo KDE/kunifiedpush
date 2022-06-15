@@ -43,7 +43,11 @@ Distributor::Distributor(QObject *parent)
         return;
     }
     settings.beginGroup(pushProviderName);
-    m_pushProvider->loadSettings(settings);
+    if (!m_pushProvider->loadSettings(settings)) {
+        qCWarning(Log) << "Invalid push provider settings!";
+        setStatus(DistributorStatus::NoSetup);
+        return;
+    }
     settings.endGroup();
     connect(m_pushProvider, &AbstractPushProvider::messageReceived, this, &Distributor::messageReceived);
     connect(m_pushProvider, &AbstractPushProvider::clientRegistered, this, &Distributor::clientRegistered);

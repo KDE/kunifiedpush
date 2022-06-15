@@ -21,7 +21,7 @@ class GotifyPushProvider : public AbstractPushProvider
 public:
     explicit GotifyPushProvider(QObject *parent = nullptr);
 
-    void loadSettings(const QSettings &settings) override;
+    bool loadSettings(const QSettings &settings) override;
     void connectToProvider() override;
     void disconnectFromProvider() override;
     void registerClient(const Client &client) override;

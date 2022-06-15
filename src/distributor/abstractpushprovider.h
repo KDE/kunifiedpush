@@ -35,8 +35,9 @@ public:
 
     /** Load connection settings.
      *  @param settings can be read on the top level, the correct group is already selected.
+     *  @returns @c true if the settings are valid, @c false otherwise.
      */
-    virtual void loadSettings(const QSettings &settings) = 0;
+    virtual bool loadSettings(const QSettings &settings) = 0;
 
     /** Attempt to establish a connection to the push provider. */
     virtual void connectToProvider() = 0;

@@ -27,9 +27,10 @@ MockPushProvider::~MockPushProvider()
     s_instance = nullptr;
 }
 
-void MockPushProvider::loadSettings(const QSettings &settings)
+bool MockPushProvider::loadSettings(const QSettings &settings)
 {
     Q_UNUSED(settings);
+    return true;
 }
 
 void MockPushProvider::connectToProvider()
