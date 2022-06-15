@@ -48,7 +48,7 @@ ConnectorPrivate::ConnectorPrivate(Connector *qq)
 
     m_serviceWatcher.setConnection(QDBusConnection::sessionBus());
     m_serviceWatcher.setWatchMode(QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration);
-    m_serviceWatcher.addWatchedService(QLatin1String("org.unifiedpush.Distributor*"));
+    m_serviceWatcher.addWatchedService(QLatin1String(UP_DISTRIBUTOR_SERVICE_NAME_FILTER));
 }
 
 ConnectorPrivate::~ConnectorPrivate()
