@@ -113,11 +113,14 @@ KCM.SimpleKCM {
         Component {
             id: nextpushForm
             Kirigami.FormLayout {
-                readonly property bool dirty: urlField.text != root.pushProviderConfig['Url'] || userField.text != root.pushProviderConfig['Username']
+                id: nextpushConfig
+                readonly property bool dirty: urlField.text != root.pushProviderConfig['Url'] || userField.text != root.pushProviderConfig['Username'] || appPassword != root.pushProviderConfig['AppPassword']
+                property string appPassword: root.pushProviderConfig['AppPassword'];
                 function config() {
                     let c = root.pushProviderConfig;
                     c['Url'] = urlField.text;
                     c['Username'] = userField.text;
+                    c['AppPassword'] = appPassword;
                     return c;
                 }
                 twinFormLayouts: [topForm]
@@ -126,10 +129,33 @@ KCM.SimpleKCM {
                     Kirigami.FormData.label: i18n("Url:")
                     text: root.pushProviderConfig['Url']
                 }
-                QQC2.TextField {
+                QQC2.Label {
                     id: userField
                     Kirigami.FormData.label: i18n("User name:")
                     text: root.pushProviderConfig['Username']
+                }
+                RowLayout {
+                    QQC2.Button {
+                        enabled: urlField.text != ""
+                        text: i18n("Authenticate")
+                        onClicked: {
+                            authBusy.running = true;
+                            kcm.nextcloudAuthenticate(urlField.text);
+                        }
+
+                    }
+                    QQC2.BusyIndicator {
+                        id: authBusy
+                        running: false
+                    }
+                }
+                Connections {
+                    target: kcm
+                    function onNextcloudAuthenticated(loginName, appPassword) {
+                        userField.text = loginName;
+                        nextpushConfig.appPassword = appPassword
+                        authBusy.running = false;
+                    }
                 }
             }
         }

@@ -4,6 +4,7 @@
 set(kcm_srcs
     clientmodel.cpp
     kcmpushnotifications.cpp
+    nextcloudauthenticator.cpp
     ../shared/connectorutils.cpp
 )
 

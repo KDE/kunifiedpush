@@ -5,6 +5,7 @@
 
 #include "kcmpushnotifications.h"
 #include "managementinterface.h"
+#include "nextcloudauthenticator.h"
 
 #include "../shared/clientinfo_p.h"
 #include "../shared/connectorutils_p.h"
@@ -14,6 +15,8 @@
 #include <KPluginFactory>
 
 #include <QDebug>
+#include <QHostInfo>
+#include <QStandardPaths>
 
 K_PLUGIN_CLASS_WITH_JSON(KCMPushNotifications, "kcm_push_notifications.json")
 
@@ -24,6 +27,10 @@ KCMPushNotifications::KCMPushNotifications(QObject *parent, const KPluginMetaDat
 {
     qDBusRegisterMetaType<KUnifiedPush::ClientInfo>();
     qDBusRegisterMetaType<QList<KUnifiedPush::ClientInfo>>();
+
+    m_nam.setRedirectPolicy(QNetworkRequest::NoLessSafeRedirectPolicy);
+    m_nam.setStrictTransportSecurityEnabled(true);
+    m_nam.enableStrictTransportSecurityStore(true, QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + QLatin1String("/org.kde.kunifiedpush/hsts/"));
 
     // TODO do this only when we are using the KDE distributor
     m_mgmtIface = new OrgKdeKunifiedpushManagementInterface(QLatin1String(KDE_DISTRIBUTOR_SERVICE_NAME), QLatin1String(KDE_DISTRIBUTOR_MANAGEMENT_PATH), QDBusConnection::sessionBus(), this);
@@ -84,6 +91,18 @@ void KCMPushNotifications::setPushProviderConfiguration(const QString &pushProvi
 void KCMPushNotifications::forceUnregister(const QString &token)
 {
     m_mgmtIface->forceUnregisterClient(token);
+}
+
+void KCMPushNotifications::nextcloudAuthenticate(const QUrl &url)
+{
+    if (!url.isValid()) {
+        return;
+    }
+
+    m_nextcloudAuthenticator.reset(new NextcloudAuthenticator);
+    connect(m_nextcloudAuthenticator.get(), &NextcloudAuthenticator::authenticated, this, &KCMPushNotifications::nextcloudAuthenticated);
+    m_nextcloudAuthenticator->setNetworkAccessManager(&m_nam);
+    m_nextcloudAuthenticator->authenticate(url, QStringLiteral("KUnifiedPush Distributor (%1)").arg(QHostInfo::localHostName()));
 }
 
 void KCMPushNotifications::save()

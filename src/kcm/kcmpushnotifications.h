@@ -12,6 +12,9 @@
 
 #include <QDBusServiceWatcher>
 
+#include <memory>
+
+class NextcloudAuthenticator;
 class OrgKdeKunifiedpushManagementInterface;
 
 /** KCM to configure push notifications. */
@@ -35,6 +38,8 @@ public:
 
     Q_INVOKABLE QVariantMap pushProviderConfiguration(const QString &pushProviderId) const;
 
+    Q_INVOKABLE void nextcloudAuthenticate(const QUrl &url);
+
     void save() override;
 
 public Q_SLOTS:
@@ -46,12 +51,17 @@ Q_SIGNALS:
     void distributorStatusChanged();
     void pushProviderChanged();
 
+    void nextcloudAuthenticated(const QString &loginName, const QString &appPassword);
+
     void saveRequested();
 
 private:
     OrgKdeKunifiedpushManagementInterface *m_mgmtIface = nullptr;
     ClientModel *m_clientModel = nullptr;
     QDBusServiceWatcher m_serviceWatcher;
+
+    QNetworkAccessManager m_nam;
+    std::unique_ptr<NextcloudAuthenticator> m_nextcloudAuthenticator;
 };
 
 #endif // KCMPUSHNOTIFICATIONS_H
