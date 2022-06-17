@@ -28,34 +28,14 @@ Distributor::Distributor(QObject *parent)
     qDBusRegisterMetaType<KUnifiedPush::ClientInfo>();
     qDBusRegisterMetaType<QList<KUnifiedPush::ClientInfo>>();
 
-    // determine push provider
-    QSettings settings;
-    const auto pushProviderName = pushProviderId();
-    if (pushProviderName == QLatin1String("Gotify")) {
-        m_pushProvider = new GotifyPushProvider(this);
-    } else if (pushProviderName == QLatin1String("NextPush")) {
-        m_pushProvider = new NextPushProvider(this);
-    } else if (pushProviderName == QLatin1String("Mock")) {
-        m_pushProvider = new MockPushProvider(this);
-    } else {
-        qCWarning(Log) << "Unknown push provider:" << pushProviderName;
-        setStatus(DistributorStatus::NoSetup);
+    // create and set up push provider
+    if (!setupPushProvider()) {
         return;
     }
-    settings.beginGroup(pushProviderName);
-    if (!m_pushProvider->loadSettings(settings)) {
-        qCWarning(Log) << "Invalid push provider settings!";
-        setStatus(DistributorStatus::NoSetup);
-        return;
-    }
-    settings.endGroup();
-    connect(m_pushProvider, &AbstractPushProvider::messageReceived, this, &Distributor::messageReceived);
-    connect(m_pushProvider, &AbstractPushProvider::clientRegistered, this, &Distributor::clientRegistered);
-    connect(m_pushProvider, &AbstractPushProvider::clientUnregistered, this, &Distributor::clientUnregistered);
-    connect(m_pushProvider, &AbstractPushProvider::connected, this, &Distributor::providerConnected);
-    connect(m_pushProvider, &AbstractPushProvider::disconnected, this, &Distributor::providerDisconnected);
 
     // load previous clients
+    // TODO what happens to existing clients if the above failed?
+    QSettings settings;
     const auto clientTokens = settings.value(QStringLiteral("Clients/Tokens"), QStringList()).toStringList();
     m_clients.reserve(clientTokens.size());
     for (const auto &token : clientTokens) {
@@ -257,6 +237,41 @@ QStringList Distributor::clientTokens() const
     l.reserve(m_clients.size());
     std::transform(m_clients.begin(), m_clients.end(), std::back_inserter(l), [](const auto &client) { return client.token; });
     return l;
+}
+
+bool Distributor::setupPushProvider()
+{
+    // determine push provider
+    const auto pushProviderName = pushProviderId();
+    if (pushProviderName == QLatin1String("Gotify")) {
+        m_pushProvider.reset(new GotifyPushProvider);
+    } else if (pushProviderName == QLatin1String("NextPush")) {
+        m_pushProvider.reset(new NextPushProvider);
+    } else if (pushProviderName == QLatin1String("Mock")) {
+        m_pushProvider.reset(new MockPushProvider);
+    } else {
+        qCWarning(Log) << "Unknown push provider:" << pushProviderName;
+        m_pushProvider.reset();
+        setStatus(DistributorStatus::NoSetup);
+        return false;
+    }
+
+
+    QSettings settings;
+    settings.beginGroup(pushProviderName);
+    if (!m_pushProvider->loadSettings(settings)) {
+        qCWarning(Log) << "Invalid push provider settings!";
+        setStatus(DistributorStatus::NoSetup);
+        return false;
+    }
+    settings.endGroup();
+
+    connect(m_pushProvider.get(), &AbstractPushProvider::messageReceived, this, &Distributor::messageReceived);
+    connect(m_pushProvider.get(), &AbstractPushProvider::clientRegistered, this, &Distributor::clientRegistered);
+    connect(m_pushProvider.get(), &AbstractPushProvider::clientUnregistered, this, &Distributor::clientUnregistered);
+    connect(m_pushProvider.get(), &AbstractPushProvider::connected, this, &Distributor::providerConnected);
+    connect(m_pushProvider.get(), &AbstractPushProvider::disconnected, this, &Distributor::providerDisconnected);
+    return true;
 }
 
 void Distributor::purgeUnavailableClients()

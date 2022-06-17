@@ -16,6 +16,7 @@
 #include <QObject>
 
 #include <deque>
+#include <memory>
 #include <vector>
 
 namespace KUnifiedPush {
@@ -57,6 +58,7 @@ private:
 
     QStringList clientTokens() const;
 
+    bool setupPushProvider();
     void purgeUnavailableClients();
 
     bool hasCurrentCommand() const;
@@ -64,7 +66,7 @@ private:
 
     void setStatus(DistributorStatus::Status status);
 
-    AbstractPushProvider *m_pushProvider = nullptr;
+    std::unique_ptr<AbstractPushProvider> m_pushProvider;
     std::vector<Client> m_clients;
     Command m_currentCommand;
     std::deque<Command> m_commandQueue;
