@@ -322,6 +322,15 @@ void Distributor::processNextCommand()
         case Command::Disconnect:
             m_pushProvider->disconnectFromProvider();
             break;
+        case Command::ChangePushProvider:
+        {
+            QSettings settings;
+            settings.setValue(QLatin1String("PushProvider/Type"), m_currentCommand.pushProvider);
+            setupPushProvider(); // TODO what happens here if this fails?
+            m_currentCommand = {};
+            processNextCommand();
+            break;
+        }
     }
 }
 
@@ -376,8 +385,39 @@ void Distributor::setPushProvider(const QString &pushProviderId, const QVariantM
         return; // nothing changed
     }
 
-    // TODO if push provider or config changed: unregister all clients, create new push provider backend, re-register all clients
-    qDebug() << pushProviderId << config << configChanged;
+    // if push provider or config changed: unregister all clients, create new push provider backend, re-register all clients
+    for (const auto &client : m_clients) {
+        Unregister(client.token);
+    }
+    if (m_status == DistributorStatus::Connected) {
+        Command cmd;
+        cmd.type = Command::Disconnect;
+        m_commandQueue.push_back(std::move(cmd));
+    }
+
+    {
+        Command cmd;
+        cmd.type = Command::ChangePushProvider;
+        cmd.pushProvider = pushProviderId;
+        m_commandQueue.push_back(std::move(cmd));
+    }
+
+    // reconnect if there are clients
+    if (!m_clients.empty()) {
+        Command cmd;
+        cmd.type = Command::Connect;
+        m_commandQueue.push_back(std::move(cmd));
+    }
+
+    // re-register clients
+    for (const auto &client : m_clients) {
+        Command cmd;
+        cmd.type = Command::Register;
+        cmd.client = client;
+        m_commandQueue.push_back(std::move(cmd));
+    }
+
+    processNextCommand();
 }
 
 QList<KUnifiedPush::ClientInfo> Distributor::registeredClients() const
