@@ -80,6 +80,15 @@ QString Distributor::Register(const QString& serviceName, const QString& token, 
     });
     if (it == m_clients.end()) {
         qCDebug(Log) << "Registering new client";
+
+        // if this is the first client, connect to the push provider first
+        // this can involve first-time device registration that is a prerequisite for registering clients
+        if (m_clients.empty()) {
+            Command cmd;
+            cmd.type = Command::Connect;
+            m_commandQueue.push_back(std::move(cmd));
+        }
+
         Command cmd;
         cmd.type = Command::Register;
         cmd.client.token = token;
@@ -87,13 +96,6 @@ QString Distributor::Register(const QString& serviceName, const QString& token, 
         setDelayedReply(true);
         cmd.reply = message().createReply();
         m_commandQueue.push_back(std::move(cmd));
-
-        // if this is the first client, also connect to the push provider
-        if (m_clients.empty()) {
-            Command cmd;
-            cmd.type = Command::Connect;
-            m_commandQueue.push_back(std::move(cmd));
-        }
 
         processNextCommand();
         return {};
@@ -255,7 +257,6 @@ bool Distributor::setupPushProvider()
         setStatus(DistributorStatus::NoSetup);
         return false;
     }
-
 
     QSettings settings;
     settings.beginGroup(pushProviderName);

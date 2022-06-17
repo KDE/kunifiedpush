@@ -75,6 +75,7 @@ private Q_SLOTS:
         QVERIFY(stateSpy->wait());
         // FIXME: delayed D-Bus replies inside the same process seem not to be actually delayed, so state get messed up after this...
         // QCOMPARE(con.state(), KUnifiedPush::Connector::Registered);
+        QVERIFY(endpointSpy->wait());
         QCOMPARE(endpointSpy->size(), 1);
         QCOMPARE(con->endpoint(), QLatin1String("https://localhost/push-endpoint"));
         QCOMPARE(dist.status(), KUnifiedPush::DistributorStatus::Connected);
