@@ -23,7 +23,7 @@ public:
     explicit ConnectorPrivate(Connector *qq);
     ~ConnectorPrivate();
 
-    void Message(const QString &token, const QString &message, const QString &messageIdentifier);
+    void Message(const QString &token, const QByteArray &message, const QString &messageIdentifier);
     void NewEndpoint(const QString &token, const QString &endpoint);
     void Unregistered(const QString &token);
 

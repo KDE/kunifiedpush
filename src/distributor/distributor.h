@@ -33,7 +33,7 @@ public:
     ~Distributor();
 
     // UnifiedPush D-Bus interface
-    QString Register(const QString &serviceName, const QString &token, QString &registrationResultReason);
+    QString Register(const QString &serviceName, const QString &token, const QString &description, QString &registrationResultReason);
     void Unregister(const QString &token);
 
     // KCM D-Bus interface

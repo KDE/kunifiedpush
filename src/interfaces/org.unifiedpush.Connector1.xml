@@ -7,10 +7,7 @@
   <interface name="org.unifiedpush.Connector1">
     <method name="Message">
       <arg name="token" type="s" direction="in"/>
-      <!--
-        ### Spec says this should be type "ay" but the gotify D-Bus distributor uses "s"...
-      -->
-      <arg name="message" type="s" direction="in"/>
+      <arg name="message" type="ay" direction="in"/>
       <arg name="messageIdentifier" type="s" direction="in"/>
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
     </method>

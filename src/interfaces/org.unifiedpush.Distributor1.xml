@@ -8,10 +8,7 @@
     <method name="Register">
       <arg name="serviceName" type="s" direction="in"/>
       <arg name="token" type="s" direction="in"/>
-      <!--
-      ### mentioned in the spec, but not implemented by the gotify dbus distributor!?
       <arg name="description" type="s" direction="in"/>
-      -->
       <arg name="registrationResult" type="s" direction="out"/>
       <arg name="registrationResultReason" type="s" direction="out"/>
     </method>

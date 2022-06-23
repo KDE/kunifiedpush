@@ -108,7 +108,7 @@ private Q_SLOTS:
         QSignalSpy msgSpy(con.get(), &Connector::messageReceived);
         KUnifiedPush::Message msg;
         msg.clientRemoteId = QStringLiteral("<client-remote-id>");
-        msg.content = QStringLiteral("hello world");
+        msg.content = "hello world";
         Q_EMIT MockPushProvider::s_instance->messageReceived(msg);
         QVERIFY(msgSpy.wait());
         QCOMPARE(msgSpy.at(0).at(0).toByteArray(), "hello world");

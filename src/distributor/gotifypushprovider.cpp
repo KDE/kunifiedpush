@@ -82,7 +82,7 @@ void GotifyPushProvider::wsMessageReceived(const QString &msg)
     const auto msgObj = QJsonDocument::fromJson(msg.toUtf8()).object();
     Message m;
     m.clientRemoteId = QString::number(msgObj.value(QLatin1String("appid")).toInt());
-    m.content = msgObj.value(QLatin1String("message")).toString();
+    m.content = msgObj.value(QLatin1String("message")).toString().toUtf8();
     Q_EMIT messageReceived(m);
 }
 

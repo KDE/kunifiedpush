@@ -56,14 +56,14 @@ ConnectorPrivate::~ConnectorPrivate()
     QDBusConnection::sessionBus().unregisterObject(QLatin1String(UP_CONNECTOR_PATH));
 }
 
-void ConnectorPrivate::Message(const QString &token, const QString &message, const QString &messageIdentifier)
+void ConnectorPrivate::Message(const QString &token, const QByteArray &message, const QString &messageIdentifier)
 {
     qCDebug(Log) << token << message << messageIdentifier;
     if (token != m_token) {
         qCWarning(Log) << "Got message for a different token??";
         return;
     }
-    Q_EMIT q->messageReceived(message.toUtf8());
+    Q_EMIT q->messageReceived(message);
 }
 
 void ConnectorPrivate::NewEndpoint(const QString &token, const QString &endpoint)
@@ -212,7 +212,7 @@ void ConnectorPrivate::processNextCommand()
                 m_token = QUuid::createUuid().toString();
             }
             qCDebug(Log) << "Registering";
-            const auto reply = m_distributor->Register(m_serviceName, m_token/*, QStringLiteral("TODO")*/);
+            const auto reply = m_distributor->Register(m_serviceName, m_token, m_description);
             auto watcher = new QDBusPendingCallWatcher(reply, this);
             connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher]() {
                 if (watcher->isError()) {

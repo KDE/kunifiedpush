@@ -27,7 +27,7 @@ NextPushProvider::NextPushProvider(QObject *parent)
             QJsonObject msgObj = QJsonDocument::fromJson(sse.data).object();
             Message msg;
             msg.clientRemoteId = msgObj.value(QLatin1String("token")).toString();
-            msg.content = QString::fromUtf8(QByteArray::fromBase64(msgObj.value(QLatin1String("message")).toString().toUtf8()));
+            msg.content = QByteArray::fromBase64(msgObj.value(QLatin1String("message")).toString().toUtf8());
             Q_EMIT messageReceived(msg);
         }
     });

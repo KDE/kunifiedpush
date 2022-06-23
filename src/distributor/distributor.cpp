@@ -72,7 +72,7 @@ Distributor::Distributor(QObject *parent)
 
 Distributor::~Distributor() = default;
 
-QString Distributor::Register(const QString& serviceName, const QString& token, QString& registrationResultReason)
+QString Distributor::Register(const QString& serviceName, const QString& token, const QString &description, QString& registrationResultReason)
 {
     qCDebug(Log) << serviceName << token;
     const auto it = std::find_if(m_clients.begin(), m_clients.end(), [&token](const auto &client) {
@@ -93,6 +93,7 @@ QString Distributor::Register(const QString& serviceName, const QString& token, 
         cmd.type = Command::Register;
         cmd.client.token = token;
         cmd.client.serviceName = serviceName;
+        cmd.client.description = description;
         setDelayedReply(true);
         cmd.reply = message().createReply();
         m_commandQueue.push_back(std::move(cmd));
