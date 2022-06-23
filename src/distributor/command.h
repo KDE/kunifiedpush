@@ -16,7 +16,15 @@ namespace KUnifiedPush {
 class Command
 {
 public:
-    enum Type { NoCommand, Register, Unregister, Connect, Disconnect, ChangePushProvider } type = NoCommand;
+    enum Type {
+        NoCommand,
+        Register,
+        Unregister,  ///< unregistration requested by client
+        ForceUnregister, ///< unregistration triggered by distributor
+        Connect,
+        Disconnect,
+        ChangePushProvider
+    } type = NoCommand;
     Client client;
     QDBusMessage reply;
     QString pushProvider;

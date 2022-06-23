@@ -180,7 +180,7 @@ void Distributor::clientUnregistered(const Client &client, AbstractPushProvider:
     qCDebug(Log) << client.token << client.remoteId << client.serviceName << error;
     switch (error) {
     case AbstractPushProvider::NoError:
-        client.connector().Unregistered(QString());
+        client.connector().Unregistered(m_currentCommand.type == Command::Unregister ? QString() : client.token);
         [[fallthrough]];
     case AbstractPushProvider::ProviderRejected:
     {
@@ -315,6 +315,7 @@ void Distributor::processNextCommand()
             m_pushProvider->registerClient(m_currentCommand.client);
             break;
         case Command::Unregister:
+        case Command::ForceUnregister:
             m_pushProvider->unregisterClient(m_currentCommand.client);
             break;
         case Command::Connect:
@@ -439,6 +440,18 @@ QList<KUnifiedPush::ClientInfo> Distributor::registeredClients() const
 
 void Distributor::forceUnregisterClient(const QString &token)
 {
-    // ### do we want to do this without telling the client?
-    Unregister(token);
+    qCDebug(Log) << token;
+    const auto it = std::find_if(m_clients.begin(), m_clients.end(), [&token](const auto &client) {
+        return client.token == token;
+    });
+    if (it == m_clients.end()) {
+        qCWarning(Log) << "Unregistration request for unknown client.";
+        return;
+    }
+
+    Command cmd;
+    cmd.type = Command::ForceUnregister;
+    cmd.client = (*it);
+    m_commandQueue.push_back(std::move(cmd));
+    processNextCommand();
 }

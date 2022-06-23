@@ -102,8 +102,10 @@ void ConnectorPrivate::Unregistered(const QString &token)
 
     // we got unregistered by the distributor
     else if (token == m_token) {
+        m_endpoint.clear();
+        Q_EMIT q->endpointChanged(m_endpoint);
         setState(Connector::Unregistered);
-        // TODO reregister?
+        storeState();
     }
 
     if (m_currentCommand == Command::Unregister) {
