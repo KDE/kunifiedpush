@@ -14,7 +14,6 @@ MockPushProvider* MockPushProvider::s_instance = nullptr;
 MockPushProvider::MockPushProvider(QObject *parent)
     : AbstractPushProvider(parent)
 {
-    Q_ASSERT(!s_instance);
     s_instance = this;
 
     qRegisterMetaType<KUnifiedPush::Client>();
@@ -23,8 +22,9 @@ MockPushProvider::MockPushProvider(QObject *parent)
 
 MockPushProvider::~MockPushProvider()
 {
-    Q_ASSERT(s_instance);
-    s_instance = nullptr;
+    if (s_instance == this) {
+        s_instance = nullptr;
+    }
 }
 
 bool MockPushProvider::loadSettings(const QSettings &settings)

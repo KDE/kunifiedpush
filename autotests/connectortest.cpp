@@ -113,8 +113,31 @@ private Q_SLOTS:
         QVERIFY(msgSpy.wait());
         QCOMPARE(msgSpy.at(0).at(0).toByteArray(), "hello world");
 
+        // reconfigure distributor to a different push provider
+        dist.setPushProvider(QStringLiteral("Broken"), {});
+        QVERIFY(stateSpy->wait());
+        QCOMPARE(con->state(), KUnifiedPush::Connector::Unregistered);
+        QCOMPARE(con->endpoint(), QString());
+        QCOMPARE(dist.status(), KUnifiedPush::DistributorStatus::NoSetup);
+
+        dist.setPushProvider(QStringLiteral("Mock"), {});
+        QVERIFY(stateSpy->wait());
+        QCOMPARE(con->state(), KUnifiedPush::Connector::Registered);
+        QCOMPARE(con->endpoint(), QLatin1String("https://localhost/push-endpoint"));
+
+        QVariantMap config;
+        config.insert(QStringLiteral("setting"), true);
+        dist.setPushProvider(QStringLiteral("Mock"), config);
+        QVERIFY(stateSpy->wait());
+        QCOMPARE(con->state(), KUnifiedPush::Connector::Unregistered);
+        QCOMPARE(con->endpoint(), QString());
+        QVERIFY(stateSpy->wait());
+        QCOMPARE(con->state(), KUnifiedPush::Connector::Registered);
+        QCOMPARE(con->endpoint(), QLatin1String("https://localhost/push-endpoint"));
+        QCOMPARE(endpointSpy->size(), 4);
+
         // connector unregisters
-        QCOMPARE(endpointSpy->size(), 0);
+        endpointSpy->clear();
         con->unregisterClient();
         QVERIFY(stateSpy->wait());
         QCOMPARE(con->state(), KUnifiedPush::Connector::Unregistered);
