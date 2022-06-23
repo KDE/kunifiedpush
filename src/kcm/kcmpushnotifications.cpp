@@ -14,7 +14,6 @@
 
 #include <KPluginFactory>
 
-#include <QDebug>
 #include <QHostInfo>
 #include <QStandardPaths>
 

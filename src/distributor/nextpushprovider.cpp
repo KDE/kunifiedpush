@@ -11,10 +11,8 @@
 #include <QHostInfo>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QSettings>
-#include <QUrlQuery>
 
 using namespace KUnifiedPush;
 
