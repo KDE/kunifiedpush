@@ -157,8 +157,10 @@ void Distributor::clientRegistered(const Client &client, AbstractPushProvider::E
 
         client.connector().NewEndpoint(client.token, client.endpoint);
 
-        m_currentCommand.reply << QString::fromLatin1(UP_REGISTER_RESULT_SUCCESS) << QString();
-        QDBusConnection::sessionBus().send(m_currentCommand.reply);
+        if (m_currentCommand.reply.isDelayedReply()) {
+            m_currentCommand.reply << QString::fromLatin1(UP_REGISTER_RESULT_SUCCESS) << QString();
+            QDBusConnection::sessionBus().send(m_currentCommand.reply);
+        }
         break;
     }
     case AbstractPushProvider::TransientNetworkError:
