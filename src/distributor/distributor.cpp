@@ -14,6 +14,7 @@
 #include "message.h"
 #include "mockpushprovider.h"
 #include "nextpushprovider.h"
+#include "ntfypushprovider.h"
 
 #include "../shared/unifiedpush-constants.h"
 
@@ -252,6 +253,8 @@ bool Distributor::setupPushProvider()
         m_pushProvider.reset(new GotifyPushProvider);
     } else if (pushProviderName == QLatin1String(NextPushProvider::Id)) {
         m_pushProvider.reset(new NextPushProvider);
+    } else if (pushProviderName == QLatin1String(NtfyPushProvider::Id)) {
+        m_pushProvider.reset(new NtfyPushProvider);
     } else if (pushProviderName == QLatin1String(MockPushProvider::Id)) {
         m_pushProvider.reset(new MockPushProvider);
     } else {

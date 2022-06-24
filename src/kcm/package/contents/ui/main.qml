@@ -81,7 +81,7 @@ KCM.SimpleKCM {
             QQC2.ComboBox {
                 id: pushProviderBox
                 Kirigami.FormData.label: i18n("Push provider:")
-                model: [ "Gotify", "NextPush" ]
+                model: [ "Gotify", "NextPush", "Ntfy" ]
                 currentIndex: find(kcm.pushProviderId)
                 Component.onCompleted: currentIndex = find(kcm.pushProviderId)
             }
@@ -159,6 +159,24 @@ KCM.SimpleKCM {
                 }
             }
         }
+        Component {
+            id: ntfyForm
+            Kirigami.FormLayout {
+                id: ntfyConfig
+                readonly property bool dirty: urlField.text != root.pushProviderConfig['Url']
+                function config() {
+                    let c = root.pushProviderConfig;
+                    c['Url'] = urlField.text;
+                    return c;
+                }
+                twinFormLayouts: [topForm]
+                QQC2.TextField {
+                    id: urlField
+                    Kirigami.FormData.label: i18n("Url:")
+                    text: root.pushProviderConfig['Url']
+                }
+            }
+        }
 
         Loader {
             id: providerFormLoader
@@ -168,6 +186,7 @@ KCM.SimpleKCM {
                 switch (pushProviderBox.currentIndex) {
                     case 0: return gotifyForm;
                     case 1: return nextpushForm;
+                    case 2: return ntfyForm;
                 }
                 return undefined;
             }

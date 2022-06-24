@@ -23,6 +23,7 @@ target_sources(KUnifiedPushDistributor PRIVATE
     mockpushprovider.h
     nextpushprovider.cpp
     nextpushprovider.h
+    ntfypushprovider.cpp
     serversenteventsstream.cpp
     serversenteventsstream.h
     ${dbus_srcs}
