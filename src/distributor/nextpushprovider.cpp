@@ -78,6 +78,11 @@ void NextPushProvider::connectToProvider()
 
 void NextPushProvider::disconnectFromProvider()
 {
+    if (m_sseReply) {
+        m_sseReply->abort();
+    } else {
+        Q_EMIT disconnected(NoError);
+    }
 }
 
 void NextPushProvider::registerClient(const Client &client)
@@ -149,6 +154,7 @@ void NextPushProvider::waitForMessage()
         }
     });
     m_sseStream.read(reply);
+    m_sseReply = reply;
     Q_EMIT connected();
 }
 

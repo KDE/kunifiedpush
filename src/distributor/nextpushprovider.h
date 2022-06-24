@@ -9,9 +9,11 @@
 #include "abstractpushprovider.h"
 #include "serversenteventsstream.h"
 
+#include <QPointer>
 #include <QUrl>
 
 class QNetworkRequest;
+class QNetworkReply;
 
 namespace KUnifiedPush {
 
@@ -38,6 +40,8 @@ private:
     QString m_userName;
     QString m_appPassword;
     QString m_deviceId;
+
+    QPointer<QNetworkReply> m_sseReply;
     ServerSentEventsStream m_sseStream;
 };
 
