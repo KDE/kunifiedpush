@@ -8,14 +8,23 @@ qt_add_dbus_interface(dbus_srcs ../interfaces/org.unifiedpush.Connector1.xml con
 qt_add_dbus_adaptor(dbus_srcs  ../interfaces/org.kde.kunifiedpush.distributor.Management.xml distributor.h KUnifiedPush::Distributor)
 target_sources(KUnifiedPushDistributor PRIVATE
     abstractpushprovider.cpp
+    abstractpushprovider.h
     client.cpp
+    client.h
     command.cpp
+    command.h
     distributor.cpp
+    distributor.h
     gotifypushprovider.cpp
+    gotifypushprovider.h
     message.cpp
+    message.h
     mockpushprovider.cpp
+    mockpushprovider.h
     nextpushprovider.cpp
+    nextpushprovider.h
     serversenteventsstream.cpp
+    serversenteventsstream.h
     ${dbus_srcs}
 )
 ecm_qt_declare_logging_category(KUnifiedPushDistributor

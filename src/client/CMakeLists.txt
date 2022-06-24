@@ -7,6 +7,7 @@ qt_add_dbus_adaptor(dbus_srcs  ../interfaces/org.unifiedpush.Connector1.xml conn
 qt_add_dbus_interface(dbus_srcs ../interfaces/org.unifiedpush.Distributor1.xml distributor1iface)
 target_sources(KUnifiedPush PRIVATE
     connector.cpp
+    connector.h
     ../shared/connectorutils.cpp
     ${dbus_srcs}
 )
