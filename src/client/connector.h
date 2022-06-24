@@ -78,7 +78,7 @@ Q_SIGNALS:
     void stateChanged(KUnifiedPush::Connector::State state);
 
 private:
-    ConnectorPrivate *d;
+    ConnectorPrivate *const d;
 };
 
 }
