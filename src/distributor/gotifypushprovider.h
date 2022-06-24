@@ -32,7 +32,7 @@ private:
 
     QString m_clientToken;
     QUrl m_url;
-    QWebSocket *m_socket;
+    QWebSocket *m_socket = nullptr;
 };
 
 }
