@@ -363,13 +363,20 @@ QString Distributor::pushProviderId() const
 
 QVariantMap Distributor::pushProviderConfiguration(const QString &pushProviderId) const
 {
+    if (pushProviderId.isEmpty()) {
+        return {};
+    }
+
     QSettings settings;
     settings.beginGroup(pushProviderId);
     const auto keys = settings.allKeys();
 
     QVariantMap config;
     for (const auto &key : keys) {
-        config.insert(key, settings.value(key));
+        const auto v = settings.value(key);
+        if (v.isValid()) {
+            config.insert(key, settings.value(key));
+        }
     }
 
     return config;
