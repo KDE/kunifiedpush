@@ -15,12 +15,10 @@ How to register for push notifications:
 
 ### Supported Distributors
 
-In theory any standard compliant D-Bus distributor is supported, however
-standard compliance seems hard...
-
-The following distributors have been tested:
-- `kunifiedpush-distributor`
-- `gotify-dbus-rust`
+For the basic functionality any standard compliant D-Bus distributor should work.
+The graphical status and configuration user interface however only works with
+the `kunifiedpush-distributor`, as that needs a lot more access to distributor
+internal details than the standard interfaces provide.
 
 ## D-Bus Distributor
 
@@ -31,12 +29,12 @@ requires provider specific code and configuration.
 
 ### Configuration
 
-There is no configuration KCM for the push provider yet, this can only be done via
+There is a configuration KCM, alternatively this can be configured via
 the `~/.config/KDE/kunifiedpush-distributor.conf` configuration file.
 
 ```
 [PushProvider]
-Type=[Gotify|NextPush]
+Type=[Gotify|NextPush|Ntfy]
 ```
 
 ### Supported push providers
@@ -65,3 +63,23 @@ AppPassword=xxx
 Url=https://my.server.org
 Username=user
 ```
+
+#### Ntfy
+
+https://ntfy.sh/
+
+Configuration:
+
+```
+[Ntfy]
+Url:https://ntfy.sh
+```
+
+Ntfy can be self-hosted, but also provides a hosted instance at `https://ntfy.sh` that
+works without requiring an account.
+
+## Push Notification KCM
+
+In combination with our own distributor this allows configuring the push provider to use
+in System Settings, check the distributor status, and see all apps currently using push
+notifications.
