@@ -24,7 +24,7 @@ class AbstractPushProvider : public QObject
 {
     Q_OBJECT
 public:
-    explicit AbstractPushProvider(QObject *parent);
+    ~AbstractPushProvider();
 
     enum Error {
         NoError, ///< operation succeeded
@@ -51,6 +51,9 @@ public:
     /** Unregister a client from the provider. */
     virtual void unregisterClient(const Client &client) = 0;
 
+    /** Provider id used e.g. in settings. */
+    const char* providerId() const;
+
 Q_SIGNALS:
     /** Inform about a received push notification. */
     void messageReceived(const KUnifiedPush::Message &msg);
@@ -68,9 +71,11 @@ Q_SIGNALS:
     void disconnected(KUnifiedPush::AbstractPushProvider::Error error, const QString &errorMsg = {});
 
 protected:
+    explicit AbstractPushProvider(const char *providerId, QObject *parent);
     QNetworkAccessManager *nam();
 
 private:
+    const char *m_providerId = nullptr;
     QNetworkAccessManager *m_nam = nullptr;
 };
 

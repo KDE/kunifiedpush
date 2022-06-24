@@ -12,7 +12,7 @@ using namespace KUnifiedPush;
 MockPushProvider* MockPushProvider::s_instance = nullptr;
 
 MockPushProvider::MockPushProvider(QObject *parent)
-    : AbstractPushProvider(parent)
+    : AbstractPushProvider(Id, parent)
 {
     s_instance = this;
 

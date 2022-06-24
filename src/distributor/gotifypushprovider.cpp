@@ -18,7 +18,7 @@
 using namespace KUnifiedPush;
 
 GotifyPushProvider::GotifyPushProvider(QObject *parent)
-    : AbstractPushProvider(parent)
+    : AbstractPushProvider(Id, parent)
 {
     qCDebug(Log);
 }

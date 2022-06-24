@@ -248,11 +248,11 @@ bool Distributor::setupPushProvider()
 {
     // determine push provider
     const auto pushProviderName = pushProviderId();
-    if (pushProviderName == QLatin1String("Gotify")) {
+    if (pushProviderName == QLatin1String(GotifyPushProvider::Id)) {
         m_pushProvider.reset(new GotifyPushProvider);
-    } else if (pushProviderName == QLatin1String("NextPush")) {
+    } else if (pushProviderName == QLatin1String(NextPushProvider::Id)) {
         m_pushProvider.reset(new NextPushProvider);
-    } else if (pushProviderName == QLatin1String("Mock")) {
+    } else if (pushProviderName == QLatin1String(MockPushProvider::Id)) {
         m_pushProvider.reset(new MockPushProvider);
     } else {
         qCWarning(Log) << "Unknown push provider:" << pushProviderName;

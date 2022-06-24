@@ -10,9 +10,17 @@
 
 using namespace KUnifiedPush;
 
-AbstractPushProvider::AbstractPushProvider(QObject *parent)
+AbstractPushProvider::AbstractPushProvider(const char *providerId, QObject *parent)
     : QObject(parent)
+    , m_providerId(providerId)
 {
+}
+
+AbstractPushProvider::~AbstractPushProvider() = default;
+
+const char* AbstractPushProvider::providerId() const
+{
+    return m_providerId;
 }
 
 QNetworkAccessManager* AbstractPushProvider::nam()

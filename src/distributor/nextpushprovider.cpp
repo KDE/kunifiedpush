@@ -17,7 +17,7 @@
 using namespace KUnifiedPush;
 
 NextPushProvider::NextPushProvider(QObject *parent)
-    : AbstractPushProvider(parent)
+    : AbstractPushProvider(Id, parent)
 {
     connect(&m_sseStream, &ServerSentEventsStream::messageReceived, this, [this](const SSEMessage &sse) {
         qCDebug(Log) << sse.event << sse.data;
