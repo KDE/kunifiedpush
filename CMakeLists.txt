@@ -38,7 +38,7 @@ find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DB
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Declarative Service)
 
 set(KUNIFIEDPUSH_INCLUDE_INSTALLDIR ${KDE_INSTALL_INCLUDEDIR}/KUnifiedPush)
-ecm_set_disabled_deprecation_versions(QT 5.15.2)
+ecm_set_disabled_deprecation_versions(QT 5.15.2 KF 5.94)
 
 add_subdirectory(src)
 if (BUILD_TESTING)
