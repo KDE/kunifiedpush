@@ -1,13 +1,27 @@
 {
     "KPlugin": {
         "Description": "Push Notifications",
+        "Description[ca@valencia]": "Notificacions «push»",
+        "Description[ca]": "Notificacions «push»",
+        "Description[fr]": "Présenter les notifications",
+        "Description[nl]": "Push-meldingen",
+        "Description[tr]": "Anında Bildirimler",
+        "Description[uk]": "Імпульсні сповіщення",
+        "Description[x-test]": "xxPush Notificationsxx",
         "FormFactors": [
             "tablet",
             "handset",
             "desktop"
         ],
         "Icon": "network-connect",
-        "Name": "Push Notifications"
+        "Name": "Push Notifications",
+        "Name[ca@valencia]": "Notificacions «push»",
+        "Name[ca]": "Notificacions «push»",
+        "Name[fr]": "Présenter les notifications",
+        "Name[nl]": "Push-meldingen",
+        "Name[tr]": "Anında Bildirimler",
+        "Name[uk]": "Імпульсні сповіщення",
+        "Name[x-test]": "xxPush Notificationsxx"
     },
     "X-KDE-System-Settings-Parent-Category": "network",
     "X-KDE-Weight": 40,
