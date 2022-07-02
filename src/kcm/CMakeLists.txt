@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: 2022 Volker Krause <vkrause@kde.org>
 # SPDX-License-Identifier: BSD-2-Clause
 
+add_definitions(-DTRANSLATION_DOMAIN=\"kcm_push_notifications\")
+
 set(kcm_srcs
     clientmodel.cpp
     clientmodel.h
