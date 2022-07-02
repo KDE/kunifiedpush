@@ -37,7 +37,13 @@ QVariant ClientModel::data(const QModelIndex &index, int role) const
         case NameRole:
             return service ? service->name() : c.serviceName;
         case DescriptionRole:
-            return c.description;
+            if (!c.description.isEmpty()) {
+                return c.description;
+            }
+            if (service) {
+                return service->comment().isEmpty() ? service->genericName() : service->comment();
+            }
+            return {};
         case IconNameRole:
             return service ? service->icon() : QStringLiteral("application-x-executable");
         case TokenRole:
