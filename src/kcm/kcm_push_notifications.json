@@ -15,6 +15,7 @@
         "Description[tr]": "Anında Bildirimler",
         "Description[uk]": "Імпульсні сповіщення",
         "Description[x-test]": "xxPush Notificationsxx",
+        "Description[zh_TW]": "推送通知",
         "FormFactors": [
             "tablet",
             "handset",
@@ -35,7 +36,8 @@
         "Name[sl]": "Porini obvestila",
         "Name[tr]": "Anında Bildirimler",
         "Name[uk]": "Імпульсні сповіщення",
-        "Name[x-test]": "xxPush Notificationsxx"
+        "Name[x-test]": "xxPush Notificationsxx",
+        "Name[zh_TW]": "推送通知"
     },
     "X-KDE-System-Settings-Parent-Category": "network",
     "X-KDE-Weight": 40,
