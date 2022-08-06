@@ -14,6 +14,9 @@
 
 #include <QDBusContext>
 #include <QObject>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QNetworkConfigurationManager>
+#endif
 
 #include <deque>
 #include <memory>
@@ -66,11 +69,16 @@ private:
 
     void setStatus(DistributorStatus::Status status);
 
+    bool isNetworkAvailable() const;
+
     std::unique_ptr<AbstractPushProvider> m_pushProvider;
     std::vector<Client> m_clients;
     Command m_currentCommand;
     std::deque<Command> m_commandQueue;
     DistributorStatus::Status m_status = DistributorStatus::Unknown;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    QNetworkConfigurationManager m_netCfgMgr;
+#endif
 };
 
 }

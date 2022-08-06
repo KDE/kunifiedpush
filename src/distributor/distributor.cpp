@@ -21,6 +21,10 @@
 #include <QDBusConnection>
 #include <QSettings>
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QNetworkInformation>
+#endif
+
 using namespace KUnifiedPush;
 
 Distributor::Distributor(QObject *parent)
@@ -28,6 +32,14 @@ Distributor::Distributor(QObject *parent)
 {
     qDBusRegisterMetaType<KUnifiedPush::ClientInfo>();
     qDBusRegisterMetaType<QList<KUnifiedPush::ClientInfo>>();
+
+    // setup network status tracking
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    connect(&m_netCfgMgr, &QNetworkConfigurationManager::onlineStateChanged, this, &Distributor::processNextCommand);
+#else
+    QNetworkInformation::instance()->load(QNetworkInformation::Feature::Reachability);
+    connect(QNetworkInformation::instance(), &QNetworkInformation::reachabilityChanged, this, &Distributor::processNextCommand);
+#endif
 
     // create and set up push provider
     if (!setupPushProvider()) {
@@ -166,7 +178,7 @@ void Distributor::clientRegistered(const Client &client, AbstractPushProvider::E
         break;
     }
     case AbstractPushProvider::TransientNetworkError:
-        // retry - TODO this still needs network and connection state tracking
+        // retry
         m_commandQueue.push_front(std::move(m_currentCommand));
         break;
     case AbstractPushProvider::ProviderRejected:
@@ -208,7 +220,7 @@ void Distributor::clientUnregistered(const Client &client, AbstractPushProvider:
         break;
     }
     case AbstractPushProvider::TransientNetworkError:
-        // retry - TODO this still needs network and connection state tracking
+        // retry
         m_commandQueue.push_front(std::move(m_currentCommand));
         break;
     }
@@ -306,7 +318,7 @@ bool Distributor::hasCurrentCommand() const
 
 void Distributor::processNextCommand()
 {
-    if (hasCurrentCommand() || m_commandQueue.empty()) {
+    if (hasCurrentCommand() || m_commandQueue.empty() || !isNetworkAvailable()) {
         return;
     }
 
@@ -483,4 +495,13 @@ void Distributor::forceUnregisterClient(const QString &token)
     cmd.client = (*it);
     m_commandQueue.push_back(std::move(cmd));
     processNextCommand();
+}
+
+bool Distributor::isNetworkAvailable() const
+{
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    return m_netCfgMgr.isOnline();
+#else
+    return QNetworkInformation::instance()->reachability() == QNetworkInformation::Reachability::Online;
+#endif
 }
