@@ -37,8 +37,11 @@ Distributor::Distributor(QObject *parent)
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     connect(&m_netCfgMgr, &QNetworkConfigurationManager::onlineStateChanged, this, &Distributor::processNextCommand);
 #else
-    QNetworkInformation::instance()->load(QNetworkInformation::Feature::Reachability);
-    connect(QNetworkInformation::instance(), &QNetworkInformation::reachabilityChanged, this, &Distributor::processNextCommand);
+    if (QNetworkInformation::load(QNetworkInformation::Feature::Reachability)) {
+        connect(QNetworkInformation::instance(), &QNetworkInformation::reachabilityChanged, this, &Distributor::processNextCommand);
+    } else {
+        qCWarning(Log) << "No network state information available!" << QNetworkInformation::availableBackends();
+    }
 #endif
 
     // create and set up push provider
@@ -502,6 +505,11 @@ bool Distributor::isNetworkAvailable() const
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     return m_netCfgMgr.isOnline();
 #else
-    return QNetworkInformation::instance()->reachability() == QNetworkInformation::Reachability::Online;
+    // if in doubt assume we have network and try to connect
+    if (QNetworkInformation::instance()) {
+        const auto reachability = QNetworkInformation::instance()->reachability();
+        return reachability == QNetworkInformation::Reachability::Online || reachability == QNetworkInformation::Reachability::Unknown;
+    }
+    return true;
 #endif
 }
