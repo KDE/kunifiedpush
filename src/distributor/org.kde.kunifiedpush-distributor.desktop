@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=UnifiedPush Distributor
+GenericName=Push Notification Service
+Exec=kunifiedpush-distributor
+Terminal=false
+Icon=network-connect
+Categories=Network
+Type=Application
+StartupNotify=false

@@ -49,3 +49,4 @@ target_sources(kunifiedpush-distributor PRIVATE
 target_link_libraries(kunifiedpush-distributor PRIVATE KUnifiedPushDistributor)
 
 install(TARGETS kunifiedpush-distributor ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(FILES org.kde.kunifiedpush-distributor.desktop DESTINATION ${KDE_INSTALL_AUTOSTARTDIR})
