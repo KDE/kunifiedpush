@@ -44,6 +44,13 @@ Distributor::Distributor(QObject *parent)
     }
 #endif
 
+    // register at D-Bus
+    new Distributor1Adaptor(this);
+    QDBusConnection::sessionBus().registerObject(QLatin1String(UP_DISTRIBUTOR_PATH), this);
+
+    new ManagementAdaptor(this);
+    QDBusConnection::sessionBus().registerObject(QLatin1String(KDE_DISTRIBUTOR_MANAGEMENT_PATH), this);
+
     // create and set up push provider
     if (!setupPushProvider()) {
         return;
@@ -75,13 +82,6 @@ Distributor::Distributor(QObject *parent)
     } else {
         setStatus(DistributorStatus::Idle);
     }
-
-    // register at D-Bus
-    new Distributor1Adaptor(this);
-    QDBusConnection::sessionBus().registerObject(QLatin1String(UP_DISTRIBUTOR_PATH), this);
-
-    new ManagementAdaptor(this);
-    QDBusConnection::sessionBus().registerObject(QLatin1String(KDE_DISTRIBUTOR_MANAGEMENT_PATH), this);
 
     processNextCommand();
 }
