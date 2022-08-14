@@ -67,7 +67,7 @@ void NtfyPushProvider::disconnectFromProvider()
 
 void NtfyPushProvider::registerClient(const Client &client)
 {
-    QString topic = QLatin1String("upk") + QUuid::createUuid().toString(QUuid::Id128);
+    const QString topic = QLatin1String("upk") + QUuid::createUuid().toString(QUuid::Id128);
     auto newClient = client;
     newClient.remoteId = topic;
 
