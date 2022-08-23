@@ -2,6 +2,7 @@
 Name=UnifiedPush Distributor
 Name[ca]=Distribuïdor UnifiedPush
 Name[ca@valencia]=Distribuïdor UnifiedPush
+Name[en_GB]=Unified Push Distributor
 Name[es]=Distribuidor de UnifiedPush
 Name[eu]=«UnifiedPush» banatzailea
 Name[fi]=UnifiedPush-jakelija
@@ -19,6 +20,7 @@ Name[zh_CN]=统一推送分发程序
 GenericName=Push Notification Service
 GenericName[ca]=Servei de notificacions «push»
 GenericName[ca@valencia]=Servei de notificacions «push»
+GenericName[en_GB]=Push Notification Service
 GenericName[es]=Servicio de notificaciones push
 GenericName[eu]=«Push» jakinarazpen zerbitzua
 GenericName[fi]=Push-ilmoituspalvelu
