@@ -2,5 +2,7 @@
 # SPDX-License-Identifier: BSD-2-Clause
 
 add_subdirectory(client)
-add_subdirectory(distributor)
-add_subdirectory(kcm)
+if (NOT ANDROID)
+    add_subdirectory(distributor)
+    add_subdirectory(kcm)
+endif()

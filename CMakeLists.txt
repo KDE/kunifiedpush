@@ -33,15 +33,19 @@ ecm_setup_version(PROJECT
 )
 
 set(QT_MIN_VERSION 5.15)
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Test WebSockets)
-# for the KCM
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Declarative Service)
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Test WebSockets)
+if (NOT ANDROID)
+    find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS DBus)
+
+    # for the KCM
+    find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Declarative Service)
+endif()
 
 set(KUNIFIEDPUSH_INCLUDE_INSTALLDIR ${KDE_INSTALL_INCLUDEDIR}/KUnifiedPush)
 ecm_set_disabled_deprecation_versions(QT 5.15.2 KF 5.94)
 
 add_subdirectory(src)
-if (BUILD_TESTING)
+if (BUILD_TESTING AND NOT ANDROID)
     add_subdirectory(autotests)
     add_subdirectory(tests)
 endif()

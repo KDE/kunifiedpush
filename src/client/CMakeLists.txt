@@ -3,8 +3,10 @@
 
 add_library(KUnifiedPush)
 
-qt_add_dbus_adaptor(dbus_srcs  ../interfaces/org.unifiedpush.Connector1.xml connector_p.h KUnifiedPush::ConnectorPrivate)
-qt_add_dbus_interface(dbus_srcs ../interfaces/org.unifiedpush.Distributor1.xml distributor1iface)
+if (NOT ANDROID)
+    qt_add_dbus_adaptor(dbus_srcs  ../interfaces/org.unifiedpush.Connector1.xml connector_p.h KUnifiedPush::ConnectorPrivate)
+    qt_add_dbus_interface(dbus_srcs ../interfaces/org.unifiedpush.Distributor1.xml distributor1iface)
+endif()
 target_sources(KUnifiedPush PRIVATE
     connector.cpp
     connector.h
@@ -28,12 +30,10 @@ ecm_qt_declare_logging_category(KUnifiedPush
 )
 
 target_include_directories(KUnifiedPush INTERFACE "$<INSTALL_INTERFACE:${KUNIFIEDPUSH_INCLUDE_INSTALLDIR}>")
-target_link_libraries(KUnifiedPush
-    PUBLIC
-        Qt${QT_MAJOR_VERSION}::Core
-    PRIVATE
-        Qt${QT_MAJOR_VERSION}::DBus
-)
+target_link_libraries(KUnifiedPush PUBLIC Qt${QT_MAJOR_VERSION}::Core)
+if (NOT ANDROID)
+    target_link_libraries(KUnifiedPush PRIVATE Qt${QT_MAJOR_VERSION}::DBus)
+endif()
 
 ecm_generate_headers(KUnifiedPush_FORWARDING_HEADERS
     HEADER_NAMES
