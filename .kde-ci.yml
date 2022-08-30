@@ -5,6 +5,8 @@ Dependencies:
 - 'on': ['@all']
   'require':
     'frameworks/extra-cmake-modules': '@stable'
+- 'on': ['Linux', 'FreeBSD']
+  'require':
     'frameworks/kcoreaddons': '@stable'
     'frameworks/kdeclarative': '@stable'
     'frameworks/kservice': '@stable'

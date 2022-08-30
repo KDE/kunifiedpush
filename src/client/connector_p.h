@@ -8,7 +8,9 @@
 
 #include "connector.h"
 
+#ifndef Q_OS_ANDROID
 #include <QDBusServiceWatcher>
+#endif
 #include <QObject>
 
 #include <deque>
@@ -23,6 +25,15 @@ public:
     explicit ConnectorPrivate(Connector *qq);
     ~ConnectorPrivate();
 
+    // platform-specific implementations
+    void init();
+    void deinit();
+    void doSetDistributor(const QString &distServiceName);
+    bool hasDistributor() const;
+    void doRegister();
+    void doUnregister();
+
+    // D-Bus interface
     void Message(const QString &token, const QByteArray &message, const QString &messageIdentifier);
     void NewEndpoint(const QString &token, const QString &endpoint);
     void Unregistered(const QString &token);
@@ -30,7 +41,6 @@ public:
     QString stateFile() const;
     void loadState();
     void storeState() const;
-    bool hasDistributor() const;
     void selectDistributor();
     void setDistributor(const QString &distServiceName);
 
@@ -45,13 +55,15 @@ public:
     QString m_token;
     QString m_endpoint;
     QString m_description;
-    OrgUnifiedpushDistributor1Interface *m_distributor = nullptr;
     Connector::State m_state = Connector::Unregistered;
 
     Command m_currentCommand = Command::None;
     std::deque<Command> m_commandQueue;
 
+#ifndef Q_OS_ANDROID
+    OrgUnifiedpushDistributor1Interface *m_distributor = nullptr;
     QDBusServiceWatcher m_serviceWatcher;
+#endif
 };
 }
 

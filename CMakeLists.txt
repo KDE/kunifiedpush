@@ -39,6 +39,11 @@ if (NOT ANDROID)
 
     # for the KCM
     find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Declarative Service)
+else()
+    find_package(Gradle REQUIRED)
+    if (QT_MAJOR_VERSION EQUAL "5")
+        find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED AndroidExtras)
+    endif()
 endif()
 
 set(KUNIFIEDPUSH_INCLUDE_INSTALLDIR ${KDE_INSTALL_INCLUDEDIR}/KUnifiedPush)

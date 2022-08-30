@@ -5,16 +5,15 @@
 
 #include "connector.h"
 #include "connector_p.h"
-#include "connector1adaptor.h"
-#include "distributor1iface.h"
 #include "logging.h"
 
 #include "../shared/unifiedpush-constants.h"
 #include "../shared/connectorutils_p.h"
 
-#include <QDBusConnection>
-#include <QDBusPendingCallWatcher>
+#include <QFile>
 #include <QSettings>
+#include <QStandardPaths>
+#include <QUuid>
 
 using namespace KUnifiedPush;
 
@@ -22,38 +21,12 @@ ConnectorPrivate::ConnectorPrivate(Connector *qq)
     : QObject(qq)
     , q(qq)
 {
-    new Connector1Adaptor(this);
-    const auto res = QDBusConnection::sessionBus().registerObject(QLatin1String(UP_CONNECTOR_PATH), this);
-    if (!res) {
-        qCWarning(Log) << "Failed to register D-Bus object!" << UP_CONNECTOR_PATH;
-        // TODO switch to error state?
-    }
-
-    connect(&m_serviceWatcher, &QDBusServiceWatcher::serviceRegistered, this, [this](const QString &serviceName) {
-        qCDebug(Log) << "Distributor" << serviceName << "became available";
-        if (!hasDistributor()) {
-            setDistributor(ConnectorUtils::selectDistributor());
-            processNextCommand();
-        }
-    });
-    connect(&m_serviceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, [this](const QString &serviceName) {
-        qCDebug(Log) << "Distributor" << serviceName << "is gone";
-        if (m_distributor->service() == serviceName) {
-            delete m_distributor;
-            m_distributor = nullptr;
-            m_currentCommand = Command::None;
-            setState(Connector::NoDistributor);
-        }
-    });
-
-    m_serviceWatcher.setConnection(QDBusConnection::sessionBus());
-    m_serviceWatcher.setWatchMode(QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration);
-    m_serviceWatcher.addWatchedService(QLatin1String(UP_DISTRIBUTOR_SERVICE_NAME_FILTER));
+    init();
 }
 
 ConnectorPrivate::~ConnectorPrivate()
 {
-    QDBusConnection::sessionBus().unregisterObject(QLatin1String(UP_CONNECTOR_PATH));
+    deinit();
 }
 
 void ConnectorPrivate::Message(const QString &token, const QByteArray &message, const QString &messageIdentifier)
@@ -137,11 +110,6 @@ void ConnectorPrivate::storeState() const
     settings.setValue(QStringLiteral("Description"), m_description);
 }
 
-bool ConnectorPrivate::hasDistributor() const
-{
-    return m_distributor && m_distributor->isValid();
-}
-
 void ConnectorPrivate::setDistributor(const QString &distServiceName)
 {
     if (distServiceName.isEmpty()) {
@@ -150,8 +118,8 @@ void ConnectorPrivate::setDistributor(const QString &distServiceName)
         return;
     }
 
-    m_distributor = new OrgUnifiedpushDistributor1Interface(distServiceName, QLatin1String(UP_DISTRIBUTOR_PATH), QDBusConnection::sessionBus(), this);
-    qCDebug(Log) << "Selected distributor" << distServiceName << m_distributor->isValid();
+    doSetDistributor(distServiceName);
+    qCDebug(Log) << "Selected distributor" << distServiceName;
     setState(Connector::Unregistered);
 
     if (!m_token.isEmpty()) { // re-register if we have been registered before
@@ -212,25 +180,7 @@ void ConnectorPrivate::processNextCommand()
                 m_token = QUuid::createUuid().toString();
             }
             qCDebug(Log) << "Registering";
-            const auto reply = m_distributor->Register(m_serviceName, m_token, m_description);
-            auto watcher = new QDBusPendingCallWatcher(reply, this);
-            connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher]() {
-                if (watcher->isError()) {
-                    qCWarning(Log) << watcher->error();
-                    setState(Connector::Error);
-                } else {
-                    const auto result = watcher->reply().arguments().at(0).toString();
-                    const auto errorMsg = watcher->reply().arguments().at(1).toString();
-                    qCDebug(Log) << result << errorMsg;
-                    if (result == QLatin1String(UP_REGISTER_RESULT_SUCCESS)) {
-                        setState(m_endpoint.isEmpty() ? Connector::Registering : Connector::Registered);
-                    } else {
-                        setState(Connector::Error);
-                    }
-                }
-                m_currentCommand = Command::None;
-                processNextCommand();
-            });
+            doRegister();
             break;
         }
         case Command::Unregister:
@@ -239,7 +189,7 @@ void ConnectorPrivate::processNextCommand()
                 break;
             }
             qCDebug(Log) << "Unregistering";
-            m_distributor->Unregister(m_token);
+            doUnregister();
             break;
     }
 
