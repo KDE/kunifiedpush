@@ -13,6 +13,7 @@ if (NOT ANDROID)
     qt_add_dbus_interface(dbus_srcs ../interfaces/org.unifiedpush.Distributor1.xml distributor1iface)
     target_sources(KUnifiedPush PRIVATE ${dbus_srcs} connector_dbus.cpp)
 else()
+    add_subdirectory(android)
     target_sources(KUnifiedPush PRIVATE connector_android.cpp)
 endif()
 

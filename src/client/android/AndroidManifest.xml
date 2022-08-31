@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    SPDX-FileCopyrightText: 2022 Volker Krause <vkrause@kde.org>
+    SPDX-License-Identifier: LGPL-2.0-or-later
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.kde.kunifiedpush">
+    <!--<receiver android:name=".MessageReceiver" android:exported="true">
+        <intent-filter>
+            <action android:name="org.unifiedpush.android.connector.NEW_ENDPOINT"/>
+            <action android:name="org.unifiedpush.android.connector.UNREGISTERED"/>
+            <action android:name="org.unifiedpush.android.connector.MESSAGE"/>
+            <action android:name="org.unifiedpush.android.connector.REGISTRATION_FAILED"/>
+        </intent-filter>
+    </receiver>-->
+</manifest>

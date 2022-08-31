@@ -6,14 +6,35 @@
 #include "connectorutils_p.h"
 #include "unifiedpush-constants.h"
 
+#ifndef Q_OS_ANDROID
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
+#else
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QtAndroid>
+#include <QAndroidJniObject>
+#else
+#include <QCoreApplication>
+#include <QJniObject>
+using QAndroidJniObject = QJniObject;
+#endif
+#endif
+#include <QStringList>
 
 using namespace KUnifiedPush;
 
 QString ConnectorUtils::selectDistributor()
 {
+#ifndef Q_OS_ANDROID
     return selectDistributor(QDBusConnection::sessionBus().interface()->registeredServiceNames());
+#else
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    QAndroidJniObject context = QtAndroid::androidContext();
+#else
+    QJniObject context = QNativeInterface::QAndroidApplication::context();
+#endif
+    return QAndroidJniObject::callStaticObjectMethod("org/kde/kunifiedpush/Distributor", "selectDistributor", "(Landroid/content/Context;)Ljava/lang/String;", context.object()).toString();
+#endif
 }
 
 QString ConnectorUtils::selectDistributor(QStringList &&services)

@@ -10,6 +10,12 @@
 
 #ifndef Q_OS_ANDROID
 #include <QDBusServiceWatcher>
+#else
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QAndroidJniObject>
+#else
+#include <QJniObject>
+#endif
 #endif
 #include <QObject>
 
@@ -63,6 +69,13 @@ public:
 #ifndef Q_OS_ANDROID
     OrgUnifiedpushDistributor1Interface *m_distributor = nullptr;
     QDBusServiceWatcher m_serviceWatcher;
+#else
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    QAndroidJniObject m_distributor;
+#else
+    QJniObject m_distributor;
+#endif
+    static std::vector<ConnectorPrivate*> s_instances;
 #endif
 };
 }

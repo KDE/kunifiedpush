@@ -1,0 +1,13 @@
+<!--
+    SPDX-FileCopyrightText: 2022 Volker Krause <vkrause@kde.org>
+    SPDX-License-Identifier: BSD-2-Clause
+-->
+<rules>
+    <dependencies>
+        <lib name="KUnifiedPush">
+            <depends>
+                <jar bundling="1" file="jar/KUnifiedPush.aar"/>
+            </depends>
+        </lib>
+    </dependencies>
+</rules>
