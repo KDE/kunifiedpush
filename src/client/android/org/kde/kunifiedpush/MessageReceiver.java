@@ -17,19 +17,24 @@ public class MessageReceiver extends BroadcastReceiver
     public void onReceive(Context context, Intent intent)
     {
         Log.d(TAG, "onReceive:" + intent.getAction());
-        switch (intent.getAction()) {
-        case UnifiedPush.ACTION_NEW_ENDPOINT:
-            newEndpoint(intent.getStringExtra(UnifiedPush.EXTRA_TOKEN), intent.getStringExtra(UnifiedPush.EXTRA_ENDPOINT));
-            break;
-        case UnifiedPush.ACTION_REGISTRATION_FAILED:
-            registrationFailed(intent.getStringExtra(UnifiedPush.EXTRA_TOKEN), intent.getStringExtra(UnifiedPush.EXTRA_MESSAGE));
-            break;
-        case UnifiedPush.ACTION_UNREGISTERED:
-            unregistered(intent.getStringExtra(UnifiedPush.EXTRA_TOKEN));
-            break;
-        case UnifiedPush.ACTION_MESSAGE:
-            message(intent.getStringExtra(UnifiedPush.EXTRA_TOKEN), intent.getByteArrayExtra(UnifiedPush.EXTRA_BYTES_MESSAGE),  intent.getStringExtra(UnifiedPush.EXTRA_MESSAGE_ID));
-            break;
+        try {
+            switch (intent.getAction()) {
+            case UnifiedPush.ACTION_NEW_ENDPOINT:
+                newEndpoint(intent.getStringExtra(UnifiedPush.EXTRA_TOKEN), intent.getStringExtra(UnifiedPush.EXTRA_ENDPOINT));
+                break;
+            case UnifiedPush.ACTION_REGISTRATION_FAILED:
+                registrationFailed(intent.getStringExtra(UnifiedPush.EXTRA_TOKEN), intent.getStringExtra(UnifiedPush.EXTRA_MESSAGE));
+                break;
+            case UnifiedPush.ACTION_UNREGISTERED:
+                unregistered(intent.getStringExtra(UnifiedPush.EXTRA_TOKEN));
+                break;
+            case UnifiedPush.ACTION_MESSAGE:
+                message(intent.getStringExtra(UnifiedPush.EXTRA_TOKEN), intent.getByteArrayExtra(UnifiedPush.EXTRA_BYTES_MESSAGE),  intent.getStringExtra(UnifiedPush.EXTRA_MESSAGE_ID));
+                break;
+            }
+        } catch (java.lang.UnsatisfiedLinkError e) {
+            // TODO when the app isn't running the C++ part isn't loaded at this point
+            Log.e(TAG, "native part not loaded " + e.toString());
         }
     }
 
