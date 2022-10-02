@@ -1,0 +1,95 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kunifiedpush package.
+#
+# Emir SARI <emir_sari@icloud.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: kunifiedpush\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-03 00:45+0000\n"
+"PO-Revision-Date: 2022-07-03 10:42+0300\n"
+"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
+"Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 22.04.2\n"
+
+#: package/contents/ui/main.qml:23
+#, kde-format
+msgid "There is no push notification service running!"
+msgstr "Çalışan bir anında bildirim hizmeti yok!"
+
+#: package/contents/ui/main.qml:31
+#, kde-format
+msgid ""
+"There is a 3rd party push notification service running. Push notifications "
+"are available, but cannot be configured here."
+msgstr ""
+"Üçüncü parti bir anında bildirim hizmeti çalışıyor. Anında bildirimler "
+"kullanılabilir; ancak burada yapılandırılamaz."
+
+#: package/contents/ui/main.qml:39
+#, kde-format
+msgid ""
+"<b>Online</b><br>Connected to the push notification server and operational."
+msgstr "<b>Çevrimiçi</b><br>Anında bildirim sunucusuna bağlı ve çalışıyor."
+
+#: package/contents/ui/main.qml:47
+#, kde-format
+msgid "<b>Idle</b><br>There are no applications using push notifications."
+msgstr "<b>Boşta</b><br>Anında bildirimleri kullanan uygulama yok."
+
+#: package/contents/ui/main.qml:55
+#, kde-format
+msgid ""
+"<b>Offline</b><br>Network connection to the server could not be established."
+msgstr "<b>Çevrimdışı</b><br>Sunucuya ağ bağlantısı kurulamadı."
+
+#: package/contents/ui/main.qml:63
+#, kde-format
+msgid "<b>Offline</b><br>Could not authenticate at the server."
+msgstr "<b>Çevrimdışı</b><br>Sunucuda kimlik doğrulanamadı."
+
+#: package/contents/ui/main.qml:71
+#, kde-format
+msgid "<b>Offline</b><br>Push notifications are not set up yet."
+msgstr "<b>Çevrimdışı</b><br>Anında bildirimler ayarlanmamış."
+
+#: package/contents/ui/main.qml:83
+#, kde-format
+msgid "Push provider:"
+msgstr "Bildirim sağlayıcı:"
+
+#: package/contents/ui/main.qml:103 package/contents/ui/main.qml:129
+#: package/contents/ui/main.qml:175
+#, kde-format
+msgid "Url:"
+msgstr "URL:"
+
+#: package/contents/ui/main.qml:108
+#, kde-format
+msgid "Client token:"
+msgstr "İstemci jetonu:"
+
+#: package/contents/ui/main.qml:134
+#, kde-format
+msgid "User name:"
+msgstr "Kullanıcı adı:"
+
+#: package/contents/ui/main.qml:140
+#, kde-format
+msgid "Authenticate"
+msgstr "Kimlik doğrula"
+
+#: package/contents/ui/main.qml:213
+#, kde-format
+msgid "Applications"
+msgstr "Uygulamalar"
+
+#: package/contents/ui/main.qml:236
+#, kde-format
+msgid "Unregister application from push notifications"
+msgstr "Uygulamayı, anında bildirimlerden kaldır"
