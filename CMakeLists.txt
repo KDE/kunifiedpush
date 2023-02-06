@@ -24,6 +24,13 @@ include(ECMSetupVersion)
 include(FeatureSummary)
 include(GenerateExportHeader)
 include(ECMDeprecationSettings)
+if (QT_MAJOR_VERSION STREQUAL "6")
+    set(QT_REQUIRED_VERSION "6.4.0")
+    set(KF_MIN_VERSION "5.240.0")
+    set(KF_MAJOR_VERSION "6")
+else()
+    set(KF_MAJOR_VERSION "5")
+endif()
 
 ecm_setup_version(PROJECT
     VARIABLE_PREFIX KUNIFIEDPUSH
@@ -38,7 +45,7 @@ if (NOT ANDROID)
     find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS DBus)
 
     # for the KCM
-    find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Declarative Service)
+    find_package(KF${KF_MAJOR_VERSION} ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Declarative Service Package)
 else()
     find_package(Gradle REQUIRED)
     if (QT_MAJOR_VERSION EQUAL "5")
@@ -47,7 +54,7 @@ else()
 endif()
 
 set(KUNIFIEDPUSH_INCLUDE_INSTALLDIR ${KDE_INSTALL_INCLUDEDIR}/KUnifiedPush)
-ecm_set_disabled_deprecation_versions(QT 5.15.2 KF 5.102.0)
+ecm_set_disabled_deprecation_versions(QT 6.4 KF 5.102.0)
 
 add_subdirectory(src)
 if (BUILD_TESTING AND NOT ANDROID)

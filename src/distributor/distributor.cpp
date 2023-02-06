@@ -37,7 +37,7 @@ Distributor::Distributor(QObject *parent)
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     connect(&m_netCfgMgr, &QNetworkConfigurationManager::onlineStateChanged, this, &Distributor::processNextCommand);
 #else
-    if (QNetworkInformation::load(QNetworkInformation::Feature::Reachability)) {
+    if (QNetworkInformation::loadBackendByFeatures(QNetworkInformation::Feature::Reachability)) {
         connect(QNetworkInformation::instance(), &QNetworkInformation::reachabilityChanged, this, &Distributor::processNextCommand);
     } else {
         qCWarning(Log) << "No network state information available!" << QNetworkInformation::availableBackends();
