@@ -72,7 +72,7 @@ Configuration:
 
 ```
 [Ntfy]
-Url:https://ntfy.sh
+Url=https://ntfy.sh
 ```
 
 Ntfy can be self-hosted, but also provides a hosted instance at `https://ntfy.sh` that
