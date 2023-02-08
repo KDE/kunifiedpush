@@ -40,7 +40,7 @@ QString ConnectorUtils::selectDistributor()
 QString ConnectorUtils::selectDistributor(QStringList &&services)
 {
     services.erase(std::remove_if(services.begin(), services.end(), [](const auto &s) { return !s.startsWith(QLatin1String(UP_DISTRIBUTOR_SERVICE_NAME_PREFIX)); }), services.end());
-    std::sort(services.begin(), services.end()); // make sure results are reproducable
+    std::sort(services.begin(), services.end()); // make sure results are reproducible
 
     if (services.isEmpty()) {
         return {};
