@@ -22,6 +22,7 @@ Name[zh_CN]=统一推送分发程序
 GenericName=Push Notification Service
 GenericName[ca]=Servei de notificacions «push»
 GenericName[ca@valencia]=Servei de notificacions «push»
+GenericName[cs]=Služba pro oznamování Push
 GenericName[en_GB]=Push Notification Service
 GenericName[es]=Servicio de notificaciones push
 GenericName[eu]=«Push» jakinarazpen zerbitzua
