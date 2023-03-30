@@ -18,9 +18,15 @@ qt_add_dbus_interface(kcm_srcs ../interfaces/org.kde.kunifiedpush.distributor.Ma
 
 kcoreaddons_add_plugin(kcm_push_notifications SOURCES ${kcm_srcs} INSTALL_NAMESPACE "plasma/kcms/systemsettings")
 target_link_libraries(kcm_push_notifications PRIVATE
-    KF${KF_MAJOR_VERSION}::QuickAddons
     KF${KF_MAJOR_VERSION}::Service
     Qt::DBus
+    Qt::Gui
 )
+
+if(QT_MAJOR_VERSION STREQUAL "5")
+    target_link_libraries(kcm_push_notifications PRIVATE KF5::QuickAddons)
+else()
+    target_link_libraries(kcm_push_notifications PRIVATE KF6::KCMUtilsQuick)
+endif()
 
 kpackage_install_package(package kcm_push_notifications kcms)

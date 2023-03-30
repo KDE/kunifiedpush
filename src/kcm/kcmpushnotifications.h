@@ -8,9 +8,14 @@
 
 #include "clientmodel.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <KQuickAddons/ConfigModule>
+#else
+#include <KQuickConfigModule>
+#endif
 
 #include <QDBusServiceWatcher>
+#include <QNetworkAccessManager>
 
 #include <memory>
 
@@ -18,7 +23,11 @@ class NextcloudAuthenticator;
 class OrgKdeKunifiedpushManagementInterface;
 
 /** KCM to configure push notifications. */
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 class KCMPushNotifications : public KQuickAddons::ConfigModule
+#else
+class KCMPushNotifications : public KQuickConfigModule
+#endif
 {
     Q_OBJECT
     Q_PROPERTY(bool hasDistributor READ hasDistributor NOTIFY distributorChanged)

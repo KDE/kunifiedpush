@@ -45,7 +45,7 @@ if (NOT ANDROID)
     find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS DBus)
 
     # for the KCM
-    find_package(KF${KF_MAJOR_VERSION} ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Declarative Service Package)
+    find_package(KF${KF_MAJOR_VERSION} ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Declarative Service Package KCMUtils)
 else()
     find_package(Gradle REQUIRED)
     if (QT_MAJOR_VERSION EQUAL "5")

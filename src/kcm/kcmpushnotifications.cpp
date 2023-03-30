@@ -22,7 +22,11 @@ K_PLUGIN_CLASS_WITH_JSON(KCMPushNotifications, "kcm_push_notifications.json")
 using namespace KUnifiedPush;
 
 KCMPushNotifications::KCMPushNotifications(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     : KQuickAddons::ConfigModule(parent, data, args)
+#else
+    : KQuickConfigModule(parent, data, args)
+#endif
 {
     qDBusRegisterMetaType<KUnifiedPush::ClientInfo>();
     qDBusRegisterMetaType<QList<KUnifiedPush::ClientInfo>>();
@@ -107,7 +111,11 @@ void KCMPushNotifications::nextcloudAuthenticate(const QUrl &url)
 void KCMPushNotifications::save()
 {
     Q_EMIT saveRequested();
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     KQuickAddons::ConfigModule::save();
+#else
+    KQuickConfigModule::save();
+#endif
 }
 
 #include "kcmpushnotifications.moc"
