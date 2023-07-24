@@ -40,7 +40,7 @@ msgstr "<b>온라인</b><br>푸시 알림 서버에 연결되었고 사용할 �
 #: package/contents/ui/main.qml:47
 #, kde-format
 msgid "<b>Idle</b><br>There are no applications using push notifications."
-msgstr "<b>대기 중</b><br>푸시 알림을 사용하는 프로그램이 없습니다."
+msgstr "<b>대기 중</b><br>푸시 알림을 사용하는 앱이 없습니다."
 
 #: package/contents/ui/main.qml:55
 #, kde-format
@@ -87,9 +87,9 @@ msgstr "인증"
 #: package/contents/ui/main.qml:213
 #, kde-format
 msgid "Applications"
-msgstr "프로그램"
+msgstr "앱"
 
 #: package/contents/ui/main.qml:236
 #, kde-format
 msgid "Unregister application from push notifications"
-msgstr "프로그램의 푸시 알림 등록 해제"
+msgstr "앱의 푸시 알림 등록 해제"
