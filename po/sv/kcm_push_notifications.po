@@ -1,0 +1,101 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kunifiedpush package.
+#
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: kunifiedpush\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-03 00:45+0000\n"
+"PO-Revision-Date: 2023-08-04 15:30+0200\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 20.08.1\n"
+
+#: package/contents/ui/main.qml:23
+#, kde-format
+msgid "There is no push notification service running!"
+msgstr "Det finns ingen utsändningsunderrättelsetjänst igång."
+
+#: package/contents/ui/main.qml:31
+#, kde-format
+msgid ""
+"There is a 3rd party push notification service running. Push notifications "
+"are available, but cannot be configured here."
+msgstr ""
+"Det finns en tredjeparts utsändningsunderrättelsetjänst igång. "
+"Utsändningsunderrättelser är tillgängliga, men går inte att ställa in här."
+
+#: package/contents/ui/main.qml:39
+#, kde-format
+msgid ""
+"<b>Online</b><br>Connected to the push notification server and operational."
+msgstr ""
+"<b>Uppkopplad</b><br>Ansluten till utsändningsunderrättelseservern och "
+"operativ."
+
+#: package/contents/ui/main.qml:47
+#, kde-format
+msgid "<b>Idle</b><br>There are no applications using push notifications."
+msgstr ""
+"<b>Overksam</b><br>Det finns inget program som använder "
+"utsändningsunderrättelser."
+
+#: package/contents/ui/main.qml:55
+#, kde-format
+msgid ""
+"<b>Offline</b><br>Network connection to the server could not be established."
+msgstr ""
+"<b>Nerkopplad</b><br>Nätverksanslutning till servern kunde inte upprättas."
+
+#: package/contents/ui/main.qml:63
+#, kde-format
+msgid "<b>Offline</b><br>Could not authenticate at the server."
+msgstr "<b>Nerkopplad</b><br>Kunde inte kontrollera behörighet på servern."
+
+#: package/contents/ui/main.qml:71
+#, kde-format
+msgid "<b>Offline</b><br>Push notifications are not set up yet."
+msgstr ""
+"<b>Nerkopplad</b><br>Utsändningsunderrättelser har inte ställts in ännu."
+
+#: package/contents/ui/main.qml:83
+#, kde-format
+msgid "Push provider:"
+msgstr "Utsändningsleverantör:"
+
+#: package/contents/ui/main.qml:103 package/contents/ui/main.qml:129
+#: package/contents/ui/main.qml:175
+#, kde-format
+msgid "Url:"
+msgstr "Webbadress:"
+
+#: package/contents/ui/main.qml:108
+#, kde-format
+msgid "Client token:"
+msgstr "Klientsymbol:"
+
+#: package/contents/ui/main.qml:134
+#, kde-format
+msgid "User name:"
+msgstr "Användarnamn:"
+
+#: package/contents/ui/main.qml:140
+#, kde-format
+msgid "Authenticate"
+msgstr "Kontrollera behörighet"
+
+#: package/contents/ui/main.qml:213
+#, kde-format
+msgid "Applications"
+msgstr "Program"
+
+#: package/contents/ui/main.qml:236
+#, kde-format
+msgid "Unregister application from push notifications"
+msgstr "Avregistrera program från utsändningsunderrättelser"
