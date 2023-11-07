@@ -24,6 +24,7 @@
         "Description[sv]": "Utsända underrättelser",
         "Description[tr]": "Anında Bildirimler",
         "Description[uk]": "Імпульсні сповіщення",
+        "Description[x-test]": "xxPush Notificationsxx",
         "Description[zh_CN]": "推送通知",
         "Description[zh_TW]": "推送通知",
         "FormFactors": [
@@ -56,6 +57,7 @@
         "Name[sv]": "Utsända underrättelser",
         "Name[tr]": "Anında Bildirimler",
         "Name[uk]": "Імпульсні сповіщення",
+        "Name[x-test]": "xxPush Notificationsxx",
         "Name[zh_CN]": "推送通知",
         "Name[zh_TW]": "推送通知"
     },
