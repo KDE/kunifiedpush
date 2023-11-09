@@ -2,22 +2,11 @@
 # SPDX-License-Identifier: CC0-1.0
 
 Dependencies:
-- 'on': ['Linux/Qt6', 'FreeBSD/Qt6', 'Android/Qt6']
+- 'on': ['Linux', 'FreeBSD', 'Android']
   'require':
     'frameworks/extra-cmake-modules': '@latest-kf6'
 
-- 'on': ['Linux/Qt5', 'FreeBSD/Qt5', 'Android/Qt5']
-  'require':
-    'frameworks/extra-cmake-modules': '@stable'
-
-- 'on': ['Linux/Qt5', 'FreeBSD/Qt5']
-  'require':
-    'frameworks/kcoreaddons': '@stable'
-    'frameworks/kdeclarative': '@stable'
-    'frameworks/kservice': '@stable'
-    'frameworks/kcmutils': '@stable'
-
-- 'on': ['Linux/Qt6', 'FreeBSD/Qt6']
+- 'on': ['Linux', 'FreeBSD']
   'require':
     'frameworks/kcoreaddons': '@latest-kf6'
     'frameworks/kdeclarative': '@latest-kf6'
