@@ -12,8 +12,9 @@ project(KUnifiedPush VERSION ${RELEASE_SERVICE_VERSION})
 
 option(KUNIFIEDPUSH_CLIENT_ONLY "Build only the application client library." FALSE)
 
-set(KF5_MIN_VERSION 5.94)
-find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
+set(KF_MIN_VERSION 5.240.0)
+set(QT_MIN_VERSION 6.5)
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
@@ -26,13 +27,6 @@ include(ECMSetupVersion)
 include(FeatureSummary)
 include(GenerateExportHeader)
 include(ECMDeprecationSettings)
-if (QT_MAJOR_VERSION STREQUAL "6")
-    set(QT_REQUIRED_VERSION "6.4.0")
-    set(KF_MIN_VERSION "5.240.0")
-    set(KF_MAJOR_VERSION "6")
-else()
-    set(KF_MAJOR_VERSION "5")
-endif()
 
 ecm_setup_version(PROJECT
     VARIABLE_PREFIX KUNIFIEDPUSH
@@ -41,20 +35,16 @@ ecm_setup_version(PROJECT
     SOVERSION 1
 )
 
-set(QT_MIN_VERSION 5.15)
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Test WebSockets)
+find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Test WebSockets)
 if (NOT ANDROID)
-    find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS DBus)
+    find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS DBus)
 
     # for the KCM
     if (NOT KUNIFIEDPUSH_CLIENT_ONLY)
-        find_package(KF${KF_MAJOR_VERSION} ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Declarative Service Package KCMUtils)
+        find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Declarative Service Package KCMUtils)
     endif()
 else()
     find_package(Gradle REQUIRED)
-    if (QT_MAJOR_VERSION EQUAL "5")
-        find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED AndroidExtras)
-    endif()
 endif()
 
 set(KUNIFIEDPUSH_INCLUDE_INSTALLDIR ${KDE_INSTALL_INCLUDEDIR}/KUnifiedPush)

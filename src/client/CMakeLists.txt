@@ -33,11 +33,9 @@ ecm_qt_declare_logging_category(KUnifiedPush
 )
 
 target_include_directories(KUnifiedPush INTERFACE "$<INSTALL_INTERFACE:${KUNIFIEDPUSH_INCLUDE_INSTALLDIR}>")
-target_link_libraries(KUnifiedPush PUBLIC Qt${QT_MAJOR_VERSION}::Core)
+target_link_libraries(KUnifiedPush PUBLIC Qt6::Core)
 if (NOT ANDROID)
-    target_link_libraries(KUnifiedPush PRIVATE Qt${QT_MAJOR_VERSION}::DBus)
-elseif(QT_MAJOR_VERSION EQUAL "5")
-    target_link_libraries(KUnifiedPush PRIVATE Qt5::AndroidExtras)
+    target_link_libraries(KUnifiedPush PRIVATE Qt6::DBus)
 endif()
 
 ecm_generate_headers(KUnifiedPush_FORWARDING_HEADERS
