@@ -16,12 +16,10 @@ set(kcm_srcs
 set_source_files_properties(../interfaces/org.kde.kunifiedpush.distributor.Management.xml PROPERTIES INCLUDE ../shared/clientinfo_p.h)
 qt_add_dbus_interface(kcm_srcs ../interfaces/org.kde.kunifiedpush.distributor.Management.xml managementinterface)
 
-kcoreaddons_add_plugin(kcm_push_notifications SOURCES ${kcm_srcs} INSTALL_NAMESPACE "plasma/kcms/systemsettings")
+kcmutils_add_qml_kcm(kcm_push_notifications SOURCES ${kcm_srcs})
 target_link_libraries(kcm_push_notifications PRIVATE
     KF6::Service
     KF6::KCMUtilsQuick
     Qt::DBus
     Qt::Gui
 )
-
-kpackage_install_package(package kcm_push_notifications kcms)
