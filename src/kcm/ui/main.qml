@@ -261,9 +261,22 @@ KCM.ScrollViewKCM {
                 }
                 QQC2.ToolButton {
                     icon.name: "edit-delete"
-                    onClicked: kcm.forceUnregister(model.token)
+
+                    onClicked: removePrompt.open()
 
                     QQC2.ToolTip.text: i18n("Unregister application from push notifications")
+
+                    Kirigami.PromptDialog {
+                        id: removePrompt
+
+                        parent: QQC2.Overlay.overlay
+
+                        title: i18nc("@title:window", "Unregister Application")
+                        subtitle: i18nc("%1 is an application name", "Are you sure you want to unregister '%1'?", model.name)
+                        standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
+
+                        onAccepted: kcm.forceUnregister(model.token)
+                    }
                 }
             }
         }
