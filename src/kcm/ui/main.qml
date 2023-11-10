@@ -7,10 +7,11 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.delegates as KirigamiDelegates
 import org.kde.kcmutils as KCM
 import org.kde.kunifiedpush.kcm
 
-KCM.SimpleKCM {
+KCM.ScrollViewKCM {
     id: root
     readonly property var pushProviderConfig: kcm.pushProviderConfiguration(pushProviderBox.currentText)
 
@@ -25,6 +26,8 @@ KCM.SimpleKCM {
         }
 
         contentItem: ColumnLayout {
+            id: headerColumn
+
             // type of distributor, and if it is our own one, distributor status information
             Kirigami.InlineMessage {
                 Layout.fillWidth: true
@@ -227,38 +230,42 @@ KCM.SimpleKCM {
     }
 
     // registered clients
-    ListView {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
+    view: ListView {
         model: kcm.clientModel
-        header: Kirigami.Heading { text: i18n("Applications") }
+        header: Kirigami.InlineViewHeader {
+            width: ListView.view.width
+            text: i18n("Applications")
+        }
         visible: count > 0
-        delegate: Kirigami.SwipeListItem {
-            GridLayout {
-                rows: 2
-                columns: 2
-                Kirigami.Icon  {
-                    Layout.rowSpan: 2
-                    source: model.iconName
+
+        delegate: QQC2.ItemDelegate {
+            width: ListView.view.width
+
+            text: model.display
+
+            down: false
+            highlighted: false
+            hoverEnabled: false
+
+            Kirigami.Theme.useAlternateBackgroundColor: true
+
+            contentItem: RowLayout {
+                spacing: 0
+                KirigamiDelegates.IconTitleSubtitle {
+                    title: model.name
+                    subtitle: model.description
+                    icon.source: model.iconName
                 }
-                QQC2.Label {
+                Item {
                     Layout.fillWidth: true
-                    text: model.name
                 }
-                QQC2.Label {
-                    Layout.fillWidth: true
-                    text: model.description
+                QQC2.ToolButton {
+                    icon.name: "edit-delete"
+                    onClicked: kcm.forceUnregister(model.token)
+
+                    QQC2.ToolTip.text: i18n("Unregister application from push notifications")
                 }
             }
-            text: model.display
-            actions: [
-                Kirigami.Action {
-                    icon.name: "edit-delete"
-                    text: i18n("Unregister application from push notifications")
-                    // TODO safety question
-                    onTriggered: kcm.forceUnregister(model.token)
-                }
-            ]
         }
     }
 }
