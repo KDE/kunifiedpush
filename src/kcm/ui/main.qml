@@ -14,194 +14,215 @@ KCM.SimpleKCM {
     id: root
     readonly property var pushProviderConfig: kcm.pushProviderConfiguration(pushProviderBox.currentText)
 
-    header: ColumnLayout {
-        // type of distributor, and if it is our own one, distributor status information
-        Kirigami.InlineMessage {
-            Layout.fillWidth: true
-            showCloseButton: false
-            type: Kirigami.MessageType.Error
-            text: i18n("There is no push notification service running!")
-            icon.name: "dialog-error"
-            visible: !kcm.hasDistributor
-        }
-        Kirigami.InlineMessage {
-            Layout.fillWidth: true
-            showCloseButton: false
-            type: Kirigami.MessageType.Information
-            text: i18n("There is a 3rd party push notification service running. Push notifications are available, but cannot be configured here.")
-            icon.name: "dialog-information"
-            visible: !kcm.hasKDEDistributor && kcm.hasDistributor
-        }
-        Kirigami.InlineMessage {
-            Layout.fillWidth: true
-            showCloseButton: false
-            type: Kirigami.MessageType.Positive
-            text: i18n("<b>Online</b><br>Connected to the push notification server and operational.")
-            icon.name: "media-playback-playing"
-            visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.Connected
-        }
-        Kirigami.InlineMessage {
-            Layout.fillWidth: true
-            showCloseButton: false
-            type: Kirigami.MessageType.Information
-            text: i18n("<b>Idle</b><br>There are no applications using push notifications.")
-            icon.name: "media-playback-paused"
-            visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.Idle
-        }
-        Kirigami.InlineMessage {
-            Layout.fillWidth: true
-            showCloseButton: false
-            type: Kirigami.MessageType.Warning
-            text: i18n("<b>Offline</b><br>Network connection to the server could not be established.")
-            icon.name: "network-disconnect"
-            visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.NoNetwork
-        }
-        Kirigami.InlineMessage {
-            Layout.fillWidth: true
-            showCloseButton: false
-            type: Kirigami.MessageType.Error
-            text: i18n("<b>Offline</b><br>Could not authenticate at the server.")
-            icon.name: "dialog-error"
-            visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.AuthenticationError
-        }
-        Kirigami.InlineMessage {
-            Layout.fillWidth: true
-            showCloseButton: false
-            type: Kirigami.MessageType.Warning
-            text: i18n("<b>Offline</b><br>Push notifications are not set up yet.")
-            icon.name: "configure"
-            visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.NoSetup
+    header: QQC2.Control {
+        padding: Kirigami.Units.largeSpacing
+
+        background: Rectangle {
+            Kirigami.Theme.colorSet: Kirigami.Theme.Window
+            Kirigami.Theme.inherit: false
+
+            color: Kirigami.Theme.backgroundColor
         }
 
-        // push provider configuration
-        Kirigami.FormLayout {
-            id: topForm
-            visible: kcm.hasKDEDistributor
-            Layout.fillWidth: true
-            QQC2.ComboBox {
-                id: pushProviderBox
-                Kirigami.FormData.label: i18n("Push provider:")
-                model: [ "Gotify", "NextPush", "Ntfy" ]
-                currentIndex: find(kcm.pushProviderId)
-                Component.onCompleted: currentIndex = find(kcm.pushProviderId)
+        contentItem: ColumnLayout {
+            // type of distributor, and if it is our own one, distributor status information
+            Kirigami.InlineMessage {
+                Layout.fillWidth: true
+                showCloseButton: false
+                type: Kirigami.MessageType.Error
+                text: i18n("There is no push notification service running!")
+                icon.name: "dialog-error"
+                visible: !kcm.hasDistributor
             }
-        }
+            Kirigami.InlineMessage {
+                Layout.fillWidth: true
+                showCloseButton: false
+                type: Kirigami.MessageType.Information
+                text: i18n("There is a 3rd party push notification service running. Push notifications are available, but cannot be configured here.")
+                icon.name: "dialog-information"
+                visible: !kcm.hasKDEDistributor && kcm.hasDistributor
+            }
+            Kirigami.InlineMessage {
+                Layout.fillWidth: true
+                showCloseButton: false
+                type: Kirigami.MessageType.Positive
+                text: i18n("<b>Online</b><br>Connected to the push notification server and operational.")
+                icon.name: "media-playback-playing"
+                visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.Connected
+            }
+            Kirigami.InlineMessage {
+                Layout.fillWidth: true
+                showCloseButton: false
+                type: Kirigami.MessageType.Information
+                text: i18n("<b>Idle</b><br>There are no applications using push notifications.")
+                icon.name: "media-playback-paused"
+                visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.Idle
+            }
+            Kirigami.InlineMessage {
+                Layout.fillWidth: true
+                showCloseButton: false
+                type: Kirigami.MessageType.Warning
+                text: i18n("<b>Offline</b><br>Network connection to the server could not be established.")
+                icon.name: "network-disconnect"
+                visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.NoNetwork
+            }
+            Kirigami.InlineMessage {
+                Layout.fillWidth: true
+                showCloseButton: false
+                type: Kirigami.MessageType.Error
+                text: i18n("<b>Offline</b><br>Could not authenticate at the server.")
+                icon.name: "dialog-error"
+                visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.AuthenticationError
+            }
+            Kirigami.InlineMessage {
+                Layout.fillWidth: true
+                showCloseButton: false
+                type: Kirigami.MessageType.Warning
+                text: i18n("<b>Offline</b><br>Push notifications are not set up yet.")
+                icon.name: "configure"
+                visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.NoSetup
+            }
 
-        Component {
-            id: gotifyForm
+            // push provider configuration
             Kirigami.FormLayout {
-                readonly property bool dirty: urlField.text != root.pushProviderConfig['Url'] || tokenField.text != root.pushProviderConfig['ClientToken']
-                function config() {
-                    let c = root.pushProviderConfig;
-                    c['Url'] = urlField.text;
-                    c['ClientToken'] = tokenField.text;
-                    return c;
-                }
-                twinFormLayouts: [topForm]
-                QQC2.TextField {
-                    id: urlField
-                    Kirigami.FormData.label: i18n("Url:")
-                    text: root.pushProviderConfig['Url']
-                }
-                QQC2.TextField {
-                    id: tokenField
-                    Kirigami.FormData.label: i18n("Client token:")
-                    text: root.pushProviderConfig['ClientToken']
+                id: topForm
+                visible: kcm.hasKDEDistributor
+                Layout.fillWidth: true
+                QQC2.ComboBox {
+                    id: pushProviderBox
+                    Kirigami.FormData.label: i18n("Push provider:")
+                    model: ["Gotify", "NextPush", "Ntfy"]
+                    currentIndex: find(kcm.pushProviderId)
+                    Component.onCompleted: currentIndex = find(kcm.pushProviderId)
                 }
             }
-        }
-        Component {
-            id: nextpushForm
-            Kirigami.FormLayout {
-                id: nextpushConfig
-                readonly property bool dirty: urlField.text != root.pushProviderConfig['Url'] || userField.text != root.pushProviderConfig['Username'] || appPassword != root.pushProviderConfig['AppPassword']
-                property string appPassword: root.pushProviderConfig['AppPassword'];
-                function config() {
-                    let c = root.pushProviderConfig;
-                    c['Url'] = urlField.text;
-                    c['Username'] = userField.text;
-                    c['AppPassword'] = appPassword;
-                    return c;
+
+            Component {
+                id: gotifyForm
+                Kirigami.FormLayout {
+                    readonly property bool dirty: urlField.text != root.pushProviderConfig['Url'] || tokenField.text != root.pushProviderConfig['ClientToken']
+
+                    function config() {
+                        let c = root.pushProviderConfig;
+                        c['Url'] = urlField.text;
+                        c['ClientToken'] = tokenField.text;
+                        return c;
+                    }
+
+                    twinFormLayouts: [topForm]
+                    QQC2.TextField {
+                        id: urlField
+                        Kirigami.FormData.label: i18n("Url:")
+                        text: root.pushProviderConfig['Url']
+                    }
+                    QQC2.TextField {
+                        id: tokenField
+                        Kirigami.FormData.label: i18n("Client token:")
+                        text: root.pushProviderConfig['ClientToken']
+                    }
                 }
-                twinFormLayouts: [topForm]
-                QQC2.TextField {
-                    id: urlField
-                    Kirigami.FormData.label: i18n("Url:")
-                    text: root.pushProviderConfig['Url']
-                }
-                QQC2.Label {
-                    id: userField
-                    Kirigami.FormData.label: i18n("User name:")
-                    text: root.pushProviderConfig['Username']
-                }
-                RowLayout {
-                    QQC2.Button {
-                        enabled: urlField.text != ""
-                        text: i18n("Authenticate")
-                        onClicked: {
-                            authBusy.running = true;
-                            kcm.nextcloudAuthenticate(urlField.text);
+            }
+            Component {
+                id: nextpushForm
+                Kirigami.FormLayout {
+                    id: nextpushConfig
+                    readonly property bool dirty: urlField.text != root.pushProviderConfig['Url'] || userField.text != root.pushProviderConfig['Username'] || appPassword != root.pushProviderConfig['AppPassword']
+                    property string appPassword: root.pushProviderConfig['AppPassword'];
+                    function config() {
+                        let c = root.pushProviderConfig;
+                        c['Url'] = urlField.text;
+                        c['Username'] = userField.text;
+                        c['AppPassword'] = appPassword;
+                        return c;
+                    }
+
+                    twinFormLayouts: [topForm]
+                    QQC2.TextField {
+                        id: urlField
+                        Kirigami.FormData.label: i18n("Url:")
+                        text: root.pushProviderConfig['Url']
+                    }
+                    QQC2.Label {
+                        id: userField
+                        Kirigami.FormData.label: i18n("User name:")
+                        text: root.pushProviderConfig['Username']
+                    }
+                    RowLayout {
+                        QQC2.Button {
+                            enabled: urlField.text != ""
+                            text: i18n("Authenticate")
+                            onClicked: {
+                                authBusy.running = true;
+                                kcm.nextcloudAuthenticate(urlField.text);
+                            }
+
                         }
-
+                        QQC2.BusyIndicator {
+                            id: authBusy
+                            running: false
+                        }
                     }
-                    QQC2.BusyIndicator {
-                        id: authBusy
-                        running: false
-                    }
-                }
-                Connections {
-                    target: kcm
-                    function onNextcloudAuthenticated(loginName, appPassword) {
-                        userField.text = loginName;
-                        nextpushConfig.appPassword = appPassword
-                        authBusy.running = false;
+                    Connections {
+                        target: kcm
+
+                        function onNextcloudAuthenticated(loginName, appPassword) {
+                            userField.text = loginName;
+                            nextpushConfig.appPassword = appPassword
+                            authBusy.running = false;
+                        }
                     }
                 }
             }
-        }
-        Component {
-            id: ntfyForm
-            Kirigami.FormLayout {
-                id: ntfyConfig
-                readonly property bool dirty: urlField.text != root.pushProviderConfig['Url']
-                function config() {
-                    let c = root.pushProviderConfig;
-                    c['Url'] = urlField.text;
-                    return c;
-                }
-                twinFormLayouts: [topForm]
-                QQC2.TextField {
-                    id: urlField
-                    Kirigami.FormData.label: i18n("Url:")
-                    text: root.pushProviderConfig['Url']
-                }
-            }
-        }
+            Component {
+                id: ntfyForm
+                Kirigami.FormLayout {
+                    id: ntfyConfig
+                    readonly property bool dirty: urlField.text != root.pushProviderConfig['Url']
 
-        Loader {
-            id: providerFormLoader
-            Layout.fillWidth: true
-            visible: kcm.hasKDEDistributor
-            sourceComponent: {
-                switch (pushProviderBox.currentIndex) {
-                    case 0: return gotifyForm;
-                    case 1: return nextpushForm;
-                    case 2: return ntfyForm;
-                }
-                return undefined;
-            }
-        }
+                    function config() {
+                        let c = root.pushProviderConfig;
+                        c['Url'] = urlField.text;
+                        return c;
+                    }
 
-        Connections {
-            target: kcm
-            function onSaveRequested() {
-                kcm.setPushProviderConfiguration(pushProviderBox.currentText, providerFormLoader.item.config());
+                    twinFormLayouts: [topForm]
+                    QQC2.TextField {
+                        id: urlField
+                        Kirigami.FormData.label: i18n("Url:")
+                        text: root.pushProviderConfig['Url']
+                    }
+                }
             }
-        }
-        Binding {
-            target: kcm
-            property: "needsSave"
-            value: providerFormLoader.item.dirty || pushProviderBox.currentText != kcm.pushProviderId
+
+            Loader {
+                id: providerFormLoader
+                Layout.fillWidth: true
+                visible: kcm.hasKDEDistributor
+                sourceComponent: {
+                    switch (pushProviderBox.currentIndex) {
+                        case 0:
+                            return gotifyForm;
+                        case 1:
+                            return nextpushForm;
+                        case 2:
+                            return ntfyForm;
+                    }
+                    return undefined;
+                }
+            }
+
+            Connections {
+                target: kcm
+
+                function onSaveRequested() {
+                    kcm.setPushProviderConfiguration(pushProviderBox.currentText, providerFormLoader.item.config());
+                }
+            }
+            Binding {
+                target: kcm
+                property: "needsSave"
+                value: providerFormLoader.item.dirty || pushProviderBox.currentText != kcm.pushProviderId
+            }
         }
     }
 
