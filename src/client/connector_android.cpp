@@ -6,12 +6,8 @@
 #include "connector_p.h"
 #include "logging.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#include <QtAndroid>
-#else
 #include <QCoreApplication>
 using QAndroidJniObject = QJniObject;
-#endif
 
 using namespace KUnifiedPush;
 
@@ -105,11 +101,7 @@ void ConnectorPrivate::deinit()
 
 void ConnectorPrivate::doSetDistributor(const QString &distServiceName)
 {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QAndroidJniObject context = QtAndroid::androidContext();
-#else
     QJniObject context = QNativeInterface::QAndroidApplication::context();
-#endif
     m_distributor = QAndroidJniObject("org.kde.kunifiedpush.Distributor", "(Ljava/lang/String;Landroid/content/Context;)V", QAndroidJniObject::fromString(distServiceName).object(), context.object());
 }
 

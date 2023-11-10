@@ -21,9 +21,7 @@
 #include <QDBusConnection>
 #include <QSettings>
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QNetworkInformation>
-#endif
 
 using namespace KUnifiedPush;
 
@@ -34,15 +32,11 @@ Distributor::Distributor(QObject *parent)
     qDBusRegisterMetaType<QList<KUnifiedPush::ClientInfo>>();
 
     // setup network status tracking
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    connect(&m_netCfgMgr, &QNetworkConfigurationManager::onlineStateChanged, this, &Distributor::processNextCommand);
-#else
     if (QNetworkInformation::loadBackendByFeatures(QNetworkInformation::Feature::Reachability)) {
         connect(QNetworkInformation::instance(), &QNetworkInformation::reachabilityChanged, this, &Distributor::processNextCommand);
     } else {
         qCWarning(Log) << "No network state information available!" << QNetworkInformation::availableBackends();
     }
-#endif
 
     // register at D-Bus
     new Distributor1Adaptor(this);
@@ -502,14 +496,10 @@ void Distributor::forceUnregisterClient(const QString &token)
 
 bool Distributor::isNetworkAvailable() const
 {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    return m_netCfgMgr.isOnline();
-#else
     // if in doubt assume we have network and try to connect
     if (QNetworkInformation::instance()) {
         const auto reachability = QNetworkInformation::instance()->reachability();
         return reachability == QNetworkInformation::Reachability::Online || reachability == QNetworkInformation::Reachability::Unknown;
     }
     return true;
-#endif
 }

@@ -14,9 +14,6 @@
 
 #include <QDBusContext>
 #include <QObject>
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#include <QNetworkConfigurationManager>
-#endif
 
 #include <deque>
 #include <memory>
@@ -76,9 +73,6 @@ private:
     Command m_currentCommand;
     std::deque<Command> m_commandQueue;
     DistributorStatus::Status m_status = DistributorStatus::Unknown;
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QNetworkConfigurationManager m_netCfgMgr;
-#endif
 };
 
 }
