@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-10 01:47+0000\n"
+"POT-Creation-Date: 2023-11-11 01:43+0000\n"
 "PO-Revision-Date: 2022-07-13 12:30+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: ui/main.qml:23
+#: ui/main.qml:36
 #, kde-format
 msgid "There is no push notification service running!"
 msgstr "실행 중인 푸시 알림 서비스가 없습니다!"
 
-#: ui/main.qml:31
+#: ui/main.qml:44
 #, kde-format
 msgid ""
 "There is a 3rd party push notification service running. Push notifications "
@@ -31,64 +31,77 @@ msgstr ""
 "제3자 푸시 알림 서비스가 실행 중입니다. 푸시 알림을 사용할 수는 있지만 여기에"
 "서 설정할 수 없습니다."
 
-#: ui/main.qml:39
+#: ui/main.qml:52
 #, kde-format
 msgid ""
 "<b>Online</b><br>Connected to the push notification server and operational."
 msgstr "<b>온라인</b><br>푸시 알림 서버에 연결되었고 사용할 수 있습니다."
 
-#: ui/main.qml:47
+#: ui/main.qml:60
 #, kde-format
 msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr "<b>대기 중</b><br>푸시 알림을 사용하는 앱이 없습니다."
 
-#: ui/main.qml:55
+#: ui/main.qml:68
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
 msgstr "<b>오프라인</b><br>서버에 연결할 수 없습니다."
 
-#: ui/main.qml:63
+#: ui/main.qml:76
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
 msgstr "<b>오프라인</b><br>서버에 인증할 수 없습니다."
 
-#: ui/main.qml:71
+#: ui/main.qml:84
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
 msgstr "<b>오프라인</b><br>푸시 알림이 설정되지 않았습니다."
 
-#: ui/main.qml:83
+#: ui/main.qml:96
 #, kde-format
 msgid "Push provider:"
 msgstr "푸시 제공자:"
 
-#: ui/main.qml:103 ui/main.qml:129 ui/main.qml:175
+#: ui/main.qml:118 ui/main.qml:145 ui/main.qml:194
 #, kde-format
 msgid "Url:"
 msgstr "URL:"
 
-#: ui/main.qml:108
+#: ui/main.qml:123
 #, kde-format
 msgid "Client token:"
 msgstr "클라이언트 토큰:"
 
-#: ui/main.qml:134
+#: ui/main.qml:150
 #, kde-format
 msgid "User name:"
 msgstr "사용자 이름:"
 
-#: ui/main.qml:140
+#: ui/main.qml:156
 #, kde-format
 msgid "Authenticate"
 msgstr "인증"
 
-#: ui/main.qml:213
+#: ui/main.qml:237
 #, kde-format
 msgid "Applications"
 msgstr "앱"
 
-#: ui/main.qml:236
+#: ui/main.qml:267
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "앱의 푸시 알림 등록 해제"
+
+#: ui/main.qml:274
+#, fuzzy, kde-format
+#| msgid "Applications"
+msgctxt "@title:window"
+msgid "Unregister Application"
+msgstr "앱"
+
+#: ui/main.qml:275
+#, kde-format
+msgctxt "%1 is an application name"
+msgid "Are you sure you want to unregister '%1'?"
+msgstr ""

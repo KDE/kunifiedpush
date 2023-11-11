@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_push_notifications\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-10 01:47+0000\n"
+"POT-Creation-Date: 2023-11-11 01:43+0000\n"
 "PO-Revision-Date: 2022-07-05 16:43+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 22.04.2\n"
 
-#: ui/main.qml:23
+#: ui/main.qml:36
 #, kde-format
 msgid "There is no push notification service running!"
 msgstr "No hay ningún servicio de notificaciones push en ejecución"
 
-#: ui/main.qml:31
+#: ui/main.qml:44
 #, kde-format
 msgid ""
 "There is a 3rd party push notification service running. Push notifications "
@@ -33,7 +33,7 @@ msgstr ""
 "Existe un servicio de notificaciones push de una tercera parte en ejecución. "
 "Las notificaciones push están disponibles, pero no se pueden configurar aquí."
 
-#: ui/main.qml:39
+#: ui/main.qml:52
 #, kde-format
 msgid ""
 "<b>Online</b><br>Connected to the push notification server and operational."
@@ -41,13 +41,13 @@ msgstr ""
 "<b>Con conexión</b><br>Conectado al servidor de notificaciones push y "
 "operativo."
 
-#: ui/main.qml:47
+#: ui/main.qml:60
 #, kde-format
 msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr ""
 "<b>Inactivo</b><br>No hay ninguna aplicación usando notificaciones push."
 
-#: ui/main.qml:55
+#: ui/main.qml:68
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
@@ -55,48 +55,61 @@ msgstr ""
 "<b>Sin conexión</b><br>No se puede establecer la conexión de red con el "
 "servidor."
 
-#: ui/main.qml:63
+#: ui/main.qml:76
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
 msgstr "<b>Sin conexión</b><br>No se puede autenticar en el servidor."
 
-#: ui/main.qml:71
+#: ui/main.qml:84
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
 msgstr ""
 "<b>Sin conexión</b><br>Todavía no se han configurado las notificaciones push."
 
-#: ui/main.qml:83
+#: ui/main.qml:96
 #, kde-format
 msgid "Push provider:"
 msgstr "Proveedor push:"
 
-#: ui/main.qml:103 ui/main.qml:129 ui/main.qml:175
+#: ui/main.qml:118 ui/main.qml:145 ui/main.qml:194
 #, kde-format
 msgid "Url:"
 msgstr "URL:"
 
-#: ui/main.qml:108
+#: ui/main.qml:123
 #, kde-format
 msgid "Client token:"
 msgstr "Token del cliente:"
 
-#: ui/main.qml:134
+#: ui/main.qml:150
 #, kde-format
 msgid "User name:"
 msgstr "Nombre de usuario:"
 
-#: ui/main.qml:140
+#: ui/main.qml:156
 #, kde-format
 msgid "Authenticate"
 msgstr "Autenticarse"
 
-#: ui/main.qml:213
+#: ui/main.qml:237
 #, kde-format
 msgid "Applications"
 msgstr "Aplicaciones"
 
-#: ui/main.qml:236
+#: ui/main.qml:267
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "Dar de baja la aplicación de las notificaciones push"
+
+#: ui/main.qml:274
+#, fuzzy, kde-format
+#| msgid "Applications"
+msgctxt "@title:window"
+msgid "Unregister Application"
+msgstr "Aplicaciones"
+
+#: ui/main.qml:275
+#, kde-format
+msgctxt "%1 is an application name"
+msgid "Are you sure you want to unregister '%1'?"
+msgstr ""

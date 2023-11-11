@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-10 01:47+0000\n"
+"POT-Creation-Date: 2023-11-11 01:43+0000\n"
 "PO-Revision-Date: 2022-07-04 07:10+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "%100==4 ? 3 : 0);\n"
 "X-Generator: Lokalize 22.04.1\n"
 
-#: ui/main.qml:23
+#: ui/main.qml:36
 #, kde-format
 msgid "There is no push notification service running!"
 msgstr "Storitev za porivanje obvestil ne teče!"
 
-#: ui/main.qml:31
+#: ui/main.qml:44
 #, kde-format
 msgid ""
 "There is a 3rd party push notification service running. Push notifications "
@@ -32,65 +32,78 @@ msgstr ""
 "Teče storitev porivanja obvestil tretje stranke. Možno je sicer porivati "
 "obvestila, a jih tu ne moremo konfigurirati."
 
-#: ui/main.qml:39
+#: ui/main.qml:52
 #, kde-format
 msgid ""
 "<b>Online</b><br>Connected to the push notification server and operational."
 msgstr "<b>Online</b><br>Povezan na strežnik porivanja obvestil in operativen."
 
-#: ui/main.qml:47
+#: ui/main.qml:60
 #, kde-format
 msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr "<b>Nedelujoč</b><br>Ni aplikacije za porivanje obvestil."
 
-#: ui/main.qml:55
+#: ui/main.qml:68
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
 msgstr ""
 "<b>Offline</b><br>Mrežne povezave s strežnikom ni bilo mogoče vzpostaviti."
 
-#: ui/main.qml:63
+#: ui/main.qml:76
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
 msgstr "<b>Offline</b><br>Ni se bilo mogoče avtenticirati na strežniku."
 
-#: ui/main.qml:71
+#: ui/main.qml:84
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
 msgstr "<b>Offline</b><br>Porivanje obvestil še ni vzpostavljeno."
 
-#: ui/main.qml:83
+#: ui/main.qml:96
 #, kde-format
 msgid "Push provider:"
 msgstr "Ponudnik porivanja:"
 
-#: ui/main.qml:103 ui/main.qml:129 ui/main.qml:175
+#: ui/main.qml:118 ui/main.qml:145 ui/main.qml:194
 #, kde-format
 msgid "Url:"
 msgstr "Url:"
 
-#: ui/main.qml:108
+#: ui/main.qml:123
 #, kde-format
 msgid "Client token:"
 msgstr "Odjemalcev žeton:"
 
-#: ui/main.qml:134
+#: ui/main.qml:150
 #, kde-format
 msgid "User name:"
 msgstr "Uporabniško ime:"
 
-#: ui/main.qml:140
+#: ui/main.qml:156
 #, kde-format
 msgid "Authenticate"
 msgstr "Avtenticiraj"
 
-#: ui/main.qml:213
+#: ui/main.qml:237
 #, kde-format
 msgid "Applications"
 msgstr "Aplikacije"
 
-#: ui/main.qml:236
+#: ui/main.qml:267
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "Odregistriraj aplikacijo od porivanja obvestil"
+
+#: ui/main.qml:274
+#, fuzzy, kde-format
+#| msgid "Applications"
+msgctxt "@title:window"
+msgid "Unregister Application"
+msgstr "Aplikacije"
+
+#: ui/main.qml:275
+#, kde-format
+msgctxt "%1 is an application name"
+msgid "Are you sure you want to unregister '%1'?"
+msgstr ""

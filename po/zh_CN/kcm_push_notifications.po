@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-10 01:47+0000\n"
+"POT-Creation-Date: 2023-11-11 01:43+0000\n"
 "PO-Revision-Date: 2023-10-21 13:55\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -17,12 +17,12 @@ msgstr ""
 "X-Crowdin-File: /kf5-trunk/messages/kunifiedpush/kcm_push_notifications.pot\n"
 "X-Crowdin-File-ID: 40698\n"
 
-#: ui/main.qml:23
+#: ui/main.qml:36
 #, kde-format
 msgid "There is no push notification service running!"
 msgstr "没有正在运行的通知推送服务。"
 
-#: ui/main.qml:31
+#: ui/main.qml:44
 #, kde-format
 msgid ""
 "There is a 3rd party push notification service running. Push notifications "
@@ -31,64 +31,77 @@ msgstr ""
 "有第三方的通知推送服务正在运行。您可以通过该服务进行通知推送，但无法在此页面"
 "对它进行配置。"
 
-#: ui/main.qml:39
+#: ui/main.qml:52
 #, kde-format
 msgid ""
 "<b>Online</b><br>Connected to the push notification server and operational."
 msgstr "<b>在线</b><br>已连接到通知推送服务器并运行。"
 
-#: ui/main.qml:47
+#: ui/main.qml:60
 #, kde-format
 msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr "<b>空闲</b><br>没有正在使用通知推送的应用程序。"
 
-#: ui/main.qml:55
+#: ui/main.qml:68
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
 msgstr "<b>脱机</b><br>无法建立到服务器的网络连接。"
 
-#: ui/main.qml:63
+#: ui/main.qml:76
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
 msgstr "<b>脱机</b><br>无法在服务器上进行身份验证。"
 
-#: ui/main.qml:71
+#: ui/main.qml:84
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
 msgstr "<b>脱机</b><br>通知推送服务尚未进行配置。"
 
-#: ui/main.qml:83
+#: ui/main.qml:96
 #, kde-format
 msgid "Push provider:"
 msgstr "推送提供者："
 
-#: ui/main.qml:103 ui/main.qml:129 ui/main.qml:175
+#: ui/main.qml:118 ui/main.qml:145 ui/main.qml:194
 #, kde-format
 msgid "Url:"
 msgstr "URL："
 
-#: ui/main.qml:108
+#: ui/main.qml:123
 #, kde-format
 msgid "Client token:"
 msgstr "客户令牌："
 
-#: ui/main.qml:134
+#: ui/main.qml:150
 #, kde-format
 msgid "User name:"
 msgstr "用户名："
 
-#: ui/main.qml:140
+#: ui/main.qml:156
 #, kde-format
 msgid "Authenticate"
 msgstr "身份认证"
 
-#: ui/main.qml:213
+#: ui/main.qml:237
 #, kde-format
 msgid "Applications"
 msgstr "应用程序"
 
-#: ui/main.qml:236
+#: ui/main.qml:267
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "取消注册通知推送服务中的应用程序"
+
+#: ui/main.qml:274
+#, fuzzy, kde-format
+#| msgid "Applications"
+msgctxt "@title:window"
+msgid "Unregister Application"
+msgstr "应用程序"
+
+#: ui/main.qml:275
+#, kde-format
+msgctxt "%1 is an application name"
+msgid "Are you sure you want to unregister '%1'?"
+msgstr ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-10 01:47+0000\n"
+"POT-Creation-Date: 2023-11-11 01:43+0000\n"
 "PO-Revision-Date: 2022-07-20 21:51+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 20.12.0\n"
 
-#: ui/main.qml:23
+#: ui/main.qml:36
 #, kde-format
 msgid "There is no push notification service running!"
 msgstr "Push-ilmoituspalvelu ei ole käynnissä!"
 
-#: ui/main.qml:31
+#: ui/main.qml:44
 #, kde-format
 msgid ""
 "There is a 3rd party push notification service running. Push notifications "
@@ -31,66 +31,79 @@ msgstr ""
 "Kolmannen osapuolen push-ilmoituspalvelu on käynnissä. Push-ilmoitukset ovat "
 "käytettävissä, mutta niitä ei voi asettaa tästä."
 
-#: ui/main.qml:39
+#: ui/main.qml:52
 #, kde-format
 msgid ""
 "<b>Online</b><br>Connected to the push notification server and operational."
 msgstr ""
 "<b>Käytössä</b><br>Yhdistetty push-ilmoituspalvelimeen ja toimintakunnossa."
 
-#: ui/main.qml:47
+#: ui/main.qml:60
 #, kde-format
 msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr "<b>Jouten</b><br>Ei push-ilmoituksia käyttäviä sovelluksia."
 
-#: ui/main.qml:55
+#: ui/main.qml:68
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
 msgstr ""
 "<b>Ei käytössä</b><br>Palvelimeen ei saatu muodostetuksi verkkoyhteyttä."
 
-#: ui/main.qml:63
+#: ui/main.qml:76
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
 msgstr "<b>Ei käytössä</b><br>Palvelimelle tunnistautuminen epäonnistui."
 
-#: ui/main.qml:71
+#: ui/main.qml:84
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
 msgstr "<b>Ei käytössä</b><br>Push-ilmoituksia ei ole vielä asetettu."
 
-#: ui/main.qml:83
+#: ui/main.qml:96
 #, kde-format
 msgid "Push provider:"
 msgstr "Push-tarjoaja:"
 
-#: ui/main.qml:103 ui/main.qml:129 ui/main.qml:175
+#: ui/main.qml:118 ui/main.qml:145 ui/main.qml:194
 #, kde-format
 msgid "Url:"
 msgstr "Verkko-osoite:"
 
-#: ui/main.qml:108
+#: ui/main.qml:123
 #, kde-format
 msgid "Client token:"
 msgstr "Asiakasmerkki:"
 
-#: ui/main.qml:134
+#: ui/main.qml:150
 #, kde-format
 msgid "User name:"
 msgstr "Käyttäjätunnus:"
 
-#: ui/main.qml:140
+#: ui/main.qml:156
 #, kde-format
 msgid "Authenticate"
 msgstr "Tunnistaudu"
 
-#: ui/main.qml:213
+#: ui/main.qml:237
 #, kde-format
 msgid "Applications"
 msgstr "Sovellukset"
 
-#: ui/main.qml:236
+#: ui/main.qml:267
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "Poista sovelluksen push-ilmoitusrekisteröinti"
+
+#: ui/main.qml:274
+#, fuzzy, kde-format
+#| msgid "Applications"
+msgctxt "@title:window"
+msgid "Unregister Application"
+msgstr "Sovellukset"
+
+#: ui/main.qml:275
+#, kde-format
+msgctxt "%1 is an application name"
+msgid "Are you sure you want to unregister '%1'?"
+msgstr ""
