@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kunifiedpush package.
 #
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-11 01:43+0000\n"
-"PO-Revision-Date: 2022-07-03 10:42+0300\n"
+"PO-Revision-Date: 2023-11-11 22:18+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 23.11.70\n"
 
 #: ui/main.qml:36
 #, kde-format
@@ -61,7 +61,7 @@ msgstr "<b>Çevrimdışı</b><br>Anında bildirimler ayarlanmamış."
 #: ui/main.qml:96
 #, kde-format
 msgid "Push provider:"
-msgstr "Bildirim sağlayıcı:"
+msgstr "Bildirim sağlayıcısı:"
 
 #: ui/main.qml:118 ui/main.qml:145 ui/main.qml:194
 #, kde-format
@@ -81,7 +81,7 @@ msgstr "Kullanıcı adı:"
 #: ui/main.qml:156
 #, kde-format
 msgid "Authenticate"
-msgstr "Kimlik doğrula"
+msgstr "Kimlik Doğrula"
 
 #: ui/main.qml:237
 #, kde-format
@@ -94,14 +94,13 @@ msgid "Unregister application from push notifications"
 msgstr "Uygulamayı, anında bildirimlerden kaldır"
 
 #: ui/main.qml:274
-#, fuzzy, kde-format
-#| msgid "Applications"
+#, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
-msgstr "Uygulamalar"
+msgstr "Uygulamanın Kaydını Kaldır"
 
 #: ui/main.qml:275
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
-msgstr ""
+msgstr "'%1' kaydını kaldırmak istediğinizden emin misiniz?"
