@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-11 01:43+0000\n"
-"PO-Revision-Date: 2022-10-30 21:01+0100\n"
+"PO-Revision-Date: 2023-11-12 05:50+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: ui/main.qml:36
 #, kde-format
@@ -95,14 +95,13 @@ msgid "Unregister application from push notifications"
 msgstr "პუშ გაფრთხილებებიდან აპლიკაციის რეგისტრაციის მხოსნა"
 
 #: ui/main.qml:274
-#, fuzzy, kde-format
-#| msgid "Applications"
+#, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
-msgstr "აპლიკაციები"
+msgstr "აპლიკაციის რეგისტრაციის გაუქმება"
 
 #: ui/main.qml:275
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
-msgstr ""
+msgstr "დარწმუნებული ბრძანდებით, რომ გნებავთ, გააუქმოთ რეგისტრაცია '%1'-სთვის?"
