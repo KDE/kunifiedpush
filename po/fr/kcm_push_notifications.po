@@ -1,19 +1,19 @@
-# Xavier Besnard <xavier.besnard@neuf.fr>, 2022.
+# SPDX-FileCopyrightText: 2022, 2023 Xavier Besnard <xavier.besnard@neuf.fr>
 # Xavier BESNARD <xavier.besnard@neuf.fr>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-11 01:43+0000\n"
-"PO-Revision-Date: 2023-01-04 17:55+0100\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
+"PO-Revision-Date: 2023-11-12 13:40+0100\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #: ui/main.qml:36
 #, kde-format
@@ -100,14 +100,13 @@ msgid "Unregister application from push notifications"
 msgstr "Désinscrire une application pour l'envoi de notifications"
 
 #: ui/main.qml:274
-#, fuzzy, kde-format
-#| msgid "Applications"
+#, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
-msgstr "Applications"
+msgstr "Supprimer l'inscription de l'application"
 
 #: ui/main.qml:275
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
-msgstr ""
+msgstr "Voulez-vous vraiment supprimer l'inscription de « %1 » ?"
