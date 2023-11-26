@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-11 01:43+0000\n"
-"PO-Revision-Date: 2023-11-19 03:37\n"
+"PO-Revision-Date: 2023-11-25 02:26\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -97,10 +97,10 @@ msgstr "取消注册通知推送服务中的应用程序"
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
-msgstr ""
+msgstr "取消注册应用程序"
 
 #: ui/main.qml:275
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
-msgstr ""
+msgstr "确定要取消注册“%1”吗？"
