@@ -41,7 +41,7 @@ if (NOT ANDROID)
 
     # for the KCM
     if (NOT KUNIFIEDPUSH_CLIENT_ONLY)
-        find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Declarative Service Package KCMUtils)
+        find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Service KCMUtils)
     endif()
 else()
     find_package(Gradle REQUIRED)
