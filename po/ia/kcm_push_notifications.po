@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-11 01:43+0000\n"
-"PO-Revision-Date: 2024-01-18 09:42+0100\n"
+"PO-Revision-Date: 2024-02-01 11:08+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -28,33 +28,41 @@ msgid ""
 "There is a 3rd party push notification service running. Push notifications "
 "are available, but cannot be configured here."
 msgstr ""
+"Il ha un servicio de notification de tertie parte executante. Notificationes "
+"de push es disponibile, ma non pote esser configurate hic."
 
 #: ui/main.qml:52
 #, kde-format
 msgid ""
 "<b>Online</b><br>Connected to the push notification server and operational."
 msgstr ""
+"<b>In Linea</b><br> Connectite al servitor de notificationes de push e "
+"operatnte."
 
 #: ui/main.qml:60
 #, kde-format
 msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr ""
+"<b>Otiante</b><br>Il non ha alcun application usante notificationes de push."
 
 #: ui/main.qml:68
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
 msgstr ""
+"<b>Foras de Linea</b><br>Connexion de rete al servitoe non poteve esser "
+"establite."
 
 #: ui/main.qml:76
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
-msgstr ""
+msgstr "<b>Foras de Linea</b><br>Non poteva authenticar al servitor."
 
 #: ui/main.qml:84
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
 msgstr ""
+"<b>Foras de Linea</b><br>Notificationes de push non es ancora configurate."
 
 #: ui/main.qml:96
 #, kde-format
