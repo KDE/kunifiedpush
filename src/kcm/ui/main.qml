@@ -15,82 +15,93 @@ KCM.ScrollViewKCM {
     id: root
     readonly property var pushProviderConfig: kcm.pushProviderConfiguration(pushProviderBox.currentText)
 
-    header: QQC2.Control {
-        padding: Kirigami.Units.largeSpacing
+    headerPaddingEnabled: false
 
-        background: Rectangle {
-            Kirigami.Theme.colorSet: Kirigami.Theme.Window
-            Kirigami.Theme.inherit: false
+    header: ColumnLayout {
+        spacing: 0
 
-            color: Kirigami.Theme.backgroundColor
+        // type of distributor, and if it is our own one, distributor status information
+        Kirigami.InlineMessage {
+            Layout.fillWidth: true
+            showCloseButton: false
+            type: Kirigami.MessageType.Error
+            text: i18n("There is no push notification service running!")
+            icon.name: "dialog-error"
+            visible: !kcm.hasDistributor
+            position: Kirigami.InlineMessage.Position.Header
+        }
+        Kirigami.InlineMessage {
+            Layout.fillWidth: true
+            showCloseButton: false
+            type: Kirigami.MessageType.Information
+            text: i18n("There is a 3rd party push notification service running. Push notifications are available, but cannot be configured here.")
+            icon.name: "dialog-information"
+            visible: !kcm.hasKDEDistributor && kcm.hasDistributor
+            position: Kirigami.InlineMessage.Position.Header
+        }
+        Kirigami.InlineMessage {
+            Layout.fillWidth: true
+            showCloseButton: false
+            type: Kirigami.MessageType.Positive
+            text: i18n("<b>Online</b><br>Connected to the push notification server and operational.")
+            icon.name: "media-playback-playing"
+            visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.Connected
+            position: Kirigami.InlineMessage.Position.Header
+        }
+        Kirigami.InlineMessage {
+            Layout.fillWidth: true
+            showCloseButton: false
+            type: Kirigami.MessageType.Information
+            text: i18n("<b>Idle</b><br>There are no applications using push notifications.")
+            icon.name: "media-playback-paused"
+            visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.Idle
+            position: Kirigami.InlineMessage.Position.Header
+        }
+        Kirigami.InlineMessage {
+            Layout.fillWidth: true
+            showCloseButton: false
+            type: Kirigami.MessageType.Warning
+            text: i18n("<b>Offline</b><br>Network connection to the server could not be established.")
+            icon.name: "network-disconnect"
+            visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.NoNetwork
+            position: Kirigami.InlineMessage.Position.Header
+        }
+        Kirigami.InlineMessage {
+            Layout.fillWidth: true
+            showCloseButton: false
+            type: Kirigami.MessageType.Error
+            text: i18n("<b>Offline</b><br>Could not authenticate at the server.")
+            icon.name: "dialog-error"
+            visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.AuthenticationError
+            position: Kirigami.InlineMessage.Position.Header
+        }
+        Kirigami.InlineMessage {
+            Layout.fillWidth: true
+            showCloseButton: false
+            type: Kirigami.MessageType.Warning
+            text: i18n("<b>Offline</b><br>Push notifications are not set up yet.")
+            icon.name: "configure"
+            visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.NoSetup
+            position: Kirigami.InlineMessage.Position.Header
         }
 
-        contentItem: ColumnLayout {
-            id: headerColumn
+        QQC2.Control {
+            padding: Kirigami.Units.largeSpacing
+            visible: kcm.hasKDEDistributor
+            Layout.fillWidth: true
 
-            // type of distributor, and if it is our own one, distributor status information
-            Kirigami.InlineMessage {
-                Layout.fillWidth: true
-                showCloseButton: false
-                type: Kirigami.MessageType.Error
-                text: i18n("There is no push notification service running!")
-                icon.name: "dialog-error"
-                visible: !kcm.hasDistributor
-            }
-            Kirigami.InlineMessage {
-                Layout.fillWidth: true
-                showCloseButton: false
-                type: Kirigami.MessageType.Information
-                text: i18n("There is a 3rd party push notification service running. Push notifications are available, but cannot be configured here.")
-                icon.name: "dialog-information"
-                visible: !kcm.hasKDEDistributor && kcm.hasDistributor
-            }
-            Kirigami.InlineMessage {
-                Layout.fillWidth: true
-                showCloseButton: false
-                type: Kirigami.MessageType.Positive
-                text: i18n("<b>Online</b><br>Connected to the push notification server and operational.")
-                icon.name: "media-playback-playing"
-                visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.Connected
-            }
-            Kirigami.InlineMessage {
-                Layout.fillWidth: true
-                showCloseButton: false
-                type: Kirigami.MessageType.Information
-                text: i18n("<b>Idle</b><br>There are no applications using push notifications.")
-                icon.name: "media-playback-paused"
-                visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.Idle
-            }
-            Kirigami.InlineMessage {
-                Layout.fillWidth: true
-                showCloseButton: false
-                type: Kirigami.MessageType.Warning
-                text: i18n("<b>Offline</b><br>Network connection to the server could not be established.")
-                icon.name: "network-disconnect"
-                visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.NoNetwork
-            }
-            Kirigami.InlineMessage {
-                Layout.fillWidth: true
-                showCloseButton: false
-                type: Kirigami.MessageType.Error
-                text: i18n("<b>Offline</b><br>Could not authenticate at the server.")
-                icon.name: "dialog-error"
-                visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.AuthenticationError
-            }
-            Kirigami.InlineMessage {
-                Layout.fillWidth: true
-                showCloseButton: false
-                type: Kirigami.MessageType.Warning
-                text: i18n("<b>Offline</b><br>Push notifications are not set up yet.")
-                icon.name: "configure"
-                visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.NoSetup
+            background: Rectangle {
+                Kirigami.Theme.colorSet: Kirigami.Theme.Window
+                Kirigami.Theme.inherit: false
+
+                color: Kirigami.Theme.backgroundColor
             }
 
             // push provider configuration
-            Kirigami.FormLayout {
+            contentItem: Kirigami.FormLayout {
                 id: topForm
-                visible: kcm.hasKDEDistributor
                 Layout.fillWidth: true
+                Layout.topMargin: Kirigami.Units.largeSpacing
                 QQC2.ComboBox {
                     id: pushProviderBox
                     Kirigami.FormData.label: i18n("Push provider:")
