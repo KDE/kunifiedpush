@@ -71,6 +71,7 @@ install(FILES
 )
 install(EXPORT KUnifiedPushTargets DESTINATION "${KUNIFIEDPUSH_INSTALL_CMAKECONFIGDIR}" FILE KUnifiedPushTargets.cmake)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kunifiedpush_version.h DESTINATION ${KUNIFIEDPUSH_INCLUDE_INSTALLDIR} COMPONENT Devel)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/default.conf DESTINATION ${KDE_INSTALL_FULL_CONFDIR}/KDE RENAME kunifiedpush-distributor.conf)
 ecm_qt_install_logging_categories(
     EXPORT KUnifiedPushLogging
     FILE org_kde_kunifiedpush.categories
