@@ -1,12 +1,11 @@
 # Translation of kcm_push_notifications to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-11 01:43+0000\n"
-"PO-Revision-Date: 2023-07-28 20:25+0200\n"
+"PO-Revision-Date: 2024-03-17 11:05+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -14,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 24.02.0\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -99,14 +98,13 @@ msgid "Unregister application from push notifications"
 msgstr "Avregistrer program for mottak av varslingar"
 
 #: ui/main.qml:274
-#, fuzzy, kde-format
-#| msgid "Applications"
+#, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
-msgstr "Program"
+msgstr "Avregistrer program"
 
 #: ui/main.qml:275
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
-msgstr ""
+msgstr "Er du sikker på at du vil avregistrera «%1»?"
