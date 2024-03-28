@@ -1,26 +1,26 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the kunifiedpush package.
+#
+# SPDX-FileCopyrightText: 2024 Enol P. <enolp@softastur.org>
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeorg\n"
+"Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-11 01:43+0000\n"
-"PO-Revision-Date: 2024-03-27 19:45\n"
-"Last-Translator: \n"
-"Language-Team: Chinese Simplified\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2024-03-27 22:37+0100\n"
+"Last-Translator: Enol P. <enolp@softastur.org>\n"
+"Language-Team: Asturian <alministradores@softastur.org>\n"
+"Language: ast_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Crowdin-Project: kdeorg\n"
-"X-Crowdin-Project-ID: 269464\n"
-"X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/kunifiedpush/kcm_push_notifications.pot\n"
-"X-Crowdin-File-ID: 48370\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 24.02.1\n"
 
 #: ui/main.qml:36
 #, kde-format
 msgid "There is no push notification service running!"
-msgstr "没有正在运行的通知推送服务。"
+msgstr ""
 
 #: ui/main.qml:44
 #, kde-format
@@ -28,79 +28,77 @@ msgid ""
 "There is a 3rd party push notification service running. Push notifications "
 "are available, but cannot be configured here."
 msgstr ""
-"有第三方的通知推送服务正在运行。您可以通过该服务进行通知推送，但无法在此页面"
-"对它进行配置。"
 
 #: ui/main.qml:52
 #, kde-format
 msgid ""
 "<b>Online</b><br>Connected to the push notification server and operational."
-msgstr "<b>在线</b><br>已连接到通知推送服务器并运行。"
+msgstr ""
 
 #: ui/main.qml:60
 #, kde-format
 msgid "<b>Idle</b><br>There are no applications using push notifications."
-msgstr "<b>空闲</b><br>没有正在使用通知推送的应用程序。"
+msgstr ""
 
 #: ui/main.qml:68
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
-msgstr "<b>脱机</b><br>无法建立到服务器的网络连接。"
+msgstr ""
 
 #: ui/main.qml:76
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
-msgstr "<b>脱机</b><br>无法在服务器上进行身份验证。"
+msgstr ""
 
 #: ui/main.qml:84
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
-msgstr "<b>脱机</b><br>通知推送服务尚未进行配置。"
+msgstr ""
 
 #: ui/main.qml:96
 #, kde-format
 msgid "Push provider:"
-msgstr "推送提供者："
+msgstr ""
 
 #: ui/main.qml:118 ui/main.qml:145 ui/main.qml:194
 #, kde-format
 msgid "Url:"
-msgstr "URL："
+msgstr "URL:"
 
 #: ui/main.qml:123
 #, kde-format
 msgid "Client token:"
-msgstr "客户令牌："
+msgstr ""
 
 #: ui/main.qml:150
 #, kde-format
 msgid "User name:"
-msgstr "用户名："
+msgstr ""
 
 #: ui/main.qml:156
 #, kde-format
 msgid "Authenticate"
-msgstr "身份认证"
+msgstr ""
 
 #: ui/main.qml:237
 #, kde-format
 msgid "Applications"
-msgstr "应用程序"
+msgstr ""
 
 #: ui/main.qml:267
 #, kde-format
 msgid "Unregister application from push notifications"
-msgstr "取消注册通知推送服务中的应用程序"
+msgstr ""
 
 #: ui/main.qml:274
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
-msgstr "取消注册应用程序"
+msgstr ""
 
 #: ui/main.qml:275
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
-msgstr "确定要取消注册“%1”吗？"
+msgstr ""
