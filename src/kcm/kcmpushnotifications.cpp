@@ -112,3 +112,5 @@ void KCMPushNotifications::save()
 
 #include "kcmpushnotifications.moc"
 #include "../shared/moc_distributorstatus_p.cpp"
+
+#include "moc_kcmpushnotifications.cpp"

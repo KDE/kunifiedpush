@@ -503,3 +503,5 @@ bool Distributor::isNetworkAvailable() const
     }
     return true;
 }
+
+#include "moc_distributor.cpp"

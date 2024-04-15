@@ -77,3 +77,5 @@ void NextcloudAuthenticator::login2Poll()
         Q_EMIT authenticated(obj.value(QLatin1String("loginName")).toString(), obj.value(QLatin1String("appPassword")).toString());
     });
 }
+
+#include "moc_nextcloudauthenticator.cpp"

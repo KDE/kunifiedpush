@@ -152,3 +152,5 @@ void GotifyPushProvider::unregisterClient(const Client &client)
         }
     });
 }
+
+#include "moc_gotifypushprovider.cpp"

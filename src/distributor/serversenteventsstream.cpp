@@ -116,3 +116,5 @@ void ServerSentEventsStream::processBuffer()
         processBuffer();
     }
 }
+
+#include "moc_serversenteventsstream.cpp"

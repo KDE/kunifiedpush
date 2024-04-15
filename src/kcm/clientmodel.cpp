@@ -69,3 +69,5 @@ void ClientModel::reload()
     m_clients = m_iface->registeredClients();
     endResetModel();
 }
+
+#include "moc_clientmodel.cpp"

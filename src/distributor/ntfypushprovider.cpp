@@ -132,3 +132,5 @@ void NtfyPushProvider::storeState()
     settings.setValue(QStringLiteral("Topics"), m_topics);
     settings.setValue(QStringLiteral("LastMessageId"), m_lastMessageId);
 }
+
+#include "moc_ntfypushprovider.cpp"

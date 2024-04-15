@@ -33,3 +33,5 @@ QNetworkAccessManager* AbstractPushProvider::nam()
     }
     return m_nam;
 }
+
+#include "moc_abstractpushprovider.cpp"

@@ -235,3 +235,7 @@ Connector::State Connector::state() const
 {
     return d->m_state;
 }
+
+#include "moc_connector.cpp"
+
+#include "moc_connector_p.cpp"
