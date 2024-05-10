@@ -41,7 +41,7 @@ if (NOT ANDROID)
 
     # for the KCM
     if (NOT KUNIFIEDPUSH_CLIENT_ONLY)
-        find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Service KCMUtils)
+        find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS CoreAddons I18n Service KCMUtils)
     endif()
 else()
     find_package(Gradle REQUIRED)
@@ -77,5 +77,8 @@ ecm_qt_install_logging_categories(
     FILE org_kde_kunifiedpush.categories
     DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
 )
+if (NOT ANDROID AND NOT KUNIFIEDPUSH_CLIENT_ONLY)
+    ki18n_install(po)
+endif()
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
