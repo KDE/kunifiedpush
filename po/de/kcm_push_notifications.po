@@ -2,6 +2,7 @@
 # Copyright (C) 2022 This file is copyright:
 # This file is distributed under the same license as the kunifiedpush package.
 # Frederik Schwarzer <schwarzer@kde.org>, 2023.
+# SPDX-FileCopyrightText: 2024 Alois Spitzbart <spitz234@hotmail.com>
 #
 # Automatically generated, 2022.
 msgid ""
@@ -9,20 +10,20 @@ msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-11 01:43+0000\n"
-"PO-Revision-Date: 2023-03-12 16:33+0100\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"PO-Revision-Date: 2024-06-11 22:42+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.07.70\n"
+"X-Generator: Lokalize 24.05.0\n"
 
 #: ui/main.qml:36
 #, kde-format
 msgid "There is no push notification service running!"
-msgstr ""
+msgstr "Es läuft kein Push-Benachrichtigungsdienst!"
 
 #: ui/main.qml:44
 #, kde-format
@@ -30,38 +31,50 @@ msgid ""
 "There is a 3rd party push notification service running. Push notifications "
 "are available, but cannot be configured here."
 msgstr ""
+"Es wird ein Push-Benachrichtigungsdienst eines Drittanbieters ausgeführt. "
+"Push-Benachrichtigungen sind verfügbar, können aber hier nicht konfiguriert "
+"werden."
 
 #: ui/main.qml:52
 #, kde-format
 msgid ""
 "<b>Online</b><br>Connected to the push notification server and operational."
 msgstr ""
+"<b>Online</b><br>Mit dem Push-Benachrichtigungsserver verbunden und "
+"betriebsbereit."
 
 #: ui/main.qml:60
 #, kde-format
 msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr ""
+"<b>Inaktiv</b><br>Es gibt keine Anwendungen, die Push-Benachrichtigungen "
+"verwenden."
 
 #: ui/main.qml:68
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
 msgstr ""
+"<b>Offline</b><br>Die Netzwerkverbindung zum Server konnte nicht hergestellt "
+"werden."
 
 #: ui/main.qml:76
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
 msgstr ""
+"<b>Offline</b><br>Die Authentifizierung beim Server konnte nicht "
+"durchgeführt werden."
 
 #: ui/main.qml:84
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
 msgstr ""
+"<b>Offline</b><br>Push-Benachrichtigungen sind noch nicht eingerichtet."
 
 #: ui/main.qml:96
 #, kde-format
 msgid "Push provider:"
-msgstr ""
+msgstr "Push-Anbieter:"
 
 #: ui/main.qml:118 ui/main.qml:145 ui/main.qml:194
 #, kde-format
@@ -71,7 +84,7 @@ msgstr "Adresse:"
 #: ui/main.qml:123
 #, kde-format
 msgid "Client token:"
-msgstr ""
+msgstr "Client-Token:"
 
 #: ui/main.qml:150
 #, kde-format
@@ -91,7 +104,7 @@ msgstr "Anwendungen"
 #: ui/main.qml:267
 #, kde-format
 msgid "Unregister application from push notifications"
-msgstr ""
+msgstr "Anwendung von Push-Benachrichtigungen abmelden"
 
 #: ui/main.qml:274
 #, fuzzy, kde-format
