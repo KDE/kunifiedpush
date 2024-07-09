@@ -1,0 +1,104 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the kunifiedpush package.
+#
+# SPDX-FileCopyrightText: 2024 Geraldo Simiao <geraldosimiao@fedoraproject.org>
+msgid ""
+msgstr ""
+"Project-Id-Version: kunifiedpush\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-11-11 01:43+0000\n"
+"PO-Revision-Date: 2024-07-08 13:30-0300\n"
+"Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
+"Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 24.05.0\n"
+
+#: ui/main.qml:36
+#, kde-format
+msgid "There is no push notification service running!"
+msgstr ""
+
+#: ui/main.qml:44
+#, kde-format
+msgid ""
+"There is a 3rd party push notification service running. Push notifications "
+"are available, but cannot be configured here."
+msgstr ""
+
+#: ui/main.qml:52
+#, kde-format
+msgid ""
+"<b>Online</b><br>Connected to the push notification server and operational."
+msgstr ""
+
+#: ui/main.qml:60
+#, kde-format
+msgid "<b>Idle</b><br>There are no applications using push notifications."
+msgstr ""
+
+#: ui/main.qml:68
+#, kde-format
+msgid ""
+"<b>Offline</b><br>Network connection to the server could not be established."
+msgstr ""
+
+#: ui/main.qml:76
+#, kde-format
+msgid "<b>Offline</b><br>Could not authenticate at the server."
+msgstr ""
+
+#: ui/main.qml:84
+#, kde-format
+msgid "<b>Offline</b><br>Push notifications are not set up yet."
+msgstr ""
+
+#: ui/main.qml:96
+#, kde-format
+msgid "Push provider:"
+msgstr ""
+
+#: ui/main.qml:118 ui/main.qml:145 ui/main.qml:194
+#, kde-format
+msgid "Url:"
+msgstr "URL:"
+
+#: ui/main.qml:123
+#, kde-format
+msgid "Client token:"
+msgstr "Token do cliente:"
+
+#: ui/main.qml:150
+#, kde-format
+msgid "User name:"
+msgstr "Nome do usuário"
+
+#: ui/main.qml:156
+#, kde-format
+msgid "Authenticate"
+msgstr "Autenticar"
+
+#: ui/main.qml:237
+#, kde-format
+msgid "Applications"
+msgstr "Aplicativos"
+
+#: ui/main.qml:267
+#, kde-format
+msgid "Unregister application from push notifications"
+msgstr ""
+
+#: ui/main.qml:274
+#, kde-format
+msgctxt "@title:window"
+msgid "Unregister Application"
+msgstr ""
+
+#: ui/main.qml:275
+#, kde-format
+msgctxt "%1 is an application name"
+msgid "Are you sure you want to unregister '%1'?"
+msgstr ""
