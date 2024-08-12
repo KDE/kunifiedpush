@@ -73,7 +73,10 @@ void NtfyPushProvider::registerClient(const Client &client)
 
     QUrl endpoint = m_url;
     auto path = endpoint.path();
-    path  += QLatin1Char('/') + topic;
+    if (!path.endsWith(QLatin1Char('/'))) {
+        path += QLatin1Char('/');
+    }
+    path += topic;
     endpoint.setPath(path);
     newClient.endpoint = endpoint.toString();
 
