@@ -98,16 +98,37 @@ KCM.ScrollViewKCM {
             }
 
             // push provider configuration
-            contentItem: Kirigami.FormLayout {
-                id: topForm
-                Layout.fillWidth: true
-                Layout.topMargin: Kirigami.Units.largeSpacing
-                QQC2.ComboBox {
-                    id: pushProviderBox
-                    Kirigami.FormData.label: i18n("Push provider:")
-                    model: ["Gotify", "NextPush", "Ntfy"]
-                    currentIndex: find(kcm.pushProviderId)
-                    Component.onCompleted: currentIndex = find(kcm.pushProviderId)
+            contentItem: ColumnLayout {
+                spacing: 0
+
+                Kirigami.FormLayout {
+                    id: topForm
+                    Layout.fillWidth: true
+                    Layout.topMargin: Kirigami.Units.largeSpacing
+                    QQC2.ComboBox {
+                        id: pushProviderBox
+                        Kirigami.FormData.label: i18n("Push provider:")
+                        model: ["Gotify", "NextPush", "Ntfy"]
+                        currentIndex: find(kcm.pushProviderId)
+                        Component.onCompleted: currentIndex = find(kcm.pushProviderId)
+                    }
+                }
+
+                Loader {
+                    id: providerFormLoader
+                    Layout.fillWidth: true
+                    visible: kcm.hasKDEDistributor
+                    sourceComponent: {
+                        switch (pushProviderBox.currentIndex) {
+                            case 0:
+                                return gotifyForm;
+                            case 1:
+                                return nextpushForm;
+                            case 2:
+                                return ntfyForm;
+                        }
+                        return undefined;
+                    }
                 }
             }
 
@@ -127,12 +148,12 @@ KCM.ScrollViewKCM {
                     QQC2.TextField {
                         id: urlField
                         Kirigami.FormData.label: i18n("Url:")
-                        text: root.pushProviderConfig['Url']
+                        text: root.pushProviderConfig['Url'] ?? ''
                     }
                     QQC2.TextField {
                         id: tokenField
                         Kirigami.FormData.label: i18n("Client token:")
-                        text: root.pushProviderConfig['ClientToken']
+                        text: root.pushProviderConfig['ClientToken'] ?? ''
                     }
                 }
             }
@@ -141,7 +162,7 @@ KCM.ScrollViewKCM {
                 Kirigami.FormLayout {
                     id: nextpushConfig
                     readonly property bool dirty: urlField.text != root.pushProviderConfig['Url'] || userField.text != root.pushProviderConfig['Username'] || appPassword != root.pushProviderConfig['AppPassword']
-                    property string appPassword: root.pushProviderConfig['AppPassword'];
+                    property string appPassword: root.pushProviderConfig['AppPassword'] ?? '';
                     function config() {
                         let c = root.pushProviderConfig;
                         c['Url'] = urlField.text;
@@ -154,12 +175,12 @@ KCM.ScrollViewKCM {
                     QQC2.TextField {
                         id: urlField
                         Kirigami.FormData.label: i18n("Url:")
-                        text: root.pushProviderConfig['Url']
+                        text: root.pushProviderConfig['Url'] ?? ''
                     }
                     QQC2.Label {
                         id: userField
                         Kirigami.FormData.label: i18n("User name:")
-                        text: root.pushProviderConfig['Username']
+                        text: root.pushProviderConfig['Username'] ?? ''
                     }
                     RowLayout {
                         QQC2.Button {
@@ -203,25 +224,8 @@ KCM.ScrollViewKCM {
                     QQC2.TextField {
                         id: urlField
                         Kirigami.FormData.label: i18n("Url:")
-                        text: root.pushProviderConfig['Url']
+                        text: root.pushProviderConfig['Url'] ?? ''
                     }
-                }
-            }
-
-            Loader {
-                id: providerFormLoader
-                Layout.fillWidth: true
-                visible: kcm.hasKDEDistributor
-                sourceComponent: {
-                    switch (pushProviderBox.currentIndex) {
-                        case 0:
-                            return gotifyForm;
-                        case 1:
-                            return nextpushForm;
-                        case 2:
-                            return ntfyForm;
-                    }
-                    return undefined;
                 }
             }
 
