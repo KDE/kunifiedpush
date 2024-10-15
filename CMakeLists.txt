@@ -12,7 +12,7 @@ project(KUnifiedPush VERSION ${RELEASE_SERVICE_VERSION})
 
 option(KUNIFIEDPUSH_CLIENT_ONLY "Build only the application client library." FALSE)
 
-set(KF_MIN_VERSION 5.240.0)
+set(KF_MIN_VERSION 6.3.0)
 set(QT_MIN_VERSION 6.5)
 find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
@@ -48,7 +48,7 @@ else()
 endif()
 
 set(KUNIFIEDPUSH_INCLUDE_INSTALLDIR ${KDE_INSTALL_INCLUDEDIR}/KUnifiedPush)
-ecm_set_disabled_deprecation_versions(QT 6.4 KF 5.102.0)
+ecm_set_disabled_deprecation_versions(QT 6.5 KF 6.3.0)
 
 add_subdirectory(src)
 if (BUILD_TESTING AND NOT ANDROID)
