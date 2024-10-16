@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-11 01:43+0000\n"
+"POT-Creation-Date: 2024-10-16 00:39+0000\n"
 "PO-Revision-Date: 2024-06-18 00:33+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: ui/main.qml:36
+#: ui/main.qml:28
 #, kde-format
 msgid "There is no push notification service running!"
 msgstr "Det finns ingen utsändningsunderrättelsetjänst igång."
 
-#: ui/main.qml:44
+#: ui/main.qml:37
 #, kde-format
 msgid ""
 "There is a 3rd party push notification service running. Push notifications "
@@ -31,7 +31,7 @@ msgstr ""
 "Det finns en tredjeparts utsändningsunderrättelsetjänst igång. "
 "Utsändningsunderrättelser är tillgängliga, men går inte att ställa in här."
 
-#: ui/main.qml:52
+#: ui/main.qml:46
 #, kde-format
 msgid ""
 "<b>Online</b><br>Connected to the push notification server and operational."
@@ -39,73 +39,73 @@ msgstr ""
 "<b>Uppkopplad</b><br>Ansluten till utsändningsunderrättelseservern och "
 "operativ."
 
-#: ui/main.qml:60
+#: ui/main.qml:55
 #, kde-format
 msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr ""
 "<b>Overksam</b><br>Det finns inget program som använder "
 "utsändningsunderrättelser."
 
-#: ui/main.qml:68
+#: ui/main.qml:64
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
 msgstr ""
 "<b>Nerkopplad</b><br>Nätverksanslutning till servern kunde inte upprättas."
 
-#: ui/main.qml:76
+#: ui/main.qml:73
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
 msgstr "<b>Nerkopplad</b><br>Kunde inte kontrollera behörighet på servern."
 
-#: ui/main.qml:84
+#: ui/main.qml:82
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
 msgstr ""
 "<b>Nerkopplad</b><br>Utsändningsunderrättelser har inte ställts in ännu."
 
-#: ui/main.qml:96
+#: ui/main.qml:110
 #, kde-format
 msgid "Push provider:"
 msgstr "Utsändningsleverantör:"
 
-#: ui/main.qml:118 ui/main.qml:145 ui/main.qml:194
+#: ui/main.qml:150 ui/main.qml:177 ui/main.qml:226
 #, kde-format
 msgid "Url:"
 msgstr "Webbadress:"
 
-#: ui/main.qml:123
+#: ui/main.qml:155
 #, kde-format
 msgid "Client token:"
 msgstr "Klientsymbol:"
 
-#: ui/main.qml:150
+#: ui/main.qml:182
 #, kde-format
 msgid "User name:"
 msgstr "Användarnamn:"
 
-#: ui/main.qml:156
+#: ui/main.qml:188
 #, kde-format
 msgid "Authenticate"
 msgstr "Kontrollera behörighet"
 
-#: ui/main.qml:237
+#: ui/main.qml:252
 #, kde-format
 msgid "Applications"
 msgstr "Program"
 
-#: ui/main.qml:267
+#: ui/main.qml:282
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "Avregistrera program från utsändningsunderrättelser"
 
-#: ui/main.qml:274
+#: ui/main.qml:289
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
 msgstr "Avregistrera program"
 
-#: ui/main.qml:275
+#: ui/main.qml:290
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"

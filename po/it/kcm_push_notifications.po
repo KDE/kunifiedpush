@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-11 01:43+0000\n"
+"POT-Creation-Date: 2024-10-16 00:39+0000\n"
 "PO-Revision-Date: 2023-11-12 10:42+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 23.08.2\n"
 
-#: ui/main.qml:36
+#: ui/main.qml:28
 #, kde-format
 msgid "There is no push notification service running!"
 msgstr "Non c'è alcun servizio di notifiche push in esecuzione!"
 
-#: ui/main.qml:44
+#: ui/main.qml:37
 #, kde-format
 msgid ""
 "There is a 3rd party push notification service running. Push notifications "
@@ -31,19 +31,19 @@ msgstr ""
 "È in esecuzione un servizio di notifiche push di terze parti. Le notifiche "
 "push sono disponibili, ma non possono essere configurate qui."
 
-#: ui/main.qml:52
+#: ui/main.qml:46
 #, kde-format
 msgid ""
 "<b>Online</b><br>Connected to the push notification server and operational."
 msgstr "<b>In linea</b><br>Connesso al server di notifiche push e operativo."
 
-#: ui/main.qml:60
+#: ui/main.qml:55
 #, kde-format
 msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr ""
 "<b>Inattivo</b><br>Non ci sono applicazioni che utilizzano le notifiche push."
 
-#: ui/main.qml:68
+#: ui/main.qml:64
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
@@ -51,58 +51,58 @@ msgstr ""
 "<b>Non in linea</b><br>Impossibile stabilire la connessione di rete al "
 "server."
 
-#: ui/main.qml:76
+#: ui/main.qml:73
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
 msgstr "<b>Non in linea</b><br>Impossibile autenticarsi sul server."
 
-#: ui/main.qml:84
+#: ui/main.qml:82
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
 msgstr "<b>Non in linea</b><br>Le notifiche push non sono ancora impostate."
 
-#: ui/main.qml:96
+#: ui/main.qml:110
 #, kde-format
 msgid "Push provider:"
 msgstr "Fornitore push:"
 
-#: ui/main.qml:118 ui/main.qml:145 ui/main.qml:194
+#: ui/main.qml:150 ui/main.qml:177 ui/main.qml:226
 #, kde-format
 msgid "Url:"
 msgstr "Url:"
 
-#: ui/main.qml:123
+#: ui/main.qml:155
 #, kde-format
 msgid "Client token:"
 msgstr "Token client:"
 
-#: ui/main.qml:150
+#: ui/main.qml:182
 #, kde-format
 msgid "User name:"
 msgstr "Nome utente:"
 
-#: ui/main.qml:156
+#: ui/main.qml:188
 #, kde-format
 msgid "Authenticate"
 msgstr "Autentica"
 
-#: ui/main.qml:237
+#: ui/main.qml:252
 #, kde-format
 msgid "Applications"
 msgstr "Applicazioni"
 
-#: ui/main.qml:267
+#: ui/main.qml:282
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "Annulla la registrazione dell'applicazione dalle notifiche push"
 
-#: ui/main.qml:274
+#: ui/main.qml:289
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
 msgstr "Annulla la registrazione dell'applicazione"
 
-#: ui/main.qml:275
+#: ui/main.qml:290
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"

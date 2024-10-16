@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-11 01:43+0000\n"
+"POT-Creation-Date: 2024-10-16 00:39+0000\n"
 "PO-Revision-Date: 2024-09-23 15:08+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 24.11.70\n"
 
-#: ui/main.qml:36
+#: ui/main.qml:28
 #, kde-format
 msgid "There is no push notification service running!"
 msgstr "Çalışan bir anında bildirim hizmeti yok!"
 
-#: ui/main.qml:44
+#: ui/main.qml:37
 #, kde-format
 msgid ""
 "There is a 3rd party push notification service running. Push notifications "
@@ -31,75 +31,75 @@ msgstr ""
 "Üçüncü parti bir anında bildirim hizmeti çalışıyor. Anında bildirimler "
 "kullanılabilir; ancak burada yapılandırılamaz."
 
-#: ui/main.qml:52
+#: ui/main.qml:46
 #, kde-format
 msgid ""
 "<b>Online</b><br>Connected to the push notification server and operational."
 msgstr "<b>Çevrimiçi</b><br>Anında bildirim sunucusuna bağlı ve çalışıyor."
 
-#: ui/main.qml:60
+#: ui/main.qml:55
 #, kde-format
 msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr "<b>Boşta</b><br>Anında bildirimleri kullanan uygulama yok."
 
-#: ui/main.qml:68
+#: ui/main.qml:64
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
 msgstr "<b>Çevrimdışı</b><br>Sunucuya ağ bağlantısı kurulamadı."
 
-#: ui/main.qml:76
+#: ui/main.qml:73
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
 msgstr "<b>Çevrimdışı</b><br>Sunucuda kimlik doğrulanamadı."
 
-#: ui/main.qml:84
+#: ui/main.qml:82
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
 msgstr "<b>Çevrimdışı</b><br>Anında bildirimler ayarlanmamış."
 
-#: ui/main.qml:96
+#: ui/main.qml:110
 #, kde-format
 msgid "Push provider:"
 msgstr "Bildirim sağlayıcısı:"
 
-#: ui/main.qml:118 ui/main.qml:145 ui/main.qml:194
+#: ui/main.qml:150 ui/main.qml:177 ui/main.qml:226
 #, kde-format
 msgid "Url:"
 msgstr "URL:"
 
-#: ui/main.qml:123
+#: ui/main.qml:155
 #, kde-format
 msgid "Client token:"
 msgstr "İstemci jetonu:"
 
-#: ui/main.qml:150
+#: ui/main.qml:182
 #, kde-format
 msgid "User name:"
 msgstr "Kullanıcı adı:"
 
-#: ui/main.qml:156
+#: ui/main.qml:188
 #, kde-format
 msgid "Authenticate"
 msgstr "Kimlik Doğrula"
 
-#: ui/main.qml:237
+#: ui/main.qml:252
 #, kde-format
 msgid "Applications"
 msgstr "Uygulamalar"
 
-#: ui/main.qml:267
+#: ui/main.qml:282
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "Uygulamayı, anında bildirimlerden kaldır"
 
-#: ui/main.qml:274
+#: ui/main.qml:289
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
 msgstr "Uygulamanın Kaydını Kaldır"
 
-#: ui/main.qml:275
+#: ui/main.qml:290
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
