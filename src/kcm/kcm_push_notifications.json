@@ -69,7 +69,7 @@
         "Name[zh_CN]": "推送通知",
         "Name[zh_TW]": "推送通知"
     },
+    "X-KDE-Keywords": "Push notifications,unified push,KUnifiedPush",
     "X-KDE-System-Settings-Parent-Category": "network",
-    "X-KDE-Weight": 40,
-    "X-KDE-Keywords": "Push notifications,unified push,KUnifiedPush"
+    "X-KDE-Weight": 40
 }
