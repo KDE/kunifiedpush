@@ -48,7 +48,7 @@ else()
 endif()
 
 set(KUNIFIEDPUSH_INCLUDE_INSTALLDIR ${KDE_INSTALL_INCLUDEDIR}/KUnifiedPush)
-ecm_set_disabled_deprecation_versions(QT 6.5 KF 6.3.0)
+ecm_set_disabled_deprecation_versions(QT 6.7 KF 6.7.0)
 
 add_subdirectory(src)
 if (BUILD_TESTING AND NOT ANDROID)
