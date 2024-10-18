@@ -75,7 +75,7 @@ protected:
     QNetworkAccessManager *nam();
 
 private:
-    const char *m_providerId = nullptr;
+    const char *const m_providerId;
     QNetworkAccessManager *m_nam = nullptr;
 };
 

@@ -33,7 +33,7 @@ public Q_SLOTS:
     void reload();
 
 private:
-    org::kde::kunifiedpush::Management *m_iface = nullptr;
+    org::kde::kunifiedpush::Management *const m_iface;
     QList<KUnifiedPush::ClientInfo> m_clients;
 
 };
