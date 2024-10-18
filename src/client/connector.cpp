@@ -7,7 +7,6 @@
 #include "connector_p.h"
 #include "logging.h"
 
-#include "../shared/unifiedpush-constants.h"
 #include "../shared/connectorutils_p.h"
 
 #include <QFile>
