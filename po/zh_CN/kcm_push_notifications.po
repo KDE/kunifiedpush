@@ -14,8 +14,9 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/kunifiedpush/kcm_push_notifications.pot\n"
-"X-Crowdin-File-ID: 48370\n"
+"X-Crowdin-File: /kf6-stable/messages/kunifiedpush/kcm_push_notifications."
+"pot\n"
+"X-Crowdin-File-ID: 56452\n"
 
 #: ui/main.qml:28
 #, kde-format
