@@ -35,12 +35,13 @@ ecm_setup_version(PROJECT
     SOVERSION 1
 )
 
-find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Test WebSockets)
+find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Test)
 if (NOT ANDROID)
     find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS DBus)
 
     # for the KCM
     if (NOT KUNIFIEDPUSH_CLIENT_ONLY)
+        find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS WebSockets)
         find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS CoreAddons I18n Service KCMUtils)
     endif()
 else()
