@@ -1,6 +1,7 @@
 {
     "KPlugin": {
         "Description": "Push Notifications",
+        "Description[ar]": "الإخطارات الفورية",
         "Description[bg]": "Насочени известия",
         "Description[ca@valencia]": "Notificacions «push»",
         "Description[ca]": "Notificacions «push»",
@@ -40,6 +41,7 @@
         ],
         "Icon": "network-connect",
         "Name": "Push Notifications",
+        "Name[ar]": "الإخطارات الفورية",
         "Name[bg]": "Насочени известия",
         "Name[ca@valencia]": "Notificacions «push»",
         "Name[ca]": "Notificacions «push»",
@@ -74,6 +76,7 @@
         "Name[zh_TW]": "推送通知"
     },
     "X-KDE-Keywords": "Push notifications,unified push,KUnifiedPush",
+    "X-KDE-Keywords[ar]": "Push notifications,unified push,إخطارات الدفع,الدفع الموحد,KUnifiedPush,إخطارات فورية",
     "X-KDE-Keywords[bg]": "насочени известия,unified push,KUnifiedPush",
     "X-KDE-Keywords[ca@valencia]": "Notificacions «push»,«push» unificat,KUnifiedPush",
     "X-KDE-Keywords[ca]": "Notificacions «push»,«push» unificat,KUnifiedPush",
