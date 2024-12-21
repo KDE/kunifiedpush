@@ -4,14 +4,16 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.kde.kunifiedpush">
-    <!--<receiver android:name=".MessageReceiver" android:exported="true">
-        <intent-filter>
-            <action android:name="org.unifiedpush.android.connector.NEW_ENDPOINT"/>
-            <action android:name="org.unifiedpush.android.connector.UNREGISTERED"/>
-            <action android:name="org.unifiedpush.android.connector.MESSAGE"/>
-            <action android:name="org.unifiedpush.android.connector.REGISTRATION_FAILED"/>
-        </intent-filter>
-    </receiver>-->
+    <application>
+        <receiver android:name=".MessageReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="org.unifiedpush.android.connector.NEW_ENDPOINT"/>
+                <action android:name="org.unifiedpush.android.connector.UNREGISTERED"/>
+                <action android:name="org.unifiedpush.android.connector.MESSAGE"/>
+                <action android:name="org.unifiedpush.android.connector.REGISTRATION_FAILED"/>
+            </intent-filter>
+        </receiver>
+    </application>
     <queries>
         <intent>
             <action android:name="org.unifiedpush.android.distributor.LINK" />
