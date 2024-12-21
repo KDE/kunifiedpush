@@ -12,4 +12,15 @@
             <action android:name="org.unifiedpush.android.connector.REGISTRATION_FAILED"/>
         </intent-filter>
     </receiver>-->
+    <queries>
+        <intent>
+            <action android:name="org.unifiedpush.android.distributor.LINK" />
+        </intent>
+        <intent>
+            <action android:name="org.unifiedpush.android.distributor.REGISTER" />
+        </intent>
+        <intent>
+            <action android:name="org.unifiedpush.android.distributor.UNREGISTER" />
+        </intent>
+    </queries>
 </manifest>
