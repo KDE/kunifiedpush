@@ -1,6 +1,17 @@
 {
     "KPlugin": {
         "Description": "Configure notifications from online services",
+        "Description[ca]": "Configura les notificacions de serveis en línia",
+        "Description[es]": "Configurar notificaciones de los servicios en línea",
+        "Description[eu]": "Konfiguratu lerroko zerbitzuetako jakinarazpenak",
+        "Description[he]": "הגדרת התראות משירותים מקוונים",
+        "Description[ka]": "ინტერნეტსერვისის გაფრთხილებების მორგება",
+        "Description[nl]": "Meldingen configureren van online services",
+        "Description[sa]": "ऑनलाइनसेवाभ्यः सूचनाः विन्यस्यताम्",
+        "Description[sl]": "Konfiguriraj obvestila spletnih storitev",
+        "Description[tr]": "Bildirimleri ve çevrimiçi hizmetleri yapılandırın",
+        "Description[uk]": "Налаштовування сповіщень від служб інтернету",
+        "Description[x-test]": "xxConfigure notifications from online servicesxx",
         "FormFactors": [
             "tablet",
             "handset",
