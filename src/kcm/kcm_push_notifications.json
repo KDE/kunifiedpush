@@ -1,10 +1,14 @@
 {
     "KPlugin": {
         "Description": "Configure notifications from online services",
+        "Description[ca@valencia]": "Configura les notificacions de serveis en línia",
         "Description[ca]": "Configura les notificacions de serveis en línia",
         "Description[es]": "Configurar notificaciones de los servicios en línea",
         "Description[eu]": "Konfiguratu lerroko zerbitzuetako jakinarazpenak",
+        "Description[fr]": "Configurer les notifications des services en ligne",
+        "Description[gl]": "Configurar as notificacións de servizos por Internet.",
         "Description[he]": "הגדרת התראות משירותים מקוונים",
+        "Description[ia]": "Configura notificationes ex servicios in linea",
         "Description[ka]": "ინტერნეტსერვისის გაფრთხილებების მორგება",
         "Description[nl]": "Meldingen configureren van online services",
         "Description[sa]": "ऑनलाइनसेवाभ्यः सूचनाः विन्यस्यताम्",
