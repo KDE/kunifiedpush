@@ -4,6 +4,7 @@
         "Description[ar]": "اضبط الإشعارات من الخدمات عبر الإنترنت",
         "Description[ca@valencia]": "Configura les notificacions de serveis en línia",
         "Description[ca]": "Configura les notificacions de serveis en línia",
+        "Description[eo]": "Agordi sciigojn el enretaj servoj",
         "Description[es]": "Configurar notificaciones de los servicios en línea",
         "Description[eu]": "Konfiguratu lerroko zerbitzuetako jakinarazpenak",
         "Description[fr]": "Configurer les notifications des services en ligne",
@@ -20,6 +21,7 @@
         "Description[uk]": "Налаштовування сповіщень від служб інтернету",
         "Description[x-test]": "xxConfigure notifications from online servicesxx",
         "Description[zh_CN]": "配置来自在线服务的通知",
+        "Description[zh_TW]": "設定來自線上服務的通知",
         "FormFactors": [
             "tablet",
             "handset",
