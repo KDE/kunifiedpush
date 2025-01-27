@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the kunifiedpush package.
-# SPDX-FileCopyrightText: 2023, 2024 Adrián Chaves (Gallaecio)
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Adrián Chaves (Gallaecio)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-16 00:39+0000\n"
-"PO-Revision-Date: 2024-12-08 14:33+0100\n"
+"PO-Revision-Date: 2025-01-26 19:20+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #: ui/main.qml:28
 #, kde-format
@@ -97,16 +97,16 @@ msgstr "Aplicacións"
 #: ui/main.qml:282
 #, kde-format
 msgid "Unregister application from push notifications"
-msgstr "Desconectar a aplicación das notificacións levadas"
+msgstr "Retirar a aplicación do rexistro de notificacións levadas."
 
 #: ui/main.qml:289
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
-msgstr "Desconectar a aplicación"
+msgstr "Retirar a aplicación do rexistro"
 
 #: ui/main.qml:290
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
-msgstr "Seguro que quere desconectar «%1»?"
+msgstr "Seguro que quere retirar «%1» do rexistro?"
