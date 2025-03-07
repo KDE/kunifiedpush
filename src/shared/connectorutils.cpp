@@ -30,7 +30,7 @@ QString ConnectorUtils::selectDistributor()
 
 QString ConnectorUtils::selectDistributor(QStringList &&services)
 {
-    services.erase(std::remove_if(services.begin(), services.end(), [](const auto &s) { return !s.startsWith(QLatin1String(UP_DISTRIBUTOR_SERVICE_NAME_PREFIX)); }), services.end());
+    services.erase(std::remove_if(services.begin(), services.end(), [](const auto &s) { return !s.startsWith(UP_DISTRIBUTOR_SERVICE_NAME_PREFIX); }), services.end());
     std::sort(services.begin(), services.end()); // make sure results are reproducible
 
     if (services.isEmpty()) {
@@ -40,7 +40,7 @@ QString ConnectorUtils::selectDistributor(QStringList &&services)
     // check if one specific distributor was requested
     const auto requestedDist = QString::fromUtf8(qgetenv("UNIFIEDPUSH_DISTRIBUTOR"));
     if (!requestedDist.isEmpty()) {
-        const QString distServiceName = QLatin1String(UP_DISTRIBUTOR_SERVICE_NAME_PREFIX) + requestedDist;
+        const QString distServiceName = UP_DISTRIBUTOR_SERVICE_NAME_PREFIX + requestedDist;
         if (!services.contains(distServiceName)) {
             return {};
         } else {
@@ -50,7 +50,7 @@ QString ConnectorUtils::selectDistributor(QStringList &&services)
     }
 
     // prefer our own distributor over 3rdparty ones
-    const auto it = std::find(services.begin(), services.end(), QLatin1String(KDE_DISTRIBUTOR_SERVICE_NAME));
+    const auto it = std::find(services.begin(), services.end(), KDE_DISTRIBUTOR_SERVICE_NAME);
     if (it != services.end()) {
         return (*it);
     }

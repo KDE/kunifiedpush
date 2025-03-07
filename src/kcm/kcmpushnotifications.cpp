@@ -43,7 +43,7 @@ KCMPushNotifications::KCMPushNotifications(QObject *parent, const KPluginMetaDat
     connect(&m_serviceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, &KCMPushNotifications::distributorChanged);
     m_serviceWatcher.setConnection(QDBusConnection::sessionBus());
     m_serviceWatcher.setWatchMode(QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration);
-    m_serviceWatcher.addWatchedService(QLatin1String(UP_DISTRIBUTOR_SERVICE_NAME_FILTER));
+    m_serviceWatcher.addWatchedService(UP_DISTRIBUTOR_SERVICE_NAME_FILTER);
     connect(this, &KCMPushNotifications::distributorChanged, this, &KCMPushNotifications::distributorStatusChanged);
     connect(this, &KCMPushNotifications::distributorChanged, this, &KCMPushNotifications::pushProviderChanged);
 

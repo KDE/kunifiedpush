@@ -51,5 +51,5 @@ void Client::activate() const
 
 OrgUnifiedpushConnector1Interface Client::connector() const
 {
-    return OrgUnifiedpushConnector1Interface(serviceName, QLatin1String(UP_CONNECTOR_PATH), QDBusConnection::sessionBus());
+    return OrgUnifiedpushConnector1Interface(serviceName, UP_CONNECTOR_PATH, QDBusConnection::sessionBus());
 }
