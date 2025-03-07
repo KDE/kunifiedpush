@@ -32,16 +32,16 @@ public:
     explicit Distributor(QObject *parent = nullptr);
     ~Distributor();
 
-    // UnifiedPush D-Bus interface
-    QString Register(const QString &serviceName, const QString &token, const QString &description, QString &registrationResultReason);
+    // UnifiedPush D-Bus interface v1
+    [[nodiscard]] QString Register(const QString &serviceName, const QString &token, const QString &description, QString &registrationResultReason);
     void Unregister(const QString &token);
 
     // KCM D-Bus interface
-    int status() const;
-    QString pushProviderId() const;
-    QVariantMap pushProviderConfiguration(const QString &pushProviderId) const;
+    [[nodiscard]] int status() const;
+    [[nodiscard]] QString pushProviderId() const;
+    [[nodiscard]] QVariantMap pushProviderConfiguration(const QString &pushProviderId) const;
     void setPushProvider(const QString &pushProviderId, const QVariantMap &config);
-    QList<KUnifiedPush::ClientInfo> registeredClients() const;
+    [[nodiscard]] QList<KUnifiedPush::ClientInfo> registeredClients() const;
     void forceUnregisterClient(const QString &token);
 
 Q_SIGNALS:
@@ -56,17 +56,17 @@ private:
     void providerConnected();
     void providerDisconnected(AbstractPushProvider::Error error, const QString &errorMsg);
 
-    QStringList clientTokens() const;
+    [[nodiscard]] QStringList clientTokens() const;
 
-    bool setupPushProvider();
+    [[nodiscard]] bool setupPushProvider();
     void purgeUnavailableClients();
 
-    bool hasCurrentCommand() const;
+    [[nodiscard]] bool hasCurrentCommand() const;
     void processNextCommand();
 
     void setStatus(DistributorStatus::Status status);
 
-    bool isNetworkAvailable() const;
+    [[nodiscard]] bool isNetworkAvailable() const;
 
     std::unique_ptr<AbstractPushProvider> m_pushProvider;
     std::vector<Client> m_clients;

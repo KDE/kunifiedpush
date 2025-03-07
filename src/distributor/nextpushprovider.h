@@ -32,7 +32,7 @@ public:
     void registerClient(const Client &client) override;
     void unregisterClient(const Client &client) override;
 
-    static constexpr const char Id[] = "NextPush";
+    static constexpr inline auto Id = QLatin1StringView("NextPush");
 private:
     void waitForMessage();
     QNetworkRequest prepareRequest(const char *restCmd, const QString &restArg = {}) const;

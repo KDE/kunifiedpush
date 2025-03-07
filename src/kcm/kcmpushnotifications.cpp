@@ -32,7 +32,7 @@ KCMPushNotifications::KCMPushNotifications(QObject *parent, const KPluginMetaDat
     m_nam.enableStrictTransportSecurityStore(true, QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + QLatin1String("/org.kde.kunifiedpush/hsts/"));
 
     // TODO do this only when we are using the KDE distributor
-    m_mgmtIface = new OrgKdeKunifiedpushManagementInterface(QLatin1String(KDE_DISTRIBUTOR_SERVICE_NAME), QLatin1String(KDE_DISTRIBUTOR_MANAGEMENT_PATH), QDBusConnection::sessionBus(), this);
+    m_mgmtIface = new OrgKdeKunifiedpushManagementInterface(KDE_DISTRIBUTOR_SERVICE_NAME, KDE_DISTRIBUTOR_MANAGEMENT_PATH, QDBusConnection::sessionBus(), this);
     connect(m_mgmtIface, &OrgKdeKunifiedpushManagementInterface::statusChanged, this, &KCMPushNotifications::distributorStatusChanged);
     connect(m_mgmtIface, &OrgKdeKunifiedpushManagementInterface::pushProviderChanged, this, &KCMPushNotifications::pushProviderChanged);
 
@@ -43,7 +43,7 @@ KCMPushNotifications::KCMPushNotifications(QObject *parent, const KPluginMetaDat
     connect(&m_serviceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, &KCMPushNotifications::distributorChanged);
     m_serviceWatcher.setConnection(QDBusConnection::sessionBus());
     m_serviceWatcher.setWatchMode(QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration);
-    m_serviceWatcher.addWatchedService(QLatin1String(UP_DISTRIBUTOR_SERVICE_NAME_FILTER));
+    m_serviceWatcher.addWatchedService(UP_DISTRIBUTOR_SERVICE_NAME_FILTER);
     connect(this, &KCMPushNotifications::distributorChanged, this, &KCMPushNotifications::distributorStatusChanged);
     connect(this, &KCMPushNotifications::distributorChanged, this, &KCMPushNotifications::pushProviderChanged);
 

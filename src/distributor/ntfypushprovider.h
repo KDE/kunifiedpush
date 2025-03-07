@@ -30,7 +30,7 @@ public:
     void registerClient(const Client &client) override;
     void unregisterClient(const Client &client) override;
 
-    static constexpr const char Id[] = "Ntfy";
+    static constexpr inline auto Id = QLatin1StringView("Ntfy");
 private:
     void doConnectToProvider();
     void storeState();

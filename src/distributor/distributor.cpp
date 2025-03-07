@@ -40,10 +40,10 @@ Distributor::Distributor(QObject *parent)
 
     // register at D-Bus
     new Distributor1Adaptor(this);
-    QDBusConnection::sessionBus().registerObject(QLatin1String(UP_DISTRIBUTOR_PATH), this);
+    QDBusConnection::sessionBus().registerObject(UP_DISTRIBUTOR_PATH, this);
 
     new ManagementAdaptor(this);
-    QDBusConnection::sessionBus().registerObject(QLatin1String(KDE_DISTRIBUTOR_MANAGEMENT_PATH), this);
+    QDBusConnection::sessionBus().registerObject(KDE_DISTRIBUTOR_MANAGEMENT_PATH, this);
 
     // create and set up push provider
     if (!setupPushProvider()) {
@@ -116,7 +116,7 @@ QString Distributor::Register(const QString& serviceName, const QString& token, 
     (*it).activate();
     (*it).connector().NewEndpoint((*it).token, (*it).endpoint);
     registrationResultReason.clear();
-    return QLatin1String(UP_REGISTER_RESULT_SUCCESS);
+    return UP_REGISTER_RESULT_SUCCESS;
 }
 
 void Distributor::Unregister(const QString& token)
@@ -258,13 +258,13 @@ bool Distributor::setupPushProvider()
 {
     // determine push provider
     const auto pushProviderName = pushProviderId();
-    if (pushProviderName == QLatin1String(GotifyPushProvider::Id)) {
+    if (pushProviderName == GotifyPushProvider::Id) {
         m_pushProvider.reset(new GotifyPushProvider);
-    } else if (pushProviderName == QLatin1String(NextPushProvider::Id)) {
+    } else if (pushProviderName == NextPushProvider::Id) {
         m_pushProvider.reset(new NextPushProvider);
-    } else if (pushProviderName == QLatin1String(NtfyPushProvider::Id)) {
+    } else if (pushProviderName == NtfyPushProvider::Id) {
         m_pushProvider.reset(new NtfyPushProvider);
-    } else if (pushProviderName == QLatin1String(MockPushProvider::Id)) {
+    } else if (pushProviderName == MockPushProvider::Id) {
         m_pushProvider.reset(new MockPushProvider);
     } else {
         qCWarning(Log) << "Unknown push provider:" << pushProviderName;

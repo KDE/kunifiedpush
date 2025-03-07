@@ -27,7 +27,7 @@ public:
     void registerClient(const Client &client) override;
     void unregisterClient(const Client &client) override;
 
-    static constexpr const char Id[] = "Gotify";
+    static constexpr inline auto Id = QLatin1StringView("Gotify");
 private:
     void wsMessageReceived(const QString &msg);
 

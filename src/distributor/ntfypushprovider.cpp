@@ -15,6 +15,7 @@
 #include <QUrlQuery>
 #include <QUuid>
 
+using namespace Qt::Literals;
 using namespace KUnifiedPush;
 
 NtfyPushProvider::NtfyPushProvider(QObject *parent)
@@ -44,7 +45,7 @@ bool NtfyPushProvider::loadSettings(const QSettings &settings)
     m_url = settings.value(QStringLiteral("Url"), QUrl()).toUrl();
 
     QSettings internal;
-    internal.beginGroup(QLatin1String(providerId()) + QLatin1String("-internal"));
+    internal.beginGroup(providerId() + "-internal"_L1);
     m_topics = internal.value(QStringLiteral("Topics"), QStringList()).toStringList();
     m_lastMessageId = internal.value(QStringLiteral("LastMessageId"), QString()).toString();
 
@@ -131,7 +132,7 @@ void NtfyPushProvider::doConnectToProvider()
 void NtfyPushProvider::storeState()
 {
     QSettings settings;
-    settings.beginGroup(QLatin1String(providerId()) + QLatin1String("-internal"));
+    settings.beginGroup(providerId() + "-internal"_L1);
     settings.setValue(QStringLiteral("Topics"), m_topics);
     settings.setValue(QStringLiteral("LastMessageId"), m_lastMessageId);
 }

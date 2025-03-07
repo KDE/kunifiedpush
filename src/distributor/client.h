@@ -22,12 +22,12 @@ public:
     static Client load(const QString &token, QSettings &settings);
 
     /** Contains all required information for a client. */
-    bool isValid() const;
+    [[nodiscard]] bool isValid() const;
 
     /** Activate client on D-Bus. */
     void activate() const;
     /** D-Bus UnifiedPush connector interface. */
-    OrgUnifiedpushConnector1Interface connector() const;
+    [[nodiscard]] OrgUnifiedpushConnector1Interface connector() const;
 
     QString serviceName;
     QString token;

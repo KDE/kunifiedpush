@@ -52,7 +52,7 @@ public:
     virtual void unregisterClient(const Client &client) = 0;
 
     /** Provider id used e.g. in settings. */
-    const char* providerId() const;
+    [[nodiscard]] QLatin1StringView providerId() const;
 
 Q_SIGNALS:
     /** Inform about a received push notification. */
@@ -71,11 +71,11 @@ Q_SIGNALS:
     void disconnected(KUnifiedPush::AbstractPushProvider::Error error, const QString &errorMsg = {});
 
 protected:
-    explicit AbstractPushProvider(const char *providerId, QObject *parent);
+    explicit AbstractPushProvider(QLatin1StringView providerId, QObject *parent);
     QNetworkAccessManager *nam();
 
 private:
-    const char *const m_providerId;
+    const QLatin1StringView m_providerId;
     QNetworkAccessManager *m_nam = nullptr;
 };
 

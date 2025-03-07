@@ -23,7 +23,7 @@ public:
     void registerClient(const Client &client) override;
     void unregisterClient(const Client &client) override;
 
-    static constexpr const char Id[] = "Mock";
+    static constexpr inline auto Id = QLatin1StringView("Mock");
     static MockPushProvider *s_instance;
 };
 

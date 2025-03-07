@@ -12,6 +12,7 @@ project(KUnifiedPush VERSION ${RELEASE_SERVICE_VERSION})
 
 option(KUNIFIEDPUSH_CLIENT_ONLY "Build only the application client library." FALSE)
 
+set(CMAKE_CXX_STANDARD 20)
 set(KF_MIN_VERSION 6.3.0)
 set(QT_MIN_VERSION 6.5)
 find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
