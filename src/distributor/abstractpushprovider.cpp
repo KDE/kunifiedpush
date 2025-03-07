@@ -10,7 +10,7 @@
 
 using namespace KUnifiedPush;
 
-AbstractPushProvider::AbstractPushProvider(const char *providerId, QObject *parent)
+AbstractPushProvider::AbstractPushProvider(QLatin1StringView providerId, QObject *parent)
     : QObject(parent)
     , m_providerId(providerId)
 {
@@ -18,7 +18,7 @@ AbstractPushProvider::AbstractPushProvider(const char *providerId, QObject *pare
 
 AbstractPushProvider::~AbstractPushProvider() = default;
 
-const char* AbstractPushProvider::providerId() const
+QLatin1StringView AbstractPushProvider::providerId() const
 {
     return m_providerId;
 }

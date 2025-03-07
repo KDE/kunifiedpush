@@ -10,8 +10,6 @@
 
 #include <QObject>
 
-#include <memory>
-
 /** Client-side integration with UnifiedPush. */
 namespace KUnifiedPush {
 
@@ -38,7 +36,7 @@ public:
      *  This needs to be communicated to the corresponding server-side application.
      *  @see endpointChanged
      */
-    QString endpoint() const;
+    [[nodiscard]] QString endpoint() const;
 
     /** Register this client.
      *  This is for subscribing to push notifications and is only needed the first
@@ -64,7 +62,7 @@ public:
     };
     Q_ENUM(State)
     /** State of the connector. */
-    State state() const;
+    [[nodiscard]] State state() const;
     // TODO error message
 
 Q_SIGNALS:

@@ -31,16 +31,16 @@ public:
     void init();
     void deinit();
     void doSetDistributor(const QString &distServiceName);
-    bool hasDistributor() const;
+    [[nodiscard]] bool hasDistributor() const;
     void doRegister();
     void doUnregister();
 
-    // D-Bus interface
+    // UnifiedPush D-Bus interface v1
     void Message(const QString &token, const QByteArray &message, const QString &messageIdentifier);
     void NewEndpoint(const QString &token, const QString &endpoint);
     void Unregistered(const QString &token);
 
-    QString stateFile() const;
+    [[nodiscard]] QString stateFile() const;
     void loadState();
     void storeState() const;
     void selectDistributor();

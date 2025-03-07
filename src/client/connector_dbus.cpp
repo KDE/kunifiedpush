@@ -19,9 +19,9 @@ using namespace KUnifiedPush;
 void ConnectorPrivate::init()
 {
     new Connector1Adaptor(this);
-    const auto res = QDBusConnection::sessionBus().registerObject(QLatin1String(UP_CONNECTOR_PATH), this);
+    auto res = QDBusConnection::sessionBus().registerObject(UP_CONNECTOR_PATH, this);
     if (!res) {
-        qCWarning(Log) << "Failed to register D-Bus object!" << UP_CONNECTOR_PATH;
+        qCWarning(Log) << "Failed to register v1 D-Bus adapter!" << UP_CONNECTOR_PATH;
         // TODO switch to error state?
     }
 
@@ -44,17 +44,17 @@ void ConnectorPrivate::init()
 
     m_serviceWatcher.setConnection(QDBusConnection::sessionBus());
     m_serviceWatcher.setWatchMode(QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration);
-    m_serviceWatcher.addWatchedService(QLatin1String(UP_DISTRIBUTOR_SERVICE_NAME_FILTER));
+    m_serviceWatcher.addWatchedService(UP_DISTRIBUTOR_SERVICE_NAME_FILTER);
 }
 
 void ConnectorPrivate::deinit()
 {
-    QDBusConnection::sessionBus().unregisterObject(QLatin1String(UP_CONNECTOR_PATH));
+    QDBusConnection::sessionBus().unregisterObject(UP_CONNECTOR_PATH);
 }
 
 void ConnectorPrivate::doSetDistributor(const QString &distServiceName)
 {
-    m_distributor = new OrgUnifiedpushDistributor1Interface(distServiceName, QLatin1String(UP_DISTRIBUTOR_PATH), QDBusConnection::sessionBus(), this);
+    m_distributor = new OrgUnifiedpushDistributor1Interface(distServiceName, UP_DISTRIBUTOR_PATH, QDBusConnection::sessionBus(), this);
     if (!m_distributor->isValid()) {
         qCWarning(Log) << "Invalid distributor D-Bus interface?" << distServiceName;
     }
@@ -77,7 +77,7 @@ void ConnectorPrivate::doRegister()
             const auto result = watcher->reply().arguments().at(0).toString();
             const auto errorMsg = watcher->reply().arguments().at(1).toString();
             qCDebug(Log) << result << errorMsg;
-            if (result == QLatin1String(UP_REGISTER_RESULT_SUCCESS)) {
+            if (result == UP_REGISTER_RESULT_SUCCESS) {
                 setState(m_endpoint.isEmpty() ? Connector::Registering : Connector::Registered);
             } else {
                 setState(Connector::Error);

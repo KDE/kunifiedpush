@@ -6,20 +6,22 @@
 #ifndef KUNIFIEDPUSH_UNIFIEDPUSH_CONSTANTS_H
 #define KUNIFIEDPUSH_UNIFIEDPUSH_CONSTANTS_H
 
+#include <QString>
+
 namespace KUnifiedPush
 {
 
-constexpr const char UP_CONNECTOR_PATH[] = "/org/unifiedpush/Connector";
+constexpr inline auto UP_CONNECTOR_PATH = QLatin1StringView("/org/unifiedpush/Connector");
 
-constexpr const char UP_DISTRIBUTOR_SERVICE_NAME_PREFIX[] = "org.unifiedpush.Distributor.";
-constexpr const char UP_DISTRIBUTOR_SERVICE_NAME_FILTER[] = "org.unifiedpush.Distributor*";
-constexpr const char UP_DISTRIBUTOR_PATH[] = "/org/unifiedpush/Distributor";
+constexpr inline auto UP_DISTRIBUTOR_SERVICE_NAME_PREFIX = QLatin1StringView("org.unifiedpush.Distributor.");
+constexpr inline auto UP_DISTRIBUTOR_SERVICE_NAME_FILTER = QLatin1StringView("org.unifiedpush.Distributor*");
+constexpr inline auto UP_DISTRIBUTOR_PATH = QLatin1StringView("/org/unifiedpush/Distributor");
 
-constexpr const char UP_REGISTER_RESULT_SUCCESS[] = "REGISTRATION_SUCCEEDED";
-constexpr const char UP_REGISTER_RESULT_FAILURE[] = "REGISTRATION_FAILED";
+constexpr inline auto UP_REGISTER_RESULT_SUCCESS = QLatin1StringView("REGISTRATION_SUCCEEDED");
+constexpr inline auto UP_REGISTER_RESULT_FAILURE = QLatin1StringView("REGISTRATION_FAILED");
 
-constexpr const char KDE_DISTRIBUTOR_SERVICE_NAME[] = "org.unifiedpush.Distributor.kde";
-constexpr const char KDE_DISTRIBUTOR_MANAGEMENT_PATH[] = "/Management";
+constexpr inline auto KDE_DISTRIBUTOR_SERVICE_NAME = QLatin1StringView("org.unifiedpush.Distributor.kde");
+constexpr inline auto KDE_DISTRIBUTOR_MANAGEMENT_PATH = QLatin1StringView("/Management");
 
 }
 
