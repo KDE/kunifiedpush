@@ -5,7 +5,9 @@
 
 #include "connector_p.h"
 #include "connector1adaptor.h"
+#include "connector2adaptor.h"
 #include "distributor1iface.h"
+#include "distributor2iface.h"
 #include "logging.h"
 
 #include "../shared/unifiedpush-constants.h"
@@ -19,9 +21,10 @@ using namespace KUnifiedPush;
 void ConnectorPrivate::init()
 {
     new Connector1Adaptor(this);
-    auto res = QDBusConnection::sessionBus().registerObject(UP_CONNECTOR_PATH, this);
+    new Connector2Adaptor(this);
+    const auto res = QDBusConnection::sessionBus().registerObject(UP_CONNECTOR_PATH, this);
     if (!res) {
-        qCWarning(Log) << "Failed to register v1 D-Bus adapter!" << UP_CONNECTOR_PATH;
+        qCWarning(Log) << "Failed to register connector D-Bus adapter!" << UP_CONNECTOR_PATH;
         // TODO switch to error state?
     }
 

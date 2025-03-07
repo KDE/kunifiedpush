@@ -40,6 +40,11 @@ public:
     void NewEndpoint(const QString &token, const QString &endpoint);
     void Unregistered(const QString &token);
 
+    // UnifiedPush D-Bus interface v2
+    [[nodiscard]] QVariantMap Message(const QVariantMap &args);
+    [[nodiscard]] QVariantMap NewEndpoint(const QVariantMap &args);
+    [[nodiscard]] QVariantMap Unregistered(const QVariantMap &args);
+
     [[nodiscard]] QString stateFile() const;
     void loadState();
     void storeState() const;
