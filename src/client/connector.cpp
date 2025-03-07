@@ -8,6 +8,7 @@
 #include "logging.h"
 
 #include "../shared/connectorutils_p.h"
+#include "../shared/unifiedpush-constants.h"
 
 #include <QFile>
 #include <QSettings>
@@ -38,6 +39,20 @@ void ConnectorPrivate::Message(const QString &token, const QByteArray &message, 
     Q_EMIT q->messageReceived(message);
 }
 
+QVariantMap ConnectorPrivate::Message(const QVariantMap &args)
+{
+    const auto token = args.value(UP_ARG_TOKEN).toString();
+    const auto message = args.value(UP_ARG_MESSAGE).toByteArray();
+    const auto id = args.value(UP_ARG_MESSAGE_IDENTIFIER).toString();
+    Message(token, message, id);
+
+    QVariantMap r;
+    if (!id.isEmpty()) {
+        r.insert(UP_ARG_MESSAGE_IDENTIFIER, id);
+    }
+    return r;
+}
+
 void ConnectorPrivate::NewEndpoint(const QString &token, const QString &endpoint)
 {
     qCDebug(Log) << token << endpoint;
@@ -56,6 +71,14 @@ void ConnectorPrivate::NewEndpoint(const QString &token, const QString &endpoint
     }
     storeState();
     setState(Connector::Registered);
+}
+
+QVariantMap ConnectorPrivate::NewEndpoint(const QVariantMap &args)
+{
+    const auto token = args.value(UP_ARG_TOKEN).toString();
+    const auto endpoint = args.value(UP_ARG_ENDPOINT).toString();
+    NewEndpoint(token, endpoint);
+    return {};
 }
 
 void ConnectorPrivate::Unregistered(const QString &token)
@@ -84,6 +107,13 @@ void ConnectorPrivate::Unregistered(const QString &token)
         m_currentCommand = Command::None;
     }
     processNextCommand();
+}
+
+QVariantMap ConnectorPrivate::Unregistered(const QVariantMap &args)
+{
+    const auto token = args.value(UP_ARG_TOKEN).toString();
+    Unregistered(token);
+    return {};
 }
 
 QString ConnectorPrivate::stateFile() const
