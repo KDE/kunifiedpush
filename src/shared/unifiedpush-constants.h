@@ -21,7 +21,9 @@ constexpr inline auto UP_ARG_DESCRIPTION = QLatin1StringView("description");
 constexpr inline auto UP_ARG_ENDPOINT = QLatin1StringView("endpoint");
 constexpr inline auto UP_ARG_MESSAGE = QLatin1StringView("message");
 constexpr inline auto UP_ARG_MESSAGE_IDENTIFIER = QLatin1StringView("id");
+constexpr inline auto UP_ARG_REASON = QLatin1StringView("reason");
 constexpr inline auto UP_ARG_SERVICE = QLatin1StringView("service");
+constexpr inline auto UP_ARG_SUCCESS = QLatin1StringView("success");
 constexpr inline auto UP_ARG_TOKEN = QLatin1StringView("token");
 constexpr inline auto UP_ARG_VAPID = QLatin1StringView("vapid");
 

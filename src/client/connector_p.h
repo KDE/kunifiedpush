@@ -16,8 +16,12 @@
 #include <QObject>
 
 #include <deque>
+#include <variant>
 
 class OrgUnifiedpushDistributor1Interface;
+class OrgUnifiedpushDistributor2Interface;
+
+class QDBusPendingCall;
 
 namespace KUnifiedPush {
 class ConnectorPrivate : public QObject
@@ -68,7 +72,9 @@ public:
     std::deque<Command> m_commandQueue;
 
 #ifndef Q_OS_ANDROID
-    OrgUnifiedpushDistributor1Interface *m_distributor = nullptr;
+    void handleRegisterResponse(const QDBusPendingCall &reply);
+
+    std::variant<OrgUnifiedpushDistributor1Interface*, OrgUnifiedpushDistributor2Interface*> m_distributor;
     QDBusServiceWatcher m_serviceWatcher;
 #else
     QJniObject m_distributor;
