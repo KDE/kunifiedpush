@@ -36,6 +36,10 @@ public:
     [[nodiscard]] QString Register(const QString &serviceName, const QString &token, const QString &description, QString &registrationResultReason);
     void Unregister(const QString &token);
 
+    // UnifiedPush D-Bus interface v2
+    [[nodiscard]] QVariantMap Register(const QVariantMap &args);
+    [[nodiscard]] QVariantMap Unregister(const QVariantMap &args);
+
     // KCM D-Bus interface
     [[nodiscard]] int status() const;
     [[nodiscard]] QString pushProviderId() const;
