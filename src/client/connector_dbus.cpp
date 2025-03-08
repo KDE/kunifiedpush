@@ -8,6 +8,7 @@
 #include "connector2adaptor.h"
 #include "distributor1iface.h"
 #include "distributor2iface.h"
+#include "introspectiface.h"
 #include "logging.h"
 
 #include "../shared/unifiedpush-constants.h"
@@ -16,6 +17,7 @@
 #include <QDBusConnection>
 #include <QDBusPendingCallWatcher>
 
+using namespace Qt::Literals;
 using namespace KUnifiedPush;
 
 void ConnectorPrivate::init()
@@ -37,9 +39,10 @@ void ConnectorPrivate::init()
     });
     connect(&m_serviceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, [this](const QString &serviceName) {
         qCDebug(Log) << "Distributor" << serviceName << "is gone";
-        if (m_distributor->service() == serviceName) {
-            delete m_distributor;
-            m_distributor = nullptr;
+        const auto distributorServiceName = std::visit([](auto iface) { return iface->service(); }, m_distributor);
+        if (distributorServiceName == serviceName) {
+            std::visit([](auto iface) { return delete iface; }, m_distributor);
+            m_distributor = {};
             m_currentCommand = Command::None;
             setState(Connector::NoDistributor);
         }
@@ -57,28 +60,88 @@ void ConnectorPrivate::deinit()
 
 void ConnectorPrivate::doSetDistributor(const QString &distServiceName)
 {
-    m_distributor = new OrgUnifiedpushDistributor1Interface(distServiceName, UP_DISTRIBUTOR_PATH, QDBusConnection::sessionBus(), this);
-    if (!m_distributor->isValid()) {
-        qCWarning(Log) << "Invalid distributor D-Bus interface?" << distServiceName;
+    // QDBusInterface::isValid does not detect whether the interface actually exists on the remote side,
+    // so we have to manually introspect this
+    OrgFreedesktopDBusIntrospectableInterface introspectIface(distServiceName, UP_DISTRIBUTOR_PATH, QDBusConnection::sessionBus());
+    if (const QString reply = introspectIface.Introspect(); reply.contains(QLatin1StringView(OrgUnifiedpushDistributor2Interface::staticInterfaceName()))) {
+        auto iface2 = std::make_unique<OrgUnifiedpushDistributor2Interface>(distServiceName, UP_DISTRIBUTOR_PATH, QDBusConnection::sessionBus(), this);
+        if (iface2->isValid()) {
+            m_distributor = iface2.release();
+            qCDebug(Log) << "Using v2 distributor interface";
+            return;
+        }
     }
+    auto iface1 = std::make_unique<OrgUnifiedpushDistributor1Interface>(distServiceName, UP_DISTRIBUTOR_PATH, QDBusConnection::sessionBus(), this);
+    if (iface1->isValid()) {
+        m_distributor = iface1.release();
+        qCDebug(Log) << "Using v1 distributor interface";
+        return;
+    }
+    qCWarning(Log) << "Invalid distributor D-Bus interface?" << distServiceName;
 }
 
 bool ConnectorPrivate::hasDistributor() const
 {
-    return m_distributor && m_distributor->isValid();
+    return std::visit([](auto iface) { return iface && iface->isValid(); }, m_distributor);
 }
 
 void ConnectorPrivate::doRegister()
 {
-    const auto reply = m_distributor->Register(m_serviceName, m_token, m_description);
+    std::visit([this](auto iface) {
+        using T = std::decay_t<decltype(iface)>;
+        if constexpr (std::is_same_v<OrgUnifiedpushDistributor1Interface*, T>) {
+            handleRegisterResponse(iface->Register(m_serviceName, m_token, m_description));
+        }
+        if constexpr (std::is_same_v<OrgUnifiedpushDistributor2Interface*, T>) {
+            QVariantMap args;
+            args.insert(UP_ARG_SERVICE, m_serviceName);
+            args.insert(UP_ARG_TOKEN, m_token);
+            args.insert(UP_ARG_DESCRIPTION, m_description);
+            handleRegisterResponse(iface->Register(args));
+        }
+    }, m_distributor);
+}
+
+// Generally Qt can do that automatically, but not for the delayed replies
+// we get for Register()...
+[[nodiscard]] static QVariantMap unpackVariantMap(const QDBusArgument &arg)
+{
+    QVariantMap m;
+    arg.beginMap();
+    while (!arg.atEnd()) {
+        arg.beginMapEntry();
+        QString key;
+        QVariant value;
+        arg >> key;
+        arg >> value;
+        m.insert(key, value);
+        arg.endMapEntry();
+    }
+    arg.endMap();
+    return m;
+}
+
+void ConnectorPrivate::handleRegisterResponse(const QDBusPendingCall &reply)
+{
     auto watcher = new QDBusPendingCallWatcher(reply, this);
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher]() {
         if (watcher->isError()) {
             qCWarning(Log) << watcher->error();
             setState(Connector::Error);
         } else {
-            const auto result = watcher->reply().arguments().at(0).toString();
-            const auto errorMsg = watcher->reply().arguments().at(1).toString();
+            QString result, errorMsg;
+            std::visit([&result, &errorMsg, watcher](auto iface) {
+                using T = std::decay_t<decltype(iface)>;
+                if constexpr (std::is_same_v<OrgUnifiedpushDistributor1Interface*, T>) {
+                    result = watcher->reply().arguments().at(0).toString();
+                    errorMsg = watcher->reply().arguments().at(1).toString();
+                }
+                if constexpr (std::is_same_v<OrgUnifiedpushDistributor2Interface*, T>) {
+                    const auto args = unpackVariantMap(watcher->reply().arguments().at(0).value<QDBusArgument>());
+                    result = args.value(UP_ARG_SUCCESS).toString();
+                    errorMsg = args.value(UP_ARG_REASON).toString();
+                }
+            }, m_distributor);
             qCDebug(Log) << result << errorMsg;
             if (result == UP_REGISTER_RESULT_SUCCESS) {
                 setState(m_endpoint.isEmpty() ? Connector::Registering : Connector::Registered);
@@ -93,5 +156,15 @@ void ConnectorPrivate::doRegister()
 
 void ConnectorPrivate::doUnregister()
 {
-    m_distributor->Unregister(m_token);
+    std::visit([this](auto iface) {
+        using T = std::decay_t<decltype(iface)>;
+        if constexpr (std::is_same_v<OrgUnifiedpushDistributor1Interface*, T>) {
+            iface->Unregister(m_token);
+        }
+        if constexpr (std::is_same_v<OrgUnifiedpushDistributor2Interface*, T>) {
+            QVariantMap args;
+            args.insert(UP_ARG_TOKEN, m_token);
+            iface->Unregister(args);
+        }
+    }, m_distributor);
 }
