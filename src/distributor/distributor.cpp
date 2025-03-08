@@ -5,6 +5,7 @@
 
 #include "distributor.h"
 #include "distributor1adaptor.h"
+#include "distributor2adaptor.h"
 #include "managementadaptor.h"
 
 #include "client.h"
@@ -39,6 +40,7 @@ Distributor::Distributor(QObject *parent)
 
     // register at D-Bus
     new Distributor1Adaptor(this);
+    new Distributor2Adaptor(this);
     QDBusConnection::sessionBus().registerObject(UP_DISTRIBUTOR_PATH, this);
 
     new ManagementAdaptor(this);
@@ -84,25 +86,19 @@ Distributor::~Distributor() = default;
 QString Distributor::Register(const QString& serviceName, const QString& token, const QString &description, QString& registrationResultReason)
 {
     qCDebug(Log) << serviceName << token;
-    const auto it = std::find_if(m_clients.begin(), m_clients.end(), [&token](const auto &client) {
+    const auto it = std::ranges::find_if(m_clients, [&token](const auto &client) {
         return client.token == token;
     });
     if (it == m_clients.end()) {
-        qCDebug(Log) << "Registering new client";
-
-        // if this is the first client, connect to the push provider first
-        // this can involve first-time device registration that is a prerequisite for registering clients
-        if (m_clients.empty()) {
-            Command cmd;
-            cmd.type = Command::Connect;
-            m_commandQueue.push_back(std::move(cmd));
-        }
+        qCDebug(Log) << "Registering new client (v1)";
+        connectOnDemand();
 
         Command cmd;
         cmd.type = Command::Register;
         cmd.client.token = token;
         cmd.client.serviceName = serviceName;
         cmd.client.description = description;
+        cmd.client.version = Client::UnifiedPushVersion::v1;
         setDelayedReply(true);
         cmd.reply = message().createReply();
         m_commandQueue.push_back(std::move(cmd));
@@ -111,11 +107,59 @@ QString Distributor::Register(const QString& serviceName, const QString& token, 
         return {};
     }
 
-    qCDebug(Log) << "Registering known client";
+    qCDebug(Log) << "Registering known client (v1)";
     (*it).activate();
     (*it).newEndpoint();
     registrationResultReason.clear();
     return UP_REGISTER_RESULT_SUCCESS;
+}
+
+QVariantMap Distributor::Register(const QVariantMap &args)
+{
+    const auto serviceName = args.value(UP_ARG_SERVICE).toString();
+    const auto token = args.value(UP_ARG_TOKEN).toString();
+    const auto description = args.value(UP_ARG_DESCRIPTION).toString();
+    qCDebug(Log) << serviceName << token;
+
+    const auto it = std::ranges::find_if(m_clients, [&token](const auto &client) {
+        return client.token == token;
+    });
+    if (it == m_clients.end()) {
+        qCDebug(Log) << "Registering new client (v2)";
+        connectOnDemand();
+
+        Command cmd;
+        cmd.type = Command::Register;
+        cmd.client.token = token;
+        cmd.client.serviceName = serviceName;
+        cmd.client.description = description;
+        cmd.client.version = Client::UnifiedPushVersion::v2;
+        setDelayedReply(true);
+        cmd.reply = message().createReply();
+        m_commandQueue.push_back(std::move(cmd));
+
+        processNextCommand();
+        return {};
+    }
+
+    qCDebug(Log) << "Registering known client (v2)";
+    (*it).activate();
+    (*it).newEndpoint();
+
+    QVariantMap res;
+    res.insert(UP_ARG_SUCCESS, QString::fromLatin1(UP_REGISTER_RESULT_SUCCESS));
+    return res;
+}
+
+void Distributor::connectOnDemand()
+{
+    // if this is the first client, connect to the push provider first
+    // this can involve first-time device registration that is a prerequisite for registering clients
+    if (m_clients.empty()) {
+        Command cmd;
+        cmd.type = Command::Connect;
+        m_commandQueue.push_back(std::move(cmd));
+    }
 }
 
 void Distributor::Unregister(const QString& token)
@@ -134,6 +178,13 @@ void Distributor::Unregister(const QString& token)
     cmd.client = (*it);
     m_commandQueue.push_back(std::move(cmd));
     processNextCommand();
+}
+
+QVariantMap Distributor::Unregister(const QVariantMap &args)
+{
+    const auto token = args.value(UP_ARG_TOKEN).toString();
+    Unregister(token);
+    return {};
 }
 
 void Distributor::messageReceived(const Message &msg) const
@@ -168,7 +219,18 @@ void Distributor::clientRegistered(const Client &client, AbstractPushProvider::E
         client.newEndpoint();
 
         if (m_currentCommand.reply.type() != QDBusMessage::InvalidMessage) {
-            m_currentCommand.reply << QString::fromLatin1(UP_REGISTER_RESULT_SUCCESS) << QString();
+            switch (client.version) {
+                case Client::UnifiedPushVersion::v1:
+                    m_currentCommand.reply << QString::fromLatin1(UP_REGISTER_RESULT_SUCCESS) << QString();
+                    break;
+                case Client::UnifiedPushVersion::v2:
+                {
+                    QVariantMap args;
+                    args.insert(UP_ARG_SUCCESS, QString::fromLatin1(UP_REGISTER_RESULT_SUCCESS));
+                    m_currentCommand.reply << args;
+                    break;
+                }
+            }
             QDBusConnection::sessionBus().send(m_currentCommand.reply);
         }
         break;
@@ -178,9 +240,25 @@ void Distributor::clientRegistered(const Client &client, AbstractPushProvider::E
         m_commandQueue.push_front(std::move(m_currentCommand));
         break;
     case AbstractPushProvider::ProviderRejected:
-        m_currentCommand.reply << QString::fromLatin1(UP_REGISTER_RESULT_FAILURE) << errorMsg;
+    {
+        switch (client.version) {
+            case Client::UnifiedPushVersion::v1:
+                m_currentCommand.reply << QString::fromLatin1(UP_REGISTER_RESULT_FAILURE) << errorMsg;
+                break;
+            case Client::UnifiedPushVersion::v2:
+            {
+                QVariantMap args;
+                args.insert(UP_ARG_SUCCESS, QString::fromLatin1(UP_REGISTER_RESULT_FAILURE));
+                args.insert(UP_ARG_REASON, QString::fromLatin1(UP_REGISTER_FAILURE_INTERNAL_ERROR));
+                // TODO when the client side ever actually uses errorMsg we could return this here in addition
+                // in a custom argument
+                m_currentCommand.reply << args;
+                break;
+            }
+        }
         QDBusConnection::sessionBus().send(m_currentCommand.reply);
         break;
+    }
     }
 
     m_currentCommand = {};

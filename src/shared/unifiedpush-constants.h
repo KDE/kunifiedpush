@@ -30,6 +30,12 @@ constexpr inline auto UP_ARG_VAPID = QLatin1StringView("vapid");
 constexpr inline auto UP_REGISTER_RESULT_SUCCESS = QLatin1StringView("REGISTRATION_SUCCEEDED");
 constexpr inline auto UP_REGISTER_RESULT_FAILURE = QLatin1StringView("REGISTRATION_FAILED");
 
+constexpr inline auto UP_REGISTER_FAILURE_INTERNAL_ERROR = QLatin1StringView("INTERNAL_ERROR");
+constexpr inline auto UP_REGISTER_FAILURE_NETWORK = QLatin1StringView("NETWORK");
+constexpr inline auto UP_REGISTER_FAILURE_ACTION_REQUIRED = QLatin1StringView("ACTION_REQUIRED");
+constexpr inline auto UP_REGISTER_FAILURE_VAPID_REQUIRED = QLatin1StringView("VAPID_REQUIRED");
+constexpr inline auto UP_REGISTER_FAILURE_UNAUTHORIZED = QLatin1StringView("UNAUTHORIZED");
+
 constexpr inline auto KDE_DISTRIBUTOR_SERVICE_NAME = QLatin1StringView("org.unifiedpush.Distributor.kde");
 constexpr inline auto KDE_DISTRIBUTOR_MANAGEMENT_PATH = QLatin1StringView("/Management");
 
