@@ -8,7 +8,6 @@
 #include "managementadaptor.h"
 
 #include "client.h"
-#include "connector1iface.h"
 #include "gotifypushprovider.h"
 #include "logging.h"
 #include "message.h"
@@ -114,7 +113,7 @@ QString Distributor::Register(const QString& serviceName, const QString& token, 
 
     qCDebug(Log) << "Registering known client";
     (*it).activate();
-    (*it).connector().NewEndpoint((*it).token, (*it).endpoint);
+    (*it).newEndpoint();
     registrationResultReason.clear();
     return UP_REGISTER_RESULT_SUCCESS;
 }
@@ -149,7 +148,7 @@ void Distributor::messageReceived(const Message &msg) const
     }
 
     (*it).activate();
-    (*it).connector().Message((*it).token, msg.content, {});
+    (*it).message(msg.content, {});
 }
 
 void Distributor::clientRegistered(const Client &client, AbstractPushProvider::Error error, const QString &errorMsg)
@@ -166,7 +165,7 @@ void Distributor::clientRegistered(const Client &client, AbstractPushProvider::E
         settings.setValue(QStringLiteral("Clients/Tokens"), clientTokens());
         Q_EMIT registeredClientsChanged();
 
-        client.connector().NewEndpoint(client.token, client.endpoint);
+        client.newEndpoint();
 
         if (m_currentCommand.reply.type() != QDBusMessage::InvalidMessage) {
             m_currentCommand.reply << QString::fromLatin1(UP_REGISTER_RESULT_SUCCESS) << QString();
@@ -193,7 +192,7 @@ void Distributor::clientUnregistered(const Client &client, AbstractPushProvider:
     qCDebug(Log) << client.token << client.remoteId << client.serviceName << error;
     switch (error) {
     case AbstractPushProvider::NoError:
-        client.connector().Unregistered(m_currentCommand.type == Command::Unregister ? QString() : client.token);
+        client.unregistered(m_currentCommand.type == Command::Unregister);
         [[fallthrough]];
     case AbstractPushProvider::ProviderRejected:
     {

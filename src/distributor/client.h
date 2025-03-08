@@ -10,7 +10,6 @@
 #include <QString>
 
 class QSettings;
-class OrgUnifiedpushConnector1Interface;
 
 namespace KUnifiedPush {
 
@@ -26,14 +25,24 @@ public:
 
     /** Activate client on D-Bus. */
     void activate() const;
+
     /** D-Bus UnifiedPush connector interface. */
-    [[nodiscard]] OrgUnifiedpushConnector1Interface connector() const;
+    void message(const QByteArray &message, const QString &messageIdentifier) const;
+    void newEndpoint() const;
+    void unregistered(bool isConfirmation) const;
 
     QString serviceName;
     QString token;
     QString remoteId;
     QString endpoint;
     QString description;
+    // UnifiedPush protocol version
+    enum class UnifiedPushVersion {
+        v1 = 1,
+        v2 = 2,
+    };
+
+    UnifiedPushVersion version = UnifiedPushVersion::v1;
 };
 
 }
