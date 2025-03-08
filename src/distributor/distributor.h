@@ -36,6 +36,10 @@ public:
     [[nodiscard]] QString Register(const QString &serviceName, const QString &token, const QString &description, QString &registrationResultReason);
     void Unregister(const QString &token);
 
+    // UnifiedPush D-Bus interface v2
+    [[nodiscard]] QVariantMap Register(const QVariantMap &args);
+    [[nodiscard]] QVariantMap Unregister(const QVariantMap &args);
+
     // KCM D-Bus interface
     [[nodiscard]] int status() const;
     [[nodiscard]] QString pushProviderId() const;
@@ -51,6 +55,7 @@ Q_SIGNALS:
 
 private:
     void messageReceived(const Message &msg) const;
+    void connectOnDemand();
     void clientRegistered(const Client &client, AbstractPushProvider::Error error, const QString &errorMsg);
     void clientUnregistered(const Client &client, AbstractPushProvider::Error error);
     void providerConnected();

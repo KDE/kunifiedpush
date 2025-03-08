@@ -4,7 +4,9 @@
 add_library(KUnifiedPushDistributor STATIC)
 
 qt_add_dbus_adaptor(dbus_srcs  ../interfaces/org.unifiedpush.Distributor1.xml distributor.h KUnifiedPush::Distributor)
+qt_add_dbus_adaptor(dbus_srcs  ../interfaces/org.unifiedpush.Distributor2.xml distributor.h KUnifiedPush::Distributor)
 qt_add_dbus_interface(dbus_srcs ../interfaces/org.unifiedpush.Connector1.xml connector1iface)
+qt_add_dbus_interface(dbus_srcs ../interfaces/org.unifiedpush.Connector2.xml connector2iface)
 qt_add_dbus_adaptor(dbus_srcs  ../interfaces/org.kde.kunifiedpush.distributor.Management.xml distributor.h KUnifiedPush::Distributor)
 target_sources(KUnifiedPushDistributor PRIVATE
     abstractpushprovider.cpp
