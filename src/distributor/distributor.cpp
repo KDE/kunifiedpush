@@ -303,6 +303,12 @@ void Distributor::purgeUnavailableClients()
         }
     }
 
+    // in mock mode assume everything is activatable, as unit tests don't install
+    // D-Bus service files
+    if (m_pushProvider->metaObject() == &MockPushProvider::staticMetaObject) [[unlikely]] {
+        return;
+    }
+
     for (const auto &token : tokensToUnregister) {
         Unregister(token);
     }
