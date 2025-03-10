@@ -5,16 +5,21 @@
 
 #include <KUnifiedPush/Connector>
 
+#include "managementinterface.h"
+
 #include "../src/distributor/distributor.h"
-#include "../src/distributor/message.h"
-#include "../src/distributor/mockpushprovider.h"
+#include "../src/shared/unifiedpush-constants.h"
 
 #include <QDBusConnection>
 #include <QLoggingCategory>
+#include <QProcess>
+#include <QProcessEnvironment>
 #include <QSettings>
 #include <QSignalSpy>
 #include <QStandardPaths>
 #include <QTest>
+
+using namespace Qt::Literals;
 
 class ConnectorTest : public QObject
 {
@@ -29,9 +34,10 @@ private Q_SLOTS:
         QCoreApplication::setOrganizationDomain(QStringLiteral("kde.org"));
         QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
 
-        QSettings settings;
+        QSettings settings(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/KDE/mockdistributor.conf"_L1, QSettings::NativeFormat);
         settings.clear();
         settings.setValue(QStringLiteral("PushProvider/Type"), QStringLiteral("Mock"));
+        settings.sync();
 
         QLoggingCategory::setFilterRules(QStringLiteral("org.kde.kunifiedpush.*=true"));
     }
@@ -62,23 +68,38 @@ private Q_SLOTS:
         stateSpy.reset(new QSignalSpy(con.get(), &Connector::stateChanged));
         endpointSpy.reset(new QSignalSpy(con.get(), &Connector::endpointChanged));
 
-        Distributor dist;
-        QCOMPARE(dist.status(), KUnifiedPush::DistributorStatus::Idle);
-        QVERIFY(QDBusConnection::sessionBus().registerService(QStringLiteral("org.unifiedpush.Distributor.mock")));
+        // start mock distributor and wait for it to become available on D-Bus
+        QProcess dist;
+        dist.setProcessChannelMode(QProcess::ForwardedChannels);
+        auto env = QProcessEnvironment::systemEnvironment();
+        env.insert(u"QT_LOGGING_RULES"_s, u"org.kde.kunifiedpush.*=true"_s);
+        dist.setProcessEnvironment(env);
+        dist.start(QCoreApplication::applicationDirPath() + "/mockdistributor"_L1);
+        QVERIFY(dist.waitForStarted());
+        QDBusServiceWatcher dbusWatcher("org.unifiedpush.Distributor.mock"_L1, QDBusConnection::sessionBus());
+        QSignalSpy dbusRegistrationSpy(&dbusWatcher, &QDBusServiceWatcher::serviceRegistered);
+        QSignalSpy dbusUnregistrationSpy(&dbusWatcher, &QDBusServiceWatcher::serviceUnregistered);
+        QVERIFY(dbusRegistrationSpy.wait());
 
-        QVERIFY(MockPushProvider::s_instance);
-        QVERIFY(stateSpy->wait());
+        // D-Bus interfaces to interact with the distributor
+        org::kde::kunifiedpush::Management distIface("org.unifiedpush.Distributor.mock"_L1, KDE_DISTRIBUTOR_MANAGEMENT_PATH, QDBusConnection::sessionBus());
+        QVERIFY(distIface.isValid());
+        QSignalSpy distStatusSpy(&distIface, &org::kde::kunifiedpush::Management::statusChanged);
+        QDBusInterface ctrlIface("org.unifiedpush.Distributor.mock"_L1, "/MockController"_L1, "org.kde.unifiedpush.MockController"_L1, QDBusConnection::sessionBus());
+        QVERIFY(ctrlIface.isValid());
+
+        // initial idle state with no client registered
+        QCOMPARE(distIface.status(), KUnifiedPush::DistributorStatus::Idle);
         QCOMPARE(con->state(), KUnifiedPush::Connector::Unregistered);
 
+        // register a client
         con->registerClient(QStringLiteral("Push notification unit test."));
         QCOMPARE(con->state(), KUnifiedPush::Connector::Registering);
         QVERIFY(stateSpy->wait());
-        // FIXME: delayed D-Bus replies inside the same process seem not to be actually delayed, so state get messed up after this...
-        // QCOMPARE(con.state(), KUnifiedPush::Connector::Registered);
-        QVERIFY(endpointSpy->wait());
+        QCOMPARE(con->state(), KUnifiedPush::Connector::Registered);
         QCOMPARE(endpointSpy->size(), 1);
         QCOMPARE(con->endpoint(), QLatin1String("https://localhost/push-endpoint"));
-        QCOMPARE(dist.status(), KUnifiedPush::DistributorStatus::Connected);
+        QCOMPARE(distIface.status(), KUnifiedPush::DistributorStatus::Connected);
 
         // connector restart does not register at the provider but uses existing state
         {
@@ -94,40 +115,40 @@ private Q_SLOTS:
         }
 
         // distributor goes away and comes back
-        QVERIFY(QDBusConnection::sessionBus().unregisterService(QStringLiteral("org.unifiedpush.Distributor.mock")));
-        QVERIFY(stateSpy->wait());
+        ctrlIface.call("quit"_L1);
+        QVERIFY(dist.waitForFinished());
+        QVERIFY(dbusUnregistrationSpy.wait());
         QCOMPARE(con->state(), KUnifiedPush::Connector::NoDistributor);
-        QVERIFY(QDBusConnection::sessionBus().registerService(QStringLiteral("org.unifiedpush.Distributor.mock")));
-        QVERIFY(stateSpy->wait());
+        dist.start(QCoreApplication::applicationDirPath() + "/mockdistributor"_L1);
+        QVERIFY(dist.waitForStarted());
+        QVERIFY(dbusRegistrationSpy.wait());
         QCOMPARE(con->state(), KUnifiedPush::Connector::Registering);
         QVERIFY(stateSpy->wait());
         QCOMPARE(con->state(), KUnifiedPush::Connector::Registered);
-        QCOMPARE(dist.status(), KUnifiedPush::DistributorStatus::Connected);
+        QCOMPARE(distIface.status(), KUnifiedPush::DistributorStatus::Connected);
 
         // receiving a message
         QSignalSpy msgSpy(con.get(), &Connector::messageReceived);
-        KUnifiedPush::Message msg;
-        msg.clientRemoteId = QStringLiteral("<client-remote-id>");
-        msg.content = "hello world";
-        Q_EMIT MockPushProvider::s_instance->messageReceived(msg);
+        ctrlIface.callWithArgumentList(QDBus::AutoDetect, "receiveMessage"_L1, { u"<client-remote-id>"_s, QByteArray("hello world")});
         QVERIFY(msgSpy.wait());
         QCOMPARE(msgSpy.at(0).at(0).toByteArray(), "hello world");
 
         // reconfigure distributor to a different push provider
-        dist.setPushProvider(QStringLiteral("Broken"), {});
+        distIface.setPushProvider(QStringLiteral("Broken"), {});
         QVERIFY(stateSpy->wait());
         QCOMPARE(con->state(), KUnifiedPush::Connector::Unregistered);
         QCOMPARE(con->endpoint(), QString());
-        QCOMPARE(dist.status(), KUnifiedPush::DistributorStatus::NoSetup);
+        QVERIFY(distStatusSpy.wait());
+        QCOMPARE(distIface.status(), KUnifiedPush::DistributorStatus::NoSetup);
 
-        dist.setPushProvider(QStringLiteral("Mock"), {});
+        distIface.setPushProvider(QStringLiteral("Mock"), {});
         QVERIFY(stateSpy->wait());
         QCOMPARE(con->state(), KUnifiedPush::Connector::Registered);
         QCOMPARE(con->endpoint(), QLatin1String("https://localhost/push-endpoint"));
 
         QVariantMap config;
         config.insert(QStringLiteral("setting"), true);
-        dist.setPushProvider(QStringLiteral("Mock"), config);
+        distIface.setPushProvider(QStringLiteral("Mock"), config);
         QVERIFY(stateSpy->wait());
         QCOMPARE(con->state(), KUnifiedPush::Connector::Unregistered);
         QCOMPARE(con->endpoint(), QString());
@@ -143,7 +164,11 @@ private Q_SLOTS:
         QCOMPARE(con->state(), KUnifiedPush::Connector::Unregistered);
         QCOMPARE(endpointSpy->size(), 1);
         QCOMPARE(con->endpoint(), QString());
-        QCOMPARE(dist.status(), KUnifiedPush::DistributorStatus::Idle);
+        QVERIFY(distStatusSpy.wait());
+        QCOMPARE(distIface.status(), KUnifiedPush::DistributorStatus::Idle);
+
+        ctrlIface.call("quit"_L1);
+        QVERIFY(dist.waitForFinished());
     }
 };
 
