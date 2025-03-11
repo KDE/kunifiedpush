@@ -265,6 +265,20 @@ Connector::State Connector::state() const
     return d->m_state;
 }
 
-#include "moc_connector.cpp"
+QString Connector::vapidPublicKey() const
+{
+    return d->m_vapidPublicKey;
+}
 
+void Connector::setVapidPublicKey(const QString &vapidPublicKey)
+{
+    if (d->m_vapidPublicKey == vapidPublicKey) {
+        return;
+    }
+
+    d->m_vapidPublicKey = vapidPublicKey;
+    Q_EMIT vapidPublicKeyChanged();
+}
+
+#include "moc_connector.cpp"
 #include "moc_connector_p.cpp"

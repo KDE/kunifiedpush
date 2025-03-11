@@ -66,6 +66,7 @@ public:
     QString m_token;
     QString m_endpoint;
     QString m_description;
+    QString m_vapidPublicKey;
     Connector::State m_state = Connector::Unregistered;
 
     Command m_currentCommand = Command::None;

@@ -24,6 +24,7 @@ class KUNIFIEDPUSH_EXPORT Connector : public QObject
     Q_OBJECT
     Q_PROPERTY(QString endpoint READ endpoint NOTIFY endpointChanged)
     Q_PROPERTY(State state READ state NOTIFY stateChanged)
+    Q_PROPERTY(QString vapidPublicKey READ vapidPublicKey WRITE setVapidPublicKey NOTIFY vapidPublicKeyChanged)
 public:
     /** Create a new connector instance.
      *  @param serviceName The application identifier, same as used for registration
@@ -65,6 +66,25 @@ public:
     [[nodiscard]] State state() const;
     // TODO error message
 
+    /** Returns the VAPID public key of the corresponding application.
+     *  @see setVapidPublicKey
+     *  @since 25.08
+     */
+    [[nodiscard]] QString vapidPublicKey() const;
+
+    /** Sets the Voluntary Application Server Identification (VAPID) public key of the corresponding application.
+     *
+     *  This is a public key on the P-256 curve encoded in the uncompressed form and BASE64 URL encoded.
+     *  This is used by the application server to identify itself to the push server, following RFC8292.
+     *
+     *  @note This must be called before calling registerClient()!
+     *
+     *  @see RFC 8292
+     *
+     *  @since 25.08
+     */
+    void setVapidPublicKey(const QString &vapidPublicKey);
+
 Q_SIGNALS:
     /** Emitted for each newly received push message. */
     void messageReceived(const QByteArray &msg);
@@ -74,6 +94,11 @@ Q_SIGNALS:
 
     /** Emitted when the connector state changes. */
     void stateChanged(KUnifiedPush::Connector::State state);
+
+    /** Emitted when the VAPID public key changed.
+     *  @since 25.08
+     */
+    void vapidPublicKeyChanged();
 
 private:
     ConnectorPrivate *const d;
