@@ -97,6 +97,9 @@ void ConnectorPrivate::doRegister()
             args.insert(UP_ARG_SERVICE, m_serviceName);
             args.insert(UP_ARG_TOKEN, m_token);
             args.insert(UP_ARG_DESCRIPTION, m_description);
+            if (!m_vapidPublicKey.isEmpty()) {
+                args.insert(UP_ARG_VAPID, m_vapidPublicKey);
+            }
             handleRegisterResponse(iface->Register(args));
         }
     }, m_distributor);
