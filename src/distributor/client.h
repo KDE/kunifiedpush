@@ -38,6 +38,7 @@ public:
     QString remoteId;
     QString endpoint;
     QString description;
+    QString vapidKey;
     // UnifiedPush protocol version
     enum class UnifiedPushVersion {
         v1 = 1,

@@ -26,6 +26,7 @@ Client Client::load(const QString &token, QSettings &settings)
     client.serviceName = settings.value("ServiceName", QString()).toString();
     client.endpoint = settings.value("Endpoint", QString()).toString();
     client.description = settings.value("Description", QString()).toString();
+    client.vapidKey = settings.value("VAPIDKey", QString()).toString();
     client.version = static_cast<UnifiedPushVersion>(settings.value("Version", 1).toInt());
     settings.endGroup();
     return client;
@@ -38,6 +39,7 @@ void Client::store(QSettings& settings) const
     settings.setValue("ServiceName", serviceName);
     settings.setValue("Endpoint", endpoint);
     settings.setValue("Description", description);
+    settings.setValue("VAPIDKey", vapidKey);
     settings.setValue("Version", qToUnderlying(version));
     settings.endGroup();
 }
