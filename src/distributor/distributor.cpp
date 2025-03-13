@@ -85,12 +85,11 @@ Distributor::~Distributor() = default;
 
 QString Distributor::Register(const QString& serviceName, const QString& token, const QString &description, QString& registrationResultReason)
 {
-    qCDebug(Log) << serviceName << token;
     const auto it = std::ranges::find_if(m_clients, [&token](const auto &client) {
         return client.token == token;
     });
     if (it == m_clients.end()) {
-        qCDebug(Log) << "Registering new client (v1)";
+        qCDebug(Log) << "Registering new client (v1)" << serviceName << token;
         connectOnDemand();
 
         Command cmd;
@@ -107,7 +106,7 @@ QString Distributor::Register(const QString& serviceName, const QString& token, 
         return {};
     }
 
-    qCDebug(Log) << "Registering known client (v1)";
+    qCDebug(Log) << "Registering known client (v1)" << serviceName << token;
     (*it).activate();
     (*it).newEndpoint();
     registrationResultReason.clear();
@@ -116,23 +115,22 @@ QString Distributor::Register(const QString& serviceName, const QString& token, 
 
 QVariantMap Distributor::Register(const QVariantMap &args)
 {
-    const auto serviceName = args.value(UP_ARG_SERVICE).toString();
     const auto token = args.value(UP_ARG_TOKEN).toString();
-    const auto description = args.value(UP_ARG_DESCRIPTION).toString();
-    qCDebug(Log) << serviceName << token;
-
     const auto it = std::ranges::find_if(m_clients, [&token](const auto &client) {
         return client.token == token;
     });
+
     if (it == m_clients.end()) {
-        qCDebug(Log) << "Registering new client (v2)";
+        const auto serviceName = args.value(UP_ARG_SERVICE).toString();
+        qCDebug(Log) << "Registering new client (v2)" << serviceName << token;
         connectOnDemand();
 
         Command cmd;
         cmd.type = Command::Register;
         cmd.client.token = token;
         cmd.client.serviceName = serviceName;
-        cmd.client.description = description;
+        cmd.client.description = args.value(UP_ARG_DESCRIPTION).toString();
+        cmd.client.vapidKey = args.value(UP_ARG_VAPID).toString();
         cmd.client.version = Client::UnifiedPushVersion::v2;
         setDelayedReply(true);
         cmd.reply = message().createReply();
@@ -142,7 +140,7 @@ QVariantMap Distributor::Register(const QVariantMap &args)
         return {};
     }
 
-    qCDebug(Log) << "Registering known client (v2)";
+    qCDebug(Log) << "Registering known client (v2)" << (*it).serviceName << token;
     (*it).activate();
     (*it).newEndpoint();
 
