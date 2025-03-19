@@ -11,6 +11,7 @@ qt_add_dbus_adaptor(dbus_srcs  ../interfaces/org.kde.kunifiedpush.distributor.Ma
 target_sources(KUnifiedPushDistributor PRIVATE
     abstractpushprovider.cpp
     abstractpushprovider.h
+    autopushprovider.cpp
     client.cpp
     client.h
     command.cpp
