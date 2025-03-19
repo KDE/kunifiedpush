@@ -8,6 +8,7 @@
 #include "distributor2adaptor.h"
 #include "managementadaptor.h"
 
+#include "autopushprovider.h"
 #include "client.h"
 #include "gotifypushprovider.h"
 #include "logging.h"
@@ -348,6 +349,8 @@ bool Distributor::setupPushProvider()
         m_pushProvider.reset(new NextPushProvider);
     } else if (pushProviderName == NtfyPushProvider::Id) {
         m_pushProvider.reset(new NtfyPushProvider);
+    } else if (pushProviderName == AutopushProvider::Id) {
+        m_pushProvider = std::make_unique<AutopushProvider>();
     } else if (pushProviderName == MockPushProvider::Id) {
         m_pushProvider.reset(new MockPushProvider);
     } else {
