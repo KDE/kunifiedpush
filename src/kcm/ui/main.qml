@@ -108,7 +108,7 @@ KCM.ScrollViewKCM {
                     QQC2.ComboBox {
                         id: pushProviderBox
                         Kirigami.FormData.label: i18n("Push provider:")
-                        model: ["Gotify", "NextPush", "Ntfy"]
+                        model: ["Gotify", "NextPush", "Ntfy", "Autopush"] // TODO separate config key and display label here!
                         currentIndex: find(kcm.pushProviderId)
                         Component.onCompleted: currentIndex = find(kcm.pushProviderId)
                     }
@@ -126,6 +126,8 @@ KCM.ScrollViewKCM {
                                 return nextpushForm;
                             case 2:
                                 return ntfyForm;
+                            case 3:
+                                return autopushForm;
                         }
                         return undefined;
                     }
@@ -225,6 +227,25 @@ KCM.ScrollViewKCM {
                         id: urlField
                         Kirigami.FormData.label: i18n("Url:")
                         text: root.pushProviderConfig['Url'] ?? ''
+                    }
+                }
+            }
+            Component {
+                id: autopushForm
+                Kirigami.FormLayout {
+                    readonly property bool dirty: urlField.text != root.pushProviderConfig['Url']
+
+                    function config() {
+                        let c = root.pushProviderConfig;
+                        c['Url'] = urlField.text;
+                        return c;
+                    }
+
+                    twinFormLayouts: [topForm]
+                    QQC2.TextField {
+                        id: urlField
+                        Kirigami.FormData.label: i18n("Url:")
+                        text: root.pushProviderConfig['Url'] ?? 'https://push.services.mozilla.com'
                     }
                 }
             }
