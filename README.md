@@ -56,6 +56,17 @@ ClientToken=xxx
 Url=https://my.server.org
 ```
 
+#### Mozilla WebPush
+
+https://github.com/mozilla-services/autopush-rs
+
+Configuration:
+
+```
+[Autopush]
+Url=https://push.services.mozilla.com
+````
+
 #### NextPush
 
 https://github.com/UP-NextPush/server-app
