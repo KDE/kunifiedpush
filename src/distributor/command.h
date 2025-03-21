@@ -23,11 +23,12 @@ public:
         ForceUnregister, ///< unregistration triggered by distributor
         Connect,
         Disconnect,
-        ChangePushProvider
+        ChangePushProvider,
+        MessageAck,
     } type = NoCommand;
     Client client;
     QDBusMessage reply;
-    QString pushProvider;
+    QString value;
 };
 
 }

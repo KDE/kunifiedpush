@@ -23,11 +23,12 @@ public:
         QCoreApplication::quit();
     }
 
-    Q_SCRIPTABLE void receiveMessage(const QString &remoteId, const QByteArray &content)
+    Q_SCRIPTABLE void receiveMessage(const QString &remoteId, const QByteArray &content, const QString &messageIdentifier)
     {
         KUnifiedPush::Message msg;
         msg.clientRemoteId = remoteId;
         msg.content = content;
+        msg.messageId = messageIdentifier;
         Q_EMIT KUnifiedPush::MockPushProvider::s_instance->messageReceived(msg);
     }
 };

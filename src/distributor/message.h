@@ -16,6 +16,7 @@ class Message
 public:
     QString clientRemoteId;
     QByteArray content;
+    QString messageId;
 };
 
 }

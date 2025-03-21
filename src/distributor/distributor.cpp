@@ -187,7 +187,7 @@ QVariantMap Distributor::Unregister(const QVariantMap &args)
     return {};
 }
 
-void Distributor::messageReceived(const Message &msg) const
+void Distributor::messageReceived(const Message &msg)
 {
     qCDebug(Log) << msg.clientRemoteId << msg.content;
     const auto it = std::find_if(m_clients.begin(), m_clients.end(), [&msg](const auto &client) {
@@ -199,7 +199,7 @@ void Distributor::messageReceived(const Message &msg) const
     }
 
     (*it).activate();
-    (*it).message(msg.content, {});
+    (*it).message(this, msg.content, msg.messageId);
 }
 
 void Distributor::clientRegistered(const Client &client, AbstractPushProvider::Error error, const QString &errorMsg)
@@ -323,6 +323,15 @@ void Distributor::providerDisconnected(AbstractPushProvider::Error error, const 
     processNextCommand();
 }
 
+void Distributor::providerMessageAcknowledged(const Client &client, const QString &messageIdentifier)
+{
+    qCDebug(Log) << client.serviceName << messageIdentifier;
+    if (m_currentCommand.type == Command::MessageAck && m_currentCommand.value == messageIdentifier) {
+        m_currentCommand = {};
+    }
+    processNextCommand();
+}
+
 QStringList Distributor::clientTokens() const
 {
     QStringList l;
@@ -364,6 +373,7 @@ bool Distributor::setupPushProvider()
     connect(m_pushProvider.get(), &AbstractPushProvider::clientUnregistered, this, &Distributor::clientUnregistered);
     connect(m_pushProvider.get(), &AbstractPushProvider::connected, this, &Distributor::providerConnected);
     connect(m_pushProvider.get(), &AbstractPushProvider::disconnected, this, &Distributor::providerDisconnected);
+    connect(m_pushProvider.get(), &AbstractPushProvider::messageAcknowledged, this, &Distributor::providerMessageAcknowledged);
     return true;
 }
 
@@ -425,13 +435,16 @@ void Distributor::processNextCommand()
         case Command::ChangePushProvider:
         {
             QSettings settings;
-            settings.setValue(QLatin1String("PushProvider/Type"), m_currentCommand.pushProvider);
+            settings.setValue(QLatin1String("PushProvider/Type"), m_currentCommand.value);
             m_currentCommand = {};
             if (setupPushProvider()) {
                 processNextCommand();
             }
             break;
         }
+        case Command::MessageAck:
+            m_pushProvider->acknowledgeMessage(m_currentCommand.client, m_currentCommand.value);
+            break;
     }
 }
 
@@ -506,7 +519,7 @@ void Distributor::setPushProvider(const QString &pushProviderId, const QVariantM
         {
             Command cmd;
             cmd.type = Command::ChangePushProvider;
-            cmd.pushProvider = pushProviderId;
+            cmd.value = pushProviderId;
             m_commandQueue.push_back(std::move(cmd));
         }
 
@@ -536,7 +549,7 @@ void Distributor::setPushProvider(const QString &pushProviderId, const QVariantM
 
         Command cmd;
         cmd.type = Command::ChangePushProvider;
-        cmd.pushProvider = pushProviderId;
+        cmd.value = pushProviderId;
         m_commandQueue.push_front(std::move(cmd));
     }
 
@@ -573,6 +586,21 @@ void Distributor::forceUnregisterClient(const QString &token)
     Command cmd;
     cmd.type = Command::ForceUnregister;
     cmd.client = (*it);
+    m_commandQueue.push_back(std::move(cmd));
+    processNextCommand();
+}
+
+void Distributor::messageAcknowledged(const Client &client, const QString &messageIdentifier)
+{
+    if (messageIdentifier.isEmpty()) {
+        return;
+    }
+
+    qCDebug(Log) << client.serviceName <<messageIdentifier;
+    Command cmd;
+    cmd.type = Command::MessageAck;
+    cmd.client = client;
+    cmd.value = messageIdentifier;
     m_commandQueue.push_back(std::move(cmd));
     processNextCommand();
 }

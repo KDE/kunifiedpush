@@ -51,6 +51,11 @@ public:
     /** Unregister a client from the provider. */
     virtual void unregisterClient(const Client &client) = 0;
 
+    /** Acknowledge a message.
+     *  The default implementation does nothing apart from indicating successful completion.
+     */
+    virtual void acknowledgeMessage(const Client &client, const QString &messageIdentifier);
+
     /** Provider id used e.g. in settings. */
     [[nodiscard]] QLatin1StringView providerId() const;
 
@@ -69,6 +74,9 @@ Q_SIGNALS:
 
     /** Emitted after the connection to the push provider disconnected or failed to be established. */
     void disconnected(KUnifiedPush::AbstractPushProvider::Error error, const QString &errorMsg = {});
+
+    /** Emitted after a message reception has been acknowledge to the push server. */
+    void messageAcknowledged(const KUnifiedPush::Client &client, const QString &messageIdentifier);
 
 protected:
     explicit AbstractPushProvider(QLatin1StringView providerId, QObject *parent);

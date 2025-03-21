@@ -13,6 +13,8 @@ class QSettings;
 
 namespace KUnifiedPush {
 
+class Distributor;
+
 /** Information about a registered client */
 class Client
 {
@@ -27,7 +29,7 @@ public:
     void activate() const;
 
     /** D-Bus UnifiedPush connector interface. */
-    void message(const QByteArray &message, const QString &messageIdentifier) const;
+    void message(Distributor *distributor, const QByteArray &message, const QString &messageIdentifier) const;
     void newEndpoint() const;
     void unregistered(bool isConfirmation) const;
 

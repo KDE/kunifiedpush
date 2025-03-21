@@ -60,3 +60,9 @@ void MockPushProvider::unregisterClient(const Client &client)
     qCDebug(Log) << client.serviceName << client.token;
     QMetaObject::invokeMethod(this, "clientUnregistered", Qt::QueuedConnection, Q_ARG(KUnifiedPush::Client, client));
 }
+
+void MockPushProvider::acknowledgeMessage(const Client &client, const QString &messageIdentifier)
+{
+    qCDebug(Log) << client.serviceName <<messageIdentifier;
+    QMetaObject::invokeMethod(this, "messageAcknowledged", Qt::QueuedConnection, Q_ARG(KUnifiedPush::Client, client), Q_ARG(QString, messageIdentifier));
+}

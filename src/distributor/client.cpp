@@ -6,6 +6,7 @@
 #include "client.h"
 #include "connector1iface.h"
 #include "connector2iface.h"
+#include "distributor.h"
 #include "logging.h"
 
 #include "../shared/unifiedpush-constants.h"
@@ -52,13 +53,14 @@ void Client::activate() const
     QDBusConnection::sessionBus().interface()->startService(serviceName);
 }
 
-void Client::message(const QByteArray &message, const QString &messageIdentifier) const
+void Client::message(Distributor *distributor, const QByteArray &message, const QString &messageIdentifier) const
 {
     switch (version) {
         case UnifiedPushVersion::v1:
         {
             OrgUnifiedpushConnector1Interface iface(serviceName, UP_CONNECTOR_PATH, QDBusConnection::sessionBus());
             iface.Message(token, message, messageIdentifier);
+            distributor->messageAcknowledged(*this, messageIdentifier);
             break;
         }
         case UnifiedPushVersion::v2:
@@ -67,8 +69,25 @@ void Client::message(const QByteArray &message, const QString &messageIdentifier
             QVariantMap args;
             args.insert(UP_ARG_TOKEN, token);
             args.insert(UP_ARG_MESSAGE, message);
-            args.insert(UP_ARG_MESSAGE_IDENTIFIER, messageIdentifier);
-            iface.Message(args);
+            if (!messageIdentifier.isEmpty()) {
+                args.insert(UP_ARG_MESSAGE_IDENTIFIER, messageIdentifier);
+            }
+            const auto reply = iface.Message(args);
+
+            auto watcher = new QDBusPendingCallWatcher(reply, distributor);
+            QObject::connect(watcher, &QDBusPendingCallWatcher::finished, distributor, [distributor, client = *this](auto *watcher) {
+                QDBusPendingReply<QVariantMap> reply = *watcher;
+                if (reply.isError()) {
+                    qCWarning(Log) << reply.error();
+                    // TODO explicit NACK? does any backend support that?
+                } else {
+                    const auto response = reply.argumentAt<0>();
+                    const auto messageId = response.value(UP_ARG_MESSAGE_IDENTIFIER).toString();
+                    distributor->messageAcknowledged(client, messageId);
+                }
+                watcher->deleteLater();
+            });
+
             break;
         }
     }

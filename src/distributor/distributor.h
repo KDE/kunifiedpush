@@ -48,18 +48,22 @@ public:
     [[nodiscard]] QList<KUnifiedPush::ClientInfo> registeredClients() const;
     void forceUnregisterClient(const QString &token);
 
+    // internal
+    void messageAcknowledged(const Client &client, const QString &messageIdentifier);
+
 Q_SIGNALS:
     void statusChanged();
     void pushProviderChanged();
     void registeredClientsChanged();
 
 private:
-    void messageReceived(const Message &msg) const;
+    void messageReceived(const Message &msg);
     void connectOnDemand();
     void clientRegistered(const Client &client, AbstractPushProvider::Error error, const QString &errorMsg);
     void clientUnregistered(const Client &client, AbstractPushProvider::Error error);
     void providerConnected();
     void providerDisconnected(AbstractPushProvider::Error error, const QString &errorMsg);
+    void providerMessageAcknowledged(const Client &client, const QString &messageIdentifier);
 
     [[nodiscard]] QStringList clientTokens() const;
 

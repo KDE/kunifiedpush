@@ -129,9 +129,15 @@ private Q_SLOTS:
 
         // receiving a message
         QSignalSpy msgSpy(con.get(), &Connector::messageReceived);
-        ctrlIface.callWithArgumentList(QDBus::AutoDetect, "receiveMessage"_L1, { u"<client-remote-id>"_s, QByteArray("hello world")});
+        ctrlIface.callWithArgumentList(QDBus::AutoDetect, "receiveMessage"_L1, { u"<client-remote-id>"_s, QByteArray("hello world"), QString()});
         QVERIFY(msgSpy.wait());
         QCOMPARE(msgSpy.at(0).at(0).toByteArray(), "hello world");
+
+        // receive a message with acknowledgement
+        msgSpy.clear();
+        ctrlIface.callWithArgumentList(QDBus::AutoDetect, "receiveMessage"_L1, { u"<client-remote-id>"_s, QByteArray("acknowledged message"), u"<msg-id>"_s});
+        QVERIFY(msgSpy.wait());
+        QCOMPARE(msgSpy.at(0).at(0).toByteArray(), "acknowledged message");
 
         // reconfigure distributor to a different push provider
         distIface.setPushProvider(QStringLiteral("Broken"), {});
