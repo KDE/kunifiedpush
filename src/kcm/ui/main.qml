@@ -13,7 +13,7 @@ import org.kde.kunifiedpush.kcm
 
 KCM.ScrollViewKCM {
     id: root
-    readonly property var pushProviderConfig: kcm.pushProviderConfiguration(pushProviderBox.currentText)
+    readonly property var pushProviderConfig: kcm.pushProviderConfiguration(pushProviderBox.currentValue)
 
     headerPaddingEnabled: false
 
@@ -108,9 +108,17 @@ KCM.ScrollViewKCM {
                     QQC2.ComboBox {
                         id: pushProviderBox
                         Kirigami.FormData.label: i18n("Push provider:")
-                        model: ["Gotify", "NextPush", "Ntfy"]
-                        currentIndex: find(kcm.pushProviderId)
-                        Component.onCompleted: currentIndex = find(kcm.pushProviderId)
+                        model: ListModel {
+                            ListElement { text: "Gotify"; key: "Gotify" }
+                            ListElement { text: "Mozilla WebPush"; key: "Autopush" }
+                            ListElement { text: "NextPush"; key: "NextPush" }
+                            ListElement { text: "Ntfy"; key: "Ntfy" }
+                        }
+                        textRole: "text"
+                        valueRole: "key"
+                        // ["Gotify", "NextPush", "Ntfy", "Autopush"] // TODO separate config key and display label here!
+                        currentIndex: indexOfValue(kcm.pushProviderId)
+                        Component.onCompleted: currentIndex = indexOfValue(kcm.pushProviderId)
                     }
                 }
 
@@ -119,15 +127,8 @@ KCM.ScrollViewKCM {
                     Layout.fillWidth: true
                     visible: kcm.hasKDEDistributor
                     sourceComponent: {
-                        switch (pushProviderBox.currentIndex) {
-                            case 0:
-                                return gotifyForm;
-                            case 1:
-                                return nextpushForm;
-                            case 2:
-                                return ntfyForm;
-                        }
-                        return undefined;
+                        const forms = [gotifyForm, autopushForm, nextpushForm, ntfyForm];
+                        return forms[pushProviderBox.currentIndex];
                     }
                 }
             }
@@ -228,18 +229,37 @@ KCM.ScrollViewKCM {
                     }
                 }
             }
+            Component {
+                id: autopushForm
+                Kirigami.FormLayout {
+                    readonly property bool dirty: urlField.text != root.pushProviderConfig['Url']
+
+                    function config() {
+                        let c = root.pushProviderConfig;
+                        c['Url'] = urlField.text;
+                        return c;
+                    }
+
+                    twinFormLayouts: [topForm]
+                    QQC2.TextField {
+                        id: urlField
+                        Kirigami.FormData.label: i18n("Url:")
+                        text: root.pushProviderConfig['Url'] ?? 'https://push.services.mozilla.com'
+                    }
+                }
+            }
 
             Connections {
                 target: kcm
 
                 function onSaveRequested() {
-                    kcm.setPushProviderConfiguration(pushProviderBox.currentText, providerFormLoader.item.config());
+                    kcm.setPushProviderConfiguration(pushProviderBox.currentValue, providerFormLoader.item.config());
                 }
             }
             Binding {
                 target: kcm
                 property: "needsSave"
-                value: providerFormLoader.item.dirty || pushProviderBox.currentText != kcm.pushProviderId
+                value: providerFormLoader.item.dirty || pushProviderBox.currentValue != kcm.pushProviderId
             }
         }
     }
