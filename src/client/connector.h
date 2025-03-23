@@ -25,6 +25,7 @@ class KUNIFIEDPUSH_EXPORT Connector : public QObject
     Q_PROPERTY(QString endpoint READ endpoint NOTIFY endpointChanged)
     Q_PROPERTY(State state READ state NOTIFY stateChanged)
     Q_PROPERTY(QString vapidPublicKey READ vapidPublicKey WRITE setVapidPublicKey NOTIFY vapidPublicKeyChanged)
+    Q_PROPERTY(bool vapidPublicKeyRequired READ vapidPublicKeyRequired WRITE setVapidPublicKeyRequired NOTIFY vapidPublicKeyRequiredChanged)
 public:
     /** Create a new connector instance.
      *  @param serviceName The application identifier, same as used for registration
@@ -45,6 +46,8 @@ public:
      *  is persisted until explicitly changed.
      *  @param description A human-readable explanation what push notifications are used
      *  for by this application.
+     *
+     *  @see setVapidPublicKey
      */
     void registerClient(const QString &description);
 
@@ -77,13 +80,34 @@ public:
      *  This is a public key on the P-256 curve encoded in the uncompressed form and BASE64 URL encoded.
      *  This is used by the application server to identify itself to the push server, following RFC8292.
      *
-     *  @note This must be called before calling registerClient()!
+     *  @note This should be either called before calling registerClient() or vapidPublicKeyRequired should
+     *  be set to @c true.
      *
      *  @see RFC 8292
      *
      *  @since 25.08
      */
     void setVapidPublicKey(const QString &vapidPublicKey);
+
+    /** Returns whether a VAPID public key is required before registering
+     *  with the push provider.
+     *  @see setVapidPublicKeyRequired
+     *  @since 25.08
+     */
+    [[nodiscard]] bool vapidPublicKeyRequired() const;
+
+    /** Sets whether a Voluntary Application Server Identification (VAPID) public key
+     *  is required before registering with the push provider.
+     *
+     *  When this is set, calling registerClient() will wait for a VAPID key to be set
+     *  via setVapidPublicKey(). This is useful when the VAPID key has first to be retrieved
+     *  asynchronously from the application server.
+     *
+     *  @see setVapidPublicKey
+     *
+     *  @since 25.08
+     */
+    void setVapidPublicKeyRequired(bool vapidRequired);
 
 Q_SIGNALS:
     /** Emitted for each newly received push message. */
@@ -99,6 +123,11 @@ Q_SIGNALS:
      *  @since 25.08
      */
     void vapidPublicKeyChanged();
+
+    /** Emitted when the VAPID public key required property changed.
+     *  @since 25.08
+     */
+    void vapidPublicKeyRequiredChanged();
 
 private:
     ConnectorPrivate *const d;
