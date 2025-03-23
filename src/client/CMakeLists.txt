@@ -6,6 +6,7 @@ add_library(KUnifiedPush)
 target_sources(KUnifiedPush PRIVATE
     connector.cpp
     connector.h
+    contentencryption.cpp
     ../shared/connectorutils.cpp
 )
 if (NOT ANDROID)
@@ -37,6 +38,7 @@ ecm_qt_declare_logging_category(KUnifiedPush
 
 target_include_directories(KUnifiedPush INTERFACE "$<INSTALL_INTERFACE:${KUNIFIEDPUSH_INCLUDE_INSTALLDIR}>")
 target_link_libraries(KUnifiedPush PUBLIC Qt6::Core)
+target_link_libraries(KUnifiedPush PRIVATE OpenSSL::Crypto)
 if (NOT ANDROID)
     target_link_libraries(KUnifiedPush PRIVATE Qt6::DBus)
 endif()

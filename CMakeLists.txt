@@ -37,6 +37,8 @@ ecm_setup_version(PROJECT
 )
 
 find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Test)
+find_package(OpenSSL REQUIRED)
+set_package_properties(OpenSSL PROPERTIES PURPOSE "RFC 8291 push content encryption.")
 if (NOT ANDROID)
     find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS DBus)
 
@@ -51,6 +53,7 @@ endif()
 
 set(KUNIFIEDPUSH_INCLUDE_INSTALLDIR ${KDE_INSTALL_INCLUDEDIR}/KUnifiedPush)
 ecm_set_disabled_deprecation_versions(QT 6.7 KF 6.7.0)
+add_compile_definitions(-DOPENSSL_API_COMPAT=30000 -DOPENSSL_NO_DEPRECATED)
 
 add_subdirectory(src)
 if (BUILD_TESTING AND NOT ANDROID)
