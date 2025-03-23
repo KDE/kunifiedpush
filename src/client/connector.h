@@ -80,6 +80,8 @@ public:
      *  This is a public key on the P-256 curve encoded in the uncompressed form and BASE64 URL encoded.
      *  This is used by the application server to identify itself to the push server, following RFC8292.
      *
+     *  The VAPID public key is persisted, ie. you don't need to store it separately in the application.
+     *
      *  @note This should be either called before calling registerClient() or vapidPublicKeyRequired should
      *  be set to @c true.
      *

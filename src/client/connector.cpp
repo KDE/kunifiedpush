@@ -124,19 +124,23 @@ QString ConnectorPrivate::stateFile() const
 void ConnectorPrivate::loadState()
 {
     QSettings settings(stateFile(), QSettings::IniFormat);
-    settings.beginGroup(QStringLiteral("Client"));
-    m_token = settings.value(QStringLiteral("Token"), QString()).toString();
-    m_endpoint = settings.value(QStringLiteral("Endpoint"), QString()).toString();
-    m_description = settings.value(QStringLiteral("Description"), QString()).toString();
+    settings.beginGroup("Client");
+    m_token = settings.value("Token").toString();
+    m_endpoint = settings.value("Endpoint").toString();
+    m_description = settings.value("Description").toString();
+    m_vapidRequired = settings.value("VapidRequired", false).toBool();
+    m_vapidPublicKey = settings.value("VapidPublicKey").toString();
 }
 
 void ConnectorPrivate::storeState() const
 {
     QSettings settings(stateFile(), QSettings::IniFormat);
-    settings.beginGroup(QStringLiteral("Client"));
-    settings.setValue(QStringLiteral("Token"), m_token);
-    settings.setValue(QStringLiteral("Endpoint"), m_endpoint);
-    settings.setValue(QStringLiteral("Description"), m_description);
+    settings.beginGroup("Client");
+    settings.setValue("Token", m_token);
+    settings.setValue("Endpoint", m_endpoint);
+    settings.setValue("Description", m_description);
+    settings.setValue("VapidRequired", m_vapidRequired);
+    settings.setValue("VapidPublicKey", m_vapidPublicKey);
 }
 
 void ConnectorPrivate::setDistributor(const QString &distServiceName)
