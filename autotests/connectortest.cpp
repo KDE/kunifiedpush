@@ -93,7 +93,10 @@ private Q_SLOTS:
         QCOMPARE(con->state(), KUnifiedPush::Connector::Unregistered);
 
         // register a client
+        con->setVapidPublicKeyRequired(true);
         con->registerClient(QStringLiteral("Push notification unit test."));
+        QCOMPARE(con->state(), KUnifiedPush::Connector::Unregistered);
+        con->setVapidPublicKey(u"<vapid-key-1>"_s);
         QCOMPARE(con->state(), KUnifiedPush::Connector::Registering);
         QVERIFY(stateSpy->wait());
         QCOMPARE(con->state(), KUnifiedPush::Connector::Registered);

@@ -186,9 +186,19 @@ void ConnectorPrivate::addCommand(ConnectorPrivate::Command cmd)
     processNextCommand();
 }
 
+bool ConnectorPrivate::isNextCommandReady() const
+{
+    assert(!m_commandQueue.empty());
+
+    if (m_commandQueue.front() == Command::Register) {
+        return !m_vapidRequired || !m_vapidPublicKey.isEmpty();
+    }
+    return true;
+}
+
 void ConnectorPrivate::processNextCommand()
 {
-    if (m_currentCommand != Command::None || !hasDistributor() || m_commandQueue.empty()) {
+    if (m_currentCommand != Command::None || !hasDistributor() || m_commandQueue.empty() || !isNextCommandReady()) {
         return;
     }
 
@@ -284,7 +294,25 @@ void Connector::setVapidPublicKey(const QString &vapidPublicKey)
         d->addCommand(ConnectorPrivate::Command::Unregister);
         d->addCommand(ConnectorPrivate::Command::None); // no-op as a barrier to prevent the other two command from being merged
         d->addCommand(ConnectorPrivate::Command::Register);
+    } else {
+        d->processNextCommand();
     }
+}
+
+bool Connector::vapidPublicKeyRequired() const
+{
+    return d->m_vapidRequired;
+}
+
+void Connector::setVapidPublicKeyRequired(bool vapidRequired)
+{
+    if (d->m_vapidRequired == vapidRequired) {
+        return;
+    }
+
+    d->m_vapidRequired = vapidRequired;
+    Q_EMIT vapidPublicKeyRequiredChanged();
+    d->processNextCommand();
 }
 
 #include "moc_connector.cpp"
