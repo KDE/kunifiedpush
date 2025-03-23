@@ -59,6 +59,7 @@ public:
 
     enum class Command { None, Register, Unregister };
     void addCommand(Command cmd);
+    [[nodiscard]] bool isNextCommandReady() const;
     void processNextCommand();
 
     Connector *q = nullptr;
@@ -67,6 +68,7 @@ public:
     QString m_endpoint;
     QString m_description;
     QString m_vapidPublicKey;
+    bool m_vapidRequired = false;
     Connector::State m_state = Connector::Unregistered;
 
     Command m_currentCommand = Command::None;
