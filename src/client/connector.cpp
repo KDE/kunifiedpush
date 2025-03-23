@@ -278,6 +278,13 @@ void Connector::setVapidPublicKey(const QString &vapidPublicKey)
 
     d->m_vapidPublicKey = vapidPublicKey;
     Q_EMIT vapidPublicKeyChanged();
+
+    // if the VAPID key changed after we had previously registered we need to re-register
+    if (!d->m_token.isEmpty()) {
+        d->addCommand(ConnectorPrivate::Command::Unregister);
+        d->addCommand(ConnectorPrivate::Command::None); // no-op as a barrier to prevent the other two command from being merged
+        d->addCommand(ConnectorPrivate::Command::Register);
+    }
 }
 
 #include "moc_connector.cpp"
