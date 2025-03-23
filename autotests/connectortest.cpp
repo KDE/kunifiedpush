@@ -127,6 +127,19 @@ private Q_SLOTS:
         QCOMPARE(con->state(), KUnifiedPush::Connector::Registered);
         QCOMPARE(distIface.status(), KUnifiedPush::DistributorStatus::Connected);
 
+        // changing VAPID key forces a re-registration
+        endpointSpy->clear();
+        con->setVapidPublicKey(u"<vapid-key-2>"_s);
+        QVERIFY(stateSpy->wait());
+        QCOMPARE(con->state(), KUnifiedPush::Connector::Registering);
+        QCOMPARE(endpointSpy->size(), 1);
+        QCOMPARE(endpointSpy->at(0).at(0).toString(), QString());
+        QVERIFY(stateSpy->wait());
+        QCOMPARE(con->state(), KUnifiedPush::Connector::Registered);
+        QCOMPARE(endpointSpy->size(), 2);
+        QCOMPARE(endpointSpy->at(1).at(0).toString(), "https://localhost/push-endpoint"_L1);
+        endpointSpy->clear();
+
         // receiving a message
         QSignalSpy msgSpy(con.get(), &Connector::messageReceived);
         ctrlIface.callWithArgumentList(QDBus::AutoDetect, "receiveMessage"_L1, { u"<client-remote-id>"_s, QByteArray("hello world"), QString()});
