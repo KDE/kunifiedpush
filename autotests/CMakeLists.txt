@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: BSD-2-Clause
 
 ecm_add_test(connectorutilstest.cpp LINK_LIBRARIES Qt::Test Qt::DBus)
+ecm_add_test(contentencryptiontest.cpp LINK_LIBRARIES Qt::Test Qt::DBus KUnifiedPush)
 if (NOT KUNIFIEDPUSH_CLIENT_ONLY)
     add_executable(mockdistributor mockdistributor.cpp)
     target_link_libraries(mockdistributor PRIVATE KUnifiedPushDistributor)
