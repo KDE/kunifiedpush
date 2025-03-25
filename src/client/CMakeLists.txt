@@ -8,6 +8,8 @@ target_sources(KUnifiedPush PRIVATE
     connector.h
     contentencryption.cpp
     ../shared/connectorutils.cpp
+    ../shared/contentencryptionutils.cpp
+    ../shared/eckey.cpp
 )
 if (NOT ANDROID)
     qt_add_dbus_adaptor(dbus_srcs  ../interfaces/org.unifiedpush.Connector1.xml connector_p.h KUnifiedPush::ConnectorPrivate)
