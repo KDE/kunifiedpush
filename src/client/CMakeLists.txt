@@ -8,6 +8,7 @@ target_sources(KUnifiedPush PRIVATE
     connector.h
     contentencryption.cpp
     ../shared/connectorutils.cpp
+    ../shared/contentencryptionutils.cpp
 )
 if (NOT ANDROID)
     qt_add_dbus_adaptor(dbus_srcs  ../interfaces/org.unifiedpush.Connector1.xml connector_p.h KUnifiedPush::ConnectorPrivate)
@@ -38,7 +39,7 @@ ecm_qt_declare_logging_category(KUnifiedPush
 
 target_include_directories(KUnifiedPush INTERFACE "$<INSTALL_INTERFACE:${KUNIFIEDPUSH_INCLUDE_INSTALLDIR}>")
 target_link_libraries(KUnifiedPush PUBLIC Qt6::Core)
-target_link_libraries(KUnifiedPush PRIVATE OpenSSL::SSL)
+target_link_libraries(KUnifiedPush PRIVATE OpenSSL::Crypto)
 if (NOT ANDROID)
     target_link_libraries(KUnifiedPush PRIVATE Qt6::DBus)
 endif()

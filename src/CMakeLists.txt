@@ -4,5 +4,6 @@
 add_subdirectory(client)
 if (NOT ANDROID AND NOT KUNIFIEDPUSH_CLIENT_ONLY)
     add_subdirectory(distributor)
+    add_subdirectory(notifier)
     add_subdirectory(kcm)
 endif()

@@ -5,7 +5,9 @@
 
 #include "contentencryption_p.h"
 #include "logging.h"
-#include "opensslpp_p.h"
+
+#include "../shared/contentencryptionutils_p.h"
+#include "../shared/opensslpp_p.h"
 
 #include <QtEndian>
 
@@ -23,31 +25,6 @@ public:
     QByteArray m_privateKey;
     QByteArray m_authSecret;
 };
-}
-
-[[nodiscard]] static openssl::evp_pkey_ptr ecKey(QByteArrayView publicKey, QByteArrayView privateKey = {})
-{
-    openssl::bn_ptr privBn;
-
-    openssl::ossl_param_bld_ptr param_bld(OSSL_PARAM_BLD_new());
-    OSSL_PARAM_BLD_push_utf8_string(param_bld.get(), "group", "prime256v1", 0);
-    if (!privateKey.isEmpty()) {
-        privBn.reset(BN_bin2bn(reinterpret_cast<const uint8_t*>(privateKey.constData()), (int)privateKey.size(), nullptr));
-        OSSL_PARAM_BLD_push_BN(param_bld.get(), "priv", privBn.get());
-    }
-    OSSL_PARAM_BLD_push_octet_string(param_bld.get(), "pub", reinterpret_cast<const uint8_t*>(publicKey.constData()), publicKey.size());
-
-    openssl::ossl_param_ptr params(OSSL_PARAM_BLD_to_param(param_bld.get()));
-
-    openssl::evp_pkey_ctx_ptr ctx(EVP_PKEY_CTX_new_from_name(nullptr, "EC", nullptr));
-    EVP_PKEY_fromdata_init(ctx.get());
-    EVP_PKEY *pkey = nullptr;
-    if (const auto res = EVP_PKEY_fromdata(ctx.get(), &pkey, EVP_PKEY_KEYPAIR, params.get()); res <= 0) {
-        qCWarning(Log) << ERR_error_string(ERR_get_error(), nullptr);
-        return {};
-    }
-
-    return openssl::evp_pkey_ptr(pkey);
 }
 
 [[nodiscard]] static QByteArray hmacSha256(QByteArrayView key, QByteArrayView data)
@@ -110,19 +87,22 @@ QByteArray ContentEncryption::decrypt(const QByteArray &encrypted) const
     }
 
     // decode header according to RFC 8188 §2.1
-    const auto salt = QByteArrayView(encrypted).left(16);
-    //const auto rs = qFromBigEndian(*reinterpret_cast<const uint32_t*>(encrypted.constData() + 16));
+    const auto salt = QByteArrayView(encrypted).left(CE_SALT_SIZE);
+    if (const auto rs = qFromBigEndian(*reinterpret_cast<const uint32_t*>(encrypted.constData() + 16)); rs != CE_RECORD_SIZE) {
+        qCWarning(Log) << "unexpected rs:" << rs;
+        return {};
+    }
     const auto idlen = *reinterpret_cast<const uint8_t*>(encrypted.constData() + 20);
     if (encrypted.size() < 22 + idlen + AEAD_TAG_SIZE) {
         qCWarning(Log) << "idlen exceeds encrypted message size!";
-        return{};
+        return {};
     }
     const auto keyid = QByteArrayView(encrypted).mid(21, idlen); // sender public key in RFC 8291
     const auto encryptedContent = QByteArrayView(encrypted).mid(21 + idlen);
 
     // load user agent key pair
-    const auto pkey = ecKey(d->m_publicKey, d->m_privateKey);
-    const auto peerKey = ecKey(keyid);
+    const auto pkey = ContentEcryptionUtils::ecKey(d->m_publicKey, d->m_privateKey);
+    const auto peerKey = ContentEcryptionUtils::ecKey(keyid);
     if (!pkey || !peerKey) {
         qCWarning(Log) << "Failed to load EC keys!";
         return {};
@@ -205,10 +185,7 @@ ContentEncryption ContentEncryption::generateKeys()
     }
 
     // auth secret
-    c.d->m_authSecret.resize(AUTH_SECRET_SIZE);
-    if (RAND_bytes(reinterpret_cast<uint8_t*>(c.d->m_authSecret.data()), (int)c.d->m_authSecret.size()) != 1) {
-        return {};
-    }
+    c.d->m_authSecret = ContentEcryptionUtils::random(AUTH_SECRET_SIZE);
 
     return c;
 }
