@@ -31,11 +31,20 @@ ConnectorPrivate::~ConnectorPrivate()
 
 void ConnectorPrivate::Message(const QString &token, const QByteArray &message, const QString &messageIdentifier)
 {
-    qCDebug(Log) << token << message << messageIdentifier;
+    qCDebug(Log) << token << message << messageIdentifier << m_contentEnc.hasKeys();
     if (token != m_token) {
         qCWarning(Log) << "Got message for a different token??";
         return;
     }
+    if (m_contentEnc.hasKeys()) {
+        const auto decrypted = m_contentEnc.decrypt(message);
+        qCDebug(Log) << token << decrypted;
+        if (!decrypted.isEmpty()) {
+            Q_EMIT q->messageReceived(decrypted);
+            return;
+        }
+    }
+
     Q_EMIT q->messageReceived(message);
 }
 
@@ -130,6 +139,13 @@ void ConnectorPrivate::loadState()
     m_description = settings.value("Description").toString();
     m_vapidRequired = settings.value("VapidRequired", false).toBool();
     m_vapidPublicKey = settings.value("VapidPublicKey").toString();
+
+    const auto pubKey = settings.value("ContentEncryptionPublicKey").toByteArray();
+    const auto privKey = settings.value("ContentEncryptionPrivateKey").toByteArray();
+    const auto authSec = settings.value("contentEncryptionAuthSecret").toByteArray();
+    if (!pubKey.isEmpty() && !privKey.isEmpty() && !authSec.isEmpty()) {
+        m_contentEnc = ContentEncryption(pubKey, privKey, authSec);
+    }
 }
 
 void ConnectorPrivate::storeState() const
@@ -141,6 +157,12 @@ void ConnectorPrivate::storeState() const
     settings.setValue("Description", m_description);
     settings.setValue("VapidRequired", m_vapidRequired);
     settings.setValue("VapidPublicKey", m_vapidPublicKey);
+
+    if (m_contentEnc.hasKeys()) {
+        settings.setValue("ContentEncryptionPublicKey", m_contentEnc.publicKey());
+        settings.setValue("ContentEncryptionPrivateKey", m_contentEnc.privateKey());
+        settings.setValue("contentEncryptionAuthSecret", m_contentEnc.authSecret());
+    }
 }
 
 void ConnectorPrivate::setDistributor(const QString &distServiceName)
@@ -239,6 +261,15 @@ void ConnectorPrivate::processNextCommand()
     processNextCommand();
 }
 
+void ConnectorPrivate::ensureKeys()
+{
+    if (m_contentEnc.hasKeys()) {
+        return;
+    }
+    m_contentEnc = ContentEncryption::generateKeys();
+    storeState();
+}
+
 
 Connector::Connector(const QString &serviceName, QObject *parent)
     : QObject(parent)
@@ -317,6 +348,18 @@ void Connector::setVapidPublicKeyRequired(bool vapidRequired)
     d->m_vapidRequired = vapidRequired;
     Q_EMIT vapidPublicKeyRequiredChanged();
     d->processNextCommand();
+}
+
+QByteArray Connector::contentEncryptionPublicKey() const
+{
+    d->ensureKeys();
+    return d->m_contentEnc.publicKey();
+}
+
+QByteArray Connector::contentEncryptionAuthSecret() const
+{
+    d->ensureKeys();
+    return d->m_contentEnc.authSecret();
 }
 
 #include "moc_connector.cpp"

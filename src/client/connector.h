@@ -111,6 +111,40 @@ public:
      */
     void setVapidPublicKeyRequired(bool vapidRequired);
 
+    /** Content encryption user agent public key.
+     *
+     *  When now key pair and authentication secret exist yet, a new one is generated
+     *  and persisted.
+     *
+     *  When a key pair and authentication secret exists incoming messages are
+     *  automatically decrypted.
+     *
+     *  @note This returns the raw 65 byte key data, application server APIs
+     *  typically want this in e.g. Base64 URL encoding.
+     *
+     *  @see RFC 8291
+     *
+     *  @since 25.08
+     */
+     [[nodiscard]] QByteArray contentEncryptionPublicKey() const;
+
+     /** Content encryption authentication secret.
+      *
+      *  When now key pair and authentication secret exist yet, a new one is generated
+      *  and persisted.
+      *
+      *  When a key pair and authentication secret exists incoming messages are
+      *  automatically decrypted.
+      *
+      *  @note This returns the raw 16 byte key data, application server APIs
+      *  typically want this in e.g. Base64 URL encoding.
+      *
+      *  @see RFC 8291
+      *
+      *  @since 25.08
+      */
+     [[nodiscard]] QByteArray contentEncryptionAuthSecret() const;
+
 Q_SIGNALS:
     /** Emitted for each newly received push message. */
     void messageReceived(const QByteArray &msg);
