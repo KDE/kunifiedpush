@@ -13,6 +13,11 @@ How to register for push notifications:
 - Communicate the endpoint URL provided by this to the corresponding server-side application.
 - Connect to its `messageReceived` signal.
 
+There's also support for the following security capabilities, in case your application server
+supports any of those:
+- Message Encryption for Web Push ([RFC 8291](https://datatracker.ietf.org/doc/rfc8291/)).
+- Voluntary Application Server Identification (VAPID) ([RFC 8292](https://datatracker.ietf.org/doc/rfc8292/)).
+
 ### Supported Distributors
 
 For the basic functionality any standard compliant D-Bus distributor should work.

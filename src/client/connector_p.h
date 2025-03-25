@@ -7,6 +7,7 @@
 #define KUNIFIEDPUSH_CONNECTOR_P_H
 
 #include "connector.h"
+#include "contentencryption_p.h"
 
 #ifndef Q_OS_ANDROID
 #include <QDBusServiceWatcher>
@@ -62,6 +63,8 @@ public:
     [[nodiscard]] bool isNextCommandReady() const;
     void processNextCommand();
 
+    void ensureKeys();
+
     Connector *q = nullptr;
     QString m_serviceName;
     QString m_token;
@@ -73,6 +76,8 @@ public:
 
     Command m_currentCommand = Command::None;
     std::deque<Command> m_commandQueue;
+
+    ContentEncryption m_contentEnc;
 
 #ifndef Q_OS_ANDROID
     void handleRegisterResponse(const QDBusPendingCall &reply);
