@@ -26,12 +26,35 @@ NtfyPushProvider::NtfyPushProvider(QObject *parent)
         if (sse.event.isEmpty()) {
             QJsonObject msgObj = QJsonDocument::fromJson(sse.data).object();
             Message msg;
-            msg.clientRemoteId = msgObj.value(QLatin1String("topic")).toString();
-            msg.content = msgObj.value(QLatin1String("message")).toString().toUtf8();
-            if (msgObj.value(QLatin1String("encoding")).toString() == QLatin1String("base64")) {
+            msg.clientRemoteId = msgObj.value("topic"_L1).toString();
+            msg.content = msgObj.value("message"_L1).toString().toUtf8();
+            if (msgObj.value("encoding"_L1).toString() == "base64"_L1) {
                 msg.content = QByteArray::fromBase64(msg.content);
             }
-            m_lastMessageId = msgObj.value(QLatin1String("id")).toString();
+
+            const auto msgId = msgObj.value("id"_L1).toString();
+
+            // encrypted messages come in as attachments apparently, so resolve those here
+            if (const auto attachment = msgObj.value("attachment"_L1).toObject(); !attachment.isEmpty()) {
+                const auto attachmentUrl = attachment.value("url"_L1).toString();
+                if (!attachmentUrl.isEmpty()) {
+                    auto reply = nam()->get(QNetworkRequest(QUrl(attachmentUrl)));
+                    connect(reply, &QNetworkReply::finished, this, [this, reply, msgId, msg]() {
+                        reply->deleteLater();
+                        if (reply->error() != QNetworkReply::NoError) {
+                            qCWarning(Log) << reply->errorString() << reply->readAll();
+                            return;
+                        }
+                        Message m(msg);
+                        m.content = reply->readAll();
+                        m_lastMessageId = msgId;
+                        Q_EMIT messageReceived(m);
+                        storeState();
+                    });
+                    return;
+                }
+            }
+            m_lastMessageId = msgId;
             Q_EMIT messageReceived(msg);
             storeState();
         }
