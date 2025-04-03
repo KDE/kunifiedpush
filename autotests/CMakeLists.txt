@@ -11,4 +11,6 @@ if (NOT KUNIFIEDPUSH_CLIENT_ONLY)
     qt_add_dbus_interface(dbus_srcs ../src/interfaces/org.kde.kunifiedpush.distributor.Management.xml managementinterface)
     ecm_add_test(connectortest.cpp ${dbus_srcs} TEST_NAME connectortest LINK_LIBRARIES Qt::Test KUnifiedPush KUnifiedPushDistributor)
     ecm_add_test(serversenteventsstreamtest.cpp LINK_LIBRARIES Qt::Test KUnifiedPushDistributor)
+
+    ecm_add_test(contentencryptortest.cpp LINK_LIBRARIES Qt::Test KUnifiedPushNotifier KUnifiedPush)
 endif()
