@@ -11,3 +11,14 @@ target_link_libraries(vapid-keygen PRIVATE
     Qt6::Core
     OpenSSL::Crypto
 )
+
+
+add_executable(webpush-notify)
+target_sources(webpush-notify PRIVATE
+    webpush-notify.cpp
+)
+target_include_directories(webpush-notify PRIVATE ${CMAKE_BINARY_DIR})
+target_link_libraries(webpush-notify PRIVATE
+    KUnifiedPushNotifier
+    Qt6::Network
+)
