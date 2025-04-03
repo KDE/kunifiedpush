@@ -4,6 +4,7 @@
 add_library(KUnifiedPushNotifier STATIC)
 target_sources(KUnifiedPushNotifier PRIVATE
     contentencryptor.cpp
+    vapid.cpp
     ../shared/contentencryptionutils.cpp
     ../shared/eckey.cpp
 )
