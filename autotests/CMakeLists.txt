@@ -13,4 +13,5 @@ if (NOT KUNIFIEDPUSH_CLIENT_ONLY)
     ecm_add_test(serversenteventsstreamtest.cpp LINK_LIBRARIES Qt::Test KUnifiedPushDistributor)
 
     ecm_add_test(contentencryptortest.cpp LINK_LIBRARIES Qt::Test KUnifiedPushNotifier KUnifiedPush)
+    ecm_add_test(vapidtest.cpp LINK_LIBRARIES Qt::Test KUnifiedPushNotifier)
 endif()
