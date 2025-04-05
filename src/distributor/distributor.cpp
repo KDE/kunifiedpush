@@ -64,9 +64,6 @@ Distributor::Distributor(QObject *parent)
     }
     qCDebug(Log) << m_clients.size() << "registered clients loaded";
 
-    // purge uninstalled apps
-    purgeUnavailableClients();
-
     // connect to push provider if necessary
     if (!m_clients.empty())
     {
@@ -77,6 +74,9 @@ Distributor::Distributor(QObject *parent)
     } else {
         setStatus(DistributorStatus::Idle);
     }
+
+    // purge uninstalled apps
+    purgeUnavailableClients();
 
     processNextCommand();
 }
