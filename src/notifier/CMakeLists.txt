@@ -9,6 +9,7 @@ target_sources(KUnifiedPushNotifier PRIVATE
     ../shared/contentencryptionutils.cpp
     ../shared/eckey.cpp
 )
+set_target_properties(KUnifiedPushNotifier PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(KUnifiedPushNotifier PRIVATE
     Qt6::Network
     OpenSSL::Crypto

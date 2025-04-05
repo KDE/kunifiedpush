@@ -17,6 +17,7 @@
 
 class NextcloudAuthenticator;
 class OrgKdeKunifiedpushManagementInterface;
+class SelfTest;
 
 /** KCM to configure push notifications. */
 class KCMPushNotifications : public KQuickConfigModule
@@ -27,17 +28,19 @@ class KCMPushNotifications : public KQuickConfigModule
     Q_PROPERTY(int distributorStatus READ distributorStatus NOTIFY distributorStatusChanged)
     Q_PROPERTY(QString pushProviderId READ pushProviderId NOTIFY pushProviderChanged)
     Q_PROPERTY(ClientModel* clientModel READ clientModel CONSTANT)
+    Q_PROPERTY(SelfTest* selfTest READ selfTest CONSTANT)
 public:
     explicit KCMPushNotifications(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
     ~KCMPushNotifications();
 
-    bool hasDistributor() const;
-    bool hasKDEDistributor() const;
-    int distributorStatus() const;
-    QString pushProviderId() const;
-    ClientModel *clientModel() const;
+    [[nodiscard]] bool hasDistributor() const;
+    [[nodiscard]] bool hasKDEDistributor() const;
+    [[nodiscard]] int distributorStatus() const;
+    [[nodiscard]] QString pushProviderId() const;
+    [[nodiscard]] ClientModel *clientModel() const;
+    [[nodiscard]] SelfTest *selfTest() const;
 
-    Q_INVOKABLE QVariantMap pushProviderConfiguration(const QString &pushProviderId) const;
+    Q_INVOKABLE [[nodiscard]] QVariantMap pushProviderConfiguration(const QString &pushProviderId) const;
 
     Q_INVOKABLE void nextcloudAuthenticate(const QUrl &url);
 
@@ -59,6 +62,7 @@ Q_SIGNALS:
 private:
     OrgKdeKunifiedpushManagementInterface *m_mgmtIface = nullptr;
     ClientModel *m_clientModel = nullptr;
+    SelfTest *m_selfTest = nullptr;
     QDBusServiceWatcher m_serviceWatcher;
 
     QNetworkAccessManager m_nam;
