@@ -262,6 +262,57 @@ KCM.ScrollViewKCM {
                 value: providerFormLoader.item.dirty || pushProviderBox.currentValue != kcm.pushProviderId
             }
         }
+
+        RowLayout {
+            visible: kcm.hasDistributor
+            Kirigami.Icon {
+                source: {
+                    switch (kcm.selfTest.state) {
+                        case SelfTest.Success:
+                            return "dialog-positive";
+                        case SelfTest.Error:
+                            return "dialog-error";
+                        case SelfTest.WaitingForEndpoint:
+                            return "network-connect";
+                        case SelfTest.Submitting:
+                            return "cloud-upload";
+                        case SelfTest.WaitingForMessage:
+                            return "cloud-download";
+                    }
+                }
+            }
+            Kirigami.TitleSubtitle {
+                Layout.fillWidth: true
+                title: {
+                    switch (kcm.selfTest.state) {
+                        case SelfTest.Idle:
+                            return "";
+                        case SelfTest.Success:
+                            return i18n("Push notifications are working correctly.")
+                        case SelfTest.Error:
+                            return i18n("Push notification test failed.")
+                        case SelfTest.WaitingForEndpoint:
+                            return i18n("Registering with push server…")
+                        case SelfTest.Submitting:
+                            return i18n("Sending push notification…")
+                        case SelfTest.WaitingForMessage:
+                            return i18n("Waiting to receive push notification…")
+                    }
+                }
+                subtitle: kcm.selfTest.errorMessage
+            }
+            QQC2.Button {
+                id: testButton
+                text: i18nc("@action:button", "Test")
+                icon.name: "media-playback-start"
+                visible: kcm.selfTest.state === SelfTest.Idle || kcm.selfTest.state === SelfTest.Success || kcm.selfTest.state === SelfTest.Error
+                onClicked: kcm.selfTest.start()
+            }
+            QQC2.BusyIndicator {
+                visible: !testButton.visible
+                running: visible
+            }
+        }
     }
 
     // registered clients

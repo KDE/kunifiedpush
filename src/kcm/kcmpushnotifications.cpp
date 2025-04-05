@@ -6,6 +6,7 @@
 #include "kcmpushnotifications.h"
 #include "managementinterface.h"
 #include "nextcloudauthenticator.h"
+#include "selftest.h"
 
 #include "../shared/clientinfo_p.h"
 #include "../shared/connectorutils_p.h"
@@ -21,7 +22,7 @@ K_PLUGIN_CLASS_WITH_JSON(KCMPushNotifications, "kcm_push_notifications.json")
 
 using namespace KUnifiedPush;
 
-KCMPushNotifications::KCMPushNotifications(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+KCMPushNotifications::KCMPushNotifications(QObject *parent, const KPluginMetaData &data, [[maybe_unused]] const QVariantList &args)
     : KQuickConfigModule(parent, data)
 {
     qDBusRegisterMetaType<KUnifiedPush::ClientInfo>();
@@ -47,7 +48,11 @@ KCMPushNotifications::KCMPushNotifications(QObject *parent, const KPluginMetaDat
     connect(this, &KCMPushNotifications::distributorChanged, this, &KCMPushNotifications::distributorStatusChanged);
     connect(this, &KCMPushNotifications::distributorChanged, this, &KCMPushNotifications::pushProviderChanged);
 
+    m_selfTest = new SelfTest(this);
+    m_selfTest->setNetworkAccessManager(&m_nam);
+
     qmlRegisterUncreatableMetaObject(DistributorStatus::staticMetaObject, "org.kde.kunifiedpush.kcm", 1, 0, "DistributorStatus", {});
+    qmlRegisterUncreatableMetaObject(SelfTest::staticMetaObject, "org.kde.kunifiedpush.kcm", 1, 0, "SelfTest", {});
 }
 
 KCMPushNotifications::~KCMPushNotifications() = default;
@@ -59,7 +64,7 @@ bool KCMPushNotifications::hasDistributor() const
 
 bool KCMPushNotifications::hasKDEDistributor() const
 {
-    return ConnectorUtils::selectDistributor() == QLatin1String(KDE_DISTRIBUTOR_SERVICE_NAME);
+    return ConnectorUtils::selectDistributor() == KDE_DISTRIBUTOR_SERVICE_NAME;
 }
 
 int KCMPushNotifications::distributorStatus() const
@@ -75,6 +80,11 @@ QString KCMPushNotifications::pushProviderId() const
 ClientModel* KCMPushNotifications::clientModel() const
 {
     return m_clientModel;
+}
+
+SelfTest* KCMPushNotifications::selfTest() const
+{
+    return m_selfTest;
 }
 
 QVariantMap KCMPushNotifications::pushProviderConfiguration(const QString &pushProviderId) const
@@ -108,6 +118,7 @@ void KCMPushNotifications::save()
 {
     Q_EMIT saveRequested();
     KQuickConfigModule::save();
+    m_selfTest->reset();
 }
 
 #include "kcmpushnotifications.moc"

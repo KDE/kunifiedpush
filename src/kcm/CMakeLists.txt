@@ -10,6 +10,7 @@ set(kcm_srcs
     kcmpushnotifications.h
     nextcloudauthenticator.cpp
     nextcloudauthenticator.h
+    selftest.cpp
     ../shared/connectorutils.cpp
 )
 
@@ -18,8 +19,11 @@ qt_add_dbus_interface(kcm_srcs ../interfaces/org.kde.kunifiedpush.distributor.Ma
 
 kcmutils_add_qml_kcm(kcm_push_notifications SOURCES ${kcm_srcs})
 target_link_libraries(kcm_push_notifications PRIVATE
+    KUnifiedPush
+    KUnifiedPushNotifier
     KF6::Service
     KF6::KCMUtilsQuick
+    KF6::I18n
     Qt::DBus
     Qt::Gui
 )
