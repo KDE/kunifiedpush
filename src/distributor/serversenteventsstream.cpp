@@ -28,6 +28,11 @@ void ServerSentEventsStream::read(QIODevice *device)
     });
 }
 
+QByteArray ServerSentEventsStream::buffer() const
+{
+    return m_buffer;
+}
+
 static bool isLineBreak(char c)
 {
     return c == '\n' || c == '\r';

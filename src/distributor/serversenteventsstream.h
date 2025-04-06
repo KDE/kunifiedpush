@@ -30,6 +30,7 @@ public:
     ~ServerSentEventsStream();
 
     void read(QIODevice *device);
+    [[nodiscard]] QByteArray buffer() const;
 
 Q_SIGNALS:
     void messageReceived(const KUnifiedPush::SSEMessage &msg);

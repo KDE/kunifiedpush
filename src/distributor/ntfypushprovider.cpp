@@ -144,7 +144,14 @@ void NtfyPushProvider::doConnectToProvider()
         if (reply->error() == QNetworkReply::OperationCanceledError) {
             return; // we triggered this ourselves
         }
-        qCDebug(Log) << reply->error() << reply->errorString();
+
+        qCDebug(Log) << reply->error() << reply->errorString() << m_sseStream.buffer();
+        const auto obj = QJsonDocument::fromJson(m_sseStream.buffer()).object();
+        if (const auto errMsg = obj.value("error"_L1).toString(); !errMsg.isEmpty()) {
+            Q_EMIT disconnected(ProviderRejected, errMsg);
+            return;
+        }
+
         Q_EMIT disconnected(TransientNetworkError, reply->errorString());
     });
 
