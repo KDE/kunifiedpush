@@ -26,6 +26,7 @@ class KCMPushNotifications : public KQuickConfigModule
     Q_PROPERTY(bool hasDistributor READ hasDistributor NOTIFY distributorChanged)
     Q_PROPERTY(bool hasKDEDistributor READ hasKDEDistributor NOTIFY distributorChanged)
     Q_PROPERTY(int distributorStatus READ distributorStatus NOTIFY distributorStatusChanged)
+    Q_PROPERTY(QString distributorErrorMessage READ distributorErrorMessage NOTIFY distributorErrorMessageChanged)
     Q_PROPERTY(QString pushProviderId READ pushProviderId NOTIFY pushProviderChanged)
     Q_PROPERTY(ClientModel* clientModel READ clientModel CONSTANT)
     Q_PROPERTY(SelfTest* selfTest READ selfTest CONSTANT)
@@ -36,6 +37,7 @@ public:
     [[nodiscard]] bool hasDistributor() const;
     [[nodiscard]] bool hasKDEDistributor() const;
     [[nodiscard]] int distributorStatus() const;
+    [[nodiscard]] QString distributorErrorMessage() const;
     [[nodiscard]] QString pushProviderId() const;
     [[nodiscard]] ClientModel *clientModel() const;
     [[nodiscard]] SelfTest *selfTest() const;
@@ -53,6 +55,7 @@ public Q_SLOTS:
 Q_SIGNALS:
     void distributorChanged();
     void distributorStatusChanged();
+    void distributorErrorMessageChanged();
     void pushProviderChanged();
 
     void nextcloudAuthenticated(const QString &loginName, const QString &appPassword);

@@ -10,6 +10,11 @@
       <arg name="status" type="i" direction="out"/>
     </method>
     <signal name="statusChanged"/>
+    <!-- error message -->
+    <method name="errorMessage">
+      <arg name="errorMessage" type="s" direction="out"/>
+    </method>
+    <signal name="errorMessageChanged"/>
     <!-- push provider configuration -->
     <method name="pushProviderId">
       <arg name="status" type="s" direction="out"/>

@@ -306,6 +306,7 @@ void Distributor::providerConnected()
 {
     qCDebug(Log);
     setStatus(DistributorStatus::Connected);
+    setErrorMessage({});
     m_currentCommand = {};
     processNextCommand();
 }
@@ -316,8 +317,10 @@ void Distributor::providerDisconnected(AbstractPushProvider::Error error, const 
     if (m_currentCommand.type == Command::Disconnect) {
         m_currentCommand = {};
         setStatus(m_clients.empty() ? DistributorStatus::Idle : DistributorStatus::NoNetwork);
+        setErrorMessage({});
     } else {
         setStatus(DistributorStatus::NoNetwork);
+        setErrorMessage(errorMsg);
     }
     processNextCommand();
 }
@@ -454,6 +457,11 @@ int Distributor::status() const
     return m_status;
 }
 
+QString Distributor::errorMessage() const
+{
+    return m_errorMessage;
+}
+
 void Distributor::setStatus(DistributorStatus::Status status)
 {
     if (m_status == status) {
@@ -462,6 +470,16 @@ void Distributor::setStatus(DistributorStatus::Status status)
 
     m_status = status;
     Q_EMIT statusChanged();
+}
+
+void Distributor::setErrorMessage(const QString &errMsg)
+{
+    if (m_errorMessage == errMsg) {
+        return;
+    }
+
+    m_errorMessage = errMsg;
+    Q_EMIT errorMessageChanged();
 }
 
 QString Distributor::pushProviderId() const

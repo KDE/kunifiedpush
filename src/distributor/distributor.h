@@ -42,6 +42,7 @@ public:
 
     // KCM D-Bus interface
     [[nodiscard]] int status() const;
+    [[nodiscard]] QString errorMessage() const;
     [[nodiscard]] QString pushProviderId() const;
     [[nodiscard]] QVariantMap pushProviderConfiguration(const QString &pushProviderId) const;
     void setPushProvider(const QString &pushProviderId, const QVariantMap &config);
@@ -53,6 +54,7 @@ public:
 
 Q_SIGNALS:
     void statusChanged();
+    void errorMessageChanged();
     void pushProviderChanged();
     void registeredClientsChanged();
 
@@ -74,6 +76,7 @@ private:
     void processNextCommand();
 
     void setStatus(DistributorStatus::Status status);
+    void setErrorMessage(const QString &errMsg);
 
     [[nodiscard]] bool isNetworkAvailable() const;
 
@@ -82,6 +85,7 @@ private:
     Command m_currentCommand;
     std::deque<Command> m_commandQueue;
     DistributorStatus::Status m_status = DistributorStatus::Unknown;
+    QString m_errorMessage;
 };
 
 }

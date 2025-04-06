@@ -61,7 +61,9 @@ KCM.ScrollViewKCM {
             Layout.fillWidth: true
             showCloseButton: false
             type: Kirigami.MessageType.Warning
-            text: i18n("<b>Offline</b><br>Network connection to the server could not be established.")
+            text: kcm.distributorErrorMessage ?
+                i18n("<b>Offline</b><br>Network connection to the server could not be established (%1).", kcm.distributorErrorMessage) :
+                i18n("<b>Offline</b><br>Network connection to the server could not be established.")
             icon.name: "network-disconnect"
             visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.NoNetwork
             position: Kirigami.InlineMessage.Position.Header
@@ -70,7 +72,9 @@ KCM.ScrollViewKCM {
             Layout.fillWidth: true
             showCloseButton: false
             type: Kirigami.MessageType.Error
-            text: i18n("<b>Offline</b><br>Could not authenticate at the server.")
+            text: kcm.distributorErrorMessage ?
+                i18n("<b>Offline</b><br>Could not authenticate at the server (%1).", kcm.distributorErrorMessage) :
+                i18n("<b>Offline</b><br>Could not authenticate at the server.")
             icon.name: "dialog-error"
             visible: kcm.hasKDEDistributor && kcm.distributorStatus == DistributorStatus.AuthenticationError
             position: Kirigami.InlineMessage.Position.Header
