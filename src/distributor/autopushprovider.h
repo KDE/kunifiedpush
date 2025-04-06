@@ -10,6 +10,7 @@
 #include "client.h"
 
 #include <QUrl>
+#include <QTimer>
 
 class QWebSocket;
 
@@ -42,6 +43,7 @@ private:
     QWebSocket *m_socket = nullptr;
     Client m_currentClient;
     QString m_currentMessageId;
+    QTimer m_pingTimer;
 };
 
 }

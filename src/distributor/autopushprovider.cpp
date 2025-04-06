@@ -23,6 +23,9 @@ AutopushProvider::AutopushProvider(QObject *parent)
     : AbstractPushProvider(Id, parent)
 {
     qCDebug(Log);
+
+    m_pingTimer.setTimerType(Qt::VeryCoarseTimer);
+    m_pingTimer.setInterval(std::chrono::minutes(5));
 }
 
 bool AutopushProvider::loadSettings(const QSettings &settings)
@@ -52,12 +55,15 @@ void AutopushProvider::connectToProvider()
                 msg.insert("uaid"_L1, m_uaid);
             }
             sendMessage(msg);
+            m_pingTimer.start();
         } else if (state == QAbstractSocket::UnconnectedState) {
             Q_EMIT disconnected(TransientNetworkError, m_socket->errorString());
             m_socket->deleteLater();
+            m_pingTimer.stop();
         }
     });
     connect(m_socket, &QWebSocket::textMessageReceived, this, &AutopushProvider::wsMessageReceived);
+    connect(&m_pingTimer, &QTimer::timeout, m_socket, [this]() { m_socket->ping(); });
 
     auto wsUrl = m_url;
     if (wsUrl.scheme() == QLatin1String("https")) {
