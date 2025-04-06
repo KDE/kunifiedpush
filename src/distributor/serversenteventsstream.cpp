@@ -33,6 +33,11 @@ QByteArray ServerSentEventsStream::buffer() const
     return m_buffer;
 }
 
+void ServerSentEventsStream::clear()
+{
+    m_buffer.clear();
+}
+
 static bool isLineBreak(char c)
 {
     return c == '\n' || c == '\r';

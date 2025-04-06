@@ -31,6 +31,7 @@ public:
 
     void read(QIODevice *device);
     [[nodiscard]] QByteArray buffer() const;
+    void clear();
 
 Q_SIGNALS:
     void messageReceived(const KUnifiedPush::SSEMessage &msg);
