@@ -43,6 +43,10 @@ void Notifier::submit(const QByteArray &msg, QNetworkAccessManager *nam)
         req.setRawHeader("Authorization", vapid.authorization(m_endpoint));
     }
 
+    // prevent ntfy from turning encrypted content into attachments
+    // (attachments aren't enabled by default in ntfy)
+    req.setRawHeader("x-unifiedpush", "1");
+
 #if 0
     for (const auto &hdr : req.rawHeaderList()) {
         qDebug() << hdr << req.rawHeader(hdr);
