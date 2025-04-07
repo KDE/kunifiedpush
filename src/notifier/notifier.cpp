@@ -27,6 +27,9 @@ void Notifier::submit(const QByteArray &msg, QNetworkAccessManager *nam)
 
     QNetworkRequest req(m_endpoint);
     req.setRawHeader("TTL", QByteArray::number(m_ttl.count()));
+    if (m_urgency != DefaultUrgency) {
+        req.setRawHeader("Urgency", urgencyValue(m_urgency));
+    }
 
     QByteArray content;
     if (!m_userAgentPublicKey.isEmpty() && !m_authSecret.isEmpty()) {
