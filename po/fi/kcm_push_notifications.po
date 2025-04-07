@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-16 00:39+0000\n"
+"POT-Creation-Date: 2025-04-07 00:40+0000\n"
 "PO-Revision-Date: 2023-12-11 18:03+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -64,43 +64,43 @@ msgstr "<b>Ei käytössä</b><br>Push-ilmoituksia ei ole vielä asetettu."
 msgid "Push provider:"
 msgstr "Push-tarjoaja:"
 
-#: ui/main.qml:150 ui/main.qml:177 ui/main.qml:226
+#: ui/main.qml:151 ui/main.qml:178 ui/main.qml:227 ui/main.qml:246
 #, kde-format
 msgid "Url:"
 msgstr "Verkko-osoite:"
 
-#: ui/main.qml:155
+#: ui/main.qml:156
 #, kde-format
 msgid "Client token:"
 msgstr "Asiakasmerkki:"
 
-#: ui/main.qml:182
+#: ui/main.qml:183
 #, kde-format
 msgid "User name:"
 msgstr "Käyttäjätunnus:"
 
-#: ui/main.qml:188
+#: ui/main.qml:189
 #, kde-format
 msgid "Authenticate"
 msgstr "Tunnistaudu"
 
-#: ui/main.qml:252
+#: ui/main.qml:272
 #, kde-format
 msgid "Applications"
 msgstr "Sovellukset"
 
-#: ui/main.qml:282
+#: ui/main.qml:302
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "Poista sovelluksen push-ilmoitusrekisteröinti"
 
-#: ui/main.qml:289
+#: ui/main.qml:309
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
 msgstr "Poista sovelluksen rekisteröinti"
 
-#: ui/main.qml:290
+#: ui/main.qml:310
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"

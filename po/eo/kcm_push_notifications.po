@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-16 00:39+0000\n"
+"POT-Creation-Date: 2025-04-07 00:40+0000\n"
 "PO-Revision-Date: 2023-11-11 07:38+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -64,43 +64,43 @@ msgstr "<b>Senrete</b><br>Puŝaj sciigoj ankoraŭ ne estas agordita."
 msgid "Push provider:"
 msgstr "Puŝprovizanto:"
 
-#: ui/main.qml:150 ui/main.qml:177 ui/main.qml:226
+#: ui/main.qml:151 ui/main.qml:178 ui/main.qml:227 ui/main.qml:246
 #, kde-format
 msgid "Url:"
 msgstr "Url:"
 
-#: ui/main.qml:155
+#: ui/main.qml:156
 #, kde-format
 msgid "Client token:"
 msgstr "Klienta ĵetono:"
 
-#: ui/main.qml:182
+#: ui/main.qml:183
 #, kde-format
 msgid "User name:"
 msgstr "Uzantnomo:"
 
-#: ui/main.qml:188
+#: ui/main.qml:189
 #, kde-format
 msgid "Authenticate"
 msgstr "Aŭtentikigi"
 
-#: ui/main.qml:252
+#: ui/main.qml:272
 #, kde-format
 msgid "Applications"
 msgstr "Aplikoj"
 
-#: ui/main.qml:282
+#: ui/main.qml:302
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "Malregistri aplikaĵon el puŝaj sciigoj"
 
-#: ui/main.qml:289
+#: ui/main.qml:309
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
 msgstr "Malregistri Aplikaĵon"
 
-#: ui/main.qml:290
+#: ui/main.qml:310
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"

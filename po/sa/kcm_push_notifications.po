@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-16 00:39+0000\n"
+"POT-Creation-Date: 2025-04-07 00:40+0000\n"
 "PO-Revision-Date: 2024-12-20 21:52+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -64,43 +64,43 @@ msgstr "<b>अफलाइन</b><br> पुश सूचनाः अद्य�
 msgid "Push provider:"
 msgstr "पुश प्रदाता :"
 
-#: ui/main.qml:150 ui/main.qml:177 ui/main.qml:226
+#: ui/main.qml:151 ui/main.qml:178 ui/main.qml:227 ui/main.qml:246
 #, kde-format
 msgid "Url:"
 msgstr "Url:"
 
-#: ui/main.qml:155
+#: ui/main.qml:156
 #, kde-format
 msgid "Client token:"
 msgstr "ग्राहक टोकन :"
 
-#: ui/main.qml:182
+#: ui/main.qml:183
 #, kde-format
 msgid "User name:"
 msgstr "उपयोक्तृनाम :"
 
-#: ui/main.qml:188
+#: ui/main.qml:189
 #, kde-format
 msgid "Authenticate"
 msgstr "प्रमाणीकरणं कुर्वन्तु"
 
-#: ui/main.qml:252
+#: ui/main.qml:272
 #, kde-format
 msgid "Applications"
 msgstr "अनुप्रयोगाः"
 
-#: ui/main.qml:282
+#: ui/main.qml:302
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "पुश सूचनाभ्यः अनुप्रयोगस्य पञ्जीकरणं अपञ्जयन्तु"
 
-#: ui/main.qml:289
+#: ui/main.qml:309
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
 msgstr "आवेदन पञ्जीकरणं रद्दं कुर्वन्तु"
 
-#: ui/main.qml:290
+#: ui/main.qml:310
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"

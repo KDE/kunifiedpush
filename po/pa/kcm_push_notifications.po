@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-16 00:39+0000\n"
+"POT-Creation-Date: 2025-04-07 00:40+0000\n"
 "PO-Revision-Date: 2024-01-28 16:07-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -61,43 +61,43 @@ msgstr "<b>ਆਫਲਾਈਨ</b><br>ਪੁਸ਼ ਨੋਟੀਫਿਕੇਸ਼ਨ �
 msgid "Push provider:"
 msgstr "ਪੁਸ਼ ਪਰੋਵਾਇਡਰ:"
 
-#: ui/main.qml:150 ui/main.qml:177 ui/main.qml:226
+#: ui/main.qml:151 ui/main.qml:178 ui/main.qml:227 ui/main.qml:246
 #, kde-format
 msgid "Url:"
 msgstr "Url:"
 
-#: ui/main.qml:155
+#: ui/main.qml:156
 #, kde-format
 msgid "Client token:"
 msgstr "ਕਲਾਂਈਟ ਟੋਕਨ:"
 
-#: ui/main.qml:182
+#: ui/main.qml:183
 #, kde-format
 msgid "User name:"
 msgstr "ਵਰਤੋਂਕਾਰ ਦਾ ਨਾਂ:"
 
-#: ui/main.qml:188
+#: ui/main.qml:189
 #, kde-format
 msgid "Authenticate"
 msgstr "ਪਰਮਾਣਕਿਤਾ"
 
-#: ui/main.qml:252
+#: ui/main.qml:272
 #, kde-format
 msgid "Applications"
 msgstr "ਐਪਲੀਕੇਸ਼ਨਾਂ"
 
-#: ui/main.qml:282
+#: ui/main.qml:302
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "ਨੋਟੀਫਿਕੇਸ਼ਨ ਪੁਸ਼ ਤੋਂ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਅਣ-ਰਜਿਸਟਰ ਕਰੋ"
 
-#: ui/main.qml:289
+#: ui/main.qml:309
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
 msgstr "ਅਣ-ਰਜਿਸਟਰ ਐਪਲੀਕੇਸ਼ਨ"
 
-#: ui/main.qml:290
+#: ui/main.qml:310
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"

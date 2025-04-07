@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-16 00:39+0000\n"
+"POT-Creation-Date: 2025-04-07 00:40+0000\n"
 "PO-Revision-Date: 2023-11-12 13:40+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -69,43 +69,43 @@ msgstr ""
 msgid "Push provider:"
 msgstr "Fournisseur d'envoi :"
 
-#: ui/main.qml:150 ui/main.qml:177 ui/main.qml:226
+#: ui/main.qml:151 ui/main.qml:178 ui/main.qml:227 ui/main.qml:246
 #, kde-format
 msgid "Url:"
 msgstr "URL :"
 
-#: ui/main.qml:155
+#: ui/main.qml:156
 #, kde-format
 msgid "Client token:"
 msgstr "Jeton de client :"
 
-#: ui/main.qml:182
+#: ui/main.qml:183
 #, kde-format
 msgid "User name:"
 msgstr "Nom d'utilisateur :"
 
-#: ui/main.qml:188
+#: ui/main.qml:189
 #, kde-format
 msgid "Authenticate"
 msgstr "S'authentifier"
 
-#: ui/main.qml:252
+#: ui/main.qml:272
 #, kde-format
 msgid "Applications"
 msgstr "Applications"
 
-#: ui/main.qml:282
+#: ui/main.qml:302
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "Désinscrire une application pour l'envoi de notifications"
 
-#: ui/main.qml:289
+#: ui/main.qml:309
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
 msgstr "Supprimer l'inscription de l'application"
 
-#: ui/main.qml:290
+#: ui/main.qml:310
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
