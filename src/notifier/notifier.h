@@ -6,6 +6,8 @@
 #ifndef KUNIFIEDPUSH_NOTIFIER_NOTIFIER_H
 #define KUNIFIEDPUSH_NOTIFIER_NOTIFIER_H
 
+#include "../shared/urgency_p.h"
+
 #include <QObject>
 #include <QUrl>
 
@@ -31,6 +33,7 @@ public:
     inline void setContact(const QString &contact) { m_contact = contact; }
     inline void setVapidPublicKey(const QByteArray &vapidPublicKey) { m_vapidPublicKey = vapidPublicKey; }
     inline void setVapidPrivateKey(const QByteArray &vapidPrivateKey) { m_vapidPrivateKey = vapidPrivateKey; }
+    inline void setUrgency(Urgency urgency) { m_urgency = urgency; }
 
     /** Submit push message with content @p msg. */
     void submit(const QByteArray &msg, QNetworkAccessManager *nam);
@@ -41,6 +44,7 @@ Q_SIGNALS:
 private:
     QUrl m_endpoint;
     std::chrono::seconds m_ttl = std::chrono::hours(1);
+    Urgency m_urgency = DefaultUrgency;
 
     // content encryption
     QByteArray m_userAgentPublicKey;

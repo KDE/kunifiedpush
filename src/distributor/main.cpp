@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 
     QCoreApplication app(argc, argv);
     KUnifiedPush::Distributor distributor;
-    if (!QDBusConnection::sessionBus().registerService(QLatin1String(KDE_DISTRIBUTOR_SERVICE_NAME))) {
+    if (!QDBusConnection::sessionBus().registerService(KDE_DISTRIBUTOR_SERVICE_NAME)) {
         qCCritical(Log) << "Distributor service name already in use - aborting!";
         return 1;
     }
