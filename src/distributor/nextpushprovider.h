@@ -27,14 +27,17 @@ public:
     ~NextPushProvider();
 
     bool loadSettings(const QSettings &settings) override;
-    void connectToProvider() override;
+    void connectToProvider(Urgency urgency) override;
     void disconnectFromProvider() override;
     void registerClient(const Client &client) override;
     void unregisterClient(const Client &client) override;
 
     static constexpr inline auto Id = QLatin1StringView("NextPush");
+protected:
+    void doChangeUrgency(Urgency urgency) override;
+
 private:
-    void waitForMessage();
+    void waitForMessage(Urgency urgency);
     QNetworkRequest prepareRequest(const char *restCmd, const QString &restArg = {}) const;
 
     QUrl m_url;

@@ -75,9 +75,9 @@ bool NtfyPushProvider::loadSettings(const QSettings &settings)
     return m_url.isValid();
 }
 
-void NtfyPushProvider::connectToProvider()
+void NtfyPushProvider::connectToProvider(Urgency urgency)
 {
-    doConnectToProvider();
+    doConnectToProvider(urgency);
     Q_EMIT connected();
 }
 
@@ -106,7 +106,7 @@ void NtfyPushProvider::registerClient(const Client &client)
 
     m_topics.push_back(topic);
     storeState();
-    doConnectToProvider();
+    doConnectToProvider(urgency());
     Q_EMIT clientRegistered(newClient);
 }
 
@@ -114,11 +114,19 @@ void NtfyPushProvider::unregisterClient(const Client &client)
 {
     m_topics.removeAll(client.remoteId);
     storeState();
-    doConnectToProvider();
+    doConnectToProvider(urgency());
     Q_EMIT clientUnregistered(client);
 }
 
-void NtfyPushProvider::doConnectToProvider()
+#if 0
+// TODO see doConnectToProvider
+void NtfyPushProvider::doChangeUrgency(Urgency urgency)
+{
+    doConnectToProvider(urgency);
+}
+#endif
+
+void NtfyPushProvider::doConnectToProvider(Urgency urgency)
 {
     if (m_sseReply) {
         m_sseReply->abort();
@@ -136,8 +144,12 @@ void NtfyPushProvider::doConnectToProvider()
     QUrlQuery query;
     query.addQueryItem(QStringLiteral("up"), QStringLiteral("1"));
     query.addQueryItem(QStringLiteral("since"), m_lastMessageId.isEmpty() ? QStringLiteral("all") : m_lastMessageId);
+    // TODO urgency filter
+    // ntfy's "priority" comes close to this, but first would need RFC 8030 compliant urgency support for incoming messages
+    // before we can add a corresponding filter here, otherwise Web Push message will not get correct urgency levels assigned
+    // and we'd miss high priority ones
     url.setQuery(query);
-    qCDebug(Log) << url;
+    qCDebug(Log) << url << qToUnderlying(urgency);
 
     auto reply = nam()->get(QNetworkRequest(url));
     connect(reply, &QNetworkReply::finished, this, [reply, this]() {
@@ -158,6 +170,10 @@ void NtfyPushProvider::doConnectToProvider()
 
     m_sseReply = reply;
     m_sseStream.read(reply);
+
+    // TODO urgency filter
+    // setUrgency(urgency);
+    // Q_EMIT urgencyChanged();
 }
 
 void NtfyPushProvider::storeState()

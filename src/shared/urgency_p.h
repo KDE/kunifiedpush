@@ -17,7 +17,11 @@ enum class Urgency {
     High
 };
 
+/** Default urgency for a message not specifying an urgency explicitly. */
 constexpr inline auto DefaultUrgency = Urgency::Normal;
+
+/** Lowest possible urgency level to receive all messages. */
+constexpr inline auto AllUrgencies = Urgency::VeryLow;
 
 constexpr const char* urgencyValue(Urgency urgency)
 {

@@ -25,6 +25,7 @@ public:
         Disconnect,
         ChangePushProvider,
         MessageAck,
+        ChangeUrgency,
     } type = NoCommand;
     Client client;
     QDBusMessage reply;

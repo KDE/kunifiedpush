@@ -33,9 +33,9 @@ bool MockPushProvider::loadSettings(const QSettings &settings)
     return true;
 }
 
-void MockPushProvider::connectToProvider()
+void MockPushProvider::connectToProvider(Urgency urgency)
 {
-    qCDebug(Log);
+    qCDebug(Log) << qToUnderlying(urgency);
     QMetaObject::invokeMethod(this, "connected", Qt::QueuedConnection);
 }
 
@@ -65,4 +65,10 @@ void MockPushProvider::acknowledgeMessage(const Client &client, const QString &m
 {
     qCDebug(Log) << client.serviceName <<messageIdentifier;
     QMetaObject::invokeMethod(this, "messageAcknowledged", Qt::QueuedConnection, Q_ARG(KUnifiedPush::Client, client), Q_ARG(QString, messageIdentifier));
+}
+
+void MockPushProvider::doChangeUrgency(Urgency urgency)
+{
+    qCDebug(Log) << qToUnderlying(urgency);
+    AbstractPushProvider::doChangeUrgency(urgency);
 }

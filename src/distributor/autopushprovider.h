@@ -26,13 +26,17 @@ public:
     explicit AutopushProvider(QObject *parent = nullptr);
 
     bool loadSettings(const QSettings &settings) override;
-    void connectToProvider() override;
+    void connectToProvider(Urgency urgency) override;
     void disconnectFromProvider() override;
     void registerClient(const Client &client) override;
     void unregisterClient(const Client &client) override;
     void acknowledgeMessage(const Client &client, const QString &messageIdentifier) override;
 
     static constexpr inline auto Id = QLatin1StringView("Autopush");
+
+protected:
+    void doChangeUrgency(Urgency urgency) override;
+
 private:
     void sendMessage(const QJsonObject &msg);
     void wsMessageReceived(const QString &msg);

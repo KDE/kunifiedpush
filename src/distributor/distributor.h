@@ -11,6 +11,7 @@
 
 #include "../shared/clientinfo_p.h"
 #include "../shared/distributorstatus_p.h"
+#include "../shared/urgency_p.h"
 
 #include <QDBusContext>
 #include <QObject>
@@ -18,6 +19,10 @@
 #include <deque>
 #include <memory>
 #include <vector>
+
+namespace Solid {
+class Device;
+}
 
 namespace KUnifiedPush {
 
@@ -66,6 +71,7 @@ private:
     void providerConnected();
     void providerDisconnected(AbstractPushProvider::Error error, const QString &errorMsg);
     void providerMessageAcknowledged(const Client &client, const QString &messageIdentifier);
+    void providerUrgencyChanged();
 
     [[nodiscard]] QStringList clientTokens() const;
 
@@ -80,11 +86,17 @@ private:
 
     [[nodiscard]] bool isNetworkAvailable() const;
 
+    // determine current urgency level based on network and batter state as per RFC 8030
+    [[nodiscard]] Urgency determineUrgency() const;
+    void setUrgency(Urgency urgency);
+    void addBattery(const Solid::Device &batteryDevice);
+
     std::unique_ptr<AbstractPushProvider> m_pushProvider;
     std::vector<Client> m_clients;
     Command m_currentCommand;
     std::deque<Command> m_commandQueue;
     DistributorStatus::Status m_status = DistributorStatus::Unknown;
+    Urgency m_urgency = AllUrgencies;
     QString m_errorMessage;
 };
 
