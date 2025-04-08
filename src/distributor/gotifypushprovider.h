@@ -22,7 +22,7 @@ public:
     explicit GotifyPushProvider(QObject *parent = nullptr);
 
     bool loadSettings(const QSettings &settings) override;
-    void connectToProvider() override;
+    void connectToProvider(Urgency urgency) override;
     void disconnectFromProvider() override;
     void registerClient(const Client &client) override;
     void unregisterClient(const Client &client) override;

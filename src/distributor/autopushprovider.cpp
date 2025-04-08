@@ -40,7 +40,7 @@ bool AutopushProvider::loadSettings(const QSettings &settings)
     return m_url.isValid();
 }
 
-void AutopushProvider::connectToProvider()
+void AutopushProvider::connectToProvider([[maybe_unused]] Urgency urgency)
 {
     qCDebug(Log);
     m_socket = new QWebSocket();
@@ -134,6 +134,11 @@ void AutopushProvider::wsMessageReceived(const QString &msg)
         Q_EMIT clientUnregistered(m_currentClient, status == 200 ? NoError : ProviderRejected);
         return;
     }
+
+    if (msgType == "urgency"_L1) {
+        Q_EMIT urgencyChanged();
+        return;
+    }
 }
 
 void AutopushProvider::registerClient(const Client &client)
@@ -181,6 +186,22 @@ void AutopushProvider::acknowledgeMessage(const Client &client, const QString &m
     }};
     sendMessage(msg);
     Q_EMIT messageAcknowledged(client, messageIdentifier);
+}
+
+void AutopushProvider::doChangeUrgency(Urgency urgency)
+{
+    qCDebug(Log) << qToUnderlying(urgency);
+    // TODO not integrated upstream yet: https://github.com/mozilla-services/autopush-rs/tree/feat/urgency
+#if 0
+    QJsonObject msg{{
+        { "messageType"_L1, "urgency"_L1 },
+        { "min"_L1, QLatin1StringView(urgencyValue(urgency)) }
+    }};
+    sendMessage(msg);
+    setUrgency(urgency);
+#else
+    AbstractPushProvider::doChangeUrgency(urgency);
+#endif
 }
 
 void AutopushProvider::storeState()

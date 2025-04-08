@@ -19,6 +19,10 @@
 
 #include "../shared/unifiedpush-constants.h"
 
+#include <Solid/Battery>
+#include <Solid/Device>
+#include <Solid/DeviceNotifier>
+
 #include <QDBusConnection>
 #include <QSettings>
 
@@ -35,9 +39,20 @@ Distributor::Distributor(QObject *parent)
     // setup network status tracking
     if (QNetworkInformation::loadBackendByFeatures(QNetworkInformation::Feature::Reachability)) {
         connect(QNetworkInformation::instance(), &QNetworkInformation::reachabilityChanged, this, &Distributor::processNextCommand);
+        connect(QNetworkInformation::instance(), &QNetworkInformation::isMeteredChanged, this, [this]{ setUrgency(determineUrgency()); });
     } else {
         qCWarning(Log) << "No network state information available!" << QNetworkInformation::availableBackends();
     }
+
+    // setup battery monitoring
+    for (const auto &batteryDevice : Solid::Device::listFromType(Solid::DeviceInterface::Battery)) {
+        addBattery(batteryDevice);
+    }
+    connect(Solid::DeviceNotifier::instance(), &Solid::DeviceNotifier::deviceAdded, this, [this](const auto &id) {
+        addBattery(Solid::Device(id));
+    });
+
+    m_urgency = determineUrgency();
 
     // register at D-Bus
     new Distributor1Adaptor(this);
@@ -308,6 +323,16 @@ void Distributor::providerConnected()
     setStatus(DistributorStatus::Connected);
     setErrorMessage({});
     m_currentCommand = {};
+
+    // provider needs separate command to change urgency
+    if (m_urgency != m_pushProvider->urgency()) {
+        if (std::ranges::none_of(m_commandQueue, [](const auto &cmd) { return cmd.type == Command::ChangeUrgency; })) {
+            Command cmd;
+            cmd.type = Command::ChangeUrgency;
+            m_commandQueue.push_back(std::move(cmd));
+        }
+    }
+
     processNextCommand();
 }
 
@@ -329,6 +354,15 @@ void Distributor::providerMessageAcknowledged(const Client &client, const QStrin
 {
     qCDebug(Log) << client.serviceName << messageIdentifier;
     if (m_currentCommand.type == Command::MessageAck && m_currentCommand.value == messageIdentifier) {
+        m_currentCommand = {};
+    }
+    processNextCommand();
+}
+
+void Distributor::providerUrgencyChanged()
+{
+    qCDebug(Log);
+    if (m_currentCommand.type == Command::ChangeUrgency) {
         m_currentCommand = {};
     }
     processNextCommand();
@@ -378,6 +412,7 @@ bool Distributor::setupPushProvider()
     connect(m_pushProvider.get(), &AbstractPushProvider::connected, this, &Distributor::providerConnected);
     connect(m_pushProvider.get(), &AbstractPushProvider::disconnected, this, &Distributor::providerDisconnected);
     connect(m_pushProvider.get(), &AbstractPushProvider::messageAcknowledged, this, &Distributor::providerMessageAcknowledged);
+    connect(m_pushProvider.get(), &AbstractPushProvider::urgencyChanged, this, &Distributor::providerUrgencyChanged);
     return true;
 }
 
@@ -431,7 +466,7 @@ void Distributor::processNextCommand()
             m_pushProvider->unregisterClient(m_currentCommand.client);
             break;
         case Command::Connect:
-            m_pushProvider->connectToProvider();
+            m_pushProvider->connectToProvider(m_urgency);
             break;
         case Command::Disconnect:
             m_pushProvider->disconnectFromProvider();
@@ -448,6 +483,9 @@ void Distributor::processNextCommand()
         }
         case Command::MessageAck:
             m_pushProvider->acknowledgeMessage(m_currentCommand.client, m_currentCommand.value);
+            break;
+        case Command::ChangeUrgency:
+            m_pushProvider->changeUrgency(m_urgency);
             break;
     }
 }
@@ -632,6 +670,71 @@ bool Distributor::isNetworkAvailable() const
         return reachability == QNetworkInformation::Reachability::Online || reachability == QNetworkInformation::Reachability::Unknown;
     }
     return true;
+}
+
+Urgency Distributor::determineUrgency() const
+{
+    bool isNotDischarging = false;
+    bool foundBattery = false;
+    int maxChargePercent = 0;
+    for (const auto &batteryDevice : Solid::Device::listFromType(Solid::DeviceInterface::Battery)) {
+        const auto battery = batteryDevice.as<Solid::Battery>();
+        if (battery->type() != Solid::Battery::PrimaryBattery || !battery->isPresent()) {
+            continue;
+        }
+        if (battery->chargeState() != Solid::Battery::Discharging) {
+            isNotDischarging = true;
+        }
+        maxChargePercent = std::max(battery->chargePercent(), maxChargePercent);
+        foundBattery = true;
+    }
+    const auto isDischarging = foundBattery && !isNotDischarging;
+    qCDebug(Log) << isDischarging << foundBattery << isNotDischarging << maxChargePercent;
+
+    if (maxChargePercent > 0 && maxChargePercent <= 15) {
+        return Urgency::High;
+    }
+
+    const auto isMetered = QNetworkInformation::instance() ? QNetworkInformation::instance()->isMetered() : false;
+    qCDebug(Log) << isMetered;
+    if (isDischarging && isMetered) {
+        return Urgency::Normal;
+    }
+
+    if (isDischarging || isMetered) {
+        return Urgency::Low;
+    }
+
+    return Urgency::VeryLow;
+}
+
+void Distributor::setUrgency(Urgency urgency)
+{
+    if (m_urgency == urgency) {
+        return;
+    }
+
+    qCDebug(Log) << qToUnderlying(urgency);
+    m_urgency = urgency;
+    if (std::ranges::any_of(m_commandQueue, [](const auto &cmd) { return cmd.type == Command::ChangeUrgency; })) {
+        return;
+    }
+    Command cmd;
+    cmd.type = Command::ChangeUrgency;
+    m_commandQueue.push_back(std::move(cmd));
+}
+
+void Distributor::addBattery(const Solid::Device &batteryDevice)
+{
+    const auto battery = batteryDevice.as<Solid::Battery>();
+    if (!battery || battery->type() != Solid::Battery::PrimaryBattery) {
+        return;
+    }
+
+    const auto updateUrgency = [this]() { setUrgency(determineUrgency()); };
+    connect(battery, &Solid::Battery::presentStateChanged, this, updateUrgency);
+    connect(battery, &Solid::Battery::chargeStateChanged, this, updateUrgency);
+    connect(battery, &Solid::Battery::chargePercentChanged, this, updateUrgency);
 }
 
 #include "moc_distributor.cpp"

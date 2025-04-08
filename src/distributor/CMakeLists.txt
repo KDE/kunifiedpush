@@ -39,6 +39,7 @@ ecm_qt_declare_logging_category(KUnifiedPushDistributor
     EXPORT KUnifiedPushLogging
 )
 target_link_libraries(KUnifiedPushDistributor PUBLIC
+    KF6::Solid
     Qt::Core
     Qt::DBus
     Qt::WebSockets

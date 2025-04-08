@@ -6,6 +6,8 @@
 #ifndef KUNIFIEDPUSH_ABSTRACTPUSHPROVIDER_H
 #define KUNIFIEDPUSH_ABSTRACTPUSHPROVIDER_H
 
+#include "../shared/urgency_p.h"
+
 #include <QObject>
 
 class QNetworkAccessManager;
@@ -40,7 +42,7 @@ public:
     virtual bool loadSettings(const QSettings &settings) = 0;
 
     /** Attempt to establish a connection to the push provider. */
-    virtual void connectToProvider() = 0;
+    virtual void connectToProvider(Urgency urgency) = 0;
 
     /** Disconnect and existing connection to the push provider. */
     virtual void disconnectFromProvider() = 0;
@@ -56,8 +58,18 @@ public:
      */
     virtual void acknowledgeMessage(const Client &client, const QString &messageIdentifier);
 
+    /** Change urgency level as needed.
+     *  Reimplement doChangeUrgency if your provider does this as a separate command.
+     */
+    void changeUrgency(Urgency urgency);
+
     /** Provider id used e.g. in settings. */
     [[nodiscard]] QLatin1StringView providerId() const;
+
+    /** The urgency level currently used by this provider.
+     *  This might not yet be the requested one if changing that is an asynchronous operation.
+     */
+    [[nodiscard]] Urgency urgency() const;
 
 Q_SIGNALS:
     /** Inform about a received push notification. */
@@ -78,13 +90,23 @@ Q_SIGNALS:
     /** Emitted after a message reception has been acknowledge to the push server. */
     void messageAcknowledged(const KUnifiedPush::Client &client, const QString &messageIdentifier);
 
+    /** Emitted when the urgency level change request has been executed. */
+    void urgencyChanged();
+
 protected:
+    /** Re-implement if urgency leve changes are done as a separate command.
+     *  The default implementation assumes urgency levels aren't supported by this provider.
+     */
+    virtual void doChangeUrgency(Urgency urgency);
+    inline void setUrgency(Urgency urgency) { m_currentUrgency = urgency; }
+
     explicit AbstractPushProvider(QLatin1StringView providerId, QObject *parent);
     QNetworkAccessManager *nam();
 
 private:
     const QLatin1StringView m_providerId;
     QNetworkAccessManager *m_nam = nullptr;
+    Urgency m_currentUrgency = AllUrgencies;
 };
 
 }

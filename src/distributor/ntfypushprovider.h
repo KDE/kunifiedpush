@@ -25,14 +25,19 @@ public:
     ~NtfyPushProvider();
 
     bool loadSettings(const QSettings &settings) override;
-    void connectToProvider() override;
+    void connectToProvider(Urgency urgency) override;
     void disconnectFromProvider() override;
     void registerClient(const Client &client) override;
     void unregisterClient(const Client &client) override;
 
     static constexpr inline auto Id = QLatin1StringView("Ntfy");
+
+protected:
+    // TODO see doConnectToProvider
+    // void doChangeUrgency(Urgency urgency) override;
+
 private:
-    void doConnectToProvider();
+    void doConnectToProvider(Urgency urgency);
     void storeState();
 
     QUrl m_url;

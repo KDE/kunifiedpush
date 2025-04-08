@@ -23,9 +23,30 @@ void AbstractPushProvider::acknowledgeMessage(const Client &client, const QStrin
     Q_EMIT messageAcknowledged(client, messageIdentifier);
 }
 
+void AbstractPushProvider::changeUrgency(Urgency urgency)
+{
+    if (m_currentUrgency == urgency) {
+        Q_EMIT urgencyChanged();
+        return;
+    }
+
+    doChangeUrgency(urgency);
+}
+
+void AbstractPushProvider::doChangeUrgency(Urgency urgency)
+{
+    m_currentUrgency = urgency;
+    Q_EMIT urgencyChanged();
+}
+
 QLatin1StringView AbstractPushProvider::providerId() const
 {
     return m_providerId;
+}
+
+Urgency AbstractPushProvider::urgency() const
+{
+    return m_currentUrgency;
 }
 
 QNetworkAccessManager* AbstractPushProvider::nam()

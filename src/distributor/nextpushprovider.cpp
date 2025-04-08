@@ -44,7 +44,7 @@ bool NextPushProvider::loadSettings(const QSettings &settings)
     return m_url.isValid() && !m_appPassword.isEmpty() && !m_userName.isEmpty();
 }
 
-void NextPushProvider::connectToProvider()
+void NextPushProvider::connectToProvider(Urgency urgency)
 {
     qCDebug(Log) << m_deviceId;
 
@@ -55,7 +55,7 @@ void NextPushProvider::connectToProvider()
         QJsonObject content;
         content.insert(QLatin1String("deviceName"), QHostInfo::localHostName());
         auto reply = nam()->put(req, QJsonDocument(content).toJson(QJsonDocument::Compact));
-        connect(reply, &QNetworkReply::finished, this, [reply, this]() {
+        connect(reply, &QNetworkReply::finished, this, [reply, urgency, this]() {
             reply->deleteLater();
             if (reply->error() != QNetworkReply::NoError) {
                 qCWarning(Log) << reply->errorString();
@@ -70,10 +70,10 @@ void NextPushProvider::connectToProvider()
 
             QSettings settings;
             settings.setValue(QStringLiteral("NextPush/DeviceId"), m_deviceId);
-            waitForMessage();
+            waitForMessage(urgency);
         });
     } else {
-        waitForMessage();
+        waitForMessage(urgency);
     }
 }
 
@@ -81,9 +81,8 @@ void NextPushProvider::disconnectFromProvider()
 {
     if (m_sseReply) {
         m_sseReply->abort();
-    } else {
-        Q_EMIT disconnected(NoError);
     }
+    Q_EMIT disconnected(NoError);
 }
 
 void NextPushProvider::registerClient(const Client &client)
@@ -142,13 +141,27 @@ void NextPushProvider::unregisterClient(const Client &client)
     });
 }
 
-void NextPushProvider::waitForMessage()
+void NextPushProvider::doChangeUrgency(Urgency urgency)
 {
-    qCDebug(Log);
+    waitForMessage(urgency);
+}
+
+void NextPushProvider::waitForMessage(Urgency urgency)
+{
+    qCDebug(Log) << qToUnderlying(urgency);
+    if (m_sseReply) {
+        m_sseReply->abort();
+    }
+
     auto req = prepareRequest("device", m_deviceId);
+    req.setRawHeader("urgency", urgencyValue(urgency));
     auto reply = nam()->get(req);
     connect(reply, &QNetworkReply::finished, this, [reply, this]() {
         reply->deleteLater();
+        if (reply->error() == QNetworkReply::OperationCanceledError) {
+            return; // we triggered this ourselves
+        }
+
         if (reply->error() != QNetworkReply::NoError) {
             qCWarning(Log) << reply->errorString();
             Q_EMIT disconnected(TransientNetworkError, reply->errorString());
@@ -157,9 +170,13 @@ void NextPushProvider::waitForMessage()
             Q_EMIT disconnected(NoError);
         }
     });
+    m_sseStream.clear();
     m_sseStream.read(reply);
     m_sseReply = reply;
     Q_EMIT connected();
+
+    setUrgency(urgency);
+    Q_EMIT urgencyChanged();
 }
 
 QNetworkRequest NextPushProvider::prepareRequest(const char *restCmd, const QString &restArg) const

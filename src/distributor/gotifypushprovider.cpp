@@ -31,7 +31,7 @@ bool GotifyPushProvider::loadSettings(const QSettings &settings)
     return m_url.isValid() && !m_clientToken.isEmpty();
 }
 
-void GotifyPushProvider::connectToProvider()
+void GotifyPushProvider::connectToProvider([[maybe_unused]] Urgency urgency)
 {
     qCDebug(Log);
     m_socket = new QWebSocket();
