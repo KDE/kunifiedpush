@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-07 00:40+0000\n"
+"POT-Creation-Date: 2025-04-09 00:40+0000\n"
 "PO-Revision-Date: 2023-11-11 10:12+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -16,6 +16,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.08.2\n"
+
+#: selftest.cpp:34
+#, kde-format
+msgid "The operation timed out."
+msgstr ""
+
+#: selftest.cpp:59
+#, kde-format
+msgid "Push notification self-test."
+msgstr ""
+
+#: selftest.cpp:73
+#, kde-format
+msgid "Could not obtain push notification endpoint."
+msgstr ""
+
+#: selftest.cpp:126
+#, kde-format
+msgid "Received notification does not have the expected content."
+msgstr ""
 
 #: ui/main.qml:28
 #, kde-format
@@ -43,65 +63,113 @@ msgstr ""
 msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr "<b>Idle</b><br>Er zijn geen toepassingen die pushmeldingen gebruiken."
 
-#: ui/main.qml:64
+#: ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid ""
+#| "<b>Offline</b><br>Network connection to the server could not be "
+#| "established."
+msgid ""
+"<b>Offline</b><br>Network connection to the server could not be established "
+"(%1)."
+msgstr ""
+"<b>Offline</b><br>Netwerkverbinding met de server kon niet gemaakt worden."
+
+#: ui/main.qml:66
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
 msgstr ""
 "<b>Offline</b><br>Netwerkverbinding met de server kon niet gemaakt worden."
 
-#: ui/main.qml:73
+#: ui/main.qml:76
+#, fuzzy, kde-format
+#| msgid "<b>Offline</b><br>Could not authenticate at the server."
+msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
+msgstr "<b>Offline</b><br>Authenticatie op de server lukte niet."
+
+#: ui/main.qml:77
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
 msgstr "<b>Offline</b><br>Authenticatie op de server lukte niet."
 
-#: ui/main.qml:82
+#: ui/main.qml:86
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
 msgstr "<b>Offline</b><br>Push-meldingen zijn nog niet ingesteld."
 
-#: ui/main.qml:110
+#: ui/main.qml:114
 #, kde-format
 msgid "Push provider:"
 msgstr "Push-leverancier:"
 
-#: ui/main.qml:151 ui/main.qml:178 ui/main.qml:227 ui/main.qml:246
+#: ui/main.qml:155 ui/main.qml:182 ui/main.qml:231 ui/main.qml:250
 #, kde-format
 msgid "Url:"
 msgstr "Url:"
 
-#: ui/main.qml:156
+#: ui/main.qml:160
 #, kde-format
 msgid "Client token:"
 msgstr "Client-token:"
 
-#: ui/main.qml:183
+#: ui/main.qml:187
 #, kde-format
 msgid "User name:"
 msgstr "Gebruikersnaam:"
 
-#: ui/main.qml:189
+#: ui/main.qml:193
 #, kde-format
 msgid "Authenticate"
 msgstr "Authenticeren"
 
-#: ui/main.qml:272
+#: ui/main.qml:295
+#, kde-format
+msgid "Push notifications are working correctly."
+msgstr ""
+
+#: ui/main.qml:297
+#, kde-format
+msgid "Push notification test failed."
+msgstr ""
+
+#: ui/main.qml:299
+#, kde-format
+msgid "Registering with push server…"
+msgstr ""
+
+#: ui/main.qml:301
+#, kde-format
+msgid "Sending push notification…"
+msgstr ""
+
+#: ui/main.qml:303
+#, kde-format
+msgid "Waiting to receive push notification…"
+msgstr ""
+
+#: ui/main.qml:310
+#, kde-format
+msgctxt "@action:button"
+msgid "Test"
+msgstr ""
+
+#: ui/main.qml:327
 #, kde-format
 msgid "Applications"
 msgstr "Toepassingen"
 
-#: ui/main.qml:302
+#: ui/main.qml:357
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "Registratie van toepassing op push-meldingen ongedaan maken"
 
-#: ui/main.qml:309
+#: ui/main.qml:364
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
 msgstr "Registratie van toepassing ongedaan maken"
 
-#: ui/main.qml:310
+#: ui/main.qml:365
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"

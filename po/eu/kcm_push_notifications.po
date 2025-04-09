@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-07 00:40+0000\n"
+"POT-Creation-Date: 2025-04-09 00:40+0000\n"
 "PO-Revision-Date: 2023-11-25 18:35+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -19,6 +19,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 23.08.3\n"
+
+#: selftest.cpp:34
+#, kde-format
+msgid "The operation timed out."
+msgstr ""
+
+#: selftest.cpp:59
+#, kde-format
+msgid "Push notification self-test."
+msgstr ""
+
+#: selftest.cpp:73
+#, kde-format
+msgid "Could not obtain push notification endpoint."
+msgstr ""
+
+#: selftest.cpp:126
+#, kde-format
+msgid "Received notification does not have the expected content."
+msgstr ""
 
 #: ui/main.qml:28
 #, kde-format
@@ -47,65 +67,113 @@ msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr ""
 "<b>Langabe</b><br>Ez dago «push» jakinarazpenik erabiltzen duen aplikaziorik."
 
-#: ui/main.qml:64
+#: ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid ""
+#| "<b>Offline</b><br>Network connection to the server could not be "
+#| "established."
+msgid ""
+"<b>Offline</b><br>Network connection to the server could not be established "
+"(%1)."
+msgstr ""
+"<b>Lerroz kanpo</b><br>Ezin izan du sareko konexioa zerbitzariarekin ezarri."
+
+#: ui/main.qml:66
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
 msgstr ""
 "<b>Lerroz kanpo</b><br>Ezin izan du sareko konexioa zerbitzariarekin ezarri."
 
-#: ui/main.qml:73
+#: ui/main.qml:76
+#, fuzzy, kde-format
+#| msgid "<b>Offline</b><br>Could not authenticate at the server."
+msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
+msgstr "<b>Lerroz kanpo</b><br>Ezin izan du zerbitzarian erregistratu."
+
+#: ui/main.qml:77
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
 msgstr "<b>Lerroz kanpo</b><br>Ezin izan du zerbitzarian erregistratu."
 
-#: ui/main.qml:82
+#: ui/main.qml:86
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
 msgstr "<b>Lerroz kanpo</b><br>«Push» jakinarazpenak ez dira oraindik ezarri."
 
-#: ui/main.qml:110
+#: ui/main.qml:114
 #, kde-format
 msgid "Push provider:"
 msgstr "«Push» hornitzailea:"
 
-#: ui/main.qml:151 ui/main.qml:178 ui/main.qml:227 ui/main.qml:246
+#: ui/main.qml:155 ui/main.qml:182 ui/main.qml:231 ui/main.qml:250
 #, kde-format
 msgid "Url:"
 msgstr "URL:"
 
-#: ui/main.qml:156
+#: ui/main.qml:160
 #, kde-format
 msgid "Client token:"
 msgstr "Bezeroaren tokena:"
 
-#: ui/main.qml:183
+#: ui/main.qml:187
 #, kde-format
 msgid "User name:"
 msgstr "Erabiltzaile-izena:"
 
-#: ui/main.qml:189
+#: ui/main.qml:193
 #, kde-format
 msgid "Authenticate"
 msgstr "Autentifikatu"
 
-#: ui/main.qml:272
+#: ui/main.qml:295
+#, kde-format
+msgid "Push notifications are working correctly."
+msgstr ""
+
+#: ui/main.qml:297
+#, kde-format
+msgid "Push notification test failed."
+msgstr ""
+
+#: ui/main.qml:299
+#, kde-format
+msgid "Registering with push server…"
+msgstr ""
+
+#: ui/main.qml:301
+#, kde-format
+msgid "Sending push notification…"
+msgstr ""
+
+#: ui/main.qml:303
+#, kde-format
+msgid "Waiting to receive push notification…"
+msgstr ""
+
+#: ui/main.qml:310
+#, kde-format
+msgctxt "@action:button"
+msgid "Test"
+msgstr ""
+
+#: ui/main.qml:327
 #, kde-format
 msgid "Applications"
 msgstr "Aplikazioak"
 
-#: ui/main.qml:302
+#: ui/main.qml:357
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "Aplikazioa «push» jakinarazpenen erregistrotik kendu"
 
-#: ui/main.qml:309
+#: ui/main.qml:364
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
 msgstr "Aplikazioa erregistrotik kendu"
 
-#: ui/main.qml:310
+#: ui/main.qml:365
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
