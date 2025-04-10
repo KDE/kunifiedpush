@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-09 00:40+0000\n"
-"PO-Revision-Date: 2023-11-11 09:19+0100\n"
+"PO-Revision-Date: 2025-04-09 07:20+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,27 +16,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.5\n"
 
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr ""
+msgstr "Časovna omejitev operacije je potekla."
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "Samotestiranje potisnih obvestil."
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr ""
+msgstr "Končne točke potisnega obvestila ni bilo mogoče pridobiti."
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr ""
+msgstr "Prejeto obvestilo nima pričakovane vsebine."
 
 #: ui/main.qml:28
 #, kde-format
@@ -64,15 +64,13 @@ msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr "<b>Nedelujoč</b><br>Ni aplikacije za porivanje obvestil."
 
 #: ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "<b>Offline</b><br>Network connection to the server could not be "
-#| "established."
+#, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
 msgstr ""
-"<b>Offline</b><br>Mrežne povezave s strežnikom ni bilo mogoče vzpostaviti."
+"<b>Offline</b><br>Mrežne povezave s strežnikom ni bilo mogoče vzpostaviti "
+"(%1)."
 
 #: ui/main.qml:66
 #, kde-format
@@ -82,10 +80,9 @@ msgstr ""
 "<b>Offline</b><br>Mrežne povezave s strežnikom ni bilo mogoče vzpostaviti."
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "<b>Offline</b><br>Could not authenticate at the server."
+#, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>Offline</b><br>Ni se bilo mogoče avtenticirati na strežniku."
+msgstr "<b>Offline</b><br>Ni se bilo mogoče avtenticirati na strežniku (%1)."
 
 #: ui/main.qml:77
 #, kde-format
@@ -125,33 +122,33 @@ msgstr "Avtenticiraj"
 #: ui/main.qml:295
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr ""
+msgstr "Potisna obvestila delujejo pravilno."
 
 #: ui/main.qml:297
 #, kde-format
 msgid "Push notification test failed."
-msgstr ""
+msgstr "Preizkus potisnega obvestila ni uspel."
 
 #: ui/main.qml:299
 #, kde-format
 msgid "Registering with push server…"
-msgstr ""
+msgstr "Registracija s potisnim strežnikom…"
 
 #: ui/main.qml:301
 #, kde-format
 msgid "Sending push notification…"
-msgstr ""
+msgstr "Pošiljanje potisnega obvestila…"
 
 #: ui/main.qml:303
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr ""
+msgstr "Čakanje na prejem potisnega obvestila…"
 
 #: ui/main.qml:310
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr ""
+msgstr "Preizkus"
 
 #: ui/main.qml:327
 #, kde-format

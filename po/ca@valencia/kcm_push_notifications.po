@@ -1,16 +1,16 @@
 # Translation of kcm_push_notifications.po to Catalan (Valencian)
-# Copyright (C) 2022-2023 This_file_is_part_of_KDE
+# Copyright (C) 2022-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 # or the same license as the source of its messages in English.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2022, 2023.
+# Josep M. Ferrer <txemaq@gmail.com>, 2022, 2023, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-09 00:40+0000\n"
-"PO-Revision-Date: 2023-11-11 11:12+0100\n"
+"PO-Revision-Date: 2025-04-09 10:01+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -23,27 +23,27 @@ msgstr ""
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr ""
+msgstr "L'operació ha excedit el temps."
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "Autoprova de notificació automàtica."
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr ""
+msgstr "No s'ha pogut obtindre el punt final de la notificació automàtica."
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr ""
+msgstr "La notificació rebuda no té el contingut esperat."
 
 #: ui/main.qml:28
 #, kde-format
 msgid "There is no push notification service running!"
-msgstr "No hi ha cap servei de notificacions «push» en execució!"
+msgstr "No hi ha cap servei de notificacions automàtiques en execució!"
 
 #: ui/main.qml:37
 #, kde-format
@@ -51,35 +51,32 @@ msgid ""
 "There is a 3rd party push notification service running. Push notifications "
 "are available, but cannot be configured here."
 msgstr ""
-"Hi ha un servei de notificacions «push» de tercers. Les notificacions «push» "
-"estan disponibles, però no es poden configurar ací."
+"Hi ha un servei de notificacions automàtiques de tercers. Les notificacions "
+"automàtiques estan disponibles, però no es poden configurar ací."
 
 #: ui/main.qml:46
 #, kde-format
 msgid ""
 "<b>Online</b><br>Connected to the push notification server and operational."
 msgstr ""
-"<b>En línia</b><br>Està connectat a un servidor de notificacions «push» i "
-"està operatiu."
+"<b>En línia</b><br>Està connectat a un servidor de notificacions "
+"automàtiques i està operatiu."
 
 #: ui/main.qml:55
 #, kde-format
 msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr ""
 "<b>Inactiu</b><br>No hi ha cap aplicació que utilitze les notificacions "
-"«push»."
+"automàtiques."
 
 #: ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "<b>Offline</b><br>Network connection to the server could not be "
-#| "established."
+#, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
 msgstr ""
 "<b>Desconnectat</b><br>No s'ha pogut establir la connexió de xarxa amb el "
-"servidor."
+"servidor (%1)."
 
 #: ui/main.qml:66
 #, kde-format
@@ -90,10 +87,9 @@ msgstr ""
 "servidor."
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "<b>Offline</b><br>Could not authenticate at the server."
+#, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>Desconnectat</b><br>No s'ha pogut autenticar amb el servidor."
+msgstr "<b>Desconnectat</b><br>No s'ha pogut autenticar amb el servidor (%1)."
 
 #: ui/main.qml:77
 #, kde-format
@@ -104,12 +100,13 @@ msgstr "<b>Desconnectat</b><br>No s'ha pogut autenticar amb el servidor."
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
 msgstr ""
-"<b>Desconnectat</b><br>Les notificacions «push» encara no s'han configurat."
+"<b>Desconnectat</b><br>Les notificacions automàtiques encara no s'han "
+"configurat."
 
 #: ui/main.qml:114
 #, kde-format
 msgid "Push provider:"
-msgstr "Proveïdor «push»:"
+msgstr "Proveïdor de notificacions automàtiques:"
 
 #: ui/main.qml:155 ui/main.qml:182 ui/main.qml:231 ui/main.qml:250
 #, kde-format
@@ -134,33 +131,33 @@ msgstr "Autentica"
 #: ui/main.qml:295
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr ""
+msgstr "Les notificacions automàtiques estan funcionant correctament."
 
 #: ui/main.qml:297
 #, kde-format
 msgid "Push notification test failed."
-msgstr ""
+msgstr "Ha fallat la prova de notificació automàtica."
 
 #: ui/main.qml:299
 #, kde-format
 msgid "Registering with push server…"
-msgstr ""
+msgstr "S'està registrant amb el servidor de notificacions automàtiques…"
 
 #: ui/main.qml:301
 #, kde-format
 msgid "Sending push notification…"
-msgstr ""
+msgstr "S'està enviant una notificació automàtica…"
 
 #: ui/main.qml:303
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr ""
+msgstr "S'està esperant a rebre una notificació automàtica…"
 
 #: ui/main.qml:310
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr ""
+msgstr "Prova"
 
 #: ui/main.qml:327
 #, kde-format
@@ -170,7 +167,7 @@ msgstr "Aplicacions"
 #: ui/main.qml:357
 #, kde-format
 msgid "Unregister application from push notifications"
-msgstr "Cancel·la el registre de l'aplicació de les notificacions «push»"
+msgstr "Cancel·la el registre de l'aplicació de les notificacions automàtiques"
 
 #: ui/main.qml:364
 #, kde-format

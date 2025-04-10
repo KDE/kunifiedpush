@@ -63,14 +63,11 @@ msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr "<b>空闲</b><br>没有正在使用通知推送的应用程序。"
 
 #: ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "<b>Offline</b><br>Network connection to the server could not be "
-#| "established."
+#, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
-msgstr "<b>脱机</b><br>无法建立到服务器的网络连接。"
+msgstr ""
 
 #: ui/main.qml:66
 #, kde-format
@@ -79,10 +76,9 @@ msgid ""
 msgstr "<b>脱机</b><br>无法建立到服务器的网络连接。"
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "<b>Offline</b><br>Could not authenticate at the server."
+#, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>脱机</b><br>无法在服务器上进行身份验证。"
+msgstr ""
 
 #: ui/main.qml:77
 #, kde-format

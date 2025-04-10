@@ -4,41 +4,41 @@
 # This file is distributed under the same license as the kunifiedpush package.
 #
 # Automatically generated, 2022.
-# SPDX-FileCopyrightText: 2023 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2023, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-09 00:40+0000\n"
-"PO-Revision-Date: 2023-12-10 17:14+0900\n"
+"PO-Revision-Date: 2025-04-09 17:38+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 24.12.3\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr ""
+msgstr "操作逾時。"
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "推送通知自我測試。"
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr ""
+msgstr "無法取得推送通知 endpoint。"
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr ""
+msgstr "接收到的通知內容與預期內容不符。"
 
 #: ui/main.qml:28
 #, kde-format
@@ -64,14 +64,11 @@ msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr "<b>待命</b><br>沒有應用程式使用推送通知。"
 
 #: ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "<b>Offline</b><br>Network connection to the server could not be "
-#| "established."
+#, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
-msgstr "<b>離線</b><br>無法建立與伺服器的網路連線。"
+msgstr "<b>離線</b><br>無法建立與伺服器的網路連線（%1）。"
 
 #: ui/main.qml:66
 #, kde-format
@@ -80,10 +77,9 @@ msgid ""
 msgstr "<b>離線</b><br>無法建立與伺服器的網路連線。"
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "<b>Offline</b><br>Could not authenticate at the server."
+#, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>離線</b><br>無法通過伺服器認證。"
+msgstr "<b>離線</b><br>無法通過伺服器認證（%1）。"
 
 #: ui/main.qml:77
 #, kde-format
@@ -123,33 +119,33 @@ msgstr "認證"
 #: ui/main.qml:295
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr ""
+msgstr "推送通知正確運作。"
 
 #: ui/main.qml:297
 #, kde-format
 msgid "Push notification test failed."
-msgstr ""
+msgstr "推送通知測試失敗。"
 
 #: ui/main.qml:299
 #, kde-format
 msgid "Registering with push server…"
-msgstr ""
+msgstr "正在與推送伺服器註冊…"
 
 #: ui/main.qml:301
 #, kde-format
 msgid "Sending push notification…"
-msgstr ""
+msgstr "正在傳送推送通知…"
 
 #: ui/main.qml:303
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr ""
+msgstr "正在等待接收推送通知…"
 
 #: ui/main.qml:310
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr ""
+msgstr "測試"
 
 #: ui/main.qml:327
 #, kde-format

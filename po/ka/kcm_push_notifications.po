@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-09 00:40+0000\n"
-"PO-Revision-Date: 2023-11-12 05:50+0100\n"
+"PO-Revision-Date: 2025-04-09 04:18+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,27 +16,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr ""
+msgstr "ოპერაციის მოლოდინის ვადა ამოიწურა."
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "პუშ გაფრთხილების თვითშემოწმება."
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr ""
+msgstr "პუშ-გაფრთხილების ბოლოწერტილის მიღება შეუძლებელია."
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr ""
+msgstr "მიღებულ გაფრთხილებას მოსალოდნელი შემცველობა არ აქვს."
 
 #: ui/main.qml:28
 #, kde-format
@@ -64,14 +64,11 @@ msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr "<b>უქმე</b><br>პუშ გაფრთხილებებს არც ერთი აპლიკაცია არ იყენებს.."
 
 #: ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "<b>Offline</b><br>Network connection to the server could not be "
-#| "established."
+#, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
-msgstr "<b>ოფლაინ</b><br>სერვერთან ქსელური მიერთება შეუძლებელია."
+msgstr "<b>ქსელის გარეშე</b><br>სერვერთან (%1) ქსელური მიერთება შეუძლებელია."
 
 #: ui/main.qml:66
 #, kde-format
@@ -80,20 +77,19 @@ msgid ""
 msgstr "<b>ოფლაინ</b><br>სერვერთან ქსელური მიერთება შეუძლებელია."
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "<b>Offline</b><br>Could not authenticate at the server."
+#, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>ოფლაინ</b><br>სერვერთან ავთენტიკაციის შეცდომა."
+msgstr "<b>ქსელის გარეშე</b><br>სერვერთან (%1) ავთენტიკაციის შეცდომა."
 
 #: ui/main.qml:77
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
-msgstr "<b>ოფლაინ</b><br>სერვერთან ავთენტიკაციის შეცდომა."
+msgstr "<b>ქსელის გარეშე</b><br>სერვერთან ავთენტიკაციის შეცდომა."
 
 #: ui/main.qml:86
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
-msgstr "<b>ოფლაინ</b><br>პუშ გაფრთხილებები ჯერ მორგებული არაა."
+msgstr "<b>ქსელის გარეშე</b><br>პუშ გაფრთხილებები ჯერ მორგებული არაა."
 
 #: ui/main.qml:114
 #, kde-format
@@ -123,33 +119,33 @@ msgstr "ავთენტიკაცია"
 #: ui/main.qml:295
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr ""
+msgstr "პუშ-გაფრთხილებები სწორად მუშაობს."
 
 #: ui/main.qml:297
 #, kde-format
 msgid "Push notification test failed."
-msgstr ""
+msgstr "პუშ-გაფრთხილებების შემოწმება ჩავარდა."
 
 #: ui/main.qml:299
 #, kde-format
 msgid "Registering with push server…"
-msgstr ""
+msgstr "რეგისტრაცია პუშ-სერვერთან…"
 
 #: ui/main.qml:301
 #, kde-format
 msgid "Sending push notification…"
-msgstr ""
+msgstr "პუშ-გაფრთხილების გაგზავნა…"
 
 #: ui/main.qml:303
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr ""
+msgstr "პუშ-გაფრთხილების მიღების მოლოდინი…"
 
 #: ui/main.qml:310
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr ""
+msgstr "შემოწმება"
 
 #: ui/main.qml:327
 #, kde-format
