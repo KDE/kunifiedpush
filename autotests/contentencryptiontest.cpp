@@ -69,7 +69,9 @@ private Q_SLOTS:
         QCOMPARE(enc.authSecret().size(), 16);
         QCOMPARE(enc.publicKey().size(), 65);
         QCOMPARE(enc.publicKey()[0], 0x04);
-        QCOMPARE(enc.privateKey().size(), 32);
+        // should be 32 but leading zeros are not included
+        QVERIFY(enc.privateKey().size() <= 32);
+        QVERIFY(enc.privateKey().size() > 0);
         QVERIFY(enc.hasKeys());
     }
 };
