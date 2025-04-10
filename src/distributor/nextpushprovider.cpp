@@ -14,6 +14,7 @@
 #include <QNetworkReply>
 #include <QSettings>
 
+using namespace Qt::Literals;
 using namespace KUnifiedPush;
 
 NextPushProvider::NextPushProvider(QObject *parent)
@@ -94,6 +95,9 @@ void NextPushProvider::registerClient(const Client &client)
     QJsonObject content;
     content.insert(QLatin1String("deviceId"), m_deviceId);
     content.insert(QLatin1String("appName"), client.serviceName);
+    if (!client.vapidKey.isEmpty()) {
+        content.insert("vapid"_L1, client.vapidKey);
+    }
     auto reply = nam()->put(req, QJsonDocument(content).toJson(QJsonDocument::Compact));
     connect(reply, &QNetworkReply::finished, this, [reply, this, client]() {
         reply->deleteLater();
