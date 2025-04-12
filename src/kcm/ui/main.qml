@@ -120,7 +120,6 @@ KCM.ScrollViewKCM {
                         }
                         textRole: "text"
                         valueRole: "key"
-                        // ["Gotify", "NextPush", "Ntfy", "Autopush"] // TODO separate config key and display label here!
                         currentIndex: indexOfValue(kcm.pushProviderId)
                         Component.onCompleted: currentIndex = indexOfValue(kcm.pushProviderId)
                     }
@@ -269,6 +268,7 @@ KCM.ScrollViewKCM {
 
         RowLayout {
             visible: kcm.hasDistributor
+            enabled: !kcm.needsSave
             Kirigami.Icon {
                 source: {
                     switch (kcm.selfTest.state) {
