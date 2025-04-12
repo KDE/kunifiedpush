@@ -193,7 +193,13 @@ void Distributor::Unregister(const QString& token)
         return client.token == token;
     });
     if (it == m_clients.end()) {
-        qCWarning(Log) << "Unregistration request for unknown client.";
+        // might still be in the queue and never completed registration
+        const auto it = std::ranges::find_if(m_commandQueue, [token](const auto &cmd) { return cmd.type == Command::Register && cmd.client.token == token; });
+        if (it != m_commandQueue.end()) {
+            m_commandQueue.erase(it);
+        } else {
+            qCWarning(Log) << "Unregistration request for unknown client.";
+        }
         return;
     }
 
