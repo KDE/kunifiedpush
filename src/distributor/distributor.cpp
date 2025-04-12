@@ -568,6 +568,16 @@ void Distributor::setPushProvider(const QString &pushProviderId, const QVariantM
         for (const auto &client : m_clients) {
             forceUnregisterClient(client.token);
         }
+        // remaining registration commands are for not yet persisted clients, keep those
+        std::vector<Command> pendingClients;
+        for (auto it = m_commandQueue.begin(); it != m_commandQueue.end();) {
+            if ((*it).type == Command::Register) {
+                pendingClients.push_back(std::move(*it));
+                it = m_commandQueue.erase(it);
+            } else {
+                ++it;
+            }
+        }
         if (m_status == DistributorStatus::Connected) {
             Command cmd;
             cmd.type = Command::Disconnect;
@@ -581,7 +591,7 @@ void Distributor::setPushProvider(const QString &pushProviderId, const QVariantM
         }
 
         // reconnect if there are clients
-        if (!m_clients.empty()) {
+        if (!m_clients.empty() || !pendingClients.empty()) {
             Command cmd;
             cmd.type = Command::Connect;
             m_commandQueue.push_back(std::move(cmd));
@@ -594,6 +604,7 @@ void Distributor::setPushProvider(const QString &pushProviderId, const QVariantM
             cmd.client = client;
             m_commandQueue.push_back(std::move(cmd));
         }
+        std::ranges::move(pendingClients, std::back_inserter(m_commandQueue));
     } else {
         // recover from a previously failed attempt to change push providers
 
