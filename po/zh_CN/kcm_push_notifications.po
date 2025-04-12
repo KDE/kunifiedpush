@@ -20,22 +20,22 @@ msgstr ""
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr ""
+msgstr "操作超时。"
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "推送通知自检。"
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr ""
+msgstr "无法获取推送通知端点。"
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr ""
+msgstr "收到的通知内容与预期不符。"
 
 #: ui/main.qml:28
 #, kde-format
@@ -67,7 +67,7 @@ msgstr "<b>空闲</b><br>没有正在使用通知推送的应用程序。"
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
-msgstr ""
+msgstr "<b>脱机</b><br>无法与服务器建立网络连接 (%1)。"
 
 #: ui/main.qml:66
 #, kde-format
@@ -78,7 +78,7 @@ msgstr "<b>脱机</b><br>无法建立到服务器的网络连接。"
 #: ui/main.qml:76
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr ""
+msgstr "<b>脱机</b><br>无法在服务器上进行身份验证 (%1)。"
 
 #: ui/main.qml:77
 #, kde-format
@@ -118,33 +118,33 @@ msgstr "身份认证"
 #: ui/main.qml:295
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr ""
+msgstr "推送通知工作正常。"
 
 #: ui/main.qml:297
 #, kde-format
 msgid "Push notification test failed."
-msgstr ""
+msgstr "推送通知测试失败。"
 
 #: ui/main.qml:299
 #, kde-format
 msgid "Registering with push server…"
-msgstr ""
+msgstr "正在向推送服务器注册…"
 
 #: ui/main.qml:301
 #, kde-format
 msgid "Sending push notification…"
-msgstr ""
+msgstr "正在推送通知…"
 
 #: ui/main.qml:303
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr ""
+msgstr "正在等待接收推送通知…"
 
 #: ui/main.qml:310
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr ""
+msgstr "测试"
 
 #: ui/main.qml:327
 #, kde-format

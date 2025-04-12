@@ -1,15 +1,15 @@
 # Spanish translations for kcm_push_notifications.po package.
-# Copyright (C) 2022 This file is copyright:
+# Copyright (C) 2022-2025 This file is copyright:
 # This file is distributed under the same license as the kunifiedpush package.
 #
 # Automatically generated, 2022.
-# SPDX-FileCopyrightText: 2022, 2023 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2022, 2023, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_push_notifications\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-09 00:40+0000\n"
-"PO-Revision-Date: 2023-11-12 00:05+0100\n"
+"PO-Revision-Date: 2025-04-11 20:38+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr ""
+msgstr "La operación ha expirado."
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "Prueba automática de notificación push."
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr ""
+msgstr "No se ha podido obtener el punto final de la notificación push."
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr ""
+msgstr "La notificación recibida no tiene el contenido que se esperaba."
 
 #: ui/main.qml:28
 #, kde-format
@@ -68,16 +68,13 @@ msgstr ""
 "<b>Inactivo</b><br>No hay ninguna aplicación usando notificaciones push."
 
 #: ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "<b>Offline</b><br>Network connection to the server could not be "
-#| "established."
+#, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
 msgstr ""
 "<b>Sin conexión</b><br>No se puede establecer la conexión de red con el "
-"servidor."
+"servidor (%1)."
 
 #: ui/main.qml:66
 #, kde-format
@@ -88,10 +85,9 @@ msgstr ""
 "servidor."
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "<b>Offline</b><br>Could not authenticate at the server."
+#, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>Sin conexión</b><br>No se puede autenticar en el servidor."
+msgstr "<b>Sin conexión</b><br>No se puede autenticar en el servidor (%1)."
 
 #: ui/main.qml:77
 #, kde-format
@@ -132,33 +128,33 @@ msgstr "Autenticarse"
 #: ui/main.qml:295
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr ""
+msgstr "Las notificaciones push funcionan correctamente."
 
 #: ui/main.qml:297
 #, kde-format
 msgid "Push notification test failed."
-msgstr ""
+msgstr "La prueba de notificación push ha fallado."
 
 #: ui/main.qml:299
 #, kde-format
 msgid "Registering with push server…"
-msgstr ""
+msgstr "Registrándose en el servidor push…"
 
 #: ui/main.qml:301
 #, kde-format
 msgid "Sending push notification…"
-msgstr ""
+msgstr "Enviando notificación push…"
 
 #: ui/main.qml:303
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr ""
+msgstr "Esperando recepción de notificación push…"
 
 #: ui/main.qml:310
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr ""
+msgstr "Prueba"
 
 #: ui/main.qml:327
 #, kde-format

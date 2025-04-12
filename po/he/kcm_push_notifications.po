@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kunifiedpush package.
 #
-# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-09 00:40+0000\n"
-"PO-Revision-Date: 2024-03-25 09:44+0200\n"
+"PO-Revision-Date: 2025-04-11 11:53+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,27 +16,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr ""
+msgstr "עבר הזמן שהוקצב לפעולה."
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "בדיקה עצמית של התראות בדחיפה."
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr ""
+msgstr "לא ניתן למשוך את נקודת הקצה של ההתראות."
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr ""
+msgstr "להתראה שהתקבלה אין את התוכן המצופה."
 
 #: ui/main.qml:28
 #, kde-format
@@ -64,14 +64,11 @@ msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr "<b>ממתין</b><br>אין יישומים שמשתמשים בהודעות בדחיפה."
 
 #: ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "<b>Offline</b><br>Network connection to the server could not be "
-#| "established."
+#, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
-msgstr "<b>מנותק</b><br>חיבור התקשורת לשרת לא מצליח."
+msgstr "<b>מנותק</b><br>חיבור התקשורת לשרת לא מצליח (%1)."
 
 #: ui/main.qml:66
 #, kde-format
@@ -80,10 +77,9 @@ msgid ""
 msgstr "<b>מנותק</b><br>חיבור התקשורת לשרת לא מצליח."
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "<b>Offline</b><br>Could not authenticate at the server."
+#, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>מנותק</b><br>לא ניתן ליצור אימות מול השרת."
+msgstr "<b>מנותק</b><br>לא ניתן ליצור אימות מול השרת (%1)."
 
 #: ui/main.qml:77
 #, kde-format
@@ -123,33 +119,33 @@ msgstr "אימות"
 #: ui/main.qml:295
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr ""
+msgstr "התראות בדחיפה פועלות כראוי."
 
 #: ui/main.qml:297
 #, kde-format
 msgid "Push notification test failed."
-msgstr ""
+msgstr "בדיקת ההתראות בדחיפה נכשלה."
 
 #: ui/main.qml:299
 #, kde-format
 msgid "Registering with push server…"
-msgstr ""
+msgstr "שרת הדחיפה נרשם…"
 
 #: ui/main.qml:301
 #, kde-format
 msgid "Sending push notification…"
-msgstr ""
+msgstr "נשלחת התראה בדחיפה…"
 
 #: ui/main.qml:303
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr ""
+msgstr "בהמתנה לקבלת התראות בדחיפה…"
 
 #: ui/main.qml:310
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr ""
+msgstr "בדיקה"
 
 #: ui/main.qml:327
 #, kde-format
