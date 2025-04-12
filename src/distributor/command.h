@@ -26,6 +26,7 @@ public:
         ChangePushProvider,
         MessageAck,
         ChangeUrgency,
+        Wait,
     } type = NoCommand;
     Client client;
     QDBusMessage reply;

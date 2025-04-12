@@ -15,6 +15,7 @@
 
 #include <QDBusContext>
 #include <QObject>
+#include <QTimer>
 
 #include <deque>
 #include <memory>
@@ -72,6 +73,7 @@ private:
     void providerDisconnected(AbstractPushProvider::Error error, const QString &errorMsg);
     void providerMessageAcknowledged(const Client &client, const QString &messageIdentifier);
     void providerUrgencyChanged();
+    void retryTimeout();
 
     [[nodiscard]] QStringList clientTokens() const;
 
@@ -98,6 +100,7 @@ private:
     DistributorStatus::Status m_status = DistributorStatus::Unknown;
     Urgency m_urgency = AllUrgencies;
     QString m_errorMessage;
+    QTimer m_retryTimer;
 };
 
 }

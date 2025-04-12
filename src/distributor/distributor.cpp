@@ -30,6 +30,10 @@
 
 using namespace KUnifiedPush;
 
+constexpr inline auto RETRY_BACKOFF_FACTOR = 1.5;
+constexpr inline auto RETRY_INITIAL_MIN = 15;
+constexpr inline auto RETRY_INITIAL_MAX = 40;
+
 Distributor::Distributor(QObject *parent)
     : QObject(parent)
 {
@@ -53,6 +57,12 @@ Distributor::Distributor(QObject *parent)
     });
 
     m_urgency = determineUrgency();
+
+    // exponential backoff retry timer
+    m_retryTimer.setTimerType(Qt::VeryCoarseTimer);
+    m_retryTimer.setSingleShot(true);
+    m_retryTimer.setInterval(0);
+    connect(&m_retryTimer, &QTimer::timeout, this, &Distributor::retryTimeout);
 
     // register at D-Bus
     new Distributor1Adaptor(this);
@@ -250,9 +260,13 @@ void Distributor::clientRegistered(const Client &client, AbstractPushProvider::E
         break;
     }
     case AbstractPushProvider::TransientNetworkError:
-        // retry
+    {
         m_commandQueue.push_front(std::move(m_currentCommand));
+        Command cmd;
+        cmd.type = Command::Wait;
+        m_commandQueue.push_front(std::move(cmd));
         break;
+    }
     case AbstractPushProvider::ProviderRejected:
     {
         switch (client.version) {
@@ -323,6 +337,7 @@ void Distributor::providerConnected()
     setStatus(DistributorStatus::Connected);
     setErrorMessage({});
     m_currentCommand = {};
+    m_retryTimer.setInterval(0); // reset retry backoff timer
 
     // provider needs separate command to change urgency
     if (m_urgency != m_pushProvider->urgency()) {
@@ -487,6 +502,13 @@ void Distributor::processNextCommand()
         case Command::ChangeUrgency:
             m_pushProvider->changeUrgency(m_urgency);
             break;
+        case Command::Wait:
+            if (m_retryTimer.interval() == 0) {
+                m_retryTimer.setInterval(std::chrono::seconds(QRandomGenerator::global()->bounded(RETRY_INITIAL_MIN, RETRY_INITIAL_MAX)));
+            }
+            qCDebug(Log) << "retry backoff time:" << m_retryTimer.interval();
+            m_retryTimer.start();
+            break;
     }
 }
 
@@ -561,6 +583,14 @@ void Distributor::setPushProvider(const QString &pushProviderId, const QVariantM
     settings.endGroup();
     if (!configChanged && pushProviderId == this->pushProviderId()) {
         return; // nothing changed
+    }
+
+    // stop retry timer if active
+    if (m_currentCommand.type == Command::Wait) {
+        qCDebug(Log) << "stopping retry timer";
+        m_currentCommand = {};
+        m_retryTimer.stop();
+        m_retryTimer.setInterval(0);
     }
 
     // if push provider or config changed: unregister all clients, create new push provider backend, re-register all clients
@@ -746,6 +776,15 @@ void Distributor::addBattery(const Solid::Device &batteryDevice)
     connect(battery, &Solid::Battery::presentStateChanged, this, updateUrgency);
     connect(battery, &Solid::Battery::chargeStateChanged, this, updateUrgency);
     connect(battery, &Solid::Battery::chargePercentChanged, this, updateUrgency);
+}
+
+void Distributor::retryTimeout()
+{
+    if (m_currentCommand.type == Command::Wait) {
+        m_currentCommand = {};
+        m_retryTimer.setInterval(m_retryTimer.interval() * RETRY_BACKOFF_FACTOR);
+    }
+    processNextCommand();
 }
 
 #include "moc_distributor.cpp"
