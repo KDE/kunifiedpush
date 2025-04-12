@@ -17,8 +17,8 @@
 #include <QNetworkReply>
 #include <QUuid>
 
-constexpr inline const char VAPID_PUBLIC_KEY[] = "BCzlgilO4rGwV9yvrW8afgUJes4-wy4HuVRWH0BIt-5858aF21oSmB9agUz5eyvmxpAUruVyU7pBaQ9HvcWY0TY=";
-constexpr inline const char VAPID_PRIVATE_KEY[] = "dV5WqGE33-HmKyuvabQdE0vUrin-FuZYRbkspO9Vxco=";
+constexpr inline const char VAPID_PUBLIC_KEY[] = "BCzlgilO4rGwV9yvrW8afgUJes4-wy4HuVRWH0BIt-5858aF21oSmB9agUz5eyvmxpAUruVyU7pBaQ9HvcWY0TY";
+constexpr inline const char VAPID_PRIVATE_KEY[] = "dV5WqGE33-HmKyuvabQdE0vUrin-FuZYRbkspO9Vxco";
 
 using namespace Qt::Literals;
 

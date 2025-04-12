@@ -35,8 +35,8 @@ int main(int argc, char **argv)
     }
     const auto keyPair = ECKey::store(key);
 
-    std::cout << "public key: " << keyPair.publicKey.toBase64(QByteArray::Base64UrlEncoding).constData() << std::endl;
-    std::cout << "private key: " << keyPair.privateKey.toBase64(QByteArray::Base64UrlEncoding).constData() << std::endl;
+    std::cout << "public key: " << keyPair.publicKey.toBase64(QByteArray::Base64UrlEncoding | QByteArray::OmitTrailingEquals).constData() << std::endl;
+    std::cout << "private key: " << keyPair.privateKey.toBase64(QByteArray::Base64UrlEncoding | QByteArray::OmitTrailingEquals).constData() << std::endl;
 
     return 0;
 }
