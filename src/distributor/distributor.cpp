@@ -370,6 +370,12 @@ void Distributor::providerDisconnected(AbstractPushProvider::Error error, const 
         setStatus(DistributorStatus::NoNetwork);
         setErrorMessage(errorMsg);
 
+        // defer what we are doing
+        if (hasCurrentCommand() && m_currentCommand.type != Command::Connect) {
+            m_commandQueue.push_front(std::move(m_currentCommand));
+        }
+        m_currentCommand = {};
+
         // attempt to reconnect when we have active clients and didn't ask for the disconnect
         if (!m_clients.empty()) {
             Command cmd;
