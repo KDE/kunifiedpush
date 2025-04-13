@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-09 00:40+0000\n"
+"POT-Creation-Date: 2025-04-13 00:40+0000\n"
 "PO-Revision-Date: 2025-04-09 10:01+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -108,22 +108,22 @@ msgstr ""
 msgid "Push provider:"
 msgstr "Proveïdor de notificacions automàtiques:"
 
-#: ui/main.qml:155 ui/main.qml:182 ui/main.qml:231 ui/main.qml:250
+#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:249
 #, kde-format
 msgid "Url:"
 msgstr "URL:"
 
-#: ui/main.qml:160
+#: ui/main.qml:159
 #, kde-format
 msgid "Client token:"
 msgstr "Testimoni de client:"
 
-#: ui/main.qml:187
+#: ui/main.qml:186
 #, kde-format
 msgid "User name:"
 msgstr "Nom d'usuari:"
 
-#: ui/main.qml:193
+#: ui/main.qml:192
 #, kde-format
 msgid "Authenticate"
 msgstr "Autentica"

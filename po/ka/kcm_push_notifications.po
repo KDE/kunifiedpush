@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-09 00:40+0000\n"
+"POT-Creation-Date: 2025-04-13 00:40+0000\n"
 "PO-Revision-Date: 2025-04-09 04:18+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -96,22 +96,22 @@ msgstr "<b>ქსელის გარეშე</b><br>პუშ გაფრ�
 msgid "Push provider:"
 msgstr "პუშის მომწოდებელი:"
 
-#: ui/main.qml:155 ui/main.qml:182 ui/main.qml:231 ui/main.qml:250
+#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:249
 #, kde-format
 msgid "Url:"
 msgstr "Url:"
 
-#: ui/main.qml:160
+#: ui/main.qml:159
 #, kde-format
 msgid "Client token:"
 msgstr "კლიენტის კოდი:"
 
-#: ui/main.qml:187
+#: ui/main.qml:186
 #, kde-format
 msgid "User name:"
 msgstr "მომხმარებელი:"
 
-#: ui/main.qml:193
+#: ui/main.qml:192
 #, kde-format
 msgid "Authenticate"
 msgstr "ავთენტიკაცია"

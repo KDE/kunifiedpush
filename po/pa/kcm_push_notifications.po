@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-09 00:40+0000\n"
+"POT-Creation-Date: 2025-04-13 00:40+0000\n"
 "PO-Revision-Date: 2024-01-28 16:07-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -97,22 +97,22 @@ msgstr "<b>ਆਫਲਾਈਨ</b><br>ਪੁਸ਼ ਨੋਟੀਫਿਕੇਸ਼ਨ �
 msgid "Push provider:"
 msgstr "ਪੁਸ਼ ਪਰੋਵਾਇਡਰ:"
 
-#: ui/main.qml:155 ui/main.qml:182 ui/main.qml:231 ui/main.qml:250
+#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:249
 #, kde-format
 msgid "Url:"
 msgstr "Url:"
 
-#: ui/main.qml:160
+#: ui/main.qml:159
 #, kde-format
 msgid "Client token:"
 msgstr "ਕਲਾਂਈਟ ਟੋਕਨ:"
 
-#: ui/main.qml:187
+#: ui/main.qml:186
 #, kde-format
 msgid "User name:"
 msgstr "ਵਰਤੋਂਕਾਰ ਦਾ ਨਾਂ:"
 
-#: ui/main.qml:193
+#: ui/main.qml:192
 #, kde-format
 msgid "Authenticate"
 msgstr "ਪਰਮਾਣਕਿਤਾ"

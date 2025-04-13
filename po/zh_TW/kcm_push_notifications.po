@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-09 00:40+0000\n"
+"POT-Creation-Date: 2025-04-13 00:40+0000\n"
 "PO-Revision-Date: 2025-04-09 17:38+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -96,22 +96,22 @@ msgstr "<b>離線</b><br>尚未設定推送通知。"
 msgid "Push provider:"
 msgstr "推送提供者："
 
-#: ui/main.qml:155 ui/main.qml:182 ui/main.qml:231 ui/main.qml:250
+#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:249
 #, kde-format
 msgid "Url:"
 msgstr "網址："
 
-#: ui/main.qml:160
+#: ui/main.qml:159
 #, kde-format
 msgid "Client token:"
 msgstr "用戶端憑證："
 
-#: ui/main.qml:187
+#: ui/main.qml:186
 #, kde-format
 msgid "User name:"
 msgstr "使用者名稱："
 
-#: ui/main.qml:193
+#: ui/main.qml:192
 #, kde-format
 msgid "Authenticate"
 msgstr "認證"

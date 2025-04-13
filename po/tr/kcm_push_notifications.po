@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-09 00:40+0000\n"
+"POT-Creation-Date: 2025-04-13 00:40+0000\n"
 "PO-Revision-Date: 2024-09-23 15:08+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -99,22 +99,22 @@ msgstr "<b>Çevrimdışı</b><br>Anında bildirimler ayarlanmamış."
 msgid "Push provider:"
 msgstr "Bildirim sağlayıcısı:"
 
-#: ui/main.qml:155 ui/main.qml:182 ui/main.qml:231 ui/main.qml:250
+#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:249
 #, kde-format
 msgid "Url:"
 msgstr "URL:"
 
-#: ui/main.qml:160
+#: ui/main.qml:159
 #, kde-format
 msgid "Client token:"
 msgstr "İstemci jetonu:"
 
-#: ui/main.qml:187
+#: ui/main.qml:186
 #, kde-format
 msgid "User name:"
 msgstr "Kullanıcı adı:"
 
-#: ui/main.qml:193
+#: ui/main.qml:192
 #, kde-format
 msgid "Authenticate"
 msgstr "Kimlik Doğrula"
