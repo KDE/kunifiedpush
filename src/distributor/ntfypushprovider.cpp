@@ -57,6 +57,9 @@ NtfyPushProvider::NtfyPushProvider(QObject *parent)
             m_lastMessageId = msgId;
             Q_EMIT messageReceived(msg);
             storeState();
+        } else if (sse.event == "open") {
+            Q_EMIT connected();
+            Q_EMIT urgencyChanged();
         }
     });
 }
@@ -78,7 +81,6 @@ bool NtfyPushProvider::loadSettings(const QSettings &settings)
 void NtfyPushProvider::connectToProvider(Urgency urgency)
 {
     doConnectToProvider(urgency);
-    Q_EMIT connected();
 }
 
 void NtfyPushProvider::disconnectFromProvider()
@@ -136,6 +138,8 @@ void NtfyPushProvider::doConnectToProvider(Urgency urgency)
     }
 
     if (m_topics.empty()) {
+        Q_EMIT connected();
+        Q_EMIT urgencyChanged();
         return;
     }
 
@@ -172,10 +176,7 @@ void NtfyPushProvider::doConnectToProvider(Urgency urgency)
 
     m_sseReply = reply;
     m_sseStream.read(reply);
-
-    // TODO urgency filter
-    // setUrgency(urgency);
-    // Q_EMIT urgencyChanged();
+    setUrgency(urgency);
 }
 
 void NtfyPushProvider::storeState()

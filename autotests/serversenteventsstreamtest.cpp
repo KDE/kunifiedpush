@@ -32,6 +32,7 @@ private Q_SLOTS:
         stream.read(&buffer);
 
         fakeStreamWrite(buffer, "event: start\ndata: {\"type\":\"start\"}\n\n");
+        QVERIFY(eventSpy.wait());
         QCOMPARE(eventSpy.size(), 1);
         auto msg = eventSpy.at(0).at(0).value<SSEMessage>();
         QCOMPARE(msg.event, "start");
@@ -43,6 +44,7 @@ private Q_SLOTS:
         fakeStreamWrite(buffer, "event: keepalive\r\n");
         QCOMPARE(eventSpy.size(), 0);
         fakeStreamWrite(buffer, "data: {\"type\":\"keepalive\",\"keepalive\":300}\r\n\r\n");
+        QVERIFY(eventSpy.wait());
         QCOMPARE(eventSpy.size(), 1);
         msg = eventSpy.at(0).at(0).value<SSEMessage>();
         QCOMPARE(msg.event, "keepalive");

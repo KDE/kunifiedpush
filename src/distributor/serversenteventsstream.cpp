@@ -111,7 +111,10 @@ void ServerSentEventsStream::processBuffer()
             msg.metaData.insert(QByteArray(lineBegin, std::distance(lineBegin, colonIt)), QByteArray(valueBegin, std::distance(valueBegin, lineEnd)));
         }
     }
-    Q_EMIT messageReceived(msg);
+
+    // defer emission of messages until the below is finished as well
+    // this avoids reaction to this pulling things out under our feet here
+    QMetaObject::invokeMethod(this, [msg, this]() { Q_EMIT messageReceived(msg); }, Qt::QueuedConnection);
 
     msgEnd = consumeLineBreak(msgEnd, m_buffer.end());
     msgEnd = consumeLineBreak(msgEnd, m_buffer.end());

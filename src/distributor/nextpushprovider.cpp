@@ -31,6 +31,10 @@ NextPushProvider::NextPushProvider(QObject *parent)
             msg.content = QByteArray::fromBase64(msgObj.value("message"_L1).toString().toUtf8());
             Q_EMIT messageReceived(msg);
         }
+        if (sse.event == "start") {
+            Q_EMIT connected();
+            Q_EMIT urgencyChanged();
+        }
     });
 }
 
@@ -188,10 +192,7 @@ void NextPushProvider::waitForMessage(Urgency urgency)
     });
     m_sseStream.read(reply);
     m_sseReply = reply;
-    Q_EMIT connected();
-
     setUrgency(urgency);
-    Q_EMIT urgencyChanged();
 }
 
 QNetworkRequest NextPushProvider::prepareRequest(const char *restCmd, const QString &restArg) const
