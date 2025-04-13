@@ -17,8 +17,8 @@
 // This is only provided here for demonstration purposes as we don't
 // have an application server here and instead use the "webpush-notify"
 // CLI tool for this.
-constexpr inline auto VAPID_PUBLIC_KEY = "BNH1upJppSLEASpoPmGDaeafgJ6KjZjxbDA3LbHG5yE1cAiKQ5qm_K08nVgibtxqm245l0BlaaMsu4iBGzV1wEU=";
-constexpr inline auto VAPID_PRIVATE_KEY = "9rxELCH8cvjOn2pUjSbfmYrm0NyNusqtPb5-OwcZUD4=";
+constexpr inline auto VAPID_PUBLIC_KEY = "BNH1upJppSLEASpoPmGDaeafgJ6KjZjxbDA3LbHG5yE1cAiKQ5qm_K08nVgibtxqm245l0BlaaMsu4iBGzV1wEU";
+constexpr inline auto VAPID_PRIVATE_KEY = "9rxELCH8cvjOn2pUjSbfmYrm0NyNusqtPb5-OwcZUD4";
 
 void printNoficationCommand(const KUnifiedPush::Connector &connector)
 {
@@ -28,8 +28,8 @@ void printNoficationCommand(const KUnifiedPush::Connector &connector)
 
     qDebug().noquote().nospace() << "echo \"Hello world!\" | "
         << QCoreApplication::applicationDirPath() << "/webpush-notify --endpoint \""
-        << connector.endpoint() << "\" --user-agent-public-key " << connector.contentEncryptionPublicKey().toBase64(QByteArray::Base64UrlEncoding)
-        << " --auth-secret " << connector.contentEncryptionAuthSecret().toBase64(QByteArray::Base64UrlEncoding)
+        << connector.endpoint() << "\" --user-agent-public-key " << connector.contentEncryptionPublicKey().toBase64(QByteArray::Base64UrlEncoding | QByteArray::OmitTrailingEquals)
+        << " --auth-secret " << connector.contentEncryptionAuthSecret().toBase64(QByteArray::Base64UrlEncoding | QByteArray::OmitTrailingEquals)
         << " --vapid-public-key " << VAPID_PUBLIC_KEY
         << " --vapid-private-key " << VAPID_PRIVATE_KEY;
 }
