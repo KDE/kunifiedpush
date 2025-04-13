@@ -78,6 +78,12 @@ bool NtfyPushProvider::loadSettings(const QSettings &settings)
     return m_url.isValid();
 }
 
+void NtfyPushProvider::resetSettings([[maybe_unused]] QSettings &settings)
+{
+    QSettings internal;
+    internal.remove(providerId() + "-internal"_L1);
+}
+
 void NtfyPushProvider::connectToProvider(Urgency urgency)
 {
     doConnectToProvider(urgency);

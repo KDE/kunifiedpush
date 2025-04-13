@@ -18,6 +18,10 @@ AbstractPushProvider::AbstractPushProvider(QLatin1StringView providerId, QObject
 
 AbstractPushProvider::~AbstractPushProvider() = default;
 
+void AbstractPushProvider::resetSettings([[maybe_unused]] QSettings &settings)
+{
+}
+
 void AbstractPushProvider::acknowledgeMessage(const Client &client, const QString &messageIdentifier)
 {
     Q_EMIT messageAcknowledged(client, messageIdentifier);

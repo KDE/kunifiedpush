@@ -417,7 +417,7 @@ QStringList Distributor::clientTokens() const
     return l;
 }
 
-bool Distributor::setupPushProvider()
+bool Distributor::setupPushProvider(bool newSetup)
 {
     // determine push provider
     const auto pushProviderName = pushProviderId();
@@ -440,6 +440,9 @@ bool Distributor::setupPushProvider()
 
     QSettings settings;
     settings.beginGroup(pushProviderName);
+    if (newSetup) {
+        m_pushProvider->resetSettings(settings);
+    }
     if (!m_pushProvider->loadSettings(settings)) {
         qCWarning(Log) << "Invalid push provider settings!";
         setStatus(DistributorStatus::NoSetup);
@@ -517,7 +520,7 @@ void Distributor::processNextCommand()
             QSettings settings;
             settings.setValue(QLatin1String("PushProvider/Type"), m_currentCommand.value);
             m_currentCommand = {};
-            if (setupPushProvider()) {
+            if (setupPushProvider(true /* new setup */)) {
                 processNextCommand();
             }
             break;

@@ -25,6 +25,7 @@ public:
     ~NtfyPushProvider();
 
     bool loadSettings(const QSettings &settings) override;
+    void resetSettings(QSettings &settings) override;
     void connectToProvider(Urgency urgency) override;
     void disconnectFromProvider() override;
     void registerClient(const Client &client) override;

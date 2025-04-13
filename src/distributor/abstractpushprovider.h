@@ -41,6 +41,12 @@ public:
      */
     virtual bool loadSettings(const QSettings &settings) = 0;
 
+    /** Reset any internal state for a fresh setup connecting to
+     *  a different push server instance.
+     *  The default implementation does nothing.
+     */
+    virtual void resetSettings(QSettings &settings);
+
     /** Attempt to establish a connection to the push provider. */
     virtual void connectToProvider(Urgency urgency) = 0;
 

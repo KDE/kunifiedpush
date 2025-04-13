@@ -50,6 +50,11 @@ bool NextPushProvider::loadSettings(const QSettings &settings)
     return m_url.isValid() && !m_appPassword.isEmpty() && !m_userName.isEmpty();
 }
 
+void NextPushProvider::resetSettings(QSettings &settings)
+{
+    settings.remove("DeviceId");
+}
+
 void NextPushProvider::connectToProvider(Urgency urgency)
 {
     qCDebug(Log) << m_deviceId;

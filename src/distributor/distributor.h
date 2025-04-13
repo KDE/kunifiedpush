@@ -77,7 +77,7 @@ private:
 
     [[nodiscard]] QStringList clientTokens() const;
 
-    [[nodiscard]] bool setupPushProvider();
+    [[nodiscard]] bool setupPushProvider(bool newSetup = false);
     void purgeUnavailableClients();
 
     [[nodiscard]] bool hasCurrentCommand() const;
