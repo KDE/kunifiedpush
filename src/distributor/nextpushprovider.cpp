@@ -13,6 +13,7 @@
 #include <QJsonObject>
 #include <QNetworkReply>
 #include <QSettings>
+#include <QStandardPaths>
 
 using namespace Qt::Literals;
 using namespace KUnifiedPush;
@@ -153,11 +154,25 @@ void NextPushProvider::waitForMessage(Urgency urgency)
         m_sseReply->abort();
     }
 
+    // HACK For unknown reasons doing SSE requests on the same
+    // QNAM instance as the other HTTP operations here will
+    // prevent other requests from happening while an SSE connection is
+    // active and will also prevent an SSE connection from being
+    // re-established after a disconnect.
+    // This doesn't match the behavior in the Ntfy implementation nor
+    // the QNAM documentation. Using a new QNAM per SSE does avoid
+    // those problems.
+    auto nam = new QNetworkAccessManager(this);
+    nam->setRedirectPolicy(QNetworkRequest::NoLessSafeRedirectPolicy);
+    nam->setStrictTransportSecurityEnabled(true);
+    nam->enableStrictTransportSecurityStore(true, QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + "/org.kde.kunifiedpush/hsts/"_L1);
+
     auto req = prepareRequest("device", m_deviceId);
     req.setRawHeader("urgency", urgencyValue(urgency));
-    auto reply = nam()->get(req);
-    connect(reply, &QNetworkReply::finished, this, [reply, this]() {
+    auto reply = nam->get(req);
+    connect(reply, &QNetworkReply::finished, this, [reply, nam, this]() {
         reply->deleteLater();
+        nam->deleteLater();
         if (reply->error() == QNetworkReply::OperationCanceledError) {
             return; // we triggered this ourselves
         }
