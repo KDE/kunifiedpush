@@ -342,15 +342,17 @@ void Distributor::providerConnected()
     qCDebug(Log);
     setStatus(DistributorStatus::Connected);
     setErrorMessage({});
-    m_currentCommand = {};
-    m_retryTimer.setInterval(0); // reset retry backoff timer
+    if (m_currentCommand.type == Command::Connect) {
+        m_currentCommand = {};
+        m_retryTimer.setInterval(0); // reset retry backoff timer
 
-    // provider needs separate command to change urgency
-    if (m_urgency != m_pushProvider->urgency()) {
-        if (std::ranges::none_of(m_commandQueue, [](const auto &cmd) { return cmd.type == Command::ChangeUrgency; })) {
-            Command cmd;
-            cmd.type = Command::ChangeUrgency;
-            m_commandQueue.push_back(std::move(cmd));
+        // provider needs separate command to change urgency
+        if (m_urgency != m_pushProvider->urgency()) {
+            if (std::ranges::none_of(m_commandQueue, [](const auto &cmd) { return cmd.type == Command::ChangeUrgency; })) {
+                Command cmd;
+                cmd.type = Command::ChangeUrgency;
+                m_commandQueue.push_back(std::move(cmd));
+            }
         }
     }
 
