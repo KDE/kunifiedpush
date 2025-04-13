@@ -73,3 +73,4 @@ Icon=network-connect
 Categories=Network
 Type=Application
 StartupNotify=false
+X-systemd-skip=true
