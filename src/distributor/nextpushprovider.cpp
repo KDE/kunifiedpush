@@ -22,12 +22,13 @@ NextPushProvider::NextPushProvider(QObject *parent)
     : AbstractPushProvider(Id, parent)
 {
     connect(&m_sseStream, &ServerSentEventsStream::messageReceived, this, [this](const SSEMessage &sse) {
-        qCDebug(Log) << sse.event << sse.data;
+        qCDebug(Log) << sse.event << sse.data << sse.metaData;
         if (sse.event == "message") {
             QJsonObject msgObj = QJsonDocument::fromJson(sse.data).object();
             Message msg;
-            msg.clientRemoteId = msgObj.value(QLatin1String("token")).toString();
-            msg.content = QByteArray::fromBase64(msgObj.value(QLatin1String("message")).toString().toUtf8());
+            msg.messageId = QString::fromUtf8(sse.metaData.value("id"));
+            msg.clientRemoteId = msgObj.value("token"_L1).toString();
+            msg.content = QByteArray::fromBase64(msgObj.value("message"_L1).toString().toUtf8());
             Q_EMIT messageReceived(msg);
         }
     });

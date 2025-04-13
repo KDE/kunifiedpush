@@ -111,6 +111,8 @@ void ServerSentEventsStream::processBuffer()
             msg.data.append(valueBegin, std::distance(valueBegin, lineEnd));
         } else if (fieldNameLen == 5 && std::strncmp(lineBegin, "event", fieldNameLen) == 0) {
             msg.event = QByteArray(valueBegin, std::distance(valueBegin, lineEnd));
+        } else {
+            msg.metaData.insert(QByteArray(lineBegin, std::distance(lineBegin, colonIt)), QByteArray(valueBegin, std::distance(valueBegin, lineEnd)));
         }
     }
     Q_EMIT messageReceived(msg);

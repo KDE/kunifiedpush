@@ -6,6 +6,7 @@
 #ifndef KUNIFIEDPUSH_SERVERSENTEVENTSSTREAM_H
 #define KUNIFIEDPUSH_SERVERSENTEVENTSSTREAM_H
 
+#include <QHash>
 #include <QObject>
 
 class QIODevice;
@@ -17,6 +18,7 @@ class SSEMessage
 public:
     QByteArray event;
     QByteArray data;
+    QHash<QByteArray, QByteArray> metaData;
 };
 
 /** Sever-sent Events (SSE) stream
