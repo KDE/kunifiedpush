@@ -91,7 +91,10 @@ void NtfyPushProvider::disconnectFromProvider()
 
 void NtfyPushProvider::registerClient(const Client &client)
 {
-    const QString topic = QLatin1String("upk") + QUuid::createUuid().toString(QUuid::Id128);
+    // hardcoded constraints in ntfy:
+    // must start with "up" AND must be exactly 14 characters long (incl. the up prefix)
+    // if we violate this visitor rate limiting will not work and we get an HTTP 507 error
+    const QString topic = "up"_L1 + QLatin1StringView(QUuid::createUuid().toByteArray().toBase64(QByteArray::Base64UrlEncoding | QByteArray::OmitTrailingEquals)).left(12);
     auto newClient = client;
     newClient.remoteId = topic;
 
