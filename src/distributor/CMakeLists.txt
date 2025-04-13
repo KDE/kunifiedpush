@@ -54,3 +54,10 @@ target_link_libraries(kunifiedpush-distributor PRIVATE KUnifiedPushDistributor)
 
 install(TARGETS kunifiedpush-distributor ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES org.kde.kunifiedpush-distributor.desktop DESTINATION ${KDE_INSTALL_AUTOSTARTDIR})
+
+configure_file(kunifiedpush-distributor.service.in ${CMAKE_CURRENT_BINARY_DIR}/kunifiedpush-distributor.service)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kunifiedpush-distributor.service DESTINATION ${KDE_INSTALL_SYSTEMDUSERUNITDIR})
+install(CODE "
+    include(${CMAKE_SOURCE_DIR}/cmake/SystemctlEnable.cmake)
+    systemctl_enable(kunifiedpush-distributor.service graphical-session.target ${KDE_INSTALL_FULL_SYSTEMDUSERUNITDIR})
+")

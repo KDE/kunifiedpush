@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2025 Volker Krause <vkrause@kde.org>
+# SPDX-License-Identifier: CC0-1.0
+
+[Unit]
+Description=KUnifiedPush Distributor
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+ExecStart=@KDE_INSTALL_FULL_BINDIR@/kunifiedpush-distributor
+Type=exec
+BusName=org.unifiedpush.Distributor.kde
+TimeoutStopSec=5sec
+Slice=background.slice
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target
