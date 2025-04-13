@@ -35,7 +35,7 @@ int main(int argc, char **argv)
     QCommandLineOption urgencyOpt(u"urgency"_s, u"Urgency of the message [very-low, low, normal, high]"_s, u"urgency"_s);
 
     QCommandLineParser parser;
-    parser.addOptions({ endpointOpt, uaPublicKeyOpt, authSecrectOpt, vapidPublicKeyOpt, vapidPrivateKeyOpt, ttlOpt });
+    parser.addOptions({ endpointOpt, uaPublicKeyOpt, authSecrectOpt, vapidPublicKeyOpt, vapidPrivateKeyOpt, ttlOpt, urgencyOpt });
     parser.addHelpOption();
     parser.addVersionOption();
     parser.process(app);
