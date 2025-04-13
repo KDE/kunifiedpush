@@ -186,7 +186,6 @@ void NextPushProvider::waitForMessage(Urgency urgency)
             Q_EMIT disconnected(NoError);
         }
     });
-    m_sseStream.clear();
     m_sseStream.read(reply);
     m_sseReply = reply;
     Q_EMIT connected();

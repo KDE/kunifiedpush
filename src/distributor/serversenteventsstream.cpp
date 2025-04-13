@@ -22,6 +22,7 @@ ServerSentEventsStream::~ServerSentEventsStream() = default;
 
 void ServerSentEventsStream::read(QIODevice *device)
 {
+    m_buffer.clear();
     connect(device, &QIODevice::readyRead, this, [device, this]() {
         m_buffer.append(device->read(device->bytesAvailable()));
         processBuffer();
@@ -31,11 +32,6 @@ void ServerSentEventsStream::read(QIODevice *device)
 QByteArray ServerSentEventsStream::buffer() const
 {
     return m_buffer;
-}
-
-void ServerSentEventsStream::clear()
-{
-    m_buffer.clear();
 }
 
 static bool isLineBreak(char c)

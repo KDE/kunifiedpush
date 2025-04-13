@@ -134,7 +134,6 @@ void NtfyPushProvider::doConnectToProvider(Urgency urgency)
     if (m_sseReply) {
         m_sseReply->abort();
     }
-    m_sseStream.clear();
 
     if (m_topics.empty()) {
         return;
