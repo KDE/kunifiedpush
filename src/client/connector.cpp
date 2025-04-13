@@ -95,7 +95,7 @@ void ConnectorPrivate::Unregistered(const QString &token)
     qCDebug(Log) << token;
 
     // confirmation of our unregistration request
-    if (token.isEmpty()) {
+    if (token.isEmpty() || (token == m_token && m_currentCommand == Command::Unregister)) {
         m_token.clear();
         m_endpoint.clear();
         Q_EMIT q->endpointChanged(m_endpoint);
