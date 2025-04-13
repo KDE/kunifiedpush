@@ -367,6 +367,18 @@ void Distributor::providerDisconnected(AbstractPushProvider::Error error, const 
     } else {
         setStatus(DistributorStatus::NoNetwork);
         setErrorMessage(errorMsg);
+
+        // attempt to reconnect when we have active clients and didn't ask for the disconnect
+        if (!m_clients.empty()) {
+            Command cmd;
+            cmd.type = Command::Connect;
+            m_commandQueue.push_front(std::move(cmd));
+
+            if (error == AbstractPushProvider::TransientNetworkError) {
+                cmd.type = Command::Wait;
+                m_commandQueue.push_front(std::move(cmd));
+            }
+        }
     }
     processNextCommand();
 }
