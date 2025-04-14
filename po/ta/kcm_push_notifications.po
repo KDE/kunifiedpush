@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kunifiedpush package.
 #
-# SPDX-FileCopyrightText: 2024 Kishore G <kishore96@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-13 00:40+0000\n"
-"PO-Revision-Date: 2024-02-18 18:29+0530\n"
+"PO-Revision-Date: 2025-04-13 16:52+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,27 +15,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr ""
+msgstr "செயலை முயற்சிப்பது காலாவதியானது."
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "புஷ் அறிவிப்பு சோதனை."
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr ""
+msgstr "புஷ் அறிவிப்புகளுக்கான வாங்கியைப் பெற முடியவில்லை."
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr ""
+msgstr "பெற்ற அறிவிப்பில் எதிர்பார்த்து உள்ளடக்கம் இல்லை."
 
 #: ui/main.qml:28
 #, kde-format
@@ -63,14 +63,11 @@ msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr "<b>ஒன்றுமில்லை</b><br>எந்த செயலியும் புஷ் அறிவிப்புகளைப் பயன்படுத்தவில்லை."
 
 #: ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "<b>Offline</b><br>Network connection to the server could not be "
-#| "established."
+#, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
-msgstr "<b>இணைப்பில்லை</b><br>சேவையகத்தைத் தொடர்புகொள்ள முடியவில்லை."
+msgstr "<b>இணைப்பில்லை</b><br>சேவையகத்தைத் தொடர்புகொள்ள முடியவில்லை (%1)"
 
 #: ui/main.qml:66
 #, kde-format
@@ -79,10 +76,9 @@ msgid ""
 msgstr "<b>இணைப்பில்லை</b><br>சேவையகத்தைத் தொடர்புகொள்ள முடியவில்லை."
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "<b>Offline</b><br>Could not authenticate at the server."
+#, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>இணைப்பில்லை</b><br>சேவையகம் நம் சான்றுகளை ஏற்கவில்லை."
+msgstr "<b>இணைப்பில்லை</b><br>சேவையகம் நம் சான்றுகளை ஏற்கவில்லை (%1)"
 
 #: ui/main.qml:77
 #, kde-format
@@ -122,33 +118,33 @@ msgstr "சான்றளி"
 #: ui/main.qml:295
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr ""
+msgstr "புஷ் அறிவிப்பு சரியாக இயங்குகிறது."
 
 #: ui/main.qml:297
 #, kde-format
 msgid "Push notification test failed."
-msgstr ""
+msgstr "புஷ் அறிவிப்பு சோதனை தோல்வியடைந்தது."
 
 #: ui/main.qml:299
 #, kde-format
 msgid "Registering with push server…"
-msgstr ""
+msgstr "புஷ் சேவையகத்தில் பதிவு செய்கிறது…"
 
 #: ui/main.qml:301
 #, kde-format
 msgid "Sending push notification…"
-msgstr ""
+msgstr "புஷ் அறிவிப்பு அனுப்பப்படுகிறது…"
 
 #: ui/main.qml:303
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr ""
+msgstr "புஷ் அறிவிப்புக்காக காத்திருக்கிறோம்…"
 
 #: ui/main.qml:310
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr ""
+msgstr "சோதி"
 
 #: ui/main.qml:327
 #, kde-format
