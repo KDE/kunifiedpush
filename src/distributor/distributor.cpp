@@ -316,8 +316,8 @@ void Distributor::clientUnregistered(const Client &client, AbstractPushProvider:
         if (it != m_clients.end()) {
             m_clients.erase(it);
 
-            // if this was the last client, also disconnect from the push provider
-            if (m_clients.empty()) {
+            // if this was the last client and nothing else needs to be done, also disconnect from the push provider
+            if (m_clients.empty() && m_commandQueue.empty()) {
                 Command cmd;
                 cmd.type = Command::Disconnect;
                 m_commandQueue.push_back(std::move(cmd));
