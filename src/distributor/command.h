@@ -21,6 +21,7 @@ public:
         Register,
         Unregister,  ///< unregistration requested by client
         ForceUnregister, ///< unregistration triggered by distributor
+        SilentUnregister, ///< unregistration for moving to a different push provider
         Connect,
         Disconnect,
         ChangePushProvider,

@@ -239,7 +239,12 @@ void Distributor::clientRegistered(const Client &client, AbstractPushProvider::E
     case AbstractPushProvider::NoError:
     {
         // TODO check whether we got an endpoint, otherwise report an error
-        m_clients.push_back(client);
+        const auto it = std::ranges::find_if(m_clients, [&client](const auto &c) { return c.token == client.token; });
+        if (it == m_clients.end()) {
+            m_clients.push_back(client);
+        } else {
+            (*it) = client;
+        }
 
         QSettings settings;
         client.store(settings);
@@ -304,29 +309,37 @@ void Distributor::clientUnregistered(const Client &client, AbstractPushProvider:
     qCDebug(Log) << client.token << client.remoteId << client.serviceName << error;
     switch (error) {
     case AbstractPushProvider::NoError:
-        client.unregistered(m_currentCommand.type == Command::Unregister);
+        if (m_currentCommand.type != Command::SilentUnregister) {
+            client.unregistered(m_currentCommand.type == Command::Unregister);
+        }
         [[fallthrough]];
     case AbstractPushProvider::ProviderRejected:
-    {
-        QSettings settings;
-        settings.remove(client.token);
-        const auto it = std::find_if(m_clients.begin(), m_clients.end(), [&client](const auto &c) {
-            return c.token == client.token;
-        });
-        if (it != m_clients.end()) {
-            m_clients.erase(it);
+        if (m_currentCommand.type != Command::SilentUnregister) {
+            QSettings settings;
+            settings.remove(client.token);
+            const auto it = std::find_if(m_clients.begin(), m_clients.end(), [&client](const auto &c) {
+                return c.token == client.token;
+            });
+            if (it != m_clients.end()) {
+                m_clients.erase(it);
 
-            // if this was the last client and nothing else needs to be done, also disconnect from the push provider
-            if (m_clients.empty() && m_commandQueue.empty()) {
-                Command cmd;
-                cmd.type = Command::Disconnect;
-                m_commandQueue.push_back(std::move(cmd));
+                // if this was the last client and nothing else needs to be done, also disconnect from the push provider
+                if (m_clients.empty() && m_commandQueue.empty()) {
+                    Command cmd;
+                    cmd.type = Command::Disconnect;
+                    m_commandQueue.push_back(std::move(cmd));
+                }
             }
+            settings.setValue(QStringLiteral("Clients/Tokens"), clientTokens());
+            Q_EMIT registeredClientsChanged();
+        } else {
+            auto c = client;
+            c.endpoint.clear();
+            QSettings settings;
+            c.store(settings);
+            c.newEndpoint();
         }
-        settings.setValue(QStringLiteral("Clients/Tokens"), clientTokens());
-        Q_EMIT registeredClientsChanged();
         break;
-    }
     case AbstractPushProvider::TransientNetworkError:
         // retry
         m_commandQueue.push_front(std::move(m_currentCommand));
@@ -507,6 +520,7 @@ void Distributor::processNextCommand()
             break;
         case Command::Unregister:
         case Command::ForceUnregister:
+        case Command::SilentUnregister:
             m_pushProvider->unregisterClient(m_currentCommand.client);
             break;
         case Command::Connect:
@@ -625,7 +639,10 @@ void Distributor::setPushProvider(const QString &pushProviderId, const QVariantM
     // if push provider or config changed: unregister all clients, create new push provider backend, re-register all clients
     if (m_status != DistributorStatus::NoSetup) {
         for (const auto &client : m_clients) {
-            forceUnregisterClient(client.token);
+            Command cmd;
+            cmd.type = Command::SilentUnregister;
+            cmd.client = client;
+            m_commandQueue.push_back(std::move(cmd));
         }
         // remaining registration commands are for not yet persisted clients, keep those
         std::vector<Command> pendingClients;
