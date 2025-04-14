@@ -504,6 +504,14 @@ bool Distributor::hasCurrentCommand() const
 
 void Distributor::processNextCommand()
 {
+    // Return to the event loop before processing the next command.
+    // This allows calls into here from within processing a network operation
+    // to fully complete first before we potentially call into that code again.
+    QMetaObject::invokeMethod(this, &Distributor::doProcessNextCommand, Qt::QueuedConnection);
+}
+
+void Distributor::doProcessNextCommand()
+{
     if (hasCurrentCommand() || m_commandQueue.empty() || !isNetworkAvailable()) {
         return;
     }

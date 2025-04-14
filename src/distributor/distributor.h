@@ -82,6 +82,7 @@ private:
 
     [[nodiscard]] bool hasCurrentCommand() const;
     void processNextCommand();
+    void doProcessNextCommand();
 
     void setStatus(DistributorStatus::Status status);
     void setErrorMessage(const QString &errMsg);
