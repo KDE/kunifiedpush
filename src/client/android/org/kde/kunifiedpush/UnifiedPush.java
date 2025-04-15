@@ -24,4 +24,5 @@ public class UnifiedPush
     static final String EXTRA_BYTES_MESSAGE = "bytesMessage";
     static final String EXTRA_MESSAGE_ID = "id";
     static final String EXTRA_REASON = "reason";
+    static final String EXTRA_VAPID = "vapid";
 }

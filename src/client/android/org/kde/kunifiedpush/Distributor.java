@@ -25,13 +25,16 @@ public class Distributor
         m_context = context;
     }
 
-    public void register(String token, String message)
+    public void register(String token, String message, String vapid)
     {
         Intent i = new Intent();
         i.setPackage(m_distributorName);
         i.setAction(UnifiedPush.ACTION_REGISTER);
         i.putExtra(UnifiedPush.EXTRA_TOKEN, token);
         i.putExtra(UnifiedPush.EXTRA_MESSAGE, message);
+        if (vapid != null) {
+            i.putExtra(UnifiedPush.EXTRA_VAPID, vapid);
+        }
         i.putExtra(UnifiedPush.EXTRA_APPLICATION, m_context.getPackageName());
         m_context.sendBroadcast(i);
     }
