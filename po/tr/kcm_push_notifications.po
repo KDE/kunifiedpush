@@ -20,22 +20,22 @@ msgstr ""
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr ""
+msgstr "İşlem zaman aşımına uğradı."
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "Anında bildirimler için öz sınama."
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr ""
+msgstr "Anında bildirim uç noktası alınamadı."
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr ""
+msgstr "Alınan bildirimin içeriği, beklenenle eşleşmiyor."
 
 #: ui/main.qml:28
 #, kde-format
@@ -63,14 +63,11 @@ msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr "<b>Boşta</b><br>Anında bildirimleri kullanan uygulama yok."
 
 #: ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "<b>Offline</b><br>Network connection to the server could not be "
-#| "established."
+#, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
-msgstr "<b>Çevrimdışı</b><br>Sunucuya ağ bağlantısı kurulamadı."
+msgstr "<b>Çevrimdışı</b><br>Sunucuya ağ bağlantısı kurulamadı (%1)."
 
 #: ui/main.qml:66
 #, kde-format
@@ -79,10 +76,9 @@ msgid ""
 msgstr "<b>Çevrimdışı</b><br>Sunucuya ağ bağlantısı kurulamadı."
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "<b>Offline</b><br>Could not authenticate at the server."
+#, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>Çevrimdışı</b><br>Sunucuda kimlik doğrulanamadı."
+msgstr "<b>Çevrimdışı</b><br>Sunucuda kimlik doğrulanamadı (%1)."
 
 #: ui/main.qml:77
 #, kde-format
@@ -122,33 +118,33 @@ msgstr "Kimlik Doğrula"
 #: ui/main.qml:295
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr ""
+msgstr "Anında bildirimler düzgün çalışıyor."
 
 #: ui/main.qml:297
 #, kde-format
 msgid "Push notification test failed."
-msgstr ""
+msgstr "Anında bildirim sınaması başarısız oldu."
 
 #: ui/main.qml:299
 #, kde-format
 msgid "Registering with push server…"
-msgstr ""
+msgstr "Anında bildirim sunucusuna kayıt yapılıyor…"
 
 #: ui/main.qml:301
 #, kde-format
 msgid "Sending push notification…"
-msgstr ""
+msgstr "Anında bildirim gönderiliyor…"
 
 #: ui/main.qml:303
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr ""
+msgstr "Anında bildirim almak için bekleniyor…"
 
 #: ui/main.qml:310
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr ""
+msgstr "Sına"
 
 #: ui/main.qml:327
 #, kde-format
