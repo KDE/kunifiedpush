@@ -58,7 +58,8 @@ QByteArray ContentEncryption::authSecret() const
 
 bool ContentEncryption::hasKeys() const
 {
-    return d && d->m_publicKey.size() == 65 && d->m_privateKey.size() == 32 && d->m_authSecret.size() == CE_AUTH_SECRET_SIZE;
+    // private key should be 32 byte long, but leading zeros are not included
+    return d && d->m_publicKey.size() == 65 && !d->m_privateKey.isEmpty() && d->m_privateKey.size() <= 32 && d->m_authSecret.size() == CE_AUTH_SECRET_SIZE;
 }
 
 QByteArray ContentEncryption::decrypt(const QByteArray &encrypted) const
