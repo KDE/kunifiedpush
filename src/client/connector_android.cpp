@@ -34,8 +34,9 @@ static void newEndpoint(JNIEnv *env, jobject that, jstring token, jstring endpoi
 static void registrationFailed(JNIEnv *env, jobject that, jstring token, jstring reason)
 {
     Q_UNUSED(that);
-    // TODO
-    qDebug() << "TODO" << fromJniString(env, token) << fromJniString(env, reason);
+    for (auto c :ConnectorPrivate::s_instances) {
+        c->registrationFailed(fromJniString(env, token), fromJniString(env, reason));
+    }
 }
 
 static void unregistered(JNIEnv *env, jobject that, jstring token)

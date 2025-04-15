@@ -55,6 +55,7 @@ public:
     void storeState() const;
     void selectDistributor();
     void setDistributor(const QString &distServiceName);
+    void registrationFailed(const QString &token, const QString &reason);
 
     void setState(Connector::State state);
 

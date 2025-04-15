@@ -182,6 +182,17 @@ void ConnectorPrivate::setDistributor(const QString &distServiceName)
     }
 }
 
+void ConnectorPrivate::registrationFailed(const QString &token, const QString &reason)
+{
+    qCDebug(Log) << token << reason;
+    if (token != m_token) {
+        return;
+    }
+
+    // TODO error code/error message
+    setState(Connector::Error);
+}
+
 void ConnectorPrivate::setState(Connector::State state)
 {
     qCDebug(Log) << state;

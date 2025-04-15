@@ -132,24 +132,24 @@ void ConnectorPrivate::handleRegisterResponse(const QDBusPendingCall &reply)
             qCWarning(Log) << watcher->error();
             setState(Connector::Error);
         } else {
-            QString result, errorMsg;
-            std::visit([&result, &errorMsg, watcher](auto iface) {
+            QString result, reason;
+            std::visit([&result, &reason, watcher](auto iface) {
                 using T = std::decay_t<decltype(iface)>;
                 if constexpr (std::is_same_v<OrgUnifiedpushDistributor1Interface*, T>) {
                     result = watcher->reply().arguments().at(0).toString();
-                    errorMsg = watcher->reply().arguments().at(1).toString();
+                    reason = watcher->reply().arguments().at(1).toString();
                 }
                 if constexpr (std::is_same_v<OrgUnifiedpushDistributor2Interface*, T>) {
                     const auto args = unpackVariantMap(watcher->reply().arguments().at(0).value<QDBusArgument>());
                     result = args.value(UP_ARG_SUCCESS).toString();
-                    errorMsg = args.value(UP_ARG_REASON).toString();
+                    reason = args.value(UP_ARG_REASON).toString();
                 }
             }, m_distributor);
-            qCDebug(Log) << result << errorMsg;
+            qCDebug(Log) << result << reason;
             if (result == UP_REGISTER_RESULT_SUCCESS) {
                 setState(m_endpoint.isEmpty() ? Connector::Registering : Connector::Registered);
             } else {
-                setState(Connector::Error);
+                registrationFailed(m_token, reason);
             }
         }
         m_currentCommand = Command::None;

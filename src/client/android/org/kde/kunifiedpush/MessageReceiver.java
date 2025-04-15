@@ -23,7 +23,7 @@ public class MessageReceiver extends BroadcastReceiver
                 newEndpoint(intent.getStringExtra(UnifiedPush.EXTRA_TOKEN), intent.getStringExtra(UnifiedPush.EXTRA_ENDPOINT));
                 break;
             case UnifiedPush.ACTION_REGISTRATION_FAILED:
-                registrationFailed(intent.getStringExtra(UnifiedPush.EXTRA_TOKEN), intent.getStringExtra(UnifiedPush.EXTRA_MESSAGE));
+                registrationFailed(intent.getStringExtra(UnifiedPush.EXTRA_TOKEN), intent.getStringExtra(UnifiedPush.EXTRA_REASON));
                 break;
             case UnifiedPush.ACTION_UNREGISTERED:
                 unregistered(intent.getStringExtra(UnifiedPush.EXTRA_TOKEN));
