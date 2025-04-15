@@ -32,6 +32,7 @@ public:
     void disconnectFromProvider() override;
     void registerClient(const Client &client) override;
     void unregisterClient(const Client &client) override;
+    void acknowledgeMessage(const Client &client, const QString &messageIdentifier) override;
 
     static constexpr inline auto Id = QLatin1StringView("NextPush");
 protected:

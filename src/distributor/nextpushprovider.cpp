@@ -152,6 +152,20 @@ void NextPushProvider::unregisterClient(const Client &client)
     });
 }
 
+void NextPushProvider::acknowledgeMessage(const Client &client, const QString &messageIdentifier)
+{
+    qCDebug(Log) << client.serviceName << messageIdentifier;
+    auto req = prepareRequest("message", messageIdentifier);
+    auto reply = nam()->deleteResource(req);
+    connect(reply, &QNetworkReply::finished, this, [reply, this, client, messageIdentifier]() {
+        reply->deleteLater();
+        if (reply->error() != QNetworkReply::NoError) {
+            qCWarning(Log) << reply->errorString() << reply->readAll();
+        };
+        Q_EMIT messageAcknowledged(client, messageIdentifier);
+    });
+}
+
 void NextPushProvider::doChangeUrgency(Urgency urgency)
 {
     waitForMessage(urgency);
