@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kunifiedpush package.
-# SPDX-FileCopyrightText: 2022, 2024 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-13 00:40+0000\n"
-"PO-Revision-Date: 2024-02-10 00:10+0100\n"
+"PO-Revision-Date: 2025-04-15 23:51+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,27 +15,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr ""
+msgstr "작업 시간을 초과했습니다."
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "푸시 알림 자가 진단."
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr ""
+msgstr "푸시 알림 엔드포인트를 가져올 수 없습니다."
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr ""
+msgstr "수신한 알림에 예상한 내용이 없습니다."
 
 #: ui/main.qml:28
 #, kde-format
@@ -63,26 +63,22 @@ msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr "<b>대기 중</b><br>푸시 알림을 사용하는 앱이 없습니다."
 
 #: ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "<b>Offline</b><br>Network connection to the server could not be "
-#| "established."
+#, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
-msgstr "<b>오프라인</b><br>서버에 연결할 수 없습니다."
+msgstr "<b>오프라인</b><br>서버로 향한 네트워크 연결을 열 수 없습니다(%1)."
 
 #: ui/main.qml:66
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
-msgstr "<b>오프라인</b><br>서버에 연결할 수 없습니다."
+msgstr "<b>오프라인</b><br>서버로 향한 네트워크 연결을 열 수 없습니다."
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "<b>Offline</b><br>Could not authenticate at the server."
+#, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>오프라인</b><br>서버에 인증할 수 없습니다."
+msgstr "<b>오프라인</b><br>서버에 인증할 수 없습니다(%1)."
 
 #: ui/main.qml:77
 #, kde-format
@@ -122,33 +118,33 @@ msgstr "인증"
 #: ui/main.qml:295
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr ""
+msgstr "푸시 알림이 올바르게 작동합니다."
 
 #: ui/main.qml:297
 #, kde-format
 msgid "Push notification test failed."
-msgstr ""
+msgstr "푸시 알림 시험이 실패했습니다."
 
 #: ui/main.qml:299
 #, kde-format
 msgid "Registering with push server…"
-msgstr ""
+msgstr "푸시 서버에 등록 중…"
 
 #: ui/main.qml:301
 #, kde-format
 msgid "Sending push notification…"
-msgstr ""
+msgstr "푸시 알림 전송 중…"
 
 #: ui/main.qml:303
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr ""
+msgstr "푸시 알림 수신 대기 중…"
 
 #: ui/main.qml:310
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr ""
+msgstr "시험"
 
 #: ui/main.qml:327
 #, kde-format
