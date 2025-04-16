@@ -113,10 +113,10 @@ bool ConnectorPrivate::hasDistributor() const
 
 void ConnectorPrivate::doRegister()
 {
-    m_distributor.callMethod<void>("register", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", QAndroidJniObject::fromString(m_token).object(), QAndroidJniObject::fromString(m_description).object(), QAndroidJniObject::fromString(m_vapidPublicKey).object());
+    m_distributor.callMethod<void>("register", m_token, m_description, m_vapidPublicKey);
 }
 
 void ConnectorPrivate::doUnregister()
 {
-    m_distributor.callMethod<void>("unregister", "(Ljava/lang/String;)V", QAndroidJniObject::fromString(m_token).object());
+    m_distributor.callMethod<void>("unregister", m_token);
 }
