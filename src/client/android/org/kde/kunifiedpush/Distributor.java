@@ -48,6 +48,16 @@ public class Distributor
         m_context.sendBroadcast(i);
     }
 
+    public void acknowledge(String token, String messageId)
+    {
+        Intent i = new Intent();
+        i.setPackage(m_distributorName);
+        i.setAction(UnifiedPush.ACTION_MESSAGE_ACK);
+        i.putExtra(UnifiedPush.EXTRA_TOKEN, token);
+        i.putExtra(UnifiedPush.EXTRA_MESSAGE_ID, messageId);
+        m_context.sendBroadcast(i);
+    }
+
     private static boolean isExcludedDistributor(ResolveInfo info)
     {
         // TODO is there a way to check for the receiver no being exported?

@@ -86,6 +86,8 @@ public:
     std::variant<OrgUnifiedpushDistributor1Interface*, OrgUnifiedpushDistributor2Interface*> m_distributor;
     QDBusServiceWatcher m_serviceWatcher;
 #else
+    void handleMessage(const QString &token, const QByteArray &message, const QString &messageIdentifier);
+
     QJniObject m_distributor;
     static std::vector<ConnectorPrivate*> s_instances;
 #endif

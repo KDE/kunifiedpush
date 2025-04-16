@@ -54,7 +54,7 @@ static void message(JNIEnv *env, jobject that, jstring token, jbyteArray message
     const auto messageData = env->GetByteArrayElements(message, nullptr);
     const auto messageQBA = QByteArray::fromRawData(reinterpret_cast<const char*>(messageData), messageSize);
     for (auto c : ConnectorPrivate::s_instances) {
-        c->Message(fromJniString(env, token), messageQBA, fromJniString(env, messageId));
+        c->handleMessage(fromJniString(env, token), messageQBA, fromJniString(env, messageId));
     }
     env->ReleaseByteArrayElements(message, messageData, JNI_ABORT);
 }
@@ -119,4 +119,17 @@ void ConnectorPrivate::doRegister()
 void ConnectorPrivate::doUnregister()
 {
     m_distributor.callMethod<void>("unregister", m_token);
+}
+
+void ConnectorPrivate::handleMessage(const QString &token, const QByteArray &message, const QString &messageIdentifier)
+{
+    if (m_token != token) {
+        return;
+    }
+
+    Message(token, message, messageIdentifier);
+
+    if (!messageIdentifier.isEmpty()) {
+        m_distributor.callMethod<void>("acknowledge", token, messageIdentifier);
+    }
 }
