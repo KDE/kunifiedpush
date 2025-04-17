@@ -5,8 +5,11 @@
 
 package org.kde.kunifiedpush;
 
+import android.app.BroadcastOptions;
+import android.app.PendingIntent;
 import android.content.*;
 import android.content.pm.*;
+import android.os.Build;
 import android.util.Log;
 import java.util.List;
 import java.util.ListIterator;
@@ -35,8 +38,7 @@ public class Distributor
         if (vapid != null) {
             i.putExtra(UnifiedPush.EXTRA_VAPID, vapid);
         }
-        i.putExtra(UnifiedPush.EXTRA_APPLICATION, m_context.getPackageName());
-        m_context.sendBroadcast(i);
+        sendToDistributor(i);
     }
 
     public void unregister(String token)
@@ -45,17 +47,38 @@ public class Distributor
         i.setPackage(m_distributorName);
         i.setAction(UnifiedPush.ACTION_UNREGISTER);
         i.putExtra(UnifiedPush.EXTRA_TOKEN, token);
-        m_context.sendBroadcast(i);
+        sendToDistributor(i);
     }
 
     public void acknowledge(String token, String messageId)
     {
+        Log.d(TAG, "acknowledging message " + messageId);
         Intent i = new Intent();
-        i.setPackage(m_distributorName);
         i.setAction(UnifiedPush.ACTION_MESSAGE_ACK);
         i.putExtra(UnifiedPush.EXTRA_TOKEN, token);
         i.putExtra(UnifiedPush.EXTRA_MESSAGE_ID, messageId);
-        m_context.sendBroadcast(i);
+        sendToDistributor(i);
+    }
+
+    private void sendToDistributor(Intent i)
+    {
+        i.setPackage(m_distributorName);
+
+        // legacy backward compatibility
+        i.putExtra(UnifiedPush.EXTRA_APPLICATION, m_context.getPackageName());
+
+        // for SDK < 34
+        Intent dummyIntent = new Intent("org.unifiedpush.dummy_app");
+        PendingIntent pi = PendingIntent.getBroadcast(m_context, 0, dummyIntent, PendingIntent.FLAG_IMMUTABLE);
+        i.putExtra(UnifiedPush.EXTRA_PI, pi);
+
+        if (Build.VERSION.SDK_INT >= 34) {
+            BroadcastOptions options = BroadcastOptions.makeBasic();
+            options.setShareIdentityEnabled(true);
+            m_context.sendBroadcast(i, null, options.toBundle());
+        } else {
+            m_context.sendBroadcast(i);
+        }
     }
 
     private static boolean isExcludedDistributor(ResolveInfo info)
