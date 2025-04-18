@@ -58,6 +58,7 @@ void AutopushProvider::connectToProvider([[maybe_unused]] Urgency urgency)
             m_pingTimer.start();
         } else if (state == QAbstractSocket::UnconnectedState) {
             Q_EMIT disconnected(TransientNetworkError, m_socket->errorString());
+            m_socket->disconnect(); // Prevent StateChanged from being signaled again during the following deleteLater
             m_socket->deleteLater();
             m_socket = nullptr;
             m_pingTimer.stop();

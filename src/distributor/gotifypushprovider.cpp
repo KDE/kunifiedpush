@@ -42,7 +42,9 @@ void GotifyPushProvider::connectToProvider([[maybe_unused]] Urgency urgency)
             Q_EMIT connected();
         } else if (state == QAbstractSocket::UnconnectedState) {
             Q_EMIT disconnected(TransientNetworkError, m_socket->errorString());
+            m_socket->disconnect(); // Prevent StateChanged from being signaled again during the following deleteLater
             m_socket->deleteLater();
+            m_socket = nullptr;
         }
     });
     connect(m_socket, &QWebSocket::textMessageReceived, this, &GotifyPushProvider::wsMessageReceived);
