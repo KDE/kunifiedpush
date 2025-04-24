@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=UnifiedPush Distributor
 Name[ar]=موزع الدفع الموحد UnifiedPush
+Name[bg]=UnifiedPush Distributor
 Name[ca]=Distribuïdor UnifiedPush
 Name[ca@valencia]=Distribuïdor UnifiedPush
 Name[de]=UnifiedPush-Distributor
@@ -34,6 +35,7 @@ Name[zh_CN]=统一推送分发程序
 Name[zh_TW]=UnifiedPush 發佈者
 GenericName=Push Notification Service
 GenericName[ar]=خدمة الإخطارات الفورية
+GenericName[bg]=Услуга за насочени известия
 GenericName[ca]=Servei de notificacions automàtiques
 GenericName[ca@valencia]=Servei de notificacions automàtiques
 GenericName[cs]=Služba pro oznamování Push
