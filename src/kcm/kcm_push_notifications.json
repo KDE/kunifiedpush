@@ -2,6 +2,7 @@
     "KPlugin": {
         "Description": "Configure notifications from online services",
         "Description[ar]": "اضبط الإشعارات من الخدمات عبر الإنترنت",
+        "Description[bg]": "Конфигуриране на известия от онлайн услуги",
         "Description[ca@valencia]": "Configura les notificacions de serveis en línia",
         "Description[ca]": "Configura les notificacions de serveis en línia",
         "Description[eo]": "Agordi sciigojn el enretaj servoj",
@@ -36,6 +37,7 @@
         "Icon": "network-connect",
         "Name": "Push Notifications",
         "Name[ar]": "الإخطارات الفورية",
+        "Name[bg]": "Насочени известия",
         "Name[ca@valencia]": "Notificacions automàtiques",
         "Name[ca]": "Notificacions automàtiques",
         "Name[cs]": "Upozornění Push",
@@ -72,6 +74,7 @@
     },
     "X-KDE-Keywords": "Push notifications,unified push,KUnifiedPush",
     "X-KDE-Keywords[ar]": "Push notifications,unified push,إخطارات الدفع,الدفع الموحد,KUnifiedPush,إخطارات فورية",
+    "X-KDE-Keywords[bg]": "насочени известия,KUnifiedPush",
     "X-KDE-Keywords[ca@valencia]": "Notificacions automàtiques,notificacions unificades,KUnifiedPush",
     "X-KDE-Keywords[ca]": "Notificacions automàtiques,notificacions unificades,KUnifiedPush",
     "X-KDE-Keywords[en_GB]": "Push notifications,unified push,KUnifiedPush",
