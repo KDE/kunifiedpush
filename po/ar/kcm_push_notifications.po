@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kunifiedpush package.
-# SPDX-FileCopyrightText: 2024 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-13 00:40+0000\n"
-"PO-Revision-Date: 2024-12-05 07:31+0400\n"
+"PO-Revision-Date: 2025-04-26 11:59+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -21,22 +21,22 @@ msgstr ""
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr ""
+msgstr "انتهى وقت العملية."
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "اختبار للإخطار فوري."
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr ""
+msgstr "لم يتمكن من الحصول على نقطة نهاية الإخطارات الفورية."
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr ""
+msgstr "الإخطار المستلم لا يحتوي على المحتوى المتوقع."
 
 #: ui/main.qml:28
 #, kde-format
@@ -64,14 +64,11 @@ msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr "<b>خامل</b><br> لا توجد تطبيقات تستخدم الإخطارات الفورية."
 
 #: ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "<b>Offline</b><br>Network connection to the server could not be "
-#| "established."
+#, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
-msgstr "<b>غير متصل</b><br>لا يمكن إنشاء اتصال شبكي بالخادم."
+msgstr "<b>غير متصل</b><br>لا يمكن إنشاء اتصال شبكي بالخادم (%1)."
 
 #: ui/main.qml:66
 #, kde-format
@@ -80,10 +77,9 @@ msgid ""
 msgstr "<b>غير متصل</b><br>لا يمكن إنشاء اتصال شبكي بالخادم."
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "<b>Offline</b><br>Could not authenticate at the server."
+#, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>غير متصل</b><br>لا يمكن المصادقة على الخادم."
+msgstr "<b>غير متصل</b><br>لا يمكن المصادقة على الخادم (%1)."
 
 #: ui/main.qml:77
 #, kde-format
@@ -123,33 +119,33 @@ msgstr "المصادقة"
 #: ui/main.qml:295
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr ""
+msgstr "الإخطارات الفورية تعمل بشكل سليم."
 
 #: ui/main.qml:297
 #, kde-format
 msgid "Push notification test failed."
-msgstr ""
+msgstr "فشل اختبار الإخطارات الفورية."
 
 #: ui/main.qml:299
 #, kde-format
 msgid "Registering with push server…"
-msgstr ""
+msgstr "يسجّل في خادم الإخطارات…"
 
 #: ui/main.qml:301
 #, kde-format
 msgid "Sending push notification…"
-msgstr ""
+msgstr "يرسل إخطار فوري…"
 
 #: ui/main.qml:303
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr ""
+msgstr "في انتظار استلام إخطار فوري…"
 
 #: ui/main.qml:310
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr ""
+msgstr "اختبر"
 
 #: ui/main.qml:327
 #, kde-format
