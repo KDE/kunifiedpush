@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kunifiedpush package.
 #
-# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
+# SPDX-FileCopyrightText: 2024, 2025 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-13 00:40+0000\n"
-"PO-Revision-Date: 2024-10-30 14:33+0200\n"
+"PO-Revision-Date: 2025-04-17 16:00+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,27 +16,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr ""
+msgstr "Darbība beidzās ar noildzi."
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "Pašpiegādes paziņojuma paštests."
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr ""
+msgstr "Neizdevās iegūt pašpiegādes paziņojuma galapunktu."
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr ""
+msgstr "Saņemtajam paziņojumam nav gaidītais saturs."
 
 #: ui/main.qml:28
 #, kde-format
@@ -66,26 +66,22 @@ msgstr ""
 "<b>Dīkstāvē</b><br>Neviena programma neizmanto pašpiegādes paziņojumus."
 
 #: ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "<b>Offline</b><br>Network connection to the server could not be "
-#| "established."
+#, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
-msgstr "<b>Nesaistē</b><br>Nevar izveidot savienojumu ar serveri."
+msgstr "<b>Nesaistē</b><br>Neizdodas izveidot savienojumu ar serveri (%1)."
 
 #: ui/main.qml:66
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
-msgstr "<b>Nesaistē</b><br>Nevar izveidot savienojumu ar serveri."
+msgstr "<b>Nesaistē</b><br>Neizdodas izveidot savienojumu ar serveri."
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "<b>Offline</b><br>Could not authenticate at the server."
+#, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>Nesaistē</b><br>Neizdevās autentificēties servera pusē."
+msgstr "<b>Nesaistē</b><br>Neizdevās autentificēties servera pusē (%1)."
 
 #: ui/main.qml:77
 #, kde-format
@@ -100,7 +96,7 @@ msgstr "<b>Nesaistē</b><br>Pašpiegādes paziņojumi vēl nav sagatavoti darbam
 #: ui/main.qml:114
 #, kde-format
 msgid "Push provider:"
-msgstr "Pašpiegādes paziņojumu sniedzējs:"
+msgstr "Pašpiegādes paziņojumu nodrošinātājs:"
 
 #: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:249
 #, kde-format
@@ -125,33 +121,33 @@ msgstr "Autentificēties"
 #: ui/main.qml:295
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr ""
+msgstr "Pašpiegādes paziņojumi darbojas pareizi"
 
 #: ui/main.qml:297
 #, kde-format
 msgid "Push notification test failed."
-msgstr ""
+msgstr "Pašpiegādes paziņojums tests neizdevās."
 
 #: ui/main.qml:299
 #, kde-format
 msgid "Registering with push server…"
-msgstr ""
+msgstr "Reģistrējas pašpiegādes serverī…"
 
 #: ui/main.qml:301
 #, kde-format
 msgid "Sending push notification…"
-msgstr ""
+msgstr "Sūta pašpiegādes paziņojumu…"
 
 #: ui/main.qml:303
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr ""
+msgstr "Gaida pašpiegādes paziņojumu…"
 
 #: ui/main.qml:310
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr ""
+msgstr "Pārbaudīt"
 
 #: ui/main.qml:327
 #, kde-format
