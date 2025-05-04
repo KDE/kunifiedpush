@@ -32,6 +32,7 @@ public:
         NoError, ///< operation succeeded
         ProviderRejected, ///< communication worked, but the provider refused to complete the operation
         TransientNetworkError, ///< temporary network error, try again
+        ActionRequired, ///< user interaction is required to resolve the problem, e.g. no push server set up
     };
     Q_ENUM(Error)
 

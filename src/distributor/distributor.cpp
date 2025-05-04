@@ -279,6 +279,7 @@ void Distributor::clientRegistered(const Client &client, AbstractPushProvider::E
         break;
     }
     case AbstractPushProvider::ProviderRejected:
+    case AbstractPushProvider::ActionRequired:
     {
         switch (client.version) {
             case Client::UnifiedPushVersion::v1:
@@ -288,7 +289,7 @@ void Distributor::clientRegistered(const Client &client, AbstractPushProvider::E
             {
                 QVariantMap args;
                 args.insert(UP_ARG_SUCCESS, QString::fromLatin1(UP_REGISTER_RESULT_FAILURE));
-                args.insert(UP_ARG_REASON, QString::fromLatin1(UP_REGISTER_FAILURE_INTERNAL_ERROR));
+                args.insert(UP_ARG_REASON, QString::fromLatin1(error == AbstractPushProvider::ActionRequired ? UP_REGISTER_FAILURE_ACTION_REQUIRED : UP_REGISTER_FAILURE_INTERNAL_ERROR));
                 // TODO when the client side ever actually uses errorMsg we could return this here in addition
                 // in a custom argument
                 m_currentCommand.reply << args;
@@ -314,6 +315,7 @@ void Distributor::clientUnregistered(const Client &client, AbstractPushProvider:
         }
         [[fallthrough]];
     case AbstractPushProvider::ProviderRejected:
+    case AbstractPushProvider::ActionRequired:
         if (m_currentCommand.type != Command::SilentUnregister) {
             QSettings settings;
             settings.remove(client.token);
@@ -470,6 +472,7 @@ bool Distributor::setupPushProvider(bool newSetup)
     connect(m_pushProvider.get(), &AbstractPushProvider::disconnected, this, &Distributor::providerDisconnected);
     connect(m_pushProvider.get(), &AbstractPushProvider::messageAcknowledged, this, &Distributor::providerMessageAcknowledged);
     connect(m_pushProvider.get(), &AbstractPushProvider::urgencyChanged, this, &Distributor::providerUrgencyChanged);
+    setStatus(DistributorStatus::Idle);
     return true;
 }
 
@@ -524,7 +527,12 @@ void Distributor::doProcessNextCommand()
             processNextCommand();
             break;
         case Command::Register:
-            m_pushProvider->registerClient(m_currentCommand.client);
+            // abort registration if there is no push server configured
+            if (!m_pushProvider || m_status == DistributorStatus::NoSetup) {
+                clientRegistered(m_currentCommand.client, AbstractPushProvider::ActionRequired, {});
+            } else {
+                m_pushProvider->registerClient(m_currentCommand.client);
+            }
             break;
         case Command::Unregister:
         case Command::ForceUnregister:
@@ -532,7 +540,12 @@ void Distributor::doProcessNextCommand()
             m_pushProvider->unregisterClient(m_currentCommand.client);
             break;
         case Command::Connect:
-            m_pushProvider->connectToProvider(m_urgency);
+            if (!m_pushProvider || m_status == DistributorStatus::NoSetup) {
+                m_currentCommand = {};
+                processNextCommand();
+            } else {
+                m_pushProvider->connectToProvider(m_urgency);
+            }
             break;
         case Command::Disconnect:
             m_pushProvider->disconnectFromProvider();
