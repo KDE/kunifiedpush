@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kunifiedpush package.
-# Tommi Nieminen <translator@legisign.org>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2025 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-13 00:40+0000\n"
-"PO-Revision-Date: 2023-12-11 18:03+0200\n"
+"PO-Revision-Date: 2025-05-29 19:12+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,26 +15,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr ""
+msgstr "Toimenpide aikakatkaistiin."
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "Push-ilmoituksen itsetestaus."
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr ""
+msgstr "Push-ilmoituksen päätepistettä ei saatu."
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr ""
+msgstr "Vastaanotetun ilmoituksen sisältö ei ole odotettu."
 
 #: ui/main.qml:28
 #, kde-format
@@ -63,15 +64,13 @@ msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr "<b>Jouten</b><br>Ei push-ilmoituksia käyttäviä sovelluksia."
 
 #: ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "<b>Offline</b><br>Network connection to the server could not be "
-#| "established."
+#, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
 msgstr ""
-"<b>Ei käytössä</b><br>Palvelimeen ei saatu muodostetuksi verkkoyhteyttä."
+"<b>Ei verkkoyhteyttä</b><br>Palvelimeen ei saatu muodostetuksi "
+"verkkoyhteyttä (%1)."
 
 #: ui/main.qml:66
 #, kde-format
@@ -81,10 +80,10 @@ msgstr ""
 "<b>Ei käytössä</b><br>Palvelimeen ei saatu muodostetuksi verkkoyhteyttä."
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "<b>Offline</b><br>Could not authenticate at the server."
+#, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>Ei käytössä</b><br>Palvelimelle tunnistautuminen epäonnistui."
+msgstr ""
+"<b>Ei verkkoyhteyttä</b><br>Palvelimeen tunnistautuminen epäonnistui (%1)."
 
 #: ui/main.qml:77
 #, kde-format
@@ -124,33 +123,33 @@ msgstr "Tunnistaudu"
 #: ui/main.qml:295
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr ""
+msgstr "Push-ilmoitukset toimivat oikein."
 
 #: ui/main.qml:297
 #, kde-format
 msgid "Push notification test failed."
-msgstr ""
+msgstr "Push-ilmoitustesti epäonnistui."
 
 #: ui/main.qml:299
 #, kde-format
 msgid "Registering with push server…"
-msgstr ""
+msgstr "Rekisteröidytään push-palvelimeen…"
 
 #: ui/main.qml:301
 #, kde-format
 msgid "Sending push notification…"
-msgstr ""
+msgstr "Lähetetään push-ilmoitusta…"
 
 #: ui/main.qml:303
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr ""
+msgstr "Odotetaan push-ilmoituksen vastaanottamista…"
 
 #: ui/main.qml:310
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr ""
+msgstr "Kokeile"
 
 #: ui/main.qml:327
 #, kde-format
