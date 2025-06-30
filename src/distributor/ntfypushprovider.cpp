@@ -78,6 +78,11 @@ void NtfyPushProvider::registerClient(const Client &client)
     }
     path += topic;
     endpoint.setPath(path);
+
+    QUrlQuery query;
+    query.addQueryItem(u"up"_s, u"1"_s);
+    endpoint.setQuery(query);
+
     newClient.endpoint = endpoint.toString();
 
     m_topics.push_back(topic);
