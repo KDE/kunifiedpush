@@ -15,6 +15,7 @@
 #include <QUrlQuery>
 #include <QUuid>
 
+using namespace Qt::Literals;
 using namespace KUnifiedPush;
 
 NtfyPushProvider::NtfyPushProvider(QObject *parent)
