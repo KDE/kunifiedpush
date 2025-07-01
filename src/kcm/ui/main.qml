@@ -230,6 +230,13 @@ KCM.ScrollViewKCM {
                         Kirigami.FormData.label: i18n("Url:")
                         text: root.pushProviderConfig['Url'] ?? ''
                     }
+                    Kirigami.InlineMessage {
+                        Kirigami.FormData.isSection: true
+                        visible: urlField.text.startsWith("https://ntfy.sh")
+                        icon.name: "data-warning"
+                        text: i18n("Note that ntfy.sh is rate-limiting applications. It will therefore not work with applications with a larger amount of users, such as public Matrix or Mastodon instances.")
+                        type: Kirigami.MessageType.Warning
+                    }
                 }
             }
             Component {
