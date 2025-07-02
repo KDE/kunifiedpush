@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-13 00:40+0000\n"
+"POT-Creation-Date: 2025-07-02 07:04+0000\n"
 "PO-Revision-Date: 2025-05-22 13:16+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -103,7 +103,7 @@ msgstr ""
 msgid "Push provider:"
 msgstr "Fornecedor:"
 
-#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:249
+#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
 #, kde-format
 msgid "Url:"
 msgstr "URL:"
@@ -123,54 +123,62 @@ msgstr "Nome de usuaria:"
 msgid "Authenticate"
 msgstr "Autenticar"
 
-#: ui/main.qml:295
+#: ui/main.qml:237
+#, kde-format
+msgid ""
+"Note that ntfy.sh is rate-limiting applications. It will therefore not work "
+"with applications with a larger amount of users, such as public Matrix or "
+"Mastodon instances."
+msgstr ""
+
+#: ui/main.qml:302
 #, kde-format
 msgid "Push notifications are working correctly."
 msgstr "As notificacións levadas funcionan."
 
-#: ui/main.qml:297
+#: ui/main.qml:304
 #, kde-format
 msgid "Push notification test failed."
 msgstr "As notificacións levadas non pasaron a proba."
 
-#: ui/main.qml:299
+#: ui/main.qml:306
 #, kde-format
 msgid "Registering with push server…"
 msgstr "Rexistrando co servidor de notificacións…"
 
-#: ui/main.qml:301
+#: ui/main.qml:308
 #, kde-format
 msgid "Sending push notification…"
 msgstr "Enviando unha notificación levada…"
 
-#: ui/main.qml:303
+#: ui/main.qml:310
 #, kde-format
 msgid "Waiting to receive push notification…"
 msgstr "Agardando a recibir a notificación levada…"
 
-#: ui/main.qml:310
+#: ui/main.qml:317
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
 msgstr "Probar"
 
-#: ui/main.qml:327
+#: ui/main.qml:334
 #, kde-format
 msgid "Applications"
 msgstr "Aplicacións"
 
-#: ui/main.qml:357
+#: ui/main.qml:364
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "Retirar a aplicación do rexistro de notificacións levadas."
 
-#: ui/main.qml:364
+#: ui/main.qml:371
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
 msgstr "Retirar a aplicación do rexistro"
 
-#: ui/main.qml:365
+#: ui/main.qml:372
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-13 00:40+0000\n"
+"POT-Creation-Date: 2025-07-02 07:04+0000\n"
 "PO-Revision-Date: 2025-04-15 23:51+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -95,7 +95,7 @@ msgstr "<b>오프라인</b><br>푸시 알림이 설정되지 않았습니다."
 msgid "Push provider:"
 msgstr "푸시 제공자:"
 
-#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:249
+#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
 #, kde-format
 msgid "Url:"
 msgstr "URL:"
@@ -115,54 +115,62 @@ msgstr "사용자 이름:"
 msgid "Authenticate"
 msgstr "인증"
 
-#: ui/main.qml:295
+#: ui/main.qml:237
+#, kde-format
+msgid ""
+"Note that ntfy.sh is rate-limiting applications. It will therefore not work "
+"with applications with a larger amount of users, such as public Matrix or "
+"Mastodon instances."
+msgstr ""
+
+#: ui/main.qml:302
 #, kde-format
 msgid "Push notifications are working correctly."
 msgstr "푸시 알림이 올바르게 작동합니다."
 
-#: ui/main.qml:297
+#: ui/main.qml:304
 #, kde-format
 msgid "Push notification test failed."
 msgstr "푸시 알림 시험이 실패했습니다."
 
-#: ui/main.qml:299
+#: ui/main.qml:306
 #, kde-format
 msgid "Registering with push server…"
 msgstr "푸시 서버에 등록 중…"
 
-#: ui/main.qml:301
+#: ui/main.qml:308
 #, kde-format
 msgid "Sending push notification…"
 msgstr "푸시 알림 전송 중…"
 
-#: ui/main.qml:303
+#: ui/main.qml:310
 #, kde-format
 msgid "Waiting to receive push notification…"
 msgstr "푸시 알림 수신 대기 중…"
 
-#: ui/main.qml:310
+#: ui/main.qml:317
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
 msgstr "시험"
 
-#: ui/main.qml:327
+#: ui/main.qml:334
 #, kde-format
 msgid "Applications"
 msgstr "앱"
 
-#: ui/main.qml:357
+#: ui/main.qml:364
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "앱의 푸시 알림 등록 해제"
 
-#: ui/main.qml:364
+#: ui/main.qml:371
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
 msgstr "앱 등록 해제"
 
-#: ui/main.qml:365
+#: ui/main.qml:372
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
