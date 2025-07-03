@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-02 07:04+0000\n"
-"PO-Revision-Date: 2025-04-09 04:18+0200\n"
+"PO-Revision-Date: 2025-07-02 17:30+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #: selftest.cpp:34
 #, kde-format
@@ -123,6 +123,9 @@ msgid ""
 "with applications with a larger amount of users, such as public Matrix or "
 "Mastodon instances."
 msgstr ""
+"გაითვალისწინეთ, რომ ntfy.sh სიჩქარის შეზღუდვის აპლიკაციაა. ის არ იმუშავებს "
+"აპლიკაციებთან დიდი რაოდენობის მომხმარებლებით, როგორებიცაა საჯარო Matrix-ის, "
+"ან Mastodon-ის სერვერები."
 
 #: ui/main.qml:302
 #, kde-format
