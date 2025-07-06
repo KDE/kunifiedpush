@@ -14,8 +14,9 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/kunifiedpush/kcm_push_notifications.pot\n"
-"X-Crowdin-File-ID: 48370\n"
+"X-Crowdin-File: /kf6-stable/messages/kunifiedpush/kcm_push_notifications."
+"pot\n"
+"X-Crowdin-File-ID: 56452\n"
 
 #: selftest.cpp:34
 #, kde-format
@@ -122,6 +123,8 @@ msgid ""
 "with applications with a larger amount of users, such as public Matrix or "
 "Mastodon instances."
 msgstr ""
+"请注意：ntfy.sh 对应用程序进行了速率限制。因此，它无法与用户数量较多的应用程"
+"序配合使用，例如公共的 Matrix 或 Mastodon 实例。"
 
 #: ui/main.qml:302
 #, kde-format
