@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-02 07:04+0000\n"
-"PO-Revision-Date: 2025-04-10 14:36+0200\n"
+"PO-Revision-Date: 2025-07-03 10:58+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.04.2\n"
 
 #: selftest.cpp:34
 #, kde-format
@@ -131,6 +131,9 @@ msgid ""
 "with applications with a larger amount of users, such as public Matrix or "
 "Mastodon instances."
 msgstr ""
+"Veuillez noter que ntfy.sh est une application limitant le débit. Elle ne "
+"fonctionnera donc pas avec les applications ayant un très grand nombre "
+"d'utilisateurs, telles que les instances publiques de Matrix ou de Mastodon."
 
 #: ui/main.qml:302
 #, kde-format
