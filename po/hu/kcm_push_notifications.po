@@ -1,46 +1,46 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the kunifiedpush package.
+#
+# SPDX-FileCopyrightText: 2025 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeorg\n"
+"Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-02 07:04+0000\n"
-"PO-Revision-Date: 2024-04-22 15:58\n"
-"Last-Translator: \n"
-"Language-Team: Chinese Simplified\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2025-07-13 21:16+0200\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Crowdin-Project: kdeorg\n"
-"X-Crowdin-Project-ID: 269464\n"
-"X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/kunifiedpush/kcm_push_notifications.pot\n"
-"X-Crowdin-File-ID: 48370\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr "操作超时。"
+msgstr "A művelet időtúllépés miatt megszakadt."
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr "推送通知自检。"
+msgstr "Leküldéses értesítés önellenőrzés."
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr "无法获取推送通知端点。"
+msgstr "Nem sikerült elérni a leküldéses értesítés végpontját."
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr "收到的通知内容与预期不符。"
+msgstr "A kapott értesítés nem a várt tartalommal rendelkezik."
 
 #: ui/main.qml:28
 #, kde-format
 msgid "There is no push notification service running!"
-msgstr "没有正在运行的通知推送服务。"
+msgstr "Nincs futó leküldéses értesítési szolgáltatás."
 
 #: ui/main.qml:37
 #, kde-format
@@ -48,72 +48,79 @@ msgid ""
 "There is a 3rd party push notification service running. Push notifications "
 "are available, but cannot be configured here."
 msgstr ""
-"有第三方的通知推送服务正在运行。您可以通过该服务进行通知推送，但无法在此页面"
-"对它进行配置。"
+"Egy harmadik féltől származó leküldéses értesítési szolgáltatás fut. A "
+"leküldéses értesítések elérhetők, de itt nem konfigurálhatók."
 
 #: ui/main.qml:46
 #, kde-format
 msgid ""
 "<b>Online</b><br>Connected to the push notification server and operational."
-msgstr "<b>在线</b><br>已连接到通知推送服务器并运行。"
+msgstr ""
+"<b>Online</b><br>Kapcsolódva a leküldéses értesítési kiszolgálóhoz és "
+"működőképes."
 
 #: ui/main.qml:55
 #, kde-format
 msgid "<b>Idle</b><br>There are no applications using push notifications."
-msgstr "<b>空闲</b><br>没有正在使用通知推送的应用程序。"
+msgstr ""
+"<b>Tétlen</b><br>Nincsenek leküldéses értesítéseket használó alkalmazások."
 
 #: ui/main.qml:65
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
-msgstr "<b>脱机</b><br>无法与服务器建立网络连接 (%1)。"
+msgstr ""
+"<b>Offline</b><br>Nem sikerült hálózati kapcsolatot létesíteni a "
+"kiszolgálóval (%1)."
 
 #: ui/main.qml:66
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
-msgstr "<b>脱机</b><br>无法建立到服务器的网络连接。"
+msgstr ""
+"<b>Offline</b><br>Nem sikerült hálózati kapcsolatot létesíteni a "
+"kiszolgálóval."
 
 #: ui/main.qml:76
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>脱机</b><br>无法在服务器上进行身份验证 (%1)。"
+msgstr "<b>Offline</b><br>Nem sikerült hitelesíteni a kiszolgálót (%1)."
 
 #: ui/main.qml:77
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
-msgstr "<b>脱机</b><br>无法在服务器上进行身份验证。"
+msgstr "<b>Offline</b><br>Nem sikerült hitelesíteni a kiszolgálót."
 
 #: ui/main.qml:86
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
-msgstr "<b>脱机</b><br>通知推送服务尚未进行配置。"
+msgstr "<b>Offline</b><br>A leküldéses értesítések még nincsenek beállítva."
 
 #: ui/main.qml:114
 #, kde-format
 msgid "Push provider:"
-msgstr "推送提供者："
+msgstr "Szolgáltató:"
 
 #: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
 #, kde-format
 msgid "Url:"
-msgstr "URL："
+msgstr "URL:"
 
 #: ui/main.qml:159
 #, kde-format
 msgid "Client token:"
-msgstr "客户令牌："
+msgstr "Kliens token:"
 
 #: ui/main.qml:186
 #, kde-format
 msgid "User name:"
-msgstr "用户名："
+msgstr "Felhasználónév:"
 
 #: ui/main.qml:192
 #, kde-format
 msgid "Authenticate"
-msgstr "身份认证"
+msgstr "Hitelesítés"
 
 #: ui/main.qml:237
 #, kde-format
@@ -122,58 +129,59 @@ msgid ""
 "with applications with a larger amount of users, such as public Matrix or "
 "Mastodon instances."
 msgstr ""
-"请注意：ntfy.sh 对应用程序进行了速率限制。因此，它无法与用户数量较多的应用程"
-"序配合使用，例如公共的 Matrix 或 Mastodon 实例。"
+"Vegye figyelembe, hogy az ntfy.sh sebességkorlátozó alkalmazás. Ezért nem "
+"fog működni nagyobb számú felhasználóval rendelkező alkalmazásokkal, mint "
+"például a nyilvános Matrix vagy a Mastodon példányok."
 
 #: ui/main.qml:302
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr "推送通知工作正常。"
+msgstr "A leküldéses értesítések megfelelően működnek."
 
 #: ui/main.qml:304
 #, kde-format
 msgid "Push notification test failed."
-msgstr "推送通知测试失败。"
+msgstr "A leküldéses értesítés ellenőrzése sikertelen."
 
 #: ui/main.qml:306
 #, kde-format
 msgid "Registering with push server…"
-msgstr "正在向推送服务器注册…"
+msgstr "Regisztráció a kiszolgálón…"
 
 #: ui/main.qml:308
 #, kde-format
 msgid "Sending push notification…"
-msgstr "正在推送通知…"
+msgstr "Leküldéses értesítés küldése…"
 
 #: ui/main.qml:310
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr "正在等待接收推送通知…"
+msgstr "Várakozás leküldéses értesítés fogadására…"
 
 #: ui/main.qml:317
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr "测试"
+msgstr "Teszt"
 
 #: ui/main.qml:334
 #, kde-format
 msgid "Applications"
-msgstr "应用程序"
+msgstr "Alkalmazások"
 
 #: ui/main.qml:364
 #, kde-format
 msgid "Unregister application from push notifications"
-msgstr "取消注册通知推送服务中的应用程序"
+msgstr "Alkalmazás leiratkozása a leküldéses értesítésekről"
 
 #: ui/main.qml:371
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
-msgstr "取消注册应用程序"
+msgstr "Alkalmazás leiratkozása"
 
 #: ui/main.qml:372
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
-msgstr "确定要取消注册“%1”吗？"
+msgstr "Biztosan szeretné, ha a(z) „%1” leiratkozna?"
