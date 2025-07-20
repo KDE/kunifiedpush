@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-02 07:04+0000\n"
-"PO-Revision-Date: 2025-04-13 16:52+0530\n"
+"PO-Revision-Date: 2025-07-19 15:39+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #: selftest.cpp:34
 #, kde-format
@@ -122,6 +122,8 @@ msgid ""
 "with applications with a larger amount of users, such as public Matrix or "
 "Mastodon instances."
 msgstr ""
+"ntfy.sh செயலிகளுக்கு விகிதவரம்பை விதிப்பதால் பல பயனர்கள் பயன்படுத்தும் செயலிகளுடன் (எ."
+"கா. பொதுவான மேட்ரிக்ஸு அல்லது மாஸ்டொடன் சேவையகங்கள்) வேலை செய்யாமல் போகலாம்."
 
 #: ui/main.qml:302
 #, kde-format
