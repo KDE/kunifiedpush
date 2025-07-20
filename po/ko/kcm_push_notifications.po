@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-02 07:04+0000\n"
-"PO-Revision-Date: 2025-04-15 23:51+0200\n"
+"PO-Revision-Date: 2025-07-20 01:42+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: selftest.cpp:34
 #, kde-format
@@ -122,6 +122,8 @@ msgid ""
 "with applications with a larger amount of users, such as public Matrix or "
 "Mastodon instances."
 msgstr ""
+"ntfy.sh에서는 앱별 요청 수에 제한을 적용합니다. 공개 Matrix나 마스토돈 인스턴"
+"스와 같이 사용자가 많은 앱이라면 작동하지 않을 수도 있습니다."
 
 #: ui/main.qml:302
 #, kde-format
