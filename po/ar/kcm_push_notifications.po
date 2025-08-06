@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-02 07:04+0000\n"
-"PO-Revision-Date: 2025-07-03 09:57+0400\n"
+"PO-Revision-Date: 2025-08-05 12:58+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -26,7 +26,7 @@ msgstr "انتهى وقت العملية."
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr "اختبار للإخطار فوري."
+msgstr "اختبار للإشعار فوري."
 
 #: selftest.cpp:73
 #, kde-format
@@ -36,7 +36,7 @@ msgstr "لم يتمكن من الحصول على نقطة نهاية الإشع�
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr "الإخطار المستلم لا يحتوي على المحتوى المتوقع."
+msgstr "الإشعار المستلم لا يحتوي على المحتوى المتوقع."
 
 #: ui/main.qml:28
 #, kde-format
@@ -145,12 +145,12 @@ msgstr "يسجّل في خادم الإشعارات…"
 #: ui/main.qml:308
 #, kde-format
 msgid "Sending push notification…"
-msgstr "يرسل إخطار فوري…"
+msgstr "يرسل إشعار فوري…"
 
 #: ui/main.qml:310
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr "في انتظار استلام إخطار فوري…"
+msgstr "في انتظار استلام إشعار فوري…"
 
 #: ui/main.qml:317
 #, kde-format
