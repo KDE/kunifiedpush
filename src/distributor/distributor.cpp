@@ -515,7 +515,7 @@ void Distributor::processNextCommand()
 
 void Distributor::doProcessNextCommand()
 {
-    if (hasCurrentCommand() || m_commandQueue.empty() || !isNetworkAvailable()) {
+    if (hasCurrentCommand() || m_commandQueue.empty() || (!isNetworkAvailable() && m_commandQueue.front().type != Command::Disconnect)) {
         return;
     }
 
