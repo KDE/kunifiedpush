@@ -74,6 +74,7 @@ private:
     void providerMessageAcknowledged(const Client &client, const QString &messageIdentifier);
     void providerUrgencyChanged();
     void retryTimeout();
+    void reachabilityChanged();
 
     [[nodiscard]] QStringList clientTokens() const;
 
