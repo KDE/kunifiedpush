@@ -42,7 +42,7 @@ Distributor::Distributor(QObject *parent)
 
     // setup network status tracking
     if (QNetworkInformation::loadBackendByFeatures(QNetworkInformation::Feature::Reachability)) {
-        connect(QNetworkInformation::instance(), &QNetworkInformation::reachabilityChanged, this, &Distributor::processNextCommand);
+        connect(QNetworkInformation::instance(), &QNetworkInformation::reachabilityChanged, this, &Distributor::reachabilityChanged);
         connect(QNetworkInformation::instance(), &QNetworkInformation::isMeteredChanged, this, [this]{ setUrgency(determineUrgency()); });
     } else {
         qCWarning(Log) << "No network state information available!" << QNetworkInformation::availableBackends();
@@ -851,6 +851,21 @@ void Distributor::retryTimeout()
         m_currentCommand = {};
         m_retryTimer.setInterval(m_retryTimer.interval() * RETRY_BACKOFF_FACTOR);
     }
+    processNextCommand();
+}
+
+void Distributor::reachabilityChanged()
+{
+    qCDebug(Log) << QNetworkInformation::instance()->reachability();
+    if (isNetworkAvailable() && !m_clients.empty() && status() != DistributorStatus::Connected) {
+        Command cmd{ .type = Command::Connect };
+        m_commandQueue.push_back(std::move(cmd));
+    }
+    if (!isNetworkAvailable() && m_status == DistributorStatus::Connected) {
+        Command cmd{ .type = Command::Disconnect };
+        m_commandQueue.push_back(std::move(cmd));
+    }
+
     processNextCommand();
 }
 
