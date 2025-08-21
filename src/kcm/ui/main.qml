@@ -151,7 +151,7 @@ KCM.ScrollViewKCM {
                     twinFormLayouts: [topForm]
                     QQC2.TextField {
                         id: urlField
-                        Kirigami.FormData.label: i18n("Url:")
+                        Kirigami.FormData.label: i18n("URL:")
                         text: root.pushProviderConfig['Url'] ?? ''
                     }
                     QQC2.TextField {
@@ -178,7 +178,7 @@ KCM.ScrollViewKCM {
                     twinFormLayouts: [topForm]
                     QQC2.TextField {
                         id: urlField
-                        Kirigami.FormData.label: i18n("Url:")
+                        Kirigami.FormData.label: i18n("URL:")
                         text: root.pushProviderConfig['Url'] ?? ''
                     }
                     QQC2.Label {
@@ -227,7 +227,7 @@ KCM.ScrollViewKCM {
                     twinFormLayouts: [topForm]
                     QQC2.TextField {
                         id: urlField
-                        Kirigami.FormData.label: i18n("Url:")
+                        Kirigami.FormData.label: i18n("URL:")
                         text: root.pushProviderConfig['Url'] ?? ''
                     }
                     Kirigami.InlineMessage {
@@ -253,7 +253,7 @@ KCM.ScrollViewKCM {
                     twinFormLayouts: [topForm]
                     QQC2.TextField {
                         id: urlField
-                        Kirigami.FormData.label: i18n("Url:")
+                        Kirigami.FormData.label: i18n("URL:")
                         text: root.pushProviderConfig['Url'] ?? 'https://push.services.mozilla.com'
                     }
                 }
