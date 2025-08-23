@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kunifiedpush package.
 #
-# Alexander Yavorsky <kekcuha@gmail.com>, 2022, 2024.
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Alexander Yavorsky <kekcuha@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-02 07:04+0000\n"
-"PO-Revision-Date: 2024-01-04 21:32+0300\n"
+"POT-Creation-Date: 2025-08-23 00:41+0000\n"
+"PO-Revision-Date: 2025-08-22 18:51+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -16,27 +16,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.08.3\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr ""
+msgstr "Время ожидания завершения операции истекло."
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "Самотестирование push-уведомления."
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr ""
+msgstr "Не удалось получить конечную точку push-уведомления."
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr ""
+msgstr "Полученное уведомление не содержит ожидаемых данных."
 
 #: ui/main.qml:28
 #, kde-format
@@ -64,14 +64,11 @@ msgid "<b>Idle</b><br>There are no applications using push notifications."
 msgstr "<b>Ожидание</b><br>Ни одно приложение не использует push-уведомления."
 
 #: ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "<b>Offline</b><br>Network connection to the server could not be "
-#| "established."
+#, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
-msgstr "<b>Не в сети</b><br>Не удалось подключиться к серверу."
+msgstr "<b>Не в сети</b><br>Не удалось подключиться к серверу (%1)."
 
 #: ui/main.qml:66
 #, kde-format
@@ -80,10 +77,10 @@ msgid ""
 msgstr "<b>Не в сети</b><br>Не удалось подключиться к серверу."
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "<b>Offline</b><br>Could not authenticate at the server."
+#, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>Не в сети</b><br>Не удалось пройти проверку подлинности на сервере."
+msgstr ""
+"<b>Не в сети</b><br>Не удалось пройти проверку подлинности на сервере (%1)."
 
 #: ui/main.qml:77
 #, kde-format
@@ -102,8 +99,8 @@ msgstr "Поставщик push:"
 
 #: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
 #, kde-format
-msgid "Url:"
-msgstr "URL:"
+msgid "URL:"
+msgstr ""
 
 #: ui/main.qml:159
 #, kde-format
@@ -127,37 +124,40 @@ msgid ""
 "with applications with a larger amount of users, such as public Matrix or "
 "Mastodon instances."
 msgstr ""
+"Примите к сведению, что ntfy.sh устанавливает ограничения на частоту "
+"обращений, и не поддерживает работу с приложениями с большим числом "
+"пользователей, такими как общедоступные севера Matrix или Mastodon."
 
 #: ui/main.qml:302
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr ""
+msgstr "Push-уведомления настроены и работают."
 
 #: ui/main.qml:304
 #, kde-format
 msgid "Push notification test failed."
-msgstr ""
+msgstr "Поверка работы push-уведомлений завершилась с ошибкой."
 
 #: ui/main.qml:306
 #, kde-format
 msgid "Registering with push server…"
-msgstr ""
+msgstr "Регистрация на сервере push-уведомлений…"
 
 #: ui/main.qml:308
 #, kde-format
 msgid "Sending push notification…"
-msgstr ""
+msgstr "Отправка push-уведомления…"
 
 #: ui/main.qml:310
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr ""
+msgstr "Ожидание получения push-уведомления…"
 
 #: ui/main.qml:317
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr ""
+msgstr "Проверка"
 
 #: ui/main.qml:334
 #, kde-format
@@ -180,3 +180,6 @@ msgstr "Отключение использования push-уведомлен�
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
 msgstr "Отключить использование push-уведомлений приложением «%1»?"
+
+#~ msgid "Url:"
+#~ msgstr "URL:"

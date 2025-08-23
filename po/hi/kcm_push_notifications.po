@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-02 07:04+0000\n"
+"POT-Creation-Date: 2025-08-23 00:41+0000\n"
 "PO-Revision-Date: 2024-12-15 17:36+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -101,8 +101,8 @@ msgstr "पुश प्रदाता:"
 
 #: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
 #, kde-format
-msgid "Url:"
-msgstr "यूआरएल:"
+msgid "URL:"
+msgstr ""
 
 #: ui/main.qml:159
 #, kde-format
@@ -179,3 +179,6 @@ msgstr "आवेदन रद्द करें"
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
 msgstr "क्या आप वाकई '%1' का पंजीकरण रद्द करना चाहते हैं?"
+
+#~ msgid "Url:"
+#~ msgstr "यूआरएल:"

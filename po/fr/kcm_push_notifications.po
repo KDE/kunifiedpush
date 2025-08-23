@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-02 07:04+0000\n"
+"POT-Creation-Date: 2025-08-23 00:41+0000\n"
 "PO-Revision-Date: 2025-07-03 10:58+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -106,8 +106,8 @@ msgstr "Fournisseur d'envoi :"
 
 #: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
 #, kde-format
-msgid "Url:"
-msgstr "URL :"
+msgid "URL:"
+msgstr ""
 
 #: ui/main.qml:159
 #, kde-format
@@ -187,3 +187,6 @@ msgstr "Supprimer l'inscription de l'application"
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
 msgstr "Voulez-vous vraiment supprimer l'inscription de « %1 » ?"
+
+#~ msgid "Url:"
+#~ msgstr "URL :"

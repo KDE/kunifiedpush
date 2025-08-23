@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-02 07:04+0000\n"
+"POT-Creation-Date: 2025-08-23 00:41+0000\n"
 "PO-Revision-Date: 2024-03-17 11:05+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -105,8 +105,8 @@ msgstr "Varslingsteneste:"
 
 #: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
 #, kde-format
-msgid "Url:"
-msgstr "Adresse:"
+msgid "URL:"
+msgstr ""
 
 #: ui/main.qml:159
 #, kde-format
@@ -183,3 +183,6 @@ msgstr "Avregistrer program"
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
 msgstr "Er du sikker på at du vil avregistrera «%1»?"
+
+#~ msgid "Url:"
+#~ msgstr "Adresse:"

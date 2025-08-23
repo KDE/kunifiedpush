@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-02 07:04+0000\n"
+"POT-Creation-Date: 2025-08-23 00:41+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -97,8 +97,8 @@ msgstr "推送提供者："
 
 #: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
 #, kde-format
-msgid "Url:"
-msgstr "URL："
+msgid "URL:"
+msgstr ""
 
 #: ui/main.qml:159
 #, kde-format
@@ -177,3 +177,6 @@ msgstr "取消注册应用程序"
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
 msgstr "确定要取消注册“%1”吗？"
+
+#~ msgid "Url:"
+#~ msgstr "URL："
