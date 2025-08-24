@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-23 00:41+0000\n"
-"PO-Revision-Date: 2025-07-03 10:37+0200\n"
+"PO-Revision-Date: 2025-08-23 07:14+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -102,7 +102,7 @@ msgstr "Ponudnik porivanja:"
 #: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
 #, kde-format
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: ui/main.qml:159
 #, kde-format

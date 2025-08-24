@@ -4,13 +4,13 @@
 # version 3 or later versions approved by the membership of KDE e.V.
 # or the same license as the source of its messages in English.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2022, 2023, 2025.
+# SPDX-FileCopyrightText: 2022, 2023, 2025 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-23 00:41+0000\n"
-"PO-Revision-Date: 2025-07-02 11:42+0200\n"
+"PO-Revision-Date: 2025-08-23 10:40+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #: selftest.cpp:34
 #, kde-format
@@ -111,7 +111,7 @@ msgstr "Proveïdor de notificacions automàtiques:"
 #: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
 #, kde-format
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: ui/main.qml:159
 #, kde-format
