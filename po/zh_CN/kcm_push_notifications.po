@@ -177,6 +177,3 @@ msgstr "取消注册应用程序"
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
 msgstr "确定要取消注册“%1”吗？"
-
-#~ msgid "Url:"
-#~ msgstr "URL："
