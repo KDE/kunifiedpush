@@ -98,7 +98,7 @@ msgstr "推送提供者："
 #: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
 #, kde-format
 msgid "URL:"
-msgstr ""
+msgstr "URL："
 
 #: ui/main.qml:159
 #, kde-format
