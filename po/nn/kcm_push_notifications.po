@@ -183,6 +183,3 @@ msgstr "Avregistrer program"
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
 msgstr "Er du sikker på at du vil avregistrera «%1»?"
-
-#~ msgid "Url:"
-#~ msgstr "Adresse:"
