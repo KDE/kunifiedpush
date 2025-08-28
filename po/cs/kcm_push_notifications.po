@@ -96,7 +96,7 @@ msgstr "Poskytovatel Push:"
 #: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
 #, kde-format
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: ui/main.qml:159
 #, kde-format
@@ -173,6 +173,3 @@ msgstr "Zrušit registraci aplikace"
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
 msgstr "Opravdu si přejete zrušit registraci'%1'?"
-
-#~ msgid "Url:"
-#~ msgstr "Url:"

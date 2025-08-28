@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-23 00:41+0000\n"
-"PO-Revision-Date: 2025-04-17 16:00+0300\n"
+"PO-Revision-Date: 2025-08-25 12:25+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #: selftest.cpp:34
 #, kde-format
@@ -101,7 +101,7 @@ msgstr "Pašpiegādes paziņojumu nodrošinātājs:"
 #: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
 #, kde-format
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: ui/main.qml:159
 #, kde-format
@@ -125,6 +125,9 @@ msgid ""
 "with applications with a larger amount of users, such as public Matrix or "
 "Mastodon instances."
 msgstr ""
+"Ievērojiet, ka „ntfy.sh“ ir lieluma ierobežota programma. Tā nedarbosies ar "
+"programmām, kas satur lielu lietotāju skaitu, piemēram, „Matrix“ vai "
+"„Mastodon“ instances."
 
 #: ui/main.qml:302
 #, kde-format
