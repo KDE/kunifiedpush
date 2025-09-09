@@ -29,7 +29,6 @@
         "Description[ta]": "இணைய சேவைகளிடமிருந்து வரும் அறிவிப்புகளை அமைக்கவிடும்",
         "Description[tr]": "Bildirimleri ve çevrimiçi hizmetleri yapılandırın",
         "Description[uk]": "Налаштовування сповіщень від служб інтернету",
-        "Description[x-test]": "xxConfigure notifications from online servicesxx",
         "Description[zh_CN]": "配置来自在线服务的通知",
         "Description[zh_TW]": "設定來自線上服務的通知",
         "FormFactors": [
@@ -73,7 +72,6 @@
         "Name[ta]": "புஷ் அறிவிப்புகள்",
         "Name[tr]": "Anında Bildirimler",
         "Name[uk]": "Імпульсні сповіщення",
-        "Name[x-test]": "xxPush Notificationsxx",
         "Name[zh_CN]": "推送通知",
         "Name[zh_TW]": "推送通知"
     },
@@ -107,7 +105,6 @@
     "X-KDE-Keywords[ta]": "Push notifications,unified push,KUnifiedPush,புஷ் அறிவிப்புகள்",
     "X-KDE-Keywords[tr]": "anında bildirimler,birleştirilmiş bildirim,KUnifiedPush,push",
     "X-KDE-Keywords[uk]": "Push notifications,unified push,KUnifiedPush,сповіщення,уніфіковане сповіщення,кюніфайдпуш",
-    "X-KDE-Keywords[x-test]": "xxPush notificationsxx,xxunified pushxx,xxKUnifiedPushxx",
     "X-KDE-Keywords[zh_CN]": "Push notifications,unified push,KUnifiedPush,tuisongtongzhi,tongzhituisong,推送通知,统一推送",
     "X-KDE-Keywords[zh_TW]": "推送通知,UnifiedPush",
     "X-KDE-System-Settings-Parent-Category": "network",
