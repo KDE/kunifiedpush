@@ -1,41 +1,42 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the kunifiedpush package.
+# SPDX-FileCopyrightText: 2022, 2023, 2025 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 #
-# SPDX-FileCopyrightText: 2022, 2023 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-02 07:04+0000\n"
-"PO-Revision-Date: 2023-11-11 14:07+0100\n"
-"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmai.com>\n"
-"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2025-09-13 11:43+0200\n"
+"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
+"Language-Team: pl\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr ""
+msgstr "Upłynął czas na działanie."
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "Samosprawdzenie powiadomień push."
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr ""
+msgstr "Nie można uzyskać punktu końcowego powiadomień push."
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr ""
+msgstr "Otrzymane powiadomienie nie zawiera oczekiwanej treści."
 
 #: ui/main.qml:28
 #, kde-format
@@ -66,16 +67,13 @@ msgstr ""
 "<b>Bezczynny</b><br>Nie ma żadnej aplikacji używającej powiadomień push."
 
 #: ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "<b>Offline</b><br>Network connection to the server could not be "
-#| "established."
+#, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
 msgstr ""
-"<b>Odłączony od sieci</b><br> Nie można ustanowić połączenia sieciowego z "
-"serwerem."
+"<b>Odłączony od sieci</b><br> Nie można nawiązać połączenia sieciowego z "
+"serwerem (%1)."
 
 #: ui/main.qml:66
 #, kde-format
@@ -86,10 +84,9 @@ msgstr ""
 "serwerem."
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "<b>Offline</b><br>Could not authenticate at the server."
+#, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>Odłączony od sieci</b><br>Nie można uwierzytelnić na serwerze."
+msgstr "<b>Odłączony od sieci</b><br>Nie można uwierzytelnić na serwerze (%1)."
 
 #: ui/main.qml:77
 #, kde-format
@@ -135,42 +132,45 @@ msgid ""
 "with applications with a larger amount of users, such as public Matrix or "
 "Mastodon instances."
 msgstr ""
+"Zauważ, że ntfy.sh ogranicza szybkość aplikacji. Nie zadziała przez to z "
+"aplikacjami, gdzie jest dużo użytkowników, takich jak publiczne Matriksy czy "
+"Mastodon."
 
 #: ui/main.qml:302
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr ""
+msgstr "Powiadomienia push działają poprawnie."
 
 #: ui/main.qml:304
 #, kde-format
 msgid "Push notification test failed."
-msgstr ""
+msgstr "Nie powiodła się próba powiadomień push."
 
 #: ui/main.qml:306
 #, kde-format
 msgid "Registering with push server…"
-msgstr ""
+msgstr "Rejestrowanie na serwerze push…"
 
 #: ui/main.qml:308
 #, kde-format
 msgid "Sending push notification…"
-msgstr ""
+msgstr "Wysyłanie powiadomienia push…"
 
 #: ui/main.qml:310
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr ""
+msgstr "Oczekiwanie na otrzymanie powiadomienia push…"
 
 #: ui/main.qml:317
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr ""
+msgstr "Próba"
 
 #: ui/main.qml:334
 #, kde-format
 msgid "Applications"
-msgstr "Uwierzytelnienia"
+msgstr "Aplikacje"
 
 #: ui/main.qml:364
 #, kde-format
@@ -181,10 +181,10 @@ msgstr "Wypisz aplikację z powiadomień push"
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
-msgstr "Wyrejestruj aplikację"
+msgstr "Wypisz aplikację"
 
 #: ui/main.qml:372
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
-msgstr "Czy na pewno wyrejestrować aplikację '%1'?"
+msgstr "Czy na pewno wypisać aplikację '%1'?"
