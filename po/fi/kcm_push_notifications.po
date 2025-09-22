@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-23 00:41+0000\n"
-"PO-Revision-Date: 2025-07-13 23:17+0300\n"
+"PO-Revision-Date: 2025-09-12 16:41+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: selftest.cpp:34
 #, kde-format
@@ -103,7 +103,7 @@ msgstr "Push-tarjoaja:"
 #: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
 #, kde-format
 msgid "URL:"
-msgstr ""
+msgstr "Verkko-osoite:"
 
 #: ui/main.qml:159
 #, kde-format
