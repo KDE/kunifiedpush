@@ -143,6 +143,7 @@ void SelfTest::setState(State state)
         m_notifier.reset();
         if (m_connector) {
             m_connector->unregisterClient();
+            m_connector->removeState();
         }
         m_connector.reset();
         m_msg = {};
