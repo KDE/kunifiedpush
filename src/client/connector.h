@@ -53,6 +53,9 @@ public:
 
     /** Unregister this client.
      *  This is for permanently unsubscribing, do not use on regular application shutdown.
+     *
+     *  Unregistration will not destroy encryption keys and can be undone by re-registering.
+     *  @see removeState()
      */
     void unregisterClient();
 
@@ -144,6 +147,14 @@ public:
       *  @since 25.08
       */
      [[nodiscard]] QByteArray contentEncryptionAuthSecret() const;
+
+     /**
+      * Remove all persisted state for this connection.
+      * @warning This destroys all connection-specific encryption keys!
+      *
+      * @since 25.12
+      */
+     void removeState();
 
 Q_SIGNALS:
     /** Emitted for each newly received push message. */

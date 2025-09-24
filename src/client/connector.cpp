@@ -373,5 +373,10 @@ QByteArray Connector::contentEncryptionAuthSecret() const
     return d->m_contentEnc.authSecret();
 }
 
+void Connector::removeState()
+{
+    QFile::remove(d->stateFile());
+}
+
 #include "moc_connector.cpp"
 #include "moc_connector_p.cpp"
