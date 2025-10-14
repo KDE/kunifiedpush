@@ -159,3 +159,5 @@ void SelfTest::setErrorMessage(const QString &errMsg)
     m_errorMsg = errMsg;
     Q_EMIT errorMessageChanged();
 }
+
+#include "moc_selftest.cpp"
