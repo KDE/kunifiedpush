@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-23 00:41+0000\n"
-"PO-Revision-Date: 2022-07-03 00:45+0000\n"
+"PO-Revision-Date: 2025-10-28 23:28+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -17,31 +17,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Poedit 3.7\n"
 
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr ""
+msgstr "Pasibaigė operacijai skirtas laikas."
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "„Push“ pranešimo savikontrolė."
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr ""
+msgstr "Nepavyko gauti „Push“ pranešimo galutinio taško."
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr ""
+msgstr "Gautame pranešime nėra turinio, kurio buvo tikėtasi."
 
 #: ui/main.qml:28
 #, kde-format
 msgid "There is no push notification service running!"
-msgstr ""
+msgstr "Neveikia jokia „Push“ pranešimų tarnyba!"
 
 #: ui/main.qml:37
 #, kde-format
@@ -49,70 +50,73 @@ msgid ""
 "There is a 3rd party push notification service running. Push notifications "
 "are available, but cannot be configured here."
 msgstr ""
+"Veikia trečiosios šalies „Push“ pranešimų tarnyba. „Push“ pranešimai yra "
+"prieinami, bet negali būti čia konfigūruojami."
 
 #: ui/main.qml:46
 #, kde-format
 msgid ""
 "<b>Online</b><br>Connected to the push notification server and operational."
 msgstr ""
+"<b>Prisijungta</b><br>Prisijungta prie „Push“ pranešimų serverio ir veikiama."
 
 #: ui/main.qml:55
 #, kde-format
 msgid "<b>Idle</b><br>There are no applications using push notifications."
-msgstr ""
+msgstr "<b>Neveiklus</b><br>Nėra jokių „Push“ pranešimus naudojančių programų."
 
 #: ui/main.qml:65
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
-msgstr ""
+msgstr "<b>Atsijungta</b><br>Nepavyko užmegzti tinklo ryšio su serveriu (%1)."
 
 #: ui/main.qml:66
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
-msgstr ""
+msgstr "<b>Atsijungta</b><br>Nepavyko užmegzti tinklo ryšio su serveriu."
 
 #: ui/main.qml:76
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr ""
+msgstr "<b>Atsijungta</b><br>Nepavyko nustatyti tapatybės serveryje (%1)."
 
 #: ui/main.qml:77
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
-msgstr ""
+msgstr "<b>Atsijungta</b><br>Nepavyko nustatyti tapatybės serveryje."
 
 #: ui/main.qml:86
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
-msgstr ""
+msgstr "<b>Atsijungta</b><br>Kol kas neatlikta „Push“ pranešimų sąranka."
 
 #: ui/main.qml:114
 #, kde-format
 msgid "Push provider:"
-msgstr ""
+msgstr "„Push“ teikėjas:"
 
 #: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
 #, kde-format
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: ui/main.qml:159
 #, kde-format
 msgid "Client token:"
-msgstr ""
+msgstr "Kliento prieigos raktas:"
 
 #: ui/main.qml:186
 #, kde-format
 msgid "User name:"
-msgstr ""
+msgstr "Naudotojo vardas:"
 
 #: ui/main.qml:192
 #, kde-format
 msgid "Authenticate"
-msgstr ""
+msgstr "Nustatyti tapatybę"
 
 #: ui/main.qml:237
 #, kde-format
@@ -121,56 +125,59 @@ msgid ""
 "with applications with a larger amount of users, such as public Matrix or "
 "Mastodon instances."
 msgstr ""
+"Turėkite omenyje, kad ntfy.sh taiko ribojimus programoms. Štai kodėl ntfy.sh "
+"neveiks su programomis, kuriose yra didelis naudotojų skaičius, pavyzdžiui, "
+"Matrix ar Mastodon egzemplioriais."
 
 #: ui/main.qml:302
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr ""
+msgstr "„Push“ pranešimai veikia tinkamai."
 
 #: ui/main.qml:304
 #, kde-format
 msgid "Push notification test failed."
-msgstr ""
+msgstr "„Push“ pranešimo išbandymas patyrė nesėkmę."
 
 #: ui/main.qml:306
 #, kde-format
 msgid "Registering with push server…"
-msgstr ""
+msgstr "Registruojama „Push“ serveryje …"
 
 #: ui/main.qml:308
 #, kde-format
 msgid "Sending push notification…"
-msgstr ""
+msgstr "Siunčiamas „Push“ pranešimas…"
 
 #: ui/main.qml:310
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr ""
+msgstr "Laukiama, kol bus gautas „Push“ pranešimas…"
 
 #: ui/main.qml:317
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr ""
+msgstr "Išbandyti"
 
 #: ui/main.qml:334
 #, kde-format
 msgid "Applications"
-msgstr ""
+msgstr "Programos"
 
 #: ui/main.qml:364
 #, kde-format
 msgid "Unregister application from push notifications"
-msgstr ""
+msgstr "Išregistruoti programą iš „Push“ pranešimų"
 
 #: ui/main.qml:371
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
-msgstr ""
+msgstr "Išregistruoti programą"
 
 #: ui/main.qml:372
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
-msgstr ""
+msgstr "Ar tikrai norite išregistruoti „%1“?"
