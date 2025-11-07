@@ -39,7 +39,7 @@ the `~/.config/KDE/kunifiedpush-distributor.conf` configuration file.
 
 ```
 [PushProvider]
-Type=[Gotify|NextPush|Ntfy]
+Type=[Gotify|Autopush|NextPush|Ntfy]
 ```
 
 ### Supported push providers
