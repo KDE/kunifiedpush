@@ -180,6 +180,3 @@ msgstr "Дерегистриране на приложението"
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
 msgstr "Сигурни ли сте, че искате да отмените регистрацията на „%1“?"
-
-#~ msgid "Url:"
-#~ msgstr "Адрес:"
