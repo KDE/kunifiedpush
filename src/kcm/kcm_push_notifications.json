@@ -78,6 +78,7 @@
         "Name[zh_CN]": "推送通知",
         "Name[zh_TW]": "推送通知"
     },
+    "NoDisplay": true,
     "X-KDE-Keywords": "Push notifications,unified push,KUnifiedPush",
     "X-KDE-Keywords[ar]": "Push notifications,unified push,إشعارات الدفع,الدفع الموحد,KUnifiedPush,إشعارات فورية",
     "X-KDE-Keywords[bg]": "насочени известия,KUnifiedPush",
