@@ -191,6 +191,3 @@ msgstr "Cancel·la el registre de l'aplicació"
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
 msgstr "Esteu segur que voleu cancel·lar el registre de l'aplicació «%1»?"
-
-#~ msgid "Url:"
-#~ msgstr "URL:"
