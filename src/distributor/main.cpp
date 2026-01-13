@@ -13,6 +13,7 @@
 #include <QDBusConnection>
 
 #include <KAboutData>
+#include <KCrash>
 
 using namespace KUnifiedPush;
 using namespace Qt::StringLiterals;
@@ -25,6 +26,8 @@ int main(int argc, char **argv)
 
     KAboutData about(u"kunifiedpush-distributor"_s, QString(), QString::fromLatin1(KUNIFIEDPUSH_VERSION_STRING));
     KAboutData::setApplicationData(about);
+
+    KCrash::initialize();
 
     KUnifiedPush::Distributor distributor;
     if (!QDBusConnection::sessionBus().registerService(KDE_DISTRIBUTOR_SERVICE_NAME)) {

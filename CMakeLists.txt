@@ -45,7 +45,7 @@ if (NOT ANDROID)
     # for the KCM
     if (NOT KUNIFIEDPUSH_CLIENT_ONLY)
         find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS WebSockets)
-        find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS CoreAddons I18n Solid Service KCMUtils)
+        find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS CoreAddons I18n Solid Service KCMUtils Crash)
     endif()
 else()
     find_package(Gradle REQUIRED)
