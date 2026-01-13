@@ -40,6 +40,7 @@ ecm_qt_declare_logging_category(KUnifiedPushDistributor
 )
 target_link_libraries(KUnifiedPushDistributor PUBLIC
     KF6::Solid
+    KF6::CoreAddons
     Qt::Core
     Qt::DBus
     Qt::WebSockets
@@ -49,6 +50,8 @@ add_executable(kunifiedpush-distributor)
 target_sources(kunifiedpush-distributor PRIVATE
     main.cpp
 )
+
+target_include_directories(kunifiedpush-distributor PRIVATE ${CMAKE_BINARY_DIR})
 
 target_link_libraries(kunifiedpush-distributor PRIVATE KUnifiedPushDistributor)
 
