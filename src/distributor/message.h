@@ -10,12 +10,22 @@
 
 namespace KUnifiedPush {
 
-/** A received push notification message. */
+/*!
+ * \class KUnifiedPush::Message
+ * \inmodule KUnifiedPush
+ * \brief A received push notification message.
+ */
 class Message
 {
 public:
+    /*!
+     */
     QString clientRemoteId;
+    /*!
+     */
     QByteArray content;
+    /*!
+     */
     QString messageId;
 };
 
