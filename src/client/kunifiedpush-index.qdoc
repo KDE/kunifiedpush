@@ -1,0 +1,31 @@
+/*!
+    \page kunifiedpush-index.html
+    \title KUnifiedPush
+
+    Todo
+
+    \section1 Using the Module
+
+    \include {module-use.qdocinc} {using the c++ api}
+
+    \section2 Building with CMake
+
+    Use the \c find_package() command to locate the library:
+
+    \code
+    find_package(KUnifiedPush REQUIRED)
+    target_link_libraries(mytarget PRIVATE KUnifiedPush)
+    \endcode
+
+    For more details, see the \l {https://doc.qt.io/qt-6/cmake-manual.html} {Build with CMake} overview.
+
+    \section1 API Reference
+
+    \list
+        \li \l{KUnifiedPush C++ Classes}
+    \endlist
+
+    \section1 Licenses
+
+    TODO
+*/

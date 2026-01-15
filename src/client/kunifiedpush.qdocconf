@@ -1,0 +1,31 @@
+include($KDE_DOCS/global/qt-module-defaults.qdocconf)
+
+project = KUnifiedPush
+description = Todo
+
+documentationinheaders = true
+
+headerdirs += .
+sourcedirs += .
+
+outputformats = HTML
+
+depends += kde qtcore kunifiedpushdistributor kunifiedpushkcm
+
+navigation.landingpage = "KUnifiedPush"
+
+qhp.projects            = KUnifiedPush
+
+qhp.KUnifiedPush.file                = kunifiedpush.qhp
+qhp.KUnifiedPush.namespace           =
+qhp.KUnifiedPush.virtualFolder       = kunifiedpush
+qhp.KUnifiedPush.indexTitle          = KUnifiedPush
+qhp.KUnifiedPush.indexRoot           =
+
+qhp.KUnifiedPush.subprojects         = classes
+qhp.KUnifiedPush.subprojects.classes.title = C++ Classes
+qhp.KUnifiedPush.subprojects.classes.indexTitle = KUnifiedPush C++ Classes
+qhp.KUnifiedPush.subprojects.classes.selectors = class fake:headerfile
+qhp.KUnifiedPush.subprojects.classes.sortPages = true
+
+tagfile = kunifiedpush.tags
