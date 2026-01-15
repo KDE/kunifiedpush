@@ -28,6 +28,8 @@ include(ECMSetupVersion)
 include(FeatureSummary)
 include(GenerateExportHeader)
 include(ECMDeprecationSettings)
+include(ECMGenerateQDoc)
+
 
 ecm_setup_version(PROJECT
     VARIABLE_PREFIX KUNIFIEDPUSH

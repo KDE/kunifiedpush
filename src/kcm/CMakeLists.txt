@@ -27,3 +27,5 @@ target_link_libraries(kcm_push_notifications PRIVATE
     Qt::DBus
     Qt::Gui
 )
+
+ecm_generate_qdoc(kcm_push_notifications kunifiedpushkcm.qdocconf)

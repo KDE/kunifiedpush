@@ -11,6 +11,9 @@ target_sources(KUnifiedPush PRIVATE
     ../shared/contentencryptionutils.cpp
     ../shared/eckey.cpp
 )
+
+ecm_generate_qdoc(KUnifiedPush kunifiedpush.qdocconf)
+
 if (NOT ANDROID)
     qt_add_dbus_adaptor(dbus_srcs  ../interfaces/org.unifiedpush.Connector1.xml connector_p.h KUnifiedPush::ConnectorPrivate)
     qt_add_dbus_adaptor(dbus_srcs  ../interfaces/org.unifiedpush.Connector2.xml connector_p.h KUnifiedPush::ConnectorPrivate)

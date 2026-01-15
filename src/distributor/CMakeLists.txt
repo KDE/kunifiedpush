@@ -45,6 +45,8 @@ target_link_libraries(KUnifiedPushDistributor PUBLIC
     Qt::WebSockets
 )
 
+ecm_generate_qdoc(KUnifiedPushDistributor kunifiedpushdistributor.qdocconf)
+
 add_executable(kunifiedpush-distributor)
 target_sources(kunifiedpush-distributor PRIVATE
     main.cpp
