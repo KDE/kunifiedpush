@@ -16,21 +16,43 @@ class QNetworkReply;
 
 namespace KUnifiedPush {
 
-/** Ntfy push provider. */
+/*!
+ * \class KUnifiedPush::NtfyPushProvider
+ * \inmodule KUnifiedPush
+ * \brief Ntfy push provider.
+ */
 class NtfyPushProvider : public AbstractPushProvider
 {
     Q_OBJECT
 public:
+    /*!
+     */
     explicit NtfyPushProvider(QObject *parent = nullptr);
+    /*!
+     */
     ~NtfyPushProvider();
 
+    /*!
+     */
     bool loadSettings(const QSettings &settings) override;
+    /*!
+     */
     void resetSettings(QSettings &settings) override;
+    /*!
+     */
     void connectToProvider(Urgency urgency) override;
+    /*!
+     */
     void disconnectFromProvider() override;
+    /*!
+     */
     void registerClient(const Client &client) override;
+    /*!
+     */
     void unregisterClient(const Client &client) override;
 
+    /*!
+     */
     static constexpr inline auto Id = QLatin1StringView("Ntfy");
 
 protected:
