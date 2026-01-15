@@ -13,25 +13,46 @@ class QIODevice;
 
 namespace KUnifiedPush {
 
+/*!
+ * \class KUnifiedPush::SSEMessage
+ * \inmodule KUnifiedPush
+ */
 class SSEMessage
 {
 public:
+    /*!
+     */
     QByteArray event;
+    /*!
+     */
     QByteArray data;
+    /*!
+     */
     QHash<QByteArray, QByteArray> metaData;
 };
 
-/** Sever-sent Events (SSE) stream
- *  @see https://en.wikipedia.org/wiki/Server-sent_events
+/*!
+ * \class KUnifiedPush::ServerSentEventsStream
+ * \inmodule KUnifiedPush
+ * \brief Sever-sent Events (SSE) stream.
+ * \sa https://en.wikipedia.org/wiki/Server-sent_events
  */
 class ServerSentEventsStream : public QObject
 {
     Q_OBJECT
 public:
+    /*!
+     */
     explicit ServerSentEventsStream(QObject *parent = nullptr);
+    /*!
+     */
     ~ServerSentEventsStream();
 
+    /*!
+     */
     void read(QIODevice *device);
+    /*!
+     */
     [[nodiscard]] QByteArray buffer() const;
 
 Q_SIGNALS:
