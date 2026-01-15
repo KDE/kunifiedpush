@@ -16,25 +16,46 @@ class QWebSocket;
 
 namespace KUnifiedPush {
 
-/** Push provider protocol implementation for Mozilla Autopush.
- *  @see https://github.com/mozilla-services/autopush-rs
+/*!
+ * \class KUnifiedPush::AutopushProvider
+ * \inmodule KUnifiedPush
+ * \brief Push provider protocol implementation for Mozilla Autopush.
+ * \sa https://github.com/mozilla-services/autopush-rs
  */
 class AutopushProvider : public AbstractPushProvider
 {
     Q_OBJECT
 public:
+    /*!
+     */
     explicit AutopushProvider(QObject *parent = nullptr);
 
+    /*!
+     */
     bool loadSettings(const QSettings &settings) override;
+    /*!
+     */
     void connectToProvider(Urgency urgency) override;
+    /*!
+     */
     void disconnectFromProvider() override;
+    /*!
+     */
     void registerClient(const Client &client) override;
+    /*!
+     */
     void unregisterClient(const Client &client) override;
+    /*!
+     */
     void acknowledgeMessage(const Client &client, const QString &messageIdentifier) override;
 
+    /*!
+     */
     static constexpr inline auto Id = QLatin1StringView("Autopush");
 
 protected:
+    /*!
+     */
     void doChangeUrgency(Urgency urgency) override;
 
 private:
