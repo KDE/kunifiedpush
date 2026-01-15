@@ -30,32 +30,66 @@ namespace KUnifiedPush {
 class Client;
 class Message;
 
-/** UnifiedPush distributor service. */
+/*!
+ * \class KUnifiedPush::Distributor
+ * \inmodule KUnifiedPush
+ * \brief UnifiedPush distributor service.
+ */
 class Distributor : public QObject, public QDBusContext
 {
     Q_OBJECT
 public:
+    /*!
+     */
     explicit Distributor(QObject *parent = nullptr);
+    /*!
+     */
     ~Distributor();
 
-    // UnifiedPush D-Bus interface v1
+    /*!
+     * Registers a distributor using the UnifiedPush D-Bus interface v1.
+     */
     [[nodiscard]] QString Register(const QString &serviceName, const QString &token, const QString &description, QString &registrationResultReason);
+    /*!
+     * Unregisters a distributor using the UnifiedPush D-Bus interface v1.
+     */
     void Unregister(const QString &token);
 
-    // UnifiedPush D-Bus interface v2
+    /*!
+     * Registers a distributor using the UnifiedPush D-Bus interface v2.
+     */
     [[nodiscard]] QVariantMap Register(const QVariantMap &args);
+    /*!
+     * Unregisters a distributor using the UnifiedPush D-Bus interface v2.
+     */
     [[nodiscard]] QVariantMap Unregister(const QVariantMap &args);
 
     // KCM D-Bus interface
+    /*!
+     */
     [[nodiscard]] int status() const;
+    /*!
+     */
     [[nodiscard]] QString errorMessage() const;
+    /*!
+     */
     [[nodiscard]] QString pushProviderId() const;
+    /*!
+     */
     [[nodiscard]] QVariantMap pushProviderConfiguration(const QString &pushProviderId) const;
+    /*!
+     */
     void setPushProvider(const QString &pushProviderId, const QVariantMap &config);
+    /*!
+     */
     [[nodiscard]] QList<KUnifiedPush::ClientInfo> registeredClients() const;
+    /*!
+     */
     void forceUnregisterClient(const QString &token);
 
-    // internal
+    /*!
+     * \internal
+     */
     void messageAcknowledged(const Client &client, const QString &messageIdentifier);
 
 Q_SIGNALS:
