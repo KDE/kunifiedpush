@@ -10,22 +10,48 @@
 
 namespace KUnifiedPush {
 
-/** Mock push provider for automated tests. */
+/*!
+ * \class KUnifiedPush::MockPushProvider
+ * \inmodule KUnifiedPush
+ * \brief Mock push provider for automated tests.
+ */
 class MockPushProvider : public AbstractPushProvider
 {
 public:
+    /*!
+     */
     explicit MockPushProvider(QObject *parent = nullptr);
+    /*!
+     */
     ~MockPushProvider();
 
+    /*!
+     */
     bool loadSettings(const QSettings &settings) override;
+    /*!
+     */
     void connectToProvider(Urgency urgency) override;
+    /*!
+     */
     void disconnectFromProvider() override;
+    /*!
+     */
     void registerClient(const Client &client) override;
+    /*!
+     */
     void unregisterClient(const Client &client) override;
+    /*!
+     */
     void acknowledgeMessage(const Client &client, const QString &messageIdentifier) override;
+    /*!
+     */
     void doChangeUrgency(Urgency urgency) override;
 
+    /*!
+     */
     static constexpr inline auto Id = QLatin1StringView("Mock");
+    /*!
+     */
     static MockPushProvider *s_instance;
 };
 
