@@ -15,36 +15,69 @@ namespace KUnifiedPush {
 
 class Distributor;
 
-/** Information about a registered client */
+/*!
+ * \class KUnifiedPush::Client
+ * \inmodule KUnifiedPush
+ * \brief Information about a registered client.
+ */
 class Client
 {
 public:
+    /*!
+     */
     void store(QSettings &settings) const;
+    /*!
+     */
     static Client load(const QString &token, QSettings &settings);
 
-    /** Contains all required information for a client. */
+    /*! Contains all required information for a client. */
     [[nodiscard]] bool isValid() const;
 
-    /** Activate client on D-Bus. */
+    /*! Activate client on D-Bus. */
     void activate() const;
 
-    /** D-Bus UnifiedPush connector interface. */
+    /*! D-Bus UnifiedPush connector interface. */
     void message(Distributor *distributor, const QByteArray &message, const QString &messageIdentifier) const;
+    /*!
+     */
     void newEndpoint() const;
+    /*!
+     */
     void unregistered(bool isConfirmation) const;
 
+    /*!
+     */
     QString serviceName;
+    /*!
+     */
     QString token;
+    /*!
+     */
     QString remoteId;
+    /*!
+     */
     QString endpoint;
+    /*!
+     */
     QString description;
+    /*!
+     */
     QString vapidKey;
-    // UnifiedPush protocol version
+    /*!
+     * \enum KUnifiedPush::Client::UnifiedPushVersion
+     * UnifiedPush protocol version.
+     *
+     * Defaults to v1.
+     * \value v1
+     * \value v2
+     */
     enum class UnifiedPushVersion {
         v1 = 1,
         v2 = 2,
     };
 
+    /*!
+     */
     UnifiedPushVersion version = UnifiedPushVersion::v1;
 };
 
