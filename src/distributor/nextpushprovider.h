@@ -17,25 +17,48 @@ class QNetworkReply;
 
 namespace KUnifiedPush {
 
-/** NextPush push provider implementation.
- *  @see https://github.com/UP-NextPush/
+/*!
+ * \class KUnifiedPush::NextPushProvider
+ * \inmodule KUnifiedPush
+ * \brief NextPush push provider implementation.
+ * \sa https://github.com/UP-NextPush/
  */
 class NextPushProvider : public AbstractPushProvider
 {
 public:
+    /*!
+     */
     explicit NextPushProvider(QObject *parent = nullptr);
+    /*!
+     */
     ~NextPushProvider();
 
+    /*!
+     */
     bool loadSettings(const QSettings &settings) override;
+    /*!
+     */
     void resetSettings(QSettings &settings) override;
+    /*!
+     */
     void connectToProvider(Urgency urgency) override;
+    /*!
+     */
     void disconnectFromProvider() override;
+    /*!
+     */
     void registerClient(const Client &client) override;
+    /*!
+     */
     void unregisterClient(const Client &client) override;
+    /*!
+     */
     void acknowledgeMessage(const Client &client, const QString &messageIdentifier) override;
 
     static constexpr inline auto Id = QLatin1StringView("NextPush");
 protected:
+    /*!
+     */
     void doChangeUrgency(Urgency urgency) override;
 
 private:
