@@ -10,14 +10,29 @@
 
 #include <QAbstractListModel>
 
-/** Model for all registered push notification client. */
+/*!
+ * \class ClientModel
+ * \inmodule KUnifiedPush
+ * \brief Model for all registered push notification client.
+ */
 class ClientModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
+    /*!
+     */
     explicit ClientModel(org::kde::kunifiedpush::Management *iface, QObject *parent = nullptr);
+    /*!
+     */
     ~ClientModel();
 
+    /*!
+     * \enum ClientModel::Role
+     * \value NameRole
+     * \value DescriptionRole
+     * \value IconNameRole
+     * \value TokenRole
+     */
     enum Role {
         NameRole = Qt::DisplayRole,
         DescriptionRole = Qt::UserRole,
@@ -25,11 +40,19 @@ public:
         TokenRole,
     };
 
+    /*!
+     */
     int rowCount(const QModelIndex &parent) const override;
+    /*!
+     */
     QVariant data(const QModelIndex &index, int role) const override;
+    /*!
+     */
     QHash<int, QByteArray> roleNames() const override;
 
 public Q_SLOTS:
+    /*!
+     */
     void reload();
 
 private:
