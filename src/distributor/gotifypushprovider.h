@@ -14,19 +14,37 @@ class QWebSocket;
 
 namespace KUnifiedPush {
 
-/** Push provider protocol implementation for Gotify. */
+/*!
+ * \class KUnifiedPush::GotifyPushProvider
+ * \inmodule KUnifiedPush
+ * \brief Push provider protocol implementation for Gotify.
+ */
 class GotifyPushProvider : public AbstractPushProvider
 {
     Q_OBJECT
 public:
+    /*!
+     */
     explicit GotifyPushProvider(QObject *parent = nullptr);
 
+    /*!
+     */
     bool loadSettings(const QSettings &settings) override;
+    /*!
+     */
     void connectToProvider(Urgency urgency) override;
+    /*!
+     */
     void disconnectFromProvider() override;
+    /*!
+     */
     void registerClient(const Client &client) override;
+    /*!
+     */
     void unregisterClient(const Client &client) override;
 
+    /*!
+     */
     static constexpr inline auto Id = QLatin1StringView("Gotify");
 private:
     void wsMessageReceived(const QString &msg);
