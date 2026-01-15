@@ -12,16 +12,37 @@
 
 namespace KUnifiedPush {
 
-/** Distributor command queue entries. */
+/*!
+ * \class KUnifiedPush::Command
+ * \inmodule KUnifiedPush
+ * \brief Distributor command queue entries.
+ */
 class Command
 {
 public:
+    /*!
+     * \enum KUnifiedPush::Command::Type
+     * \value NoCommand
+     * \value Register
+     * \value Unregister
+     *        Unregistration requested by client
+     * \value ForceUnregister
+     *        Unregistration triggered by distributor
+     * \value SilentUnregister
+     *        Unregistration for moving to a different push provider
+     * \value Connect
+     * \value Disconnect
+     * \value ChangePushProvider
+     * \value MessageAck
+     * \value ChangeUrgency
+     * \value Wait
+     */
     enum Type {
         NoCommand,
         Register,
-        Unregister,  ///< unregistration requested by client
-        ForceUnregister, ///< unregistration triggered by distributor
-        SilentUnregister, ///< unregistration for moving to a different push provider
+        Unregister,
+        ForceUnregister,
+        SilentUnregister,
         Connect,
         Disconnect,
         ChangePushProvider,
@@ -29,8 +50,14 @@ public:
         ChangeUrgency,
         Wait,
     } type = NoCommand;
+    /*!
+     */
     Client client;
+    /*!
+     */
     QDBusMessage reply;
+    /*!
+     */
     QString value;
 };
 
