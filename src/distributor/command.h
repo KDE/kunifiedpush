@@ -16,6 +16,12 @@ namespace KUnifiedPush {
 class Command
 {
 public:
+    Command() = default;
+    Command(const Command &) = delete;
+    Command(Command &&) noexcept = default;
+    Command& operator=(const Command&) = delete;
+    Command& operator=(Command &&) noexcept = default;
+
     enum Type {
         NoCommand,
         Register,

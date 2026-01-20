@@ -519,7 +519,7 @@ void Distributor::doProcessNextCommand()
         return;
     }
 
-    m_currentCommand = m_commandQueue.front();
+    m_currentCommand = std::move(m_commandQueue.front());
     m_commandQueue.pop_front();
     switch (m_currentCommand.type) {
         case Command::NoCommand:
@@ -858,11 +858,13 @@ void Distributor::reachabilityChanged()
 {
     qCDebug(Log) << QNetworkInformation::instance()->reachability();
     if (isNetworkAvailable() && !m_clients.empty() && status() != DistributorStatus::Connected) {
-        Command cmd{ .type = Command::Connect };
+        Command cmd;
+        cmd.type = Command::Connect;
         m_commandQueue.push_back(std::move(cmd));
     }
     if (!isNetworkAvailable() && m_status == DistributorStatus::Connected) {
-        Command cmd{ .type = Command::Disconnect };
+        Command cmd;
+        cmd.type = Command::Disconnect;
         m_commandQueue.push_back(std::move(cmd));
     }
 
