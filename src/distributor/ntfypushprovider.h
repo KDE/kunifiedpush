@@ -45,6 +45,16 @@ private:
     QStringList m_topics;
     QString m_lastMessageId;
 
+    enum class AuthMethod {
+        None,
+        Basic,
+        Bearer,
+    };
+    Q_ENUM(AuthMethod)
+    AuthMethod m_authMethod = AuthMethod::None;
+    QString m_userName;
+    QString m_secret;
+
     QPointer<QNetworkReply> m_sseReply;
     ServerSentEventsStream m_sseStream;
 };

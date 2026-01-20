@@ -221,6 +221,9 @@ KCM.ScrollViewKCM {
                     function config() {
                         let c = root.pushProviderConfig;
                         c['Url'] = urlField.text;
+                        c['AuthMethod'] = authMethod.currentIndex === 1 ? "Basic" : authMethod.currentIndex === 2 ? "Bearer" : "None"
+                        c['Username'] = userName.text;
+                        c['Secret'] = secret.text;
                         return c;
                     }
 
@@ -236,6 +239,32 @@ KCM.ScrollViewKCM {
                         icon.name: "data-warning"
                         text: i18n("Note that ntfy.sh is rate-limiting applications. It will therefore not work with applications with a larger amount of users, such as public Matrix or Mastodon instances.")
                         type: Kirigami.MessageType.Warning
+                    }
+                    QQC2.ComboBox {
+                        id: authMethod
+                        Kirigami.FormData.label: i18n("Authentication method:")
+                        model: [i18nc("authentication method", "None"), i18nc("authentication method", "Password"), i18nc("authentication method", "Token")]
+                        currentIndex: {
+                            switch (root.pushProviderConfig['AuthMethod']) {
+                                case 'Basic':
+                                    return 1;
+                                case 'Bearer':
+                                    return 2;
+                            }
+                            return 0;
+                        }
+                    }
+                    QQC2.TextField {
+                        id: userName
+                        text: root.pushProviderConfig['Username'] ?? ''
+                        Kirigami.FormData.label: i18n("Username:")
+                        visible: authMethod.currentIndex === 1
+                    }
+                    QQC2.TextField {
+                        id: secret
+                        text: root.pushProviderConfig['Secret'] ?? ''
+                        Kirigami.FormData.label: authMethod.currentIndx === 1 ? i18n("Password:") : i18nc("authentication token", "Token:")
+                        visible: authMethod.currentIndex > 0
                     }
                 }
             }

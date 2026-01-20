@@ -10,6 +10,7 @@
 
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QMetaEnum>
 #include <QNetworkReply>
 #include <QSettings>
 #include <QUrlQuery>
@@ -68,7 +69,10 @@ NtfyPushProvider::~NtfyPushProvider() = default;
 
 bool NtfyPushProvider::loadSettings(const QSettings &settings)
 {
-    m_url = settings.value(QStringLiteral("Url"), QUrl()).toUrl();
+    m_url = settings.value("Url", QUrl()).toUrl();
+    m_authMethod = static_cast<AuthMethod>(std::max(QMetaEnum::fromType<AuthMethod>().keyToValue(settings.value("AuthMethod"_L1, u"None"_s).toString().toUtf8().constData()), 0));
+    m_userName = settings.value("Username", QString()).toString();
+    m_secret = settings.value("Secret", QString()).toString();
 
     QSettings internal;
     internal.beginGroup(providerId() + "-internal"_L1);
@@ -168,7 +172,18 @@ void NtfyPushProvider::doConnectToProvider(Urgency urgency)
     url.setQuery(query);
     qCDebug(Log) << url << qToUnderlying(urgency);
 
-    auto reply = nam()->get(QNetworkRequest(url));
+    QNetworkRequest req(url);
+    switch (m_authMethod) {
+        case AuthMethod::None:
+            break;
+        case AuthMethod::Basic:
+            req.setRawHeader("Authorization", "Basic " + QByteArray(m_userName.toUtf8() + ":" + m_secret.toUtf8()).toBase64());
+            break;
+        case AuthMethod::Bearer:
+            req.setRawHeader("Authorization", "Bearer " + m_secret.toUtf8());
+            break;
+    }
+    auto reply = nam()->get(req);
     connect(reply, &QNetworkReply::finished, this, [reply, this]() {
         reply->deleteLater();
         if (reply->error() == QNetworkReply::OperationCanceledError) {

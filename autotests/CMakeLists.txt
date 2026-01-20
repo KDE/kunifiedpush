@@ -14,4 +14,8 @@ if (NOT KUNIFIEDPUSH_CLIENT_ONLY)
 
     ecm_add_test(contentencryptortest.cpp LINK_LIBRARIES Qt::Test KUnifiedPushNotifier KUnifiedPush)
     ecm_add_test(vapidtest.cpp LINK_LIBRARIES Qt::Test KUnifiedPushNotifier)
+
+    # for local use only (needs an appropriately configured local ntfy instance)
+    ecm_add_test(ntfytest.cpp ${dbus_srcs} TEST_NAME ntfytest LINK_LIBRARIES Qt::Test KUnifiedPush KUnifiedPushDistributor KUnifiedPushNotifier)
+    set_tests_properties(ntfytest PROPERTIES DISABLED TRUE)
 endif()
