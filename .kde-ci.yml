@@ -17,3 +17,4 @@ Dependencies:
 
 Options:
   require-passing-tests-on: [ 'Linux' ]
+  enable-lsan: True
