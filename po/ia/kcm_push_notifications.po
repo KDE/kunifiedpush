@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:40+0000\n"
-"PO-Revision-Date: 2026-01-22 17:44+0100\n"
+"PO-Revision-Date: 2026-01-30 18:40+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -130,6 +130,9 @@ msgid ""
 "with applications with a larger amount of users, such as public Matrix or "
 "Mastodon instances."
 msgstr ""
+"Nota que ntfy.sh es un application con limite de frequentia. Ergo il non "
+"functionara con aplicationes con un plus grande amonta de usatores, tal como "
+"instantias de Matrix public o ìde Mastodon."
 
 #: ui/main.qml:302
 #, kde-format
