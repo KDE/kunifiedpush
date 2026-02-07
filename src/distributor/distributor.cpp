@@ -775,7 +775,7 @@ bool Distributor::isNetworkAvailable() const
     // if in doubt assume we have network and try to connect
     if (QNetworkInformation::instance()) {
         const auto reachability = QNetworkInformation::instance()->reachability();
-        return reachability == QNetworkInformation::Reachability::Online || reachability == QNetworkInformation::Reachability::Unknown;
+        return reachability != QNetworkInformation::Reachability::Disconnected;
     }
     return true;
 }
