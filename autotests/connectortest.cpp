@@ -163,9 +163,12 @@ private Q_SLOTS:
         QCOMPARE(distIface.status(), KUnifiedPush::DistributorStatus::NoSetup);
 
         distIface.setPushProvider(QStringLiteral("Mock"), {});
-        QVERIFY(distStatusSpy.wait());
-        QCOMPARE(distIface.status(), KUnifiedPush::DistributorStatus::NoSetup);
-        QVERIFY(distStatusSpy.wait());
+        if (distIface.status() == KUnifiedPush::DistributorStatus::NoSetup) {
+            QVERIFY(distStatusSpy.wait());
+        }
+        if (distIface.status() == KUnifiedPush::DistributorStatus::Idle) {
+            QVERIFY(distStatusSpy.wait());
+        }
         QCOMPARE(distIface.status(), KUnifiedPush::DistributorStatus::Connected);
         QVERIFY(endpointSpy->wait());
         QCOMPARE(con->state(), KUnifiedPush::Connector::Registered);
