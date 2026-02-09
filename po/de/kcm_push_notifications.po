@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_push_notifications\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:51+0000\n"
+"POT-Creation-Date: 2026-02-09 00:42+0000\n"
 "PO-Revision-Date: 2025-12-23 00:48+0100\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -111,7 +111,7 @@ msgstr ""
 msgid "Push provider:"
 msgstr "Push-Anbieter:"
 
-#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
+#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:233 ui/main.qml:285
 #, kde-format
 msgid "URL:"
 msgstr "Adresse:"
@@ -131,7 +131,7 @@ msgstr "Benutzername:"
 msgid "Authenticate"
 msgstr "Authentifizieren"
 
-#: ui/main.qml:237
+#: ui/main.qml:240
 #, kde-format
 msgid ""
 "Note that ntfy.sh is rate-limiting applications. It will therefore not work "
@@ -142,54 +142,95 @@ msgstr ""
 "wird es bei Anwendungen mit vielen Nutzern, wie öffentlichen Matrix- oder "
 "Mastodon-Instanzen, nicht funktionieren."
 
-#: ui/main.qml:302
+#: ui/main.qml:245
+#, fuzzy, kde-format
+#| msgid "Authenticate"
+msgid "Authentication method:"
+msgstr "Authentifizieren"
+
+#: ui/main.qml:246
+#, kde-format
+msgctxt "authentication method"
+msgid "None"
+msgstr ""
+
+#: ui/main.qml:246
+#, kde-format
+msgctxt "authentication method"
+msgid "Password"
+msgstr ""
+
+#: ui/main.qml:246
+#, kde-format
+msgctxt "authentication method"
+msgid "Token"
+msgstr ""
+
+#: ui/main.qml:260
+#, fuzzy, kde-format
+#| msgid "User name:"
+msgid "Username:"
+msgstr "Benutzername:"
+
+#: ui/main.qml:266
+#, kde-format
+msgid "Password:"
+msgstr ""
+
+#: ui/main.qml:266
+#, kde-format
+msgctxt "authentication token"
+msgid "Token:"
+msgstr ""
+
+#: ui/main.qml:331
 #, kde-format
 msgid "Push notifications are working correctly."
 msgstr "Push-Benachrichtigungen funktionieren wie erwartet."
 
-#: ui/main.qml:304
+#: ui/main.qml:333
 #, kde-format
 msgid "Push notification test failed."
 msgstr "Der Test für Push-Benachrichtigungen ist fehlgeschlagen."
 
-#: ui/main.qml:306
+#: ui/main.qml:335
 #, kde-format
 msgid "Registering with push server…"
 msgstr "Registrieren beim Push-Server …"
 
-#: ui/main.qml:308
+#: ui/main.qml:337
 #, kde-format
 msgid "Sending push notification…"
 msgstr "Push-Benachrichtigung wird gesendet …"
 
-#: ui/main.qml:310
+#: ui/main.qml:339
 #, kde-format
 msgid "Waiting to receive push notification…"
 msgstr "Warten auf Empfang der Push-Benachrichtigung …"
 
-#: ui/main.qml:317
+#: ui/main.qml:346
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
 msgstr "Test"
 
-#: ui/main.qml:334
+#: ui/main.qml:363
 #, kde-format
 msgid "Applications"
 msgstr "Anwendungen"
 
-#: ui/main.qml:364
+#: ui/main.qml:393
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "Anwendung von Push-Benachrichtigungen abmelden"
 
-#: ui/main.qml:371
+#: ui/main.qml:400
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
 msgstr "Anwendung abmelden"
 
-#: ui/main.qml:372
+#: ui/main.qml:401
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"

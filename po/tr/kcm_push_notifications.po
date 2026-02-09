@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:51+0000\n"
+"POT-Creation-Date: 2026-02-09 00:42+0000\n"
 "PO-Revision-Date: 2025-08-23 17:32+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -95,7 +95,7 @@ msgstr "<b>Çevrimdışı</b><br>Anında bildirimler ayarlanmamış."
 msgid "Push provider:"
 msgstr "Bildirim sağlayıcısı:"
 
-#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
+#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:233 ui/main.qml:285
 #, kde-format
 msgid "URL:"
 msgstr "URL:"
@@ -115,7 +115,7 @@ msgstr "Kullanıcı adı:"
 msgid "Authenticate"
 msgstr "Kimlik Doğrula"
 
-#: ui/main.qml:237
+#: ui/main.qml:240
 #, kde-format
 msgid ""
 "Note that ntfy.sh is rate-limiting applications. It will therefore not work "
@@ -126,54 +126,95 @@ msgstr ""
 "bu, Matrix veya Mastodon örnekleri gibi çok sayıda kullanıcılı hizmetlerle "
 "çalışmayacaktır."
 
-#: ui/main.qml:302
+#: ui/main.qml:245
+#, fuzzy, kde-format
+#| msgid "Authenticate"
+msgid "Authentication method:"
+msgstr "Kimlik Doğrula"
+
+#: ui/main.qml:246
+#, kde-format
+msgctxt "authentication method"
+msgid "None"
+msgstr ""
+
+#: ui/main.qml:246
+#, kde-format
+msgctxt "authentication method"
+msgid "Password"
+msgstr ""
+
+#: ui/main.qml:246
+#, kde-format
+msgctxt "authentication method"
+msgid "Token"
+msgstr ""
+
+#: ui/main.qml:260
+#, fuzzy, kde-format
+#| msgid "User name:"
+msgid "Username:"
+msgstr "Kullanıcı adı:"
+
+#: ui/main.qml:266
+#, kde-format
+msgid "Password:"
+msgstr ""
+
+#: ui/main.qml:266
+#, kde-format
+msgctxt "authentication token"
+msgid "Token:"
+msgstr ""
+
+#: ui/main.qml:331
 #, kde-format
 msgid "Push notifications are working correctly."
 msgstr "Anında bildirimler düzgün çalışıyor."
 
-#: ui/main.qml:304
+#: ui/main.qml:333
 #, kde-format
 msgid "Push notification test failed."
 msgstr "Anında bildirim sınaması başarısız oldu."
 
-#: ui/main.qml:306
+#: ui/main.qml:335
 #, kde-format
 msgid "Registering with push server…"
 msgstr "Anında bildirim sunucusuna kayıt yapılıyor…"
 
-#: ui/main.qml:308
+#: ui/main.qml:337
 #, kde-format
 msgid "Sending push notification…"
 msgstr "Anında bildirim gönderiliyor…"
 
-#: ui/main.qml:310
+#: ui/main.qml:339
 #, kde-format
 msgid "Waiting to receive push notification…"
 msgstr "Anında bildirim almak için bekleniyor…"
 
-#: ui/main.qml:317
+#: ui/main.qml:346
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
 msgstr "Sına"
 
-#: ui/main.qml:334
+#: ui/main.qml:363
 #, kde-format
 msgid "Applications"
 msgstr "Uygulamalar"
 
-#: ui/main.qml:364
+#: ui/main.qml:393
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "Uygulamayı, anında bildirimlerden kaldır"
 
-#: ui/main.qml:371
+#: ui/main.qml:400
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
 msgstr "Uygulamanın Kaydını Kaldır"
 
-#: ui/main.qml:372
+#: ui/main.qml:401
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"

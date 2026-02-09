@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:51+0000\n"
+"POT-Creation-Date: 2026-02-09 00:42+0000\n"
 "PO-Revision-Date: 2025-09-27 13:36+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -97,7 +97,7 @@ msgstr "<b>Не в сети</b><br>Push-уведомления ещё не на�
 msgid "Push provider:"
 msgstr "Поставщик push:"
 
-#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
+#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:233 ui/main.qml:285
 #, kde-format
 msgid "URL:"
 msgstr "URL:"
@@ -117,7 +117,7 @@ msgstr "Имя пользователя:"
 msgid "Authenticate"
 msgstr "Аутентификация"
 
-#: ui/main.qml:237
+#: ui/main.qml:240
 #, kde-format
 msgid ""
 "Note that ntfy.sh is rate-limiting applications. It will therefore not work "
@@ -128,54 +128,95 @@ msgstr ""
 "обращений, и не поддерживает работу с приложениями с большим числом "
 "пользователей, такими как общедоступные севера Matrix или Mastodon."
 
-#: ui/main.qml:302
+#: ui/main.qml:245
+#, fuzzy, kde-format
+#| msgid "Authenticate"
+msgid "Authentication method:"
+msgstr "Аутентификация"
+
+#: ui/main.qml:246
+#, kde-format
+msgctxt "authentication method"
+msgid "None"
+msgstr ""
+
+#: ui/main.qml:246
+#, kde-format
+msgctxt "authentication method"
+msgid "Password"
+msgstr ""
+
+#: ui/main.qml:246
+#, kde-format
+msgctxt "authentication method"
+msgid "Token"
+msgstr ""
+
+#: ui/main.qml:260
+#, fuzzy, kde-format
+#| msgid "User name:"
+msgid "Username:"
+msgstr "Имя пользователя:"
+
+#: ui/main.qml:266
+#, kde-format
+msgid "Password:"
+msgstr ""
+
+#: ui/main.qml:266
+#, kde-format
+msgctxt "authentication token"
+msgid "Token:"
+msgstr ""
+
+#: ui/main.qml:331
 #, kde-format
 msgid "Push notifications are working correctly."
 msgstr "Push-уведомления настроены и работают."
 
-#: ui/main.qml:304
+#: ui/main.qml:333
 #, kde-format
 msgid "Push notification test failed."
 msgstr "Поверка работы push-уведомлений завершилась с ошибкой."
 
-#: ui/main.qml:306
+#: ui/main.qml:335
 #, kde-format
 msgid "Registering with push server…"
 msgstr "Регистрация на сервере push-уведомлений…"
 
-#: ui/main.qml:308
+#: ui/main.qml:337
 #, kde-format
 msgid "Sending push notification…"
 msgstr "Отправка push-уведомления…"
 
-#: ui/main.qml:310
+#: ui/main.qml:339
 #, kde-format
 msgid "Waiting to receive push notification…"
 msgstr "Ожидание получения push-уведомления…"
 
-#: ui/main.qml:317
+#: ui/main.qml:346
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
 msgstr "Проверка"
 
-#: ui/main.qml:334
+#: ui/main.qml:363
 #, kde-format
 msgid "Applications"
 msgstr "Приложения"
 
-#: ui/main.qml:364
+#: ui/main.qml:393
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "Отключить использование push-уведомлений"
 
-#: ui/main.qml:371
+#: ui/main.qml:400
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
 msgstr "Отключение использования push-уведомлений"
 
-#: ui/main.qml:372
+#: ui/main.qml:401
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"

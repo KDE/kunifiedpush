@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:51+0000\n"
+"POT-Creation-Date: 2026-02-09 00:42+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -95,7 +95,7 @@ msgstr "<b>脱机</b><br>通知推送服务尚未进行配置。"
 msgid "Push provider:"
 msgstr "推送提供者："
 
-#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:230 ui/main.qml:256
+#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:233 ui/main.qml:285
 #, kde-format
 msgid "URL:"
 msgstr "URL："
@@ -115,7 +115,7 @@ msgstr "用户名："
 msgid "Authenticate"
 msgstr "身份认证"
 
-#: ui/main.qml:237
+#: ui/main.qml:240
 #, kde-format
 msgid ""
 "Note that ntfy.sh is rate-limiting applications. It will therefore not work "
@@ -125,54 +125,95 @@ msgstr ""
 "请注意：ntfy.sh 对应用程序进行了速率限制。因此，它无法与用户数量较多的应用程"
 "序配合使用，例如公共的 Matrix 或 Mastodon 实例。"
 
-#: ui/main.qml:302
+#: ui/main.qml:245
+#, fuzzy, kde-format
+#| msgid "Authenticate"
+msgid "Authentication method:"
+msgstr "身份认证"
+
+#: ui/main.qml:246
+#, kde-format
+msgctxt "authentication method"
+msgid "None"
+msgstr ""
+
+#: ui/main.qml:246
+#, kde-format
+msgctxt "authentication method"
+msgid "Password"
+msgstr ""
+
+#: ui/main.qml:246
+#, kde-format
+msgctxt "authentication method"
+msgid "Token"
+msgstr ""
+
+#: ui/main.qml:260
+#, fuzzy, kde-format
+#| msgid "User name:"
+msgid "Username:"
+msgstr "用户名："
+
+#: ui/main.qml:266
+#, kde-format
+msgid "Password:"
+msgstr ""
+
+#: ui/main.qml:266
+#, kde-format
+msgctxt "authentication token"
+msgid "Token:"
+msgstr ""
+
+#: ui/main.qml:331
 #, kde-format
 msgid "Push notifications are working correctly."
 msgstr "推送通知工作正常。"
 
-#: ui/main.qml:304
+#: ui/main.qml:333
 #, kde-format
 msgid "Push notification test failed."
 msgstr "推送通知测试失败。"
 
-#: ui/main.qml:306
+#: ui/main.qml:335
 #, kde-format
 msgid "Registering with push server…"
 msgstr "正在向推送服务器注册…"
 
-#: ui/main.qml:308
+#: ui/main.qml:337
 #, kde-format
 msgid "Sending push notification…"
 msgstr "正在推送通知…"
 
-#: ui/main.qml:310
+#: ui/main.qml:339
 #, kde-format
 msgid "Waiting to receive push notification…"
 msgstr "正在等待接收推送通知…"
 
-#: ui/main.qml:317
+#: ui/main.qml:346
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
 msgstr "测试"
 
-#: ui/main.qml:334
+#: ui/main.qml:363
 #, kde-format
 msgid "Applications"
 msgstr "应用程序"
 
-#: ui/main.qml:364
+#: ui/main.qml:393
 #, kde-format
 msgid "Unregister application from push notifications"
 msgstr "取消注册通知推送服务中的应用程序"
 
-#: ui/main.qml:371
+#: ui/main.qml:400
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
 msgstr "取消注册应用程序"
 
-#: ui/main.qml:372
+#: ui/main.qml:401
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
