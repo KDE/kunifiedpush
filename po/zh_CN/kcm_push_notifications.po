@@ -126,10 +126,9 @@ msgstr ""
 "序配合使用，例如公共的 Matrix 或 Mastodon 实例。"
 
 #: ui/main.qml:245
-#, fuzzy, kde-format
-#| msgid "Authenticate"
+#, kde-format
 msgid "Authentication method:"
-msgstr "身份认证"
+msgstr ""
 
 #: ui/main.qml:246
 #, kde-format
@@ -150,10 +149,9 @@ msgid "Token"
 msgstr ""
 
 #: ui/main.qml:260
-#, fuzzy, kde-format
-#| msgid "User name:"
+#, kde-format
 msgid "Username:"
-msgstr "用户名："
+msgstr ""
 
 #: ui/main.qml:266
 #, kde-format

@@ -1,48 +1,48 @@
-# Spanish translations for kcm_push_notifications.po package.
-# Copyright (C) 2022-2026 This file is copyright:
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the kunifiedpush package.
-# Automatically generated, 2022.
+# SPDX-FileCopyrightText: 2026 Viorel-Cătălin Răpițeanu <rapiteanu.catalin@gmail.com>
+# SPDX-FileCopyrightText: 2026 Sergiu Bivol <sergiu@cip.md>
 #
-# SPDX-FileCopyrightText: 2022, 2023, 2025, 2026 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: kcm_push_notifications\n"
+"Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-09 00:42+0000\n"
-"PO-Revision-Date: 2026-02-09 18:40+0100\n"
-"Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
-"Language-Team: Spanish <kde-l10n-es@kde.org>\n"
-"Language: es\n"
+"PO-Revision-Date: 2026-02-09 13:21+0000\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
+"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.12.2\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr "La operación ha expirado."
+msgstr "Operația a expirat."
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr "Prueba automática de notificación push."
+msgstr "Testarea automată a notificărilor „push”."
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr "No se ha podido obtener el punto final de la notificación push."
+msgstr "Nu s-a putut obține punctul final pentru notificări împinse."
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr "La notificación recibida no tiene el contenido que se esperaba."
+msgstr "Notificarea primită nu are conținutul așteptat."
 
 #: ui/main.qml:28
 #, kde-format
 msgid "There is no push notification service running!"
-msgstr "No hay ningún servicio de notificaciones push en ejecución"
+msgstr "Nu rulează niciun serviciu de notificări împinse!"
 
 #: ui/main.qml:37
 #, kde-format
@@ -50,22 +50,20 @@ msgid ""
 "There is a 3rd party push notification service running. Push notifications "
 "are available, but cannot be configured here."
 msgstr ""
-"Existe un servicio de notificaciones push de una tercera parte en ejecución. "
-"Las notificaciones push están disponibles, pero no se pueden configurar aquí."
+"Rulează un serviciu terț de notificări împinse. Notificările de acest tip "
+"sunt disponibile, dar nu pot fi configurate aici."
 
 #: ui/main.qml:46
 #, kde-format
 msgid ""
 "<b>Online</b><br>Connected to the push notification server and operational."
 msgstr ""
-"<b>Con conexión</b><br>Conectado al servidor de notificaciones push y "
-"operativo."
+"<b>Conectat</b><br>Conectat la serverul de notificări împinse și operațional."
 
 #: ui/main.qml:55
 #, kde-format
 msgid "<b>Idle</b><br>There are no applications using push notifications."
-msgstr ""
-"<b>Inactivo</b><br>No hay ninguna aplicación usando notificaciones push."
+msgstr "<b>Inactiv</b><br>Nicio aplicație nu folosește notificări „push”."
 
 #: ui/main.qml:65
 #, kde-format
@@ -73,37 +71,36 @@ msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
 msgstr ""
-"<b>Sin conexión</b><br>No se puede establecer la conexión de red con el "
-"servidor (%1)."
+"<b>Deconectat</b><br>Nu s-a putut stabili conexiunea de rețea spre server "
+"(%1)."
 
 #: ui/main.qml:66
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
 msgstr ""
-"<b>Sin conexión</b><br>No se puede establecer la conexión de red con el "
-"servidor."
+"<b>Deconectat</b><br>Nu s-a putut stabili conexiunea de rețea spre server."
 
 #: ui/main.qml:76
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>Sin conexión</b><br>No se puede autenticar en el servidor (%1)."
+msgstr ""
+"<b>Deconectat</b><br>Nu s-a putut realiza autentificarea la server (%1)."
 
 #: ui/main.qml:77
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
-msgstr "<b>Sin conexión</b><br>No se puede autenticar en el servidor."
+msgstr "<b>Deconectat</b><br>Nu s-a putut realiza autentificarea la server."
 
 #: ui/main.qml:86
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
-msgstr ""
-"<b>Sin conexión</b><br>Todavía no se han configurado las notificaciones push."
+msgstr "<b>Deconectat</b><br>Notificările împinse nu sunt încă configurate."
 
 #: ui/main.qml:114
 #, kde-format
 msgid "Push provider:"
-msgstr "Proveedor push:"
+msgstr "Furnizor de notificări „push”:"
 
 #: ui/main.qml:154 ui/main.qml:181 ui/main.qml:233 ui/main.qml:285
 #, kde-format
@@ -113,17 +110,17 @@ msgstr "URL:"
 #: ui/main.qml:159
 #, kde-format
 msgid "Client token:"
-msgstr "Token del cliente:"
+msgstr "Jeton client:"
 
 #: ui/main.qml:186
 #, kde-format
 msgid "User name:"
-msgstr "Nombre de usuario:"
+msgstr "Nume utilizator:"
 
 #: ui/main.qml:192
 #, kde-format
 msgid "Authenticate"
-msgstr "Autenticarse"
+msgstr "Autentifică"
 
 #: ui/main.qml:240
 #, kde-format
@@ -132,98 +129,98 @@ msgid ""
 "with applications with a larger amount of users, such as public Matrix or "
 "Mastodon instances."
 msgstr ""
-"Tenga en cuenta que ntfy.sh limita la velocidad de las aplicaciones. Por lo "
-"tanto, no funcionará con aplicaciones con un gran número de usuarios, como "
-"instancias públicas de Matrix o de Mastodon."
+"Rețineți că ntfy.sh limitează rata de interogare a aplicațiilor. Prin "
+"urmare, acesta nu va funcționa cu aplicații care au un număr mare de "
+"utilizatori, cum ar fi instanțele publice de Matrix sau Mastodon."
 
 #: ui/main.qml:245
 #, kde-format
 msgid "Authentication method:"
-msgstr "Método de autenticación:"
+msgstr "Metodă de autentificare:"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "None"
-msgstr "Ninguno"
+msgstr "Niciuna"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "Password"
-msgstr "Contraseña"
+msgstr "Parolă"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "Token"
-msgstr "Token"
+msgstr "Jeton"
 
 #: ui/main.qml:260
 #, kde-format
 msgid "Username:"
-msgstr "Nombre de usuario:"
+msgstr "Utilizator:"
 
 #: ui/main.qml:266
 #, kde-format
 msgid "Password:"
-msgstr "Contraseña:"
+msgstr "Parolă:"
 
 #: ui/main.qml:266
 #, kde-format
 msgctxt "authentication token"
 msgid "Token:"
-msgstr "Token:"
+msgstr "Jeton:"
 
 #: ui/main.qml:331
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr "Las notificaciones push funcionan correctamente."
+msgstr "Notificările împinse funcționează corect."
 
 #: ui/main.qml:333
 #, kde-format
 msgid "Push notification test failed."
-msgstr "La prueba de notificación push ha fallado."
+msgstr "Testul notificărilor împinse a eșuat."
 
 #: ui/main.qml:335
 #, kde-format
 msgid "Registering with push server…"
-msgstr "Registrándose en el servidor push…"
+msgstr "Se înregistrează la serverul „push”…"
 
 #: ui/main.qml:337
 #, kde-format
 msgid "Sending push notification…"
-msgstr "Enviando notificación push…"
+msgstr "Se trimite notificarea împinsă…"
 
 #: ui/main.qml:339
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr "Esperando recepción de notificación push…"
+msgstr "Se așteaptă primirea notificării împinse…"
 
 #: ui/main.qml:346
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr "Prueba"
+msgstr "Testează"
 
 #: ui/main.qml:363
 #, kde-format
 msgid "Applications"
-msgstr "Aplicaciones"
+msgstr "Aplicații"
 
 #: ui/main.qml:393
 #, kde-format
 msgid "Unregister application from push notifications"
-msgstr "Cancelar el registro de la aplicación de las notificaciones push"
+msgstr "Revocă înregistrarea aplicației la notificări împinse"
 
 #: ui/main.qml:400
 #, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
-msgstr "Cancelar registro de aplicación"
+msgstr "Revocă înregistrarea aplicației"
 
 #: ui/main.qml:401
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
-msgstr "¿Seguro que quiere cancelar el registro de «%1»?"
+msgstr "Sigur doriți să revocați înregistrarea pentru „%1”?"
