@@ -146,15 +146,14 @@ msgid "Token"
 msgstr ""
 
 #: ui/main.qml:260
-#, fuzzy, kde-format
-#| msgid "User name:"
+#, kde-format
 msgid "Username:"
 msgstr "Uživatelské jméno:"
 
 #: ui/main.qml:266
 #, kde-format
 msgid "Password:"
-msgstr ""
+msgstr "Heslo:"
 
 #: ui/main.qml:266
 #, kde-format

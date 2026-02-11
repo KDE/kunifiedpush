@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the kunifiedpush package.
-# SPDX-FileCopyrightText: 2022, 2023, 2025 Vincenzo Reale <smart2128vr@gmail.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2025, 2026 Vincenzo Reale <smart2128vr@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-09 00:42+0000\n"
-"PO-Revision-Date: 2025-08-24 08:08+0200\n"
+"PO-Revision-Date: 2026-02-10 11:56+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.12.2\n"
 
 #: selftest.cpp:34
 #, kde-format
@@ -132,45 +132,43 @@ msgstr ""
 "pubbliche di Matrix o Mastodon."
 
 #: ui/main.qml:245
-#, fuzzy, kde-format
-#| msgid "Authenticate"
+#, kde-format
 msgid "Authentication method:"
-msgstr "Autentica"
+msgstr "Metodo di autenticazione:"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "None"
-msgstr ""
+msgstr "Nessuna"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #: ui/main.qml:260
-#, fuzzy, kde-format
-#| msgid "User name:"
+#, kde-format
 msgid "Username:"
 msgstr "Nome utente:"
 
 #: ui/main.qml:266
 #, kde-format
 msgid "Password:"
-msgstr ""
+msgstr "Password:"
 
 #: ui/main.qml:266
 #, kde-format
 msgctxt "authentication token"
 msgid "Token:"
-msgstr ""
+msgstr "Token:"
 
 #: ui/main.qml:331
 #, kde-format

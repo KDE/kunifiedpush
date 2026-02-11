@@ -1,21 +1,21 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kunifiedpush package.
 #
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025, 2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-09 00:42+0000\n"
-"PO-Revision-Date: 2025-08-23 17:32+0300\n"
-"Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
-"Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
+"PO-Revision-Date: 2026-02-10 19:08+0300\n"
+"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
+"Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.07.70\n"
 
 #: selftest.cpp:34
 #, kde-format
@@ -127,45 +127,43 @@ msgstr ""
 "çalışmayacaktır."
 
 #: ui/main.qml:245
-#, fuzzy, kde-format
-#| msgid "Authenticate"
+#, kde-format
 msgid "Authentication method:"
-msgstr "Kimlik Doğrula"
+msgstr "Kimlik doğrulama yöntemi:"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "None"
-msgstr ""
+msgstr "Yok"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "Password"
-msgstr ""
+msgstr "Parola"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "Token"
-msgstr ""
+msgstr "Jeton"
 
 #: ui/main.qml:260
-#, fuzzy, kde-format
-#| msgid "User name:"
+#, kde-format
 msgid "Username:"
 msgstr "Kullanıcı adı:"
 
 #: ui/main.qml:266
 #, kde-format
 msgid "Password:"
-msgstr ""
+msgstr "Parola:"
 
 #: ui/main.qml:266
 #, kde-format
 msgctxt "authentication token"
 msgid "Token:"
-msgstr ""
+msgstr "Jeton:"
 
 #: ui/main.qml:331
 #, kde-format

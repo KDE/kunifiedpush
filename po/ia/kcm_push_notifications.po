@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-09 00:42+0000\n"
-"PO-Revision-Date: 2026-01-29 11:11+0100\n"
+"PO-Revision-Date: 2026-02-10 12:05+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -135,45 +135,43 @@ msgstr ""
 "instantias de Matrix public o ìde Mastodon."
 
 #: ui/main.qml:245
-#, fuzzy, kde-format
-#| msgid "Authenticate"
+#, kde-format
 msgid "Authentication method:"
-msgstr "Authentica"
+msgstr "Methodo de authentication:"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "None"
-msgstr ""
+msgstr "Necun"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "Password"
-msgstr ""
+msgstr "Contrasigno"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "Token"
-msgstr ""
+msgstr "Indicio"
 
 #: ui/main.qml:260
-#, fuzzy, kde-format
-#| msgid "User name:"
+#, kde-format
 msgid "Username:"
 msgstr "Nomine de usator:"
 
 #: ui/main.qml:266
 #, kde-format
 msgid "Password:"
-msgstr ""
+msgstr "Contrasigno:"
 
 #: ui/main.qml:266
 #, kde-format
 msgctxt "authentication token"
 msgid "Token:"
-msgstr ""
+msgstr "Indicio:"
 
 #: ui/main.qml:331
 #, kde-format
