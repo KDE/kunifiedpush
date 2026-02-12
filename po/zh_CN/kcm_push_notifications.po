@@ -128,41 +128,41 @@ msgstr ""
 #: ui/main.qml:245
 #, kde-format
 msgid "Authentication method:"
-msgstr ""
+msgstr "身份验证方式："
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "None"
-msgstr ""
+msgstr "无"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "Password"
-msgstr ""
+msgstr "密码"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "Token"
-msgstr ""
+msgstr "令牌"
 
 #: ui/main.qml:260
 #, kde-format
 msgid "Username:"
-msgstr ""
+msgstr "用户名："
 
 #: ui/main.qml:266
 #, kde-format
 msgid "Password:"
-msgstr ""
+msgstr "密码："
 
 #: ui/main.qml:266
 #, kde-format
 msgctxt "authentication token"
 msgid "Token:"
-msgstr ""
+msgstr "令牌："
 
 #: ui/main.qml:331
 #, kde-format
