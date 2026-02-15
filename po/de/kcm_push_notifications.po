@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the kunifiedpush package.
 # SPDX-FileCopyrightText: 2023 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2024 Alois Spitzbart <spitz234@hotmail.com>
-# SPDX-FileCopyrightText: 2025 Philipp Kiemle <l10n.daphipz@fastmail.de>
+# SPDX-FileCopyrightText: 2025, 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_push_notifications\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-09 00:42+0000\n"
-"PO-Revision-Date: 2025-12-23 00:48+0100\n"
+"PO-Revision-Date: 2026-02-11 11:17+0100\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.08.3\n"
+"X-Generator: Lokalize 25.12.2\n"
 
 #: selftest.cpp:34
 #, kde-format
@@ -143,45 +143,43 @@ msgstr ""
 "Mastodon-Instanzen, nicht funktionieren."
 
 #: ui/main.qml:245
-#, fuzzy, kde-format
-#| msgid "Authenticate"
+#, kde-format
 msgid "Authentication method:"
-msgstr "Authentifizieren"
+msgstr "Authentifizierungsmethode:"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "None"
-msgstr ""
+msgstr "Keine"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "Password"
-msgstr ""
+msgstr "Passwort"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #: ui/main.qml:260
-#, fuzzy, kde-format
-#| msgid "User name:"
+#, kde-format
 msgid "Username:"
 msgstr "Benutzername:"
 
 #: ui/main.qml:266
 #, kde-format
 msgid "Password:"
-msgstr ""
+msgstr "Passwort:"
 
 #: ui/main.qml:266
 #, kde-format
 msgctxt "authentication token"
 msgid "Token:"
-msgstr ""
+msgstr "Token:"
 
 #: ui/main.qml:331
 #, kde-format
