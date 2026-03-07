@@ -52,7 +52,7 @@ else()
 endif()
 
 set(KUNIFIEDPUSH_INCLUDE_INSTALLDIR ${KDE_INSTALL_INCLUDEDIR}/KUnifiedPush)
-ecm_set_disabled_deprecation_versions(QT 6.7 KF 6.7.0)
+ecm_set_disabled_deprecation_versions(QT 6.11 KF 6.23.0)
 add_compile_definitions(-DOPENSSL_API_COMPAT=30000 -DOPENSSL_NO_DEPRECATED)
 
 add_subdirectory(src)
