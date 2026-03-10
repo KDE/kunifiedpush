@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-09 00:42+0000\n"
-"PO-Revision-Date: 2026-02-10 19:08+0300\n"
+"PO-Revision-Date: 2026-03-09 21:52+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
-"Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
+"Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.07.70\n"
+"X-Generator: Lokalize 25.12.2\n"
 
 #: selftest.cpp:34
 #, kde-format
@@ -55,7 +55,7 @@ msgstr ""
 #, kde-format
 msgid ""
 "<b>Online</b><br>Connected to the push notification server and operational."
-msgstr "<b>Çevrimiçi</b><br>Anında bildirim sunucusuna bağlı ve çalışıyor."
+msgstr "<b>Çevrim içi</b><br>Anında bildirim sunucusuna bağlı ve çalışıyor."
 
 #: ui/main.qml:55
 #, kde-format
@@ -67,28 +67,28 @@ msgstr "<b>Boşta</b><br>Anında bildirimleri kullanan uygulama yok."
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
-msgstr "<b>Çevrimdışı</b><br>Sunucuya ağ bağlantısı kurulamadı (%1)."
+msgstr "<b>Çevrim dışı</b><br>Sunucuya ağ bağlantısı kurulamadı (%1)."
 
 #: ui/main.qml:66
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
-msgstr "<b>Çevrimdışı</b><br>Sunucuya ağ bağlantısı kurulamadı."
+msgstr "<b>Çevrim dışı</b><br>Sunucuya ağ bağlantısı kurulamadı."
 
 #: ui/main.qml:76
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr "<b>Çevrimdışı</b><br>Sunucuda kimlik doğrulanamadı (%1)."
+msgstr "<b>Çevrim dışı</b><br>Sunucuda kimlik doğrulanamadı (%1)."
 
 #: ui/main.qml:77
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
-msgstr "<b>Çevrimdışı</b><br>Sunucuda kimlik doğrulanamadı."
+msgstr "<b>Çevrim dışı</b><br>Sunucuda kimlik doğrulanamadı."
 
 #: ui/main.qml:86
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
-msgstr "<b>Çevrimdışı</b><br>Anında bildirimler ayarlanmamış."
+msgstr "<b>Çevrim dışı</b><br>Anında bildirimler ayarlanmamış."
 
 #: ui/main.qml:114
 #, kde-format
