@@ -12,33 +12,33 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.04.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 22.04.3\n"
 
 #: selftest.cpp:34
 #, kde-format
 msgid "The operation timed out."
-msgstr ""
+msgstr "Časový limit operácie vypršal."
 
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "Automatický test push notifikácií."
 
 #: selftest.cpp:73
 #, kde-format
 msgid "Could not obtain push notification endpoint."
-msgstr ""
+msgstr "Nepodarilo sa získať koncový bod push notifikácií."
 
 #: selftest.cpp:126
 #, kde-format
 msgid "Received notification does not have the expected content."
-msgstr ""
+msgstr "Prijatá notifikácia nemá očakávaný obsah."
 
 #: ui/main.qml:28
 #, kde-format
 msgid "There is no push notification service running!"
-msgstr ""
+msgstr "Nie je spustená žiadna služba push notifikácií!"
 
 #: ui/main.qml:37
 #, kde-format
@@ -46,17 +46,19 @@ msgid ""
 "There is a 3rd party push notification service running. Push notifications "
 "are available, but cannot be configured here."
 msgstr ""
+"Je spustená služba push notifikácií tretej strany. Push notifikácie sú "
+"dostupné, ale nie je možné ich tu nastaviť."
 
 #: ui/main.qml:46
 #, kde-format
 msgid ""
 "<b>Online</b><br>Connected to the push notification server and operational."
-msgstr ""
+msgstr "<b>Online</b><br>Pripojené k serveru push notifikácií a funkčné."
 
 #: ui/main.qml:55
 #, kde-format
 msgid "<b>Idle</b><br>There are no applications using push notifications."
-msgstr ""
+msgstr "<b>Nečinné</b><br>Žiadne aplikácie nepoužívajú push notifikácie."
 
 #: ui/main.qml:65
 #, kde-format
@@ -64,42 +66,44 @@ msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established "
 "(%1)."
 msgstr ""
+"<b>Offline</b><br>Nepodarilo sa nadviazať sieťové pripojenie k serveru (%1)."
 
 #: ui/main.qml:66
 #, kde-format
 msgid ""
 "<b>Offline</b><br>Network connection to the server could not be established."
 msgstr ""
+"<b>Offline</b><br>Nepodarilo sa nadviazať sieťové pripojenie k serveru."
 
 #: ui/main.qml:76
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
-msgstr ""
+msgstr "<b>Offline</b><br>Nepodarilo sa overiť totožnosť na serveri (%1)."
 
 #: ui/main.qml:77
 #, kde-format
 msgid "<b>Offline</b><br>Could not authenticate at the server."
-msgstr ""
+msgstr "<b>Offline</b><br>Nepodarilo sa overiť totožnosť na serveri."
 
 #: ui/main.qml:86
 #, kde-format
 msgid "<b>Offline</b><br>Push notifications are not set up yet."
-msgstr ""
+msgstr "<b>Offline</b><br>Push notifikácie ešte nie sú nastavené."
 
 #: ui/main.qml:114
 #, kde-format
 msgid "Push provider:"
-msgstr ""
+msgstr "Poskytovateľ push notifikácií:"
 
 #: ui/main.qml:154 ui/main.qml:181 ui/main.qml:233 ui/main.qml:285
 #, kde-format
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: ui/main.qml:159
 #, kde-format
 msgid "Client token:"
-msgstr ""
+msgstr "Token klienta:"
 
 #: ui/main.qml:186
 #, kde-format
@@ -118,10 +122,12 @@ msgid ""
 "with applications with a larger amount of users, such as public Matrix or "
 "Mastodon instances."
 msgstr ""
+"Upozorňujeme, že ntfy.sh obmedzuje počet požiadaviek aplikácií. Preto nebude "
+"fungovať s aplikáciami s väčším počtom používateľov, ako sú verejné "
+"inštancie Matrix alebo Mastodon."
 
 #: ui/main.qml:245
-#, fuzzy, kde-format
-#| msgid "Authenticate"
+#, kde-format
 msgid "Authentication method:"
 msgstr "Overiť"
 
@@ -129,67 +135,66 @@ msgstr "Overiť"
 #, kde-format
 msgctxt "authentication method"
 msgid "None"
-msgstr ""
+msgstr "Žiadny"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "Password"
-msgstr ""
+msgstr "Heslo"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #: ui/main.qml:260
-#, fuzzy, kde-format
-#| msgid "User name:"
+#, kde-format
 msgid "Username:"
-msgstr "Meno používateľa:"
+msgstr "Užívateľské meno:"
 
 #: ui/main.qml:266
 #, kde-format
 msgid "Password:"
-msgstr ""
+msgstr "Heslo:"
 
 #: ui/main.qml:266
 #, kde-format
 msgctxt "authentication token"
 msgid "Token:"
-msgstr ""
+msgstr "Token:"
 
 #: ui/main.qml:331
 #, kde-format
 msgid "Push notifications are working correctly."
-msgstr ""
+msgstr "Push notifikácie fungujú správne."
 
 #: ui/main.qml:333
 #, kde-format
 msgid "Push notification test failed."
-msgstr ""
+msgstr "Test push notifikácií zlyhal."
 
 #: ui/main.qml:335
 #, kde-format
 msgid "Registering with push server…"
-msgstr ""
+msgstr "Registrácia na push serveri…"
 
 #: ui/main.qml:337
 #, kde-format
 msgid "Sending push notification…"
-msgstr ""
+msgstr "Odosielanie push notifikácie…"
 
 #: ui/main.qml:339
 #, kde-format
 msgid "Waiting to receive push notification…"
-msgstr ""
+msgstr "Čakanie na prijatie push notifikácie…"
 
 #: ui/main.qml:346
 #, kde-format
 msgctxt "@action:button"
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
 #: ui/main.qml:363
 #, kde-format
@@ -199,11 +204,10 @@ msgstr "Aplikácie"
 #: ui/main.qml:393
 #, kde-format
 msgid "Unregister application from push notifications"
-msgstr ""
+msgstr "Zrušiť registráciu aplikácie z push notifikácií"
 
 #: ui/main.qml:400
-#, fuzzy, kde-format
-#| msgid "Applications"
+#, kde-format
 msgctxt "@title:window"
 msgid "Unregister Application"
 msgstr "Aplikácie"
@@ -212,7 +216,7 @@ msgstr "Aplikácie"
 #, kde-format
 msgctxt "%1 is an application name"
 msgid "Are you sure you want to unregister '%1'?"
-msgstr ""
+msgstr "Are you sure chcete to unregister '%1'?"
 
 #~ msgid "Url:"
 #~ msgstr "Url:"
