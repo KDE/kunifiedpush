@@ -40,7 +40,15 @@
             "desktop"
         ],
         "Icon": "network-connect",
-        "Name": "Push Services"
+        "Name": "Push Services",
+        "Name[ca]": "Serveis de notificació automàtica",
+        "Name[es]": "Servicios push",
+        "Name[ka]": "პუშ-სერვისები",
+        "Name[nl]": "Push-services",
+        "Name[pt_BR]": "Serviços push",
+        "Name[sk]": "Služby Push",
+        "Name[sl]": "Potisne storitve",
+        "Name[uk]": "Служби надсилання"
     },
     "X-KDE-Keywords": "Push notifications,unified push,KUnifiedPush",
     "X-KDE-Keywords[ar]": "Push notifications,unified push,إشعارات الدفع,الدفع الموحد,KUnifiedPush,إشعارات فورية",
@@ -60,7 +68,7 @@
     "X-KDE-Keywords[hu]": "Leküldéses értesítések,egységes leküldés,KUnifiedPush",
     "X-KDE-Keywords[ia]": "Notificationes de Push, push unificate, KUnifiedPush",
     "X-KDE-Keywords[it]": "Notifiche push,push unificate,KUnifiedPush",
-    "X-KDE-Keywords[ka]": "Push notifications,unified push,KUnifiedPush;პუშ გაფრთხილებები",
+    "X-KDE-Keywords[ka]": "Push notifications,unified push,KUnifiedPush;პუშ-გაფრთხილებები",
     "X-KDE-Keywords[ko]": "푸시 알림,통합 푸시",
     "X-KDE-Keywords[lt]": "Push notifications,unified push,KUnifiedPush,Push pranešimai,jungtinis push,bendras push,KUnifiedPush,push žinutės,push zinutes",
     "X-KDE-Keywords[lv]": "Pašpiegādes paziņojumi,apvienotā pašpiegāde,KUnifiedPush",
