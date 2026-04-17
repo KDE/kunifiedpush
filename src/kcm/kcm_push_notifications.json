@@ -55,7 +55,8 @@
         "Name[sk]": "Služby Push",
         "Name[sl]": "Potisne storitve",
         "Name[tr]": "Anında Bildirim Hizmetleri",
-        "Name[uk]": "Служби надсилання"
+        "Name[uk]": "Служби надсилання",
+        "Name[zh_CN]": "推送服务"
     },
     "X-KDE-Keywords": "Push notifications,unified push,KUnifiedPush",
     "X-KDE-Keywords[ar]": "Push notifications,unified push,إشعارات الدفع,الدفع الموحد,KUnifiedPush,إشعارات فورية",
