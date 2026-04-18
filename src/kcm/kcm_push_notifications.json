@@ -41,6 +41,7 @@
         ],
         "Icon": "network-connect",
         "Name": "Push Services",
+        "Name[ar]": "خدمات الإشعارات الفورية",
         "Name[ca@valencia]": "Serveis de notificació automàtica",
         "Name[ca]": "Serveis de notificació automàtica",
         "Name[es]": "Servicios push",
