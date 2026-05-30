@@ -43,6 +43,7 @@
         "Icon": "network-connect",
         "Name": "Push Services",
         "Name[ar]": "خدمات الإشعارات الفورية",
+        "Name[bg]": "Услуги за известия",
         "Name[ca@valencia]": "Serveis de notificació automàtica",
         "Name[ca]": "Serveis de notificació automàtica",
         "Name[de]": "Push-Dienste",
