@@ -17,6 +17,7 @@
 
 #include <QHostInfo>
 #include <QStandardPaths>
+#include <qqml.h>
 
 K_PLUGIN_CLASS_WITH_JSON(KCMPushNotifications, "kcm_push_notifications.json")
 
