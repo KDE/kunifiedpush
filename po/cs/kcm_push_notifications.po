@@ -1,21 +1,21 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the kunifiedpush package.
-# SPDX-FileCopyrightText: 2022, 2023 Vit Pelcak <vit@pelcak.org>
+# SPDX-FileCopyrightText: 2022-2023, 2026 Vit Pelcak <vit@pelcak.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kunifiedpush\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-09 00:42+0000\n"
-"PO-Revision-Date: 2023-11-14 14:49+0100\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-06-08 10:39+0200\n"
+"Last-Translator: Vít Pelčák <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 26.04.1\n"
 
 #: selftest.cpp:34
 #, kde-format
@@ -25,7 +25,7 @@ msgstr "Čas na operaci vypršel."
 #: selftest.cpp:59
 #, kde-format
 msgid "Push notification self-test."
-msgstr ""
+msgstr "Vlastní test Upozornění Push"
 
 #: selftest.cpp:73
 #, kde-format
@@ -127,23 +127,24 @@ msgstr ""
 msgid "Authentication method:"
 msgstr "Ověřit"
 
+# žádné parametry funkce v inspektoru funkcí
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "None"
-msgstr ""
+msgstr "Nic"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "Password"
-msgstr ""
+msgstr "Heslo"
 
 #: ui/main.qml:246
 #, kde-format
 msgctxt "authentication method"
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #: ui/main.qml:260
 #, kde-format
@@ -159,7 +160,7 @@ msgstr "Heslo:"
 #, kde-format
 msgctxt "authentication token"
 msgid "Token:"
-msgstr ""
+msgstr "Token:"
 
 #: ui/main.qml:331
 #, kde-format
