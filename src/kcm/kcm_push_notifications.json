@@ -1,5 +1,6 @@
 {
     "KPlugin": {
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kunifiedpush",
         "Description": "Configure notifications from online services",
         "Description[ar]": "اضبط الإشعارات من الخدمات عبر الإنترنت",
         "Description[bg]": "Конфигуриране на известия от онлайн услуги",
