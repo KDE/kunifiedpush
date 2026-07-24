@@ -16,6 +16,7 @@ struct ClientInfo {
     QString token;
     QString serviceName;
     QString description;
+    bool enabled = false;
 };
 
 }
@@ -24,7 +25,7 @@ Q_DECLARE_METATYPE(KUnifiedPush::ClientInfo)
 inline QDBusArgument &operator<<(QDBusArgument &argument, const KUnifiedPush::ClientInfo &client)
 {
     argument.beginStructure();
-    argument << client.token << client.serviceName << client.description;
+    argument << client.token << client.serviceName << client.description << client.enabled;
     argument.endStructure();
     return argument;
 }
@@ -32,7 +33,7 @@ inline QDBusArgument &operator<<(QDBusArgument &argument, const KUnifiedPush::Cl
 inline const QDBusArgument &operator>>(const QDBusArgument &argument, KUnifiedPush::ClientInfo &client)
 {
     argument.beginStructure();
-    argument >> client.token >> client.serviceName >> client.description;
+    argument >> client.token >> client.serviceName >> client.description >> client.enabled;
     argument.endStructure();
     return argument;
 }

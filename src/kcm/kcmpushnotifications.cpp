@@ -104,6 +104,11 @@ void KCMPushNotifications::setPushProviderConfiguration(const QString &pushProvi
     m_mgmtIface->setPushProvider(pushProviderId, config);
 }
 
+void KCMPushNotifications::setClientEnabled(const QString &token,
+                                            const bool enabled) {
+    m_mgmtIface->setClientEnabled(token, enabled);
+}
+
 void KCMPushNotifications::forceUnregister(const QString &token)
 {
     m_mgmtIface->forceUnregisterClient(token);

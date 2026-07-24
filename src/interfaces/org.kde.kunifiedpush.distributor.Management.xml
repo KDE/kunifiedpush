@@ -40,6 +40,11 @@
       <arg name="clientToken" type="s" direction="in"/>
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
     </method>
+    <method name="setClientEnabled">
+      <arg name="clientToken" type="s" direction="in"/>
+      <arg name="enabled" type="b" direction="in"/>
+      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
+    </method>
     <signal name="registeredClientsChanged"/>
   </interface>
 </node>

@@ -46,6 +46,7 @@ public:
     };
 
     UnifiedPushVersion version = UnifiedPushVersion::v1;
+    bool enabled = false;
 };
 
 }

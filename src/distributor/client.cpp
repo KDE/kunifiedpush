@@ -28,6 +28,7 @@ Client Client::load(const QString &token, QSettings &settings)
     client.description = settings.value("Description", QString()).toString();
     client.vapidKey = settings.value("VAPIDKey", QString()).toString();
     client.version = static_cast<UnifiedPushVersion>(settings.value("Version", 1).toInt());
+    client.enabled = settings.value("Enabled", true).toBool(); // True so old migrated clients are enabled by default
     settings.endGroup();
     return client;
 }
@@ -41,6 +42,7 @@ void Client::store(QSettings& settings) const
     settings.setValue("Description", description);
     settings.setValue("VAPIDKey", vapidKey);
     settings.setValue("Version", qToUnderlying(version));
+    settings.setValue("Enabled", enabled);
     settings.endGroup();
 }
 
@@ -51,12 +53,24 @@ bool Client::isValid() const
 
 void Client::activate() const
 {
+    if (!enabled) {
+        return;
+    }
+
     qCDebug(Log) << "activating" << serviceName;
-    QDBusConnection::sessionBus().interface()->startService(serviceName);
+    auto reply = QDBusConnection::sessionBus().interface()->startService(serviceName);
+    if (!reply.isValid()) {
+        qWarning() << "Failed to activate" << serviceName;
+    }
 }
 
 void Client::message(Distributor *distributor, const QByteArray &message, const QString &messageIdentifier) const
 {
+    if (!enabled) {
+        distributor->messageAcknowledged(*this, messageIdentifier);
+        return;
+    }
+
     switch (version) {
         case UnifiedPushVersion::v1:
         {

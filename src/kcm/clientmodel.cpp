@@ -48,6 +48,8 @@ QVariant ClientModel::data(const QModelIndex &index, int role) const
             return service ? service->icon() : QStringLiteral("application-x-executable");
         case TokenRole:
             return c.token;
+        case EnabledRole:
+            return c.enabled;
     }
 
     return {};
@@ -60,6 +62,7 @@ QHash<int, QByteArray> ClientModel::roleNames() const
     n.insert(DescriptionRole, "description");
     n.insert(IconNameRole, "iconName");
     n.insert(TokenRole, "token");
+    n.insert(EnabledRole, "enabled");
     return n;
 }
 

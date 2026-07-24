@@ -731,6 +731,7 @@ QList<KUnifiedPush::ClientInfo> Distributor::registeredClients() const
         info.token = client.token;
         info.serviceName = client.serviceName;
         info.description = client.description;
+        info.enabled = client.enabled;
         result.push_back(std::move(info));
     }
 
@@ -753,6 +754,22 @@ void Distributor::forceUnregisterClient(const QString &token)
     cmd.client = (*it);
     m_commandQueue.push_back(std::move(cmd));
     processNextCommand();
+}
+
+void Distributor::setClientEnabled(const QString &token, bool enabled)
+{
+    qCDebug(Log) << token;
+    const auto it = std::find_if(m_clients.begin(), m_clients.end(), [&token](const auto &client) {
+        return client.token == token;
+    });
+    if (it == m_clients.end()) {
+        qCWarning(Log) << "Unregistration request for unknown client.";
+        return;
+    }
+
+    it->enabled = enabled;
+    QSettings settings;
+    it->store(settings);
 }
 
 void Distributor::messageAcknowledged(const Client &client, const QString &messageIdentifier)

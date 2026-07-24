@@ -23,6 +23,7 @@ public:
         DescriptionRole = Qt::UserRole,
         IconNameRole,
         TokenRole,
+        EnabledRole,
     };
 
     int rowCount(const QModelIndex &parent) const override;

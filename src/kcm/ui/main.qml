@@ -385,6 +385,13 @@ KCM.ScrollViewKCM {
                 Item {
                     Layout.fillWidth: true
                 }
+                QQC2.Switch {
+                    checked: model.enabled
+
+                    Accessible.name: i18nc("@label:checkbox accessible", "Enable this client")
+
+                    onCheckedChanged: kcm.setClientEnabled(model.token, checked)
+                }
                 QQC2.ToolButton {
                     icon.name: "edit-delete"
 

@@ -54,6 +54,7 @@ public:
     void setPushProvider(const QString &pushProviderId, const QVariantMap &config);
     [[nodiscard]] QList<KUnifiedPush::ClientInfo> registeredClients() const;
     void forceUnregisterClient(const QString &token);
+    void setClientEnabled(const QString &token, bool enabled);
 
     // internal
     void messageAcknowledged(const Client &client, const QString &messageIdentifier);

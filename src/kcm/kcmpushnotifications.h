@@ -51,6 +51,7 @@ public:
 public Q_SLOTS:
     void forceUnregister(const QString &token);
     void setPushProviderConfiguration(const QString &pushProviderId, const QVariantMap &config);
+    void setClientEnabled(const QString &token, bool enabled);
 
 Q_SIGNALS:
     void distributorChanged();
