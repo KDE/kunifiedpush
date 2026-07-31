@@ -30,7 +30,9 @@ int main(int argc, char **argv)
     KCrash::initialize();
 
     KUnifiedPush::Distributor distributor;
-    if (!QDBusConnection::sessionBus().registerService(KDE_DISTRIBUTOR_SERVICE_NAME)) {
+    const auto serviceName = qEnvironmentVariableIsEmpty("KDE_DISTRIBUTOR_SERVICE_NAME") ? QString::fromLatin1(KDE_DISTRIBUTOR_SERVICE_NAME)
+        : UP_DISTRIBUTOR_SERVICE_NAME_PREFIX + qEnvironmentVariable("KDE_DISTRIBUTOR_SERVICE_NAME");
+    if (!QDBusConnection::sessionBus().registerService(serviceName)) {
         qCCritical(Log) << "Distributor service name already in use - aborting!";
         return 1;
     }

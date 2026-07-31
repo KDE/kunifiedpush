@@ -32,6 +32,10 @@ between the server-side application and the push provider, but not the one betwe
 the push provider and the distributor. Supporting different push providers therefore
 requires provider specific code and configuration.
 
+The default name of the created service is `org.unifiedpush.Distributor.kde`.
+The part of the name after the prefix `org.unifiedpush.Distributor.` can be changed
+using the `KDE_DISTRIBUTOR_SERVICE_NAME` environment variable.
+
 ### Configuration
 
 There is a configuration KCM, alternatively this can be configured via

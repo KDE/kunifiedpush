@@ -34,7 +34,9 @@ KCMPushNotifications::KCMPushNotifications(QObject *parent, const KPluginMetaDat
     m_nam.enableStrictTransportSecurityStore(true, QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + QLatin1String("/org.kde.kunifiedpush/hsts/"));
 
     // TODO do this only when we are using the KDE distributor
-    m_mgmtIface = new OrgKdeKunifiedpushManagementInterface(KDE_DISTRIBUTOR_SERVICE_NAME, KDE_DISTRIBUTOR_MANAGEMENT_PATH, QDBusConnection::sessionBus(), this);
+    const auto serviceName = qEnvironmentVariableIsEmpty("KDE_DISTRIBUTOR_SERVICE_NAME") ? QString::fromLatin1(KDE_DISTRIBUTOR_SERVICE_NAME)
+        : UP_DISTRIBUTOR_SERVICE_NAME_PREFIX + qEnvironmentVariable("KDE_DISTRIBUTOR_SERVICE_NAME");
+    m_mgmtIface = new OrgKdeKunifiedpushManagementInterface(serviceName, KDE_DISTRIBUTOR_MANAGEMENT_PATH, QDBusConnection::sessionBus(), this);
     connect(m_mgmtIface, &OrgKdeKunifiedpushManagementInterface::statusChanged, this, &KCMPushNotifications::distributorStatusChanged);
     connect(m_mgmtIface, &OrgKdeKunifiedpushManagementInterface::errorMessageChanged, this, &KCMPushNotifications::distributorErrorMessageChanged);
     connect(m_mgmtIface, &OrgKdeKunifiedpushManagementInterface::pushProviderChanged, this, &KCMPushNotifications::pushProviderChanged);
@@ -66,7 +68,9 @@ bool KCMPushNotifications::hasDistributor() const
 
 bool KCMPushNotifications::hasKDEDistributor() const
 {
-    return ConnectorUtils::selectDistributor() == KDE_DISTRIBUTOR_SERVICE_NAME;
+    const auto serviceName = qEnvironmentVariableIsEmpty("KDE_DISTRIBUTOR_SERVICE_NAME") ? QString::fromLatin1(KDE_DISTRIBUTOR_SERVICE_NAME)
+        : UP_DISTRIBUTOR_SERVICE_NAME_PREFIX + qEnvironmentVariable("KDE_DISTRIBUTOR_SERVICE_NAME");
+    return ConnectorUtils::selectDistributor() == serviceName;
 }
 
 int KCMPushNotifications::distributorStatus() const
