@@ -62,3 +62,17 @@ install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/kunifiedpush_export.h
     DESTINATION ${KUNIFIEDPUSH_INCLUDE_INSTALLDIR}/kunifiedpush
 )
+
+if(${ECM_VERSION} VERSION_GREATER_EQUAL 6.30)
+include(ECMInstalledLibraryCheck)
+
+ecm_add_installed_library_check(KUnifiedPush
+    PACKAGE_NAME "KUnifiedPush"
+    NO_PACKAGE_TARGET_NAMESPACE
+)
+
+ecm_installed_library_check_include_strings(KUnifiedPush
+    HEADERS ${KUnifiedPush_FORWARDING_HEADERS}
+    PREFIX KUnifiedPush
+)
+endif()
