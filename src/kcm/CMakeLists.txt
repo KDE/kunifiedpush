@@ -26,4 +26,6 @@ target_link_libraries(kcm_push_notifications PRIVATE
     KF6::I18n
     Qt::DBus
     Qt::Gui
+    Qt::Network
+    Qt::Qml
 )
