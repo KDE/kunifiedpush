@@ -27,7 +27,7 @@ static void newEndpoint(JNIEnv *env, jobject that, jstring token, jstring endpoi
 {
     Q_UNUSED(that);
     for (auto c : ConnectorPrivate::s_instances) {
-        c->NewEndpoint(fromJniString(env, token), fromJniString(env, endpoint));
+        c->newEndpointImpl(fromJniString(env, token), fromJniString(env, endpoint));
     }
 }
 
@@ -43,7 +43,7 @@ static void unregistered(JNIEnv *env, jobject that, jstring token)
 {
     Q_UNUSED(that);
     for (auto c : ConnectorPrivate::s_instances) {
-        c->Unregistered(fromJniString(env, token));
+        c->unregisteredImpl(fromJniString(env, token));
     }
 }
 
@@ -127,7 +127,7 @@ void ConnectorPrivate::handleMessage(const QString &token, const QByteArray &mes
         return;
     }
 
-    Message(token, message, messageIdentifier);
+    messageImpl(token, message, messageIdentifier);
 
     if (!messageIdentifier.isEmpty()) {
         m_distributor.callMethod<void>("acknowledge", token, messageIdentifier);
