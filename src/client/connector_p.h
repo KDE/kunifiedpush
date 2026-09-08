@@ -39,7 +39,11 @@ public:
     [[nodiscard]] bool hasDistributor() const;
     void doRegister();
     void doUnregister();
+    void newEndpointImpl(const QString &token, const QString &endpoint);
+    void unregisteredImpl(const QString &token);
+    void messageImpl(const QString &token, const QByteArray &message, const QString &messageIdentifier);
 
+#ifndef Q_OS_ANDROID
     // UnifiedPush D-Bus interface v1
     void Message(const QString &token, const QByteArray &message, const QString &messageIdentifier);
     void NewEndpoint(const QString &token, const QString &endpoint);
@@ -49,6 +53,7 @@ public:
     [[nodiscard]] QVariantMap Message(const QVariantMap &args);
     [[nodiscard]] QVariantMap NewEndpoint(const QVariantMap &args);
     [[nodiscard]] QVariantMap Unregistered(const QVariantMap &args);
+#endif
 
     [[nodiscard]] QString stateFile() const;
     void loadState();
