@@ -16,9 +16,12 @@
 
 #include <QDBusConnection>
 #include <QDBusPendingCallWatcher>
+#include <qloggingcategory.h>
 
 using namespace Qt::Literals;
 using namespace KUnifiedPush;
+
+std::vector<ConnectorPrivate*> ConnectorPrivate::s_instances;
 
 void ConnectorPrivate::init()
 {
@@ -51,11 +54,15 @@ void ConnectorPrivate::init()
     m_serviceWatcher.setConnection(QDBusConnection::sessionBus());
     m_serviceWatcher.setWatchMode(QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration);
     m_serviceWatcher.addWatchedService(UP_DISTRIBUTOR_SERVICE_NAME_FILTER);
+
+    s_instances.push_back(this);
 }
 
 void ConnectorPrivate::deinit()
 {
     QDBusConnection::sessionBus().unregisterObject(UP_CONNECTOR_PATH);
+
+    s_instances.erase(std::remove(s_instances.begin(), s_instances.end(), this), s_instances.end());
 }
 
 void ConnectorPrivate::doSetDistributor(const QString &distServiceName)
@@ -126,6 +133,7 @@ void ConnectorPrivate::doRegister()
 
 void ConnectorPrivate::handleRegisterResponse(const QDBusPendingCall &reply)
 {
+    qCWarning(Log) << m_serviceName << m_identifier << m_token;
     auto watcher = new QDBusPendingCallWatcher(reply, this);
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher]() {
         if (watcher->isError()) {
@@ -174,7 +182,11 @@ void ConnectorPrivate::doUnregister()
 
 void ConnectorPrivate::NewEndpoint(const QString &token, const QString &endpoint)
 {
-    newEndpointImpl(token, endpoint);
+    for (auto instance : s_instances) {
+        if (instance->m_token == token) {
+            instance->newEndpointImpl(token, endpoint);
+        }
+    }
 }
 
 QVariantMap ConnectorPrivate::NewEndpoint(const QVariantMap &args)
@@ -187,7 +199,11 @@ QVariantMap ConnectorPrivate::NewEndpoint(const QVariantMap &args)
 
 void ConnectorPrivate::Unregistered(const QString &token)
 {
-    unregisteredImpl(token);
+    for (auto instance : s_instances) {
+        if (instance->m_token == token || token.isEmpty()) {
+            instance->unregisteredImpl(token);
+        }
+    }
 }
 
 QVariantMap ConnectorPrivate::Unregistered(const QVariantMap &args)
@@ -199,7 +215,12 @@ QVariantMap ConnectorPrivate::Unregistered(const QVariantMap &args)
 
 void ConnectorPrivate::Message(const QString &token, const QByteArray &message, const QString &messageIdentifier)
 {
-    messageImpl(token, message, messageIdentifier);
+    for (auto instance : s_instances) {
+        if (instance->m_token == token) {
+            instance->messageImpl(token, message, messageIdentifier);
+            return;
+        }
+    }
 }
 
 QVariantMap ConnectorPrivate::Message(const QVariantMap &args)

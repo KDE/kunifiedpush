@@ -32,6 +32,13 @@ public:
      *  on D-Bus and for D-Bus activation.
      */
     explicit Connector(const QString &serviceName, QObject *parent = nullptr);
+
+    /** Create a new connector instance.
+     *  @param serviceName The application identifier, same as used for registration
+     *  @param identifier The unique identifier for this client instance
+     *  on D-Bus and for D-Bus activation.
+     */
+    explicit Connector(const QString &serviceName, const QString &identifier, QObject *parent = nullptr);
     ~Connector();
 
     /** HTTP endpoint to trigger the push notification.

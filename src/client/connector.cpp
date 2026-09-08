@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2022 Volker Krause <vkrause@kde.org>
+    SPDX-FileCopyrightText: 2026 Benjamin Port <benjamin.port@enioka.com>
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
@@ -14,8 +15,11 @@
 #include <QSettings>
 #include <QStandardPaths>
 #include <QUuid>
+#include <qobject.h>
+#include <QUrl>
 
 using namespace KUnifiedPush;
+using namespace Qt::Literals;
 
 ConnectorPrivate::ConnectorPrivate(Connector *qq)
     : QObject(qq)
@@ -98,7 +102,11 @@ void ConnectorPrivate::unregisteredImpl(const QString &token)
 
 QString ConnectorPrivate::stateFile() const
 {
-    return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1String("/kunifiedpush-") + m_serviceName;
+    QString suffix = ""_L1;
+    if (!m_identifier.isEmpty()) {
+        suffix = '['_L1 + m_identifier + ']'_L1;
+    }
+    return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/kunifiedpush-"_L1 + m_serviceName + suffix;
 }
 
 void ConnectorPrivate::loadState()
@@ -254,6 +262,11 @@ void ConnectorPrivate::ensureKeys()
 
 
 Connector::Connector(const QString &serviceName, QObject *parent)
+    : Connector(serviceName, ""_L1, parent)
+{
+}
+
+Connector::Connector(const QString &serviceName, const QString &identifier, QObject *parent)
     : QObject(parent)
     , d(new ConnectorPrivate(this))
 {
@@ -262,6 +275,8 @@ Connector::Connector(const QString &serviceName, QObject *parent)
         qCWarning(Log) << "empty D-Bus service name!";
         return;
     }
+    // Encode identifier to prevent / inside as we use it as filename
+    d->m_identifier = QString::fromUtf8(QUrl::toPercentEncoding(identifier));
 
     d->loadState();
     d->setDistributor(ConnectorUtils::selectDistributor());

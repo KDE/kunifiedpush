@@ -143,15 +143,20 @@ private Q_SLOTS:
         QCOMPARE(endpointSpy->at(1).at(0).toString(), "https://localhost/push-endpoint"_L1);
         endpointSpy->clear();
 
+        // Get remote id from config
+        QSettings stateSettings(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1String("/kunifiedpush-org.kde.kunifiedpush.connectortest"), QSettings::IniFormat);
+        stateSettings.beginGroup("Client");
+        QString remoteId = stateSettings.value("Token").toString() + QStringLiteral("-remote-id");
+
         // receiving a message
         QSignalSpy msgSpy(con.get(), &Connector::messageReceived);
-        ctrlIface.callWithArgumentList(QDBus::AutoDetect, "receiveMessage"_L1, { u"<client-remote-id>"_s, QByteArray("hello world"), QString()});
+        ctrlIface.callWithArgumentList(QDBus::AutoDetect, "receiveMessage"_L1, { remoteId, QByteArray("hello world"), QString()});
         QVERIFY(msgSpy.wait());
         QCOMPARE(msgSpy.at(0).at(0).toByteArray(), "hello world");
 
         // receive a message with acknowledgement
         msgSpy.clear();
-        ctrlIface.callWithArgumentList(QDBus::AutoDetect, "receiveMessage"_L1, { u"<client-remote-id>"_s, QByteArray("acknowledged message"), u"<msg-id>"_s});
+        ctrlIface.callWithArgumentList(QDBus::AutoDetect, "receiveMessage"_L1, { remoteId, QByteArray("acknowledged message"), u"<msg-id>"_s});
         QVERIFY(msgSpy.wait());
         QCOMPARE(msgSpy.at(0).at(0).toByteArray(), "acknowledged message");
 
