@@ -50,7 +50,7 @@ void MockPushProvider::registerClient(const Client &client)
     qCDebug(Log) << client.serviceName << client.token << client.vapidKey;
 
     auto newClient = client;
-    newClient.remoteId = QStringLiteral("<client-remote-id>");
+    newClient.remoteId = client.token + QStringLiteral("-remote-id");
     newClient.endpoint = QStringLiteral("https://localhost/push-endpoint");
     QMetaObject::invokeMethod(this, "clientRegistered", Qt::QueuedConnection, Q_ARG(KUnifiedPush::Client, newClient));
 }

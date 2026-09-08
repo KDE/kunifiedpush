@@ -77,6 +77,7 @@ public:
     QString m_endpoint;
     QString m_description;
     QString m_vapidPublicKey;
+    QString m_identifier;
     bool m_vapidRequired = false;
     Connector::State m_state = Connector::Unregistered;
 
@@ -94,8 +95,9 @@ public:
     void handleMessage(const QString &token, const QByteArray &message, const QString &messageIdentifier);
 
     QJniObject m_distributor;
-    static std::vector<ConnectorPrivate*> s_instances;
 #endif
+
+    static std::vector<ConnectorPrivate*> s_instances;
 };
 }
 
