@@ -1,0 +1,220 @@
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
+msgid ""
+msgstr ""
+"Project-Id-Version: kunifiedpush\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-02-09 00:42+0000\n"
+"PO-Revision-Date: 2026-11-19 17:02+0100\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr@ijekavian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#: selftest.cpp:34
+#, kde-format
+msgid "The operation timed out."
+msgstr "Истекло је вријеме за поступак."
+
+#: selftest.cpp:59
+#, kde-format
+msgid "Push notification self-test."
+msgstr "Самопроба пуш обавјештења."
+
+#: selftest.cpp:73
+#, kde-format
+msgid "Could not obtain push notification endpoint."
+msgstr "Не могу да добавим крајњу тачку за пуш обавјештења."
+
+#: selftest.cpp:126
+#, kde-format
+msgid "Received notification does not have the expected content."
+msgstr "Примљено обавјештење нема очекивани садржај."
+
+#: ui/main.qml:28
+#, kde-format
+msgid "There is no push notification service running!"
+msgstr "Није покренут ниједан сервис за пуш обавјештења!"
+
+#: ui/main.qml:37
+#, kde-format
+msgid ""
+"There is a 3rd party push notification service running. Push notifications "
+"are available, but cannot be configured here."
+msgstr ""
+"Покренут је сервис треће стране за пуш обавјештења. Пуш обавјештења су "
+"доступна, али се не могу подесити овдје."
+
+#: ui/main.qml:46
+#, kde-format
+msgid ""
+"<b>Online</b><br>Connected to the push notification server and operational."
+msgstr "<b>На вези</b><br/>Повезано са сервером за пуш обавјештења и ради."
+
+#: ui/main.qml:55
+#, kde-format
+msgid "<b>Idle</b><br>There are no applications using push notifications."
+msgstr "<b>Мирује</b><br/>Нема програма који користе пуш обавјештења."
+
+#: ui/main.qml:65
+#, kde-format
+msgid ""
+"<b>Offline</b><br>Network connection to the server could not be established "
+"(%1)."
+msgstr ""
+"<b>Ван везе</b><br/>Не могу да успоставим мрежну везу са сервером (%1)."
+
+#: ui/main.qml:66
+#, kde-format
+msgid ""
+"<b>Offline</b><br>Network connection to the server could not be established."
+msgstr "<b>Ван везе</b><br/>Не могу да успоставим мрежну везу са сервером."
+
+#: ui/main.qml:76
+#, kde-format
+msgid "<b>Offline</b><br>Could not authenticate at the server (%1)."
+msgstr "<b>Ван везе</b><br/>Не могу да се аутентификујем на серверу (%1)."
+
+#: ui/main.qml:77
+#, kde-format
+msgid "<b>Offline</b><br>Could not authenticate at the server."
+msgstr "<b>Ван везе</b><br/>Не могу да се аутентификујем на серверу."
+
+#: ui/main.qml:86
+#, kde-format
+msgid "<b>Offline</b><br>Push notifications are not set up yet."
+msgstr "<b>Ван везе</b><br/>Пуш обавјештења још нису подешена."
+
+#: ui/main.qml:114
+#, kde-format
+msgid "Push provider:"
+msgstr "Добављач пуш обавјештења:"
+
+#: ui/main.qml:154 ui/main.qml:181 ui/main.qml:233 ui/main.qml:285
+#, kde-format
+msgid "URL:"
+msgstr "УРЛ:"
+
+#: ui/main.qml:159
+#, kde-format
+msgid "Client token:"
+msgstr "Токен клијента:"
+
+#: ui/main.qml:186
+#, kde-format
+msgid "User name:"
+msgstr "Корисничко име:"
+
+#: ui/main.qml:192
+#, kde-format
+msgid "Authenticate"
+msgstr "Аутентификуј"
+
+#: ui/main.qml:240
+#, kde-format
+msgid ""
+"Note that ntfy.sh is rate-limiting applications. It will therefore not work "
+"with applications with a larger amount of users, such as public Matrix or "
+"Mastodon instances."
+msgstr ""
+"Имајте у виду да ntfy.sh ограничава учесталост захтјева програма. Зато неће "
+"радити са програмима који имају већи број корисника, као што су јавни "
+"примјерци сервиса Matrix или Mastodon."
+
+#: ui/main.qml:245
+#, kde-format
+msgid "Authentication method:"
+msgstr "Метод аутентификације:"
+
+#: ui/main.qml:246
+#, kde-format
+msgctxt "authentication method"
+msgid "None"
+msgstr "никакав"
+
+#: ui/main.qml:246
+#, kde-format
+msgctxt "authentication method"
+msgid "Password"
+msgstr "лозинка"
+
+#: ui/main.qml:246
+#, kde-format
+msgctxt "authentication method"
+msgid "Token"
+msgstr "токен"
+
+#: ui/main.qml:260
+#, kde-format
+msgid "Username:"
+msgstr "Корисничко име:"
+
+#: ui/main.qml:266
+#, kde-format
+msgid "Password:"
+msgstr "Лозинка:"
+
+#: ui/main.qml:266
+#, kde-format
+msgctxt "authentication token"
+msgid "Token:"
+msgstr "Токен:"
+
+#: ui/main.qml:331
+#, kde-format
+msgid "Push notifications are working correctly."
+msgstr "Пуш обавјештења раде исправно."
+
+#: ui/main.qml:333
+#, kde-format
+msgid "Push notification test failed."
+msgstr "Проба пуш обавјештења није успјела."
+
+#: ui/main.qml:335
+#, kde-format
+msgid "Registering with push server…"
+msgstr "Региструјем се на пуш серверу…"
+
+#: ui/main.qml:337
+#, kde-format
+msgid "Sending push notification…"
+msgstr "Шаљем пуш обавјештење…"
+
+#: ui/main.qml:339
+#, kde-format
+msgid "Waiting to receive push notification…"
+msgstr "Чекам на пријем пуш обавјештења…"
+
+#: ui/main.qml:346
+#, kde-format
+msgctxt "@action:button"
+msgid "Test"
+msgstr "Испробај"
+
+#: ui/main.qml:363
+#, kde-format
+msgid "Applications"
+msgstr "Програми"
+
+#: ui/main.qml:393
+#, kde-format
+msgid "Unregister application from push notifications"
+msgstr "Одјави програм са пуш обавјештења"
+
+#: ui/main.qml:400
+#, kde-format
+msgctxt "@title:window"
+msgid "Unregister Application"
+msgstr "Одјављивање програма"
+
+#: ui/main.qml:401
+#, kde-format
+msgctxt "%1 is an application name"
+msgid "Are you sure you want to unregister '%1'?"
+msgstr "Желите ли заиста да одјавите „%1“?"
